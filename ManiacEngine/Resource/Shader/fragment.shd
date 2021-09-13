@@ -1,0 +1,21 @@
+#version 330
+
+uniform sampler2D ourTexture;
+uniform int renderMode = 0;
+
+in vec3 OutColor;
+in vec2 TexCoord;
+
+out vec4 finalColor;
+
+void main()
+{
+	if(renderMode == 0)
+	{
+		finalColor = vec4( OutColor, 1.0 ); 
+	} 
+    else
+    {
+    	finalColor = texture(ourTexture, TexCoord);
+    }
+}
