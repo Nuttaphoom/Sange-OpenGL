@@ -114,4 +114,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\Shader\fragment.shd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Resource\Shader\vertext.shd">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

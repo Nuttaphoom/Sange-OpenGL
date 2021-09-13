@@ -54,6 +54,10 @@
     <ClInclude Include="SquareMeshVbo.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\Shader\fragment.shd" />
+    <None Include="..\Resource\Shader\vertext.shd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
