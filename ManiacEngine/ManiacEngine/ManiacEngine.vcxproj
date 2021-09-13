@@ -57,6 +57,7 @@
   <ItemGroup>
     <None Include="..\Resource\Shader\fragment.shd" />
     <None Include="..\Resource\Shader\vertext.shd" />
+    <None Include="blur.shd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

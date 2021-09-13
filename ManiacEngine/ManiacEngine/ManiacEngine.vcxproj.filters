@@ -121,5 +121,8 @@
     <None Include="..\Resource\Shader\vertext.shd">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="blur.shd">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
