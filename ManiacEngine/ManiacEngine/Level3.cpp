@@ -7,7 +7,6 @@ void Level3::LevelLoad()
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
-
 	//cout << "Load Level" << endl;
 }
 
@@ -79,6 +78,7 @@ void Level3::HandleKey(char key)
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1; ; break;
+
 	}
 }
 

@@ -15,7 +15,7 @@ using namespace std;
 
 class GLRenderer
 {
-protected:
+protected:	
 	int winWidth;
 	int winHeight;
 	glm::mat4 projectionMatrix;
@@ -49,8 +49,8 @@ public:
 	void SetOrthoProjection(float left, float right, float bottom, float top);
 	void SetViewPort(int x, int y, int w, int h);
 	void SetClearColor(float r, float g, float b);
-
-	GLuint GetModelMatrixAttrId();
+ 
+ 	GLuint GetModelMatrixAttrId();
 	GLuint GetProjectionMatrixAttrId();
 	GLuint GetColorUniformId();
 	GLuint GetModeUniformId();

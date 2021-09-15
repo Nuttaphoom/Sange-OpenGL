@@ -3,6 +3,7 @@
 #include <vector>
 #include "DrawableObject.h"
 #include "GLRenderer.h"
+#include "Camera.h"
 #include "GameData.h"
 
 using namespace std;

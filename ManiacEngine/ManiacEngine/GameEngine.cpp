@@ -34,6 +34,9 @@ void GameEngine::Init(int width, int height)
 
 void GameEngine::Render(vector<DrawableObject*> renderObjects)
 {
+	glm::vec3 cs = Camera::GetInstance()->GetCamOffset(); 
+	renderer->SetOrthoProjection(-3 + cs.x, 3 + cs.x, -3+cs.y , 3+cs.y);
+
 	this->GetRenderer()->Render(renderObjects);
 }
 

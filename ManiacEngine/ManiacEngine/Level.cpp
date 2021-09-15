@@ -70,6 +70,9 @@ void Level::HandleKey(char key)
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;
+
+		case 'g': Camera::GetInstance()->Translate(0.3f, 0);  break;//Move the cam 
+			 
 	}
 }
 

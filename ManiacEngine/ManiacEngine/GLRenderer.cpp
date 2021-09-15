@@ -12,7 +12,7 @@ GLRenderer::GLRenderer(int w, int h)
 	this->winWidth = w;
 	this->winHeight = h;
 	projectionMatrix = glm::ortho(-1.f, 1.f, -1.f, 1.f);
-	glViewport(0, 0, winWidth, winHeight);
+ 	glViewport(0, 0, winWidth, winHeight);
 }
 
 bool GLRenderer::InitGL(string vertexShaderFile, string fragmentShaderFile)
@@ -137,7 +137,8 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 		glUniformMatrix4fv(pMatrixId, 1, GL_FALSE, glm::value_ptr(this->projectionMatrix));
 	}
 
-	glm::mat4 camera = glm::mat4(1.0);
+	glm::mat4 camera = glm::mat4(1.0) ;
+	
 
 	for (DrawableObject *obj : objList) {
 		obj->Render(camera);
@@ -283,3 +284,5 @@ GLuint GLRenderer::LoadTexture(string path)
 
 	return texture;
 }
+
+ 
