@@ -75,11 +75,6 @@ void LevelTest::HandleKey(char key)
 
 void LevelTest::HandleMouse(int type, int x, int y)
 {
-	float realX, realY;
+	Level::HandleMouse(type, x, y);
 
-	// Calculate Real X Y 
-	realX = x;
-	realY = y;
-
-	player->SetPosition(glm::vec3(realX, realY, 0));
 }

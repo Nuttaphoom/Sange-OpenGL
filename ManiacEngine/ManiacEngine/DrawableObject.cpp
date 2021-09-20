@@ -1,6 +1,6 @@
 
 #include "DrawableObject.h"
-
+#include "Camera.h"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
 
@@ -32,11 +32,15 @@ void DrawableObject::SetSize(float sizeX, float sizeY)
 
 void DrawableObject::SetPosition(glm::vec3 newPosition)
 {
+	newPosition  += Camera::GetInstance()->GetCamOffset() ; 
+ 
+
 	pos = newPosition;
 }
 
 void DrawableObject::Translate(glm::vec3 moveDistance)
 {
+	printf("player x y : %.2f , %.2f\n", pos.x, pos.y);
 	pos = pos + moveDistance;
 }
 

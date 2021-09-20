@@ -23,7 +23,7 @@ GLRenderer * GameEngine::GetRenderer()
 
 void GameEngine::Init(int width, int height)
 {
-	winWidth = width;
+	winWidth = width  ;
 	winHeight = height;
 	renderer = new GLRenderer(width, height);
 	renderer->InitGL("../Resource/Shader/vertext.shd", "../Resource/Shader/fragment.shd");
@@ -34,9 +34,13 @@ void GameEngine::Init(int width, int height)
 
 void GameEngine::Render(vector<DrawableObject*> renderObjects)
 {
-	glm::vec3 cs = Camera::GetInstance()->GetCamOffset(); 
+	glm::vec3 cs = Camera::GetInstance()->GetCamOffset();  //Translate Cam
 	renderer->SetOrthoProjection(-3 + cs.x, 3 + cs.x, -3+cs.y , 3+cs.y);
+ 
+	float p = Camera::GetInstance()->GetZoomOffset() ; //Zoom Cam
+	renderer->SetViewPort(0 - p, 0 - p, winWidth + p, winHeight + p) ;
 
+ 
 	this->GetRenderer()->Render(renderObjects);
 }
 

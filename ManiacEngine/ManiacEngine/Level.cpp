@@ -70,23 +70,34 @@ void Level::HandleKey(char key)
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;
-
-		case 'g': Camera::GetInstance()->Translate(0.3f, 0);  break;//Move the cam 
-			 
+		case 'g': Camera::GetInstance()->Translate(0.3f, 0);  break;//Move the cam to right
+		case 'f': Camera::GetInstance()->Translate(-0.3f, 0); break;//Move the cam to left  
+		case 'z': Camera::GetInstance()->Zoom(10);  break;//zoom the cam 
 	}
 }
 
 void Level::HandleMouse(int type, int x, int y)
 {
-	float realX, realY;
+	float realX = x, realY = y;
 
 	// Calculate Real X Y 
-	realX = (x - 300);
-	realY = (y - 300);
-	realX = (realX / 300);
-	realY = (realY / 300);
+	Level::CamToWorld(realX, realY); 
 
-	cout << realX << "A,A" << realY << endl;
+	cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
 	player->SetPosition(glm::vec3(realX, realY, 0));
+}
+
+void Level::CamToWorld(float &realX, float &realY) {
+	int x , y ;
+	x = realX; y = realY ; 
+
+	realX = (x - GameEngine::GetInstance()->GetWindowWidth() / 2);
+	realY = (y - GameEngine::GetInstance()->GetWindowHeight() / 2);
+	realX = (realX / GameEngine::GetInstance()->GetWindowWidth());
+	realY = (realY / GameEngine::GetInstance()->GetWindowHeight());
+	realX = (realX * 6.0f);
+	realY = (realY * 6.0f) * -1;
+ 
+
 }

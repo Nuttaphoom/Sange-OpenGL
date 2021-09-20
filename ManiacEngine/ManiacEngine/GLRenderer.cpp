@@ -139,6 +139,7 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 
 	glm::mat4 camera = glm::mat4(1.0) ;
 	
+	
 
 	for (DrawableObject *obj : objList) {
 		obj->Render(camera);

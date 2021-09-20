@@ -4,6 +4,7 @@ Camera* Camera::instance = nullptr;
 Camera::Camera() {
 	instance = this;
 	CamOffset = glm::vec3(0); 
+	zoomOffset = 1; 
 }
 
 Camera* Camera::GetInstance()
@@ -17,9 +18,17 @@ Camera* Camera::GetInstance()
 void Camera::Translate(float x, float y) {
 
 	CamOffset = glm::vec3(CamOffset.x + x, CamOffset.y + y, CamOffset.z);
-	printf("CamOffset is %.2f\n", CamOffset.x); 
+}
+
+void Camera::Zoom(float p) {
+	zoomOffset += p; 
+	return;
 }
 
 glm::vec3 Camera::GetCamOffset() {
 	return CamOffset;  
+}
+
+float Camera::GetZoomOffset() {
+	return zoomOffset; 
 }

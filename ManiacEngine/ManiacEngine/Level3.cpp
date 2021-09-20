@@ -84,15 +84,5 @@ void Level3::HandleKey(char key)
 
 void Level3::HandleMouse(int type, int x, int y)
 {
-	float realX, realY;
-
-	// Calculate Real X Y 
-	realX = (x - 300)   ;
-	realY = (y - 300)   ;
-	realX = (realX / 300)  	; 
-	realY = (realY / 300)  	;
-
-	cout << realX << "A,A" << realY << endl;
-
-	player->SetPosition(glm::vec3(realX, realY, 0));
+	Level::HandleMouse(type, x, y); 
 }
