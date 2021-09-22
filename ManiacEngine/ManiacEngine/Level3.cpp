@@ -13,7 +13,7 @@ void Level3::LevelLoad()
 void Level3::LevelInit()
 {
 	GameObject* obj = new GameObject();
-	obj->SetColor(1.0, 1.0, 0.0);
+	obj->SetColor(0.0, 1.0, 0.0);
 	objectsList.push_back(obj);
 
 	player = obj;
@@ -71,14 +71,13 @@ void Level3::HandleKey(char key)
 
 	switch (key)
 	{
-	case 'w': player->Translate(glm::vec3(0, 0.3, 0)); break;
-	case 's': player->Translate(glm::vec3(0, -0.3, 0)); break;
-	case 'a': player->Translate(glm::vec3(-0.3, 0, 0)); break;
-	case 'd': player->Translate(glm::vec3(0.3, 0, 0)); break;
-	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
-	case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1; ; break;
-
+		case 'w': player->Translate(glm::vec3(0, 0.3, 0)); break;
+		case 's': player->Translate(glm::vec3(0, -0.3, 0)); break;
+		case 'a': player->Translate(glm::vec3(-0.3, 0, 0)); break;
+		case 'd': player->Translate(glm::vec3(0.3, 0, 0)); break;
+		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
+		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
+		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1; ; break;
 	}
 }
 

@@ -55,3 +55,40 @@ void SquareMeshVbo::Render()
 	}
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 }
+
+
+void SquareMeshVbo::AdjustTexcoord(float* uv)
+{
+	GLfloat texData[] =
+	{
+	  uv[0],uv[1],
+	  uv[2], uv[3],
+	  uv[4], uv[5],
+	  uv[6], uv[7]
+	};
+
+	glBindBuffer(GL_ARRAY_BUFFER, this->texVboId);
+	glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
+
+	isReset = true;
+}
+
+void SquareMeshVbo::ResetTexcoord()
+{
+	if (isReset)
+	{
+		GLfloat texData[] =
+		{
+		  0.0f, 0.0f,
+		  1.0f, 0.0f,
+		  1.0f, 1.0f,
+		  0.0f, 1.0f
+		};
+
+		glBindBuffer(GL_ARRAY_BUFFER, this->texVboId);
+		glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), texData, GL_STATIC_DRAW);
+
+		isReset = false;
+	}
+
+}

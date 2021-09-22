@@ -3,7 +3,8 @@
 #include "SquareMeshVbo.h"
 #include "GameObject.h"
 #include "GameData.h"
-
+#include "ImageObject.h"
+#include "SpriteObject.h"
 class Level
 {
 private:
@@ -21,5 +22,5 @@ public:
 	virtual void HandleKey(char key);
 	virtual void HandleMouse(int type, int x, int y);
 
-	void CamToWorld(float& x, float& y);
+	void WorldToCam(float& x, float& y);
 };

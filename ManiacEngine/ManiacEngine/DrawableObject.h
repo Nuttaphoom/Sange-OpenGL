@@ -1,5 +1,6 @@
 #pragma once
 #include "glm.hpp"
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -12,10 +13,11 @@ protected:
 
 public:
 	glm::mat4 getTransform();
-
+	
 	DrawableObject();
 	~DrawableObject();
 	virtual void Render(glm::mat4 globalModelTransform) = 0;
+	virtual void Update(float deltaTime);
 	glm::vec3 GetPos(); 
 	glm::vec3 GetSize(); 
 	void SetSize(float sizeX, float sizeY);

@@ -1,6 +1,7 @@
 #pragma once
 #include "Level.h"
-
+#include "TriangleMeshVbo.h"
+#include "SquareMeshVbo.h"
 class LevelTest : public Level
 {
 private:

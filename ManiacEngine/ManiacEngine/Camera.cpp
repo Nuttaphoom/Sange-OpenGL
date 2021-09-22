@@ -21,7 +21,11 @@ void Camera::Translate(float x, float y) {
 }
 
 void Camera::Zoom(float p) {
-	zoomOffset += p; 
+	if (zoomOffset > 0.1 && p < 0)
+		zoomOffset += p; 
+	if (zoomOffset < 3 && p > 0)
+		zoomOffset += p;
+
 	return;
 }
 

@@ -2,45 +2,49 @@
 
 void LevelTest::LevelLoad()
 {
-	SquareMeshVbo * square = new SquareMeshVbo();
+	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
 
-	//cout << "Load Level" << endl;
+	TriangleMeshVbo* tri = new TriangleMeshVbo();
+	tri->LoadData();
+	GameEngine::GetInstance()->AddMesh(TriangleMeshVbo::MESH_NAME, tri);
+
+	cout << "Load Level" << endl;
 }
 
 void LevelTest::LevelInit()
 {
-	GameObject * obj = new GameObject();
+	GameObject* obj = new GameObject();
 	obj->SetColor(0.0, 1.0, 0.0);
 	objectsList.push_back(obj);
 
 	player = obj;
 
-	GameObject * obj2 = new GameObject();
+	GameObject* obj2 = new GameObject();
 	obj2->SetColor(0.0, 0.0, 1.0);
 	obj2->SetPosition(glm::vec3(2.0f, 2.0f, 0.0f));
+	obj2->SetSize(100, 100); 
 	objectsList.push_back(obj2);
 
-	GameObject * obj3 = new GameObject();
+	GameObject* obj3 = new GameObject();
 	obj3->SetColor(0.0, 0.0, 1.0);
 	obj3->SetPosition(glm::vec3(-2.0f, -2.0f, 0.0f));
+	obj3->SetSize(100, 100);
 	objectsList.push_back(obj3);
 
- 
-
-	//cout << "Init Level" << endl;
+	cout << "Init Level" << endl;
 }
 
 void LevelTest::LevelUpdate()
 {
-	//cout << "Update Level" << endl;
+	cout << "Update Level" << endl;
 }
 
 void LevelTest::LevelDraw()
 {
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
+	cout << "Draw Level" << endl;
 }
 
 void LevelTest::LevelFree()
@@ -49,13 +53,13 @@ void LevelTest::LevelFree()
 		delete obj;
 	}
 	objectsList.clear();
-	//cout << "Free Level" << endl;
+	cout << "Free Level" << endl;
 }
 
 void LevelTest::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
+	cout << "Unload Level" << endl;
 }
 
 void LevelTest::HandleKey(char key)
@@ -75,6 +79,11 @@ void LevelTest::HandleKey(char key)
 
 void LevelTest::HandleMouse(int type, int x, int y)
 {
-	Level::HandleMouse(type, x, y);
+	float realX, realY;
 
+	// Calculate Real X Y 
+	realX = -3 + x * (6.0f / GameEngine::GetInstance()->GetWindowWidth());
+	realY = -3 + (GameEngine::GetInstance()->GetWindowHeight() - y) * (6.0f / GameEngine::GetInstance()->GetWindowHeight());
+
+	player->SetPosition(glm::vec3(realX, realY, 0));
 }

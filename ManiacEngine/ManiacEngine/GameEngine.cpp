@@ -35,12 +35,11 @@ void GameEngine::Init(int width, int height)
 void GameEngine::Render(vector<DrawableObject*> renderObjects)
 {
 	glm::vec3 cs = Camera::GetInstance()->GetCamOffset();  //Translate Cam
-	renderer->SetOrthoProjection(-3 + cs.x, 3 + cs.x, -3+cs.y , 3+cs.y);
- 
-	float p = Camera::GetInstance()->GetZoomOffset() ; //Zoom Cam
-	renderer->SetViewPort(0 - p, 0 - p, winWidth + p, winHeight + p) ;
+	float p = Camera::GetInstance()->GetZoomOffset(); //Zoom Cam
 
+	renderer->SetOrthoProjection((-640 / (p)) + cs.x, (640/(p)) + cs.x, (-360/(p))+cs.y , (360/(p))+cs.y);
  
+  
 	this->GetRenderer()->Render(renderObjects);
 }
 
@@ -72,4 +71,14 @@ int GameEngine::GetWindowWidth()
 int GameEngine::GetWindowHeight()
 {
 	return winHeight;
+}
+
+int GameEngine::GetDeltaTime()
+{
+	return deltaTime;
+}
+
+void GameEngine::SetDeltaTime(int dt)
+{
+	deltaTime = dt;
 }

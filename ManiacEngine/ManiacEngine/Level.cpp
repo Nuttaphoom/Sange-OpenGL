@@ -1,5 +1,4 @@
 #include "Level.h"
-#include "ImageObject.h"
 
 void Level::LevelLoad()
 {
@@ -14,20 +13,27 @@ void Level::LevelInit()
 {
 	GameObject * obj = new GameObject();
 	obj->SetColor(1.0, 0.0, 0.0);
+	obj->SetSize(100, 100);
 	objectsList.push_back(obj);
 
 	player = obj;
 
 	ImageObject* img = new ImageObject();
-	img->SetSize(2.0f, -2.0f);
+	img->SetSize(100.0f, -100.0f);
 	img->SetTexture("../Resource/Texture/penguin.png");
 	objectsList.push_back(img);
 
 	ImageObject* img2 = new ImageObject(); 
 	img2->SetPosition(glm::vec3(3,3,1));
-	img2->SetSize(1.0f, -2.0f); 
+	img2->SetSize(100.0f, -200.0f); 
 	img2->SetTexture("../Resource/Texture/cartoon.PNG");
 	objectsList.push_back(img2);
+
+	SpriteObject* sprite = new SpriteObject("../Resource/Texture/TestSprite.png", 4, 7);
+	sprite->SetSize(200.0f, -200.0f);
+	sprite->SetPosition(glm::vec3(1.0f, 0.0f, 0.0f));
+	sprite->SetAnimationLoop(0, 0, 27, 50);
+	objectsList.push_back(sprite);
 
 	//cout << "Init Level" << endl;
 }
@@ -35,6 +41,10 @@ void Level::LevelInit()
 void Level::LevelUpdate()
 {
 	//cout << "Update Level" << endl;
+	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
+	for (DrawableObject* obj : objectsList) {
+		obj->Update(deltaTime);
+	}
 }
 
 void Level::LevelDraw()
@@ -70,9 +80,10 @@ void Level::HandleKey(char key)
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;
-		case 'g': Camera::GetInstance()->Translate(0.3f, 0);  break;//Move the cam to right
-		case 'f': Camera::GetInstance()->Translate(-0.3f, 0); break;//Move the cam to left  
-		case 'z': Camera::GetInstance()->Zoom(10);  break;//zoom the cam 
+		case 'g': Camera::GetInstance()->Translate(10.0f, 0);  break;//Move the cam to right
+		case 'f': Camera::GetInstance()->Translate(-10.0f, 0); break;//Move the cam to left  
+		case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
+		case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
 	}
 }
 
@@ -81,14 +92,20 @@ void Level::HandleMouse(int type, int x, int y)
 	float realX = x, realY = y;
 
 	// Calculate Real X Y 
-	Level::CamToWorld(realX, realY); 
+	Level::WorldToCam(realX, realY);
 
 	cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
-	player->SetPosition(glm::vec3(realX, realY, 0));
+	glm::vec3 MoveObjectToMuseVec3 = (glm::vec3(realX, realY, 0) );
+	MoveObjectToMuseVec3.x /= Camera::GetInstance()->GetZoomOffset();
+	MoveObjectToMuseVec3.y /= Camera::GetInstance()->GetZoomOffset();
+
+	MoveObjectToMuseVec3 += Camera::GetInstance()->GetCamOffset(); 
+
+	player->SetPosition(MoveObjectToMuseVec3);
 }
 
-void Level::CamToWorld(float &realX, float &realY) {
+void Level::WorldToCam(float &realX, float &realY) {
 	int x , y ;
 	x = realX; y = realY ; 
 
@@ -96,8 +113,8 @@ void Level::CamToWorld(float &realX, float &realY) {
 	realY = (y - GameEngine::GetInstance()->GetWindowHeight() / 2);
 	realX = (realX / GameEngine::GetInstance()->GetWindowWidth());
 	realY = (realY / GameEngine::GetInstance()->GetWindowHeight());
-	realX = (realX * 6.0f);
-	realY = (realY * 6.0f) * -1;
+	realX = (realX * 1280.0f);
+	realY = (realY * 720.0f) * -1;
  
 
 }

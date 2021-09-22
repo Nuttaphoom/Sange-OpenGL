@@ -34,6 +34,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
   </ItemGroup>
@@ -53,6 +54,7 @@
     <ClInclude Include="LevelTest.h" />
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="SquareMeshVbo.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
   </ItemGroup>

@@ -11,7 +11,8 @@ class GameEngine
 {
 	static GameEngine* instance;
 	int winWidth, winHeight;
-	
+	int deltaTime; 
+
 	GLRenderer *renderer;
 	GameEngine();
 public:
@@ -25,4 +26,6 @@ public:
 	void Render(vector<DrawableObject*> renderObjects);
 	int GetWindowWidth();
 	int GetWindowHeight();
+	int GetDeltaTime();
+	void SetDeltaTime(int dt);
 };
