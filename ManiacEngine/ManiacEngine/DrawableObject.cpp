@@ -3,8 +3,7 @@
 #include "Camera.h"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
-#include "UI.h"
-
+ 
 
 glm::mat4 DrawableObject::getTransform()
 {
@@ -43,8 +42,7 @@ void DrawableObject::Translate(glm::vec3 moveDistance)
 
 void DrawableObject::Update(float deltaTime)
 {
-	//if (dynamic_cast<UI>(this))
-
+ 
 }
 
 
