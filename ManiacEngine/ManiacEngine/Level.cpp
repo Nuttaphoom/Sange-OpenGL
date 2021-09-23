@@ -1,5 +1,6 @@
 #include "Level.h"
-
+static int SCREEN_WIDTH;
+static int SCREEN_HEIGHT; 
 void Level::LevelLoad()
 {
 	SquareMeshVbo * square = new SquareMeshVbo();
@@ -23,10 +24,12 @@ void Level::LevelInit()
 	img->SetTexture("../Resource/Texture/penguin.png");
 	objectsList.push_back(img);
 
-	ImageObject* img2 = new ImageObject(); 
-	img2->SetPosition(glm::vec3(3,3,1));
-	img2->SetSize(100.0f, -200.0f); 
-	img2->SetTexture("../Resource/Texture/cartoon.PNG");
+	GUI* img2 = new GUI(GUIName::GUI_TEST);
+		//new GUI(GUIName::GUI_TEST,glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 , GameEngine::GetInstance()->GetWindowHeight() , 1), glm::vec3(451, -121, 0));
+	img2->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 4 * -1 + GameEngine::GetInstance()->GetWindowWidth() / 13 * -1,
+		GameEngine::GetInstance()->GetWindowHeight() / 2 - GameEngine::GetInstance()->GetWindowHeight() / 6, 0));
+	img2->SetSize(451, -121); 
+	img2->SetTexture("../Resource/Texture/HPBar.PNG");
 	objectsList.push_back(img2);
 
 	SpriteObject* sprite = new SpriteObject("../Resource/Texture/TestSprite.png", 4, 7);

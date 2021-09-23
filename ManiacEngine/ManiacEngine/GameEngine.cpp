@@ -34,11 +34,14 @@ void GameEngine::Init(int width, int height)
 
 void GameEngine::Render(vector<DrawableObject*> renderObjects)
 {
+	///Adjust Cam
 	glm::vec3 cs = Camera::GetInstance()->GetCamOffset();  //Translate Cam
 	float p = Camera::GetInstance()->GetZoomOffset(); //Zoom Cam
 
-	renderer->SetOrthoProjection((-640 / (p)) + cs.x, (640/(p)) + cs.x, (-360/(p))+cs.y , (360/(p))+cs.y);
- 
+	int ScX = winWidth /  2;
+	int ScY = winHeight / 2;
+	renderer->SetOrthoProjection((-ScX  / (p)) + cs.x, (ScX/(p)) + cs.x, (-ScY/(p))+cs.y , (ScY/(p))+cs.y); 
+	
   
 	this->GetRenderer()->Render(renderObjects);
 }

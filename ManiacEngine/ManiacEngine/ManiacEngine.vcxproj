@@ -27,6 +27,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateController.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="ImageObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level3.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="GameStateController.h" />
     <ClInclude Include="GameStateList.h" />
     <ClInclude Include="GLRenderer.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level3.h" />
