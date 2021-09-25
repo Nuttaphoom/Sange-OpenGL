@@ -58,11 +58,11 @@ void Level::LevelDraw()
 
 void Level::LevelFree()
 {
-	for (DrawableObject* obj : objectsList) {
+	/*for (DrawableObject* obj : objectsList) {
 		delete obj;
 	}
 	objectsList.clear();
-	//cout << "Free Level" << endl;
+	//cout << "Free Level" << endl;*/
 }
 
 void Level::LevelUnload()

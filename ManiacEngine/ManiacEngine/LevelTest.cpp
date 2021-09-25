@@ -70,11 +70,15 @@ void LevelTest::LevelDraw()
 
 void LevelTest::LevelFree()
 {
-	for (DrawableObject* obj : objectsList) {
+	/*for (DrawableObject* obj : objectsList) {
 		delete obj;
 	}
 	objectsList.clear();
+<<<<<<< Updated upstream
 	//cout << "Free Level" << endl;
+=======
+	cout << "Free Level" << endl;*/
+//>>>>>>> Stashed changes
 }
 
 void LevelTest::LevelUnload()

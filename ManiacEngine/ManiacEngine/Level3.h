@@ -1,6 +1,7 @@
 #pragma once
 #pragma once
 #include "Level.h"
+#include "Entity.h"
 
 class Level3 : public Level
 {
