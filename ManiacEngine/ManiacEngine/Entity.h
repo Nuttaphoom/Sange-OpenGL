@@ -12,4 +12,5 @@ class Entity : public SpriteObject
 	bool Death();
 	bool Collides(Entity other);
 	void InvincibleFrame(float deltatime);
+ 	
 };

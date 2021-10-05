@@ -31,6 +31,7 @@ void LevelTest::LevelLoad()
 		}
 		
 	}
+
 	//cout << "Load Level" << endl;
 }
 
@@ -59,13 +60,14 @@ void LevelTest::LevelInit()
 
 void LevelTest::LevelUpdate()
 {
+ 
 	//cout << "Update Level" << endl;
 }
 
 void LevelTest::LevelDraw()
 {
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
+ 	//cout << "Draw Level" << endl;
 }
 
 void LevelTest::LevelFree()

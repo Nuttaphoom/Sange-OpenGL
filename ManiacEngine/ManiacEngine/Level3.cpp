@@ -15,7 +15,16 @@ void Level3::LevelInit()
 	GameObject* obj = new GameObject();
 	obj->SetColor(0.0, 1.0, 0.0);
 	objectsList.push_back(obj);
-
+	Entity* E1 = new Entity("../Resource/Texture/TestSprite.png", 4, 7, 100.0, 9.0, 0.0);
+	E1->SetSize(200.0f, -200.0f);
+	E1->SetPosition(glm::vec3(50.0f, 0.0f, 0.0f));
+	E1->SetAnimationLoop(0, 0, 27, 50);
+	objectsList.push_back(E1);
+	Entity* E2 = new Entity("../Resource/Texture/TestSprite.png", 4, 7, 100.0, 9.0, 0.0);
+	E2->SetSize(200.0f, -200.0f);
+	E2->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
+	E2->SetAnimationLoop(0, 0, 27, 50);
+	objectsList.push_back(E2);
 	player = obj;
 	/*
 	GameObject* obj2 = new GameObject();
@@ -43,24 +52,9 @@ void Level3::LevelUpdate()
 	*/
 	//cout << player->GetPos().x + (player->GetSize().x / 2) << endl; 
 
-	Entity* E1 = new Entity("../Resource/Texture/TestSprite.png", 4, 7, 100.0, 9.0, 0.0);
-	E1->SetSize(200.0f, -200.0f);
-	E1->SetPosition(glm::vec3(50.0f, 0.0f, 0.0f));
-	E1->SetAnimationLoop(0, 0, 27, 50);
-	objectsList.push_back(E1);
-	Entity* E2 = new Entity("../Resource/Texture/TestSprite.png", 4, 7, 100.0, 9.0, 0.0);
-	E2->SetSize(200.0f, -200.0f);
-	E2->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
-	E2->SetAnimationLoop(0, 0, 27, 50);
-	objectsList.push_back(E2);
-
-	if (!E1->Collides(*(E2)))
-	{
-		cout << "E1 is not collides with E2" << endl;
-	}
-	else
-	{
-		cout << "E1 is collides with E2" << endl;
+	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
+	for (DrawableObject* obj : objectsList) {
+		obj->Update(deltaTime);
 	}
  }
 

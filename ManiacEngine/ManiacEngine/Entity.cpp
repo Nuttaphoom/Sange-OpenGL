@@ -2,6 +2,7 @@
 
 Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame){}
 
+ 
 bool Entity::Collides(Entity other)
 {
 	bool CollideX = this->GetPos().x + this->GetSize().x >= other.GetPos().x && other.GetPos().x + other.GetSize().x >= this->GetPos().x;

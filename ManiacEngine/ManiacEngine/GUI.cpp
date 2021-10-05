@@ -44,7 +44,7 @@ void GUI::Render(glm::mat4 globalModelTransform)
 }
 
 void GUI::Update(float deltaTime) {
-	if (this->GUIname == GUIName::GUI_TEST) UPDATE_TEST(deltaTime);
+	//if (this->GUIname == GUIName::GUI_TEST) UPDATE_TEST(deltaTime);
 }
 
 

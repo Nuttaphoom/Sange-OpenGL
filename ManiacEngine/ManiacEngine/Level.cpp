@@ -24,13 +24,13 @@ void Level::LevelInit()
 	img->SetTexture("../Resource/Texture/penguin.png");
 	objectsList.push_back(img);
 
-	GUI* img2 = new GUI(GUIName::GUI_TEST);
+	Button* butt = new Button(ButtonName::NEXT_LEVEL_BUTTON) ; 
 		//new GUI(GUIName::GUI_TEST,glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 , GameEngine::GetInstance()->GetWindowHeight() , 1), glm::vec3(451, -121, 0));
-	img2->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 4 * -1 + GameEngine::GetInstance()->GetWindowWidth() / 13 * -1,
+	butt->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 4 * -1 + GameEngine::GetInstance()->GetWindowWidth() / 13 * -1,
 		GameEngine::GetInstance()->GetWindowHeight() / 2 - GameEngine::GetInstance()->GetWindowHeight() / 6, 0));
-	img2->SetSize(451, -121); 
-	img2->SetTexture("../Resource/Texture/HPBar.PNG");
-	objectsList.push_back(img2);
+	butt->SetSize(451, -121); 
+	butt->SetTexture("../Resource/Texture/HPBar.PNG");
+	objectsList.push_back(butt);
 
 	SpriteObject* sprite = new SpriteObject("../Resource/Texture/TestSprite.png", 4, 7);
 	sprite->SetSize(200.0f, -200.0f);
@@ -48,6 +48,7 @@ void Level::LevelUpdate()
 	for (DrawableObject* obj : objectsList) {
 		obj->Update(deltaTime);
 	}
+
 }
 
 void Level::LevelDraw()
@@ -93,12 +94,21 @@ void Level::HandleKey(char key)
 void Level::HandleMouse(int type, int x, int y)
 {
 	float realX = x, realY = y;
-
+	glm::vec3 mouseVec3 ; 
 	// Calculate Real X Y 
 	Level::WorldToCam(realX, realY);
+	mouseVec3 = glm::vec3(realX, realY,1);
 
-	cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
+	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
+	//Detecting Button 
+	for (int i = 0; i < objectsList.size(); i++) {
+		if (Button* bptr = dynamic_cast<Button*>(objectsList[i])) {
+			bptr->OnClick(mouseVec3); 
+		}
+	}
+
+	//move object to current position with respect to Camera position 
 	glm::vec3 MoveObjectToMuseVec3 = (glm::vec3(realX, realY, 0) );
 	MoveObjectToMuseVec3.x /= Camera::GetInstance()->GetZoomOffset();
 	MoveObjectToMuseVec3.y /= Camera::GetInstance()->GetZoomOffset();

@@ -5,7 +5,7 @@
 #include "GameEngine.h" 
 
 enum class GUIName {
-	GUI_TEST
+	Button
 };
 
 class GUI : public ImageObject {
@@ -15,7 +15,7 @@ private:
 public:
 	GUI(GUIName GUIname) :GUIname(GUIname) {};
 	void Render(glm::mat4 globalModelTransform);
-	void Update(float deltaTime);  
+	void Update(float deltaTime);   
  
 };
 
