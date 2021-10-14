@@ -5,7 +5,8 @@
 #include "GameData.h"
 #include "ImageObject.h"
 #include "SpriteObject.h"
-#include "Button.h"
+#include "Button.h" 
+#include "TileMap.h"
 class Level
 {
 private:

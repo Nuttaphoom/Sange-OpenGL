@@ -8,7 +8,6 @@ class Level3 : public Level
 private:
 	vector<DrawableObject*> objectsList;
 	GameObject* player;
-
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();

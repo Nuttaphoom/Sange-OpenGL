@@ -42,7 +42,6 @@ void GameEngine::Render(vector<DrawableObject*> renderObjects)
 	int ScY = winHeight / 2;
 	renderer->SetOrthoProjection((-ScX  / (p)) + cs.x, (ScX/(p)) + cs.x, (-ScY/(p))+cs.y , (ScY/(p))+cs.y); 
 	
-  
 	this->GetRenderer()->Render(renderObjects);
 }
 

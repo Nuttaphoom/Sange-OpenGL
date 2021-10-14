@@ -117,3 +117,11 @@ void SpriteObject::NextAnimation()
 	}
 
 }
+void SpriteObject::SetTexture(string path)
+{
+	texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(path);
+}
+
+void SpriteObject::SetUV(float uvs[8]) {
+	for (int i = 0; i < 8; i++) this->uv[i] = uvs[i]; 
+}

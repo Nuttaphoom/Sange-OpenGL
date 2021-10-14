@@ -9,7 +9,8 @@ void LevelTest::LevelLoad()
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
-	ifstream mapFile("../Resource/Map/Card.txt");
+
+	ifstream mapFile("../Resource/Map/Example_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -37,6 +38,15 @@ void LevelTest::LevelLoad()
 
 void LevelTest::LevelInit()
 {
+ 
+	tilemaps = new TileMap(MapWidth, MapHeight, sMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
+		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
+			objectsList.push_back(tilemaps->GetTiles()[i][j]); 
+		}
+	}
+
+
 	GameObject* obj = new GameObject();
 	obj->SetColor(0.0, 1.0, 0.0);
 	objectsList.push_back(obj);
@@ -75,12 +85,9 @@ void LevelTest::LevelFree()
 	/*for (DrawableObject* obj : objectsList) {
 		delete obj;
 	}
-	objectsList.clear();
-<<<<<<< Updated upstream
-	//cout << "Free Level" << endl;
-=======
-	cout << "Free Level" << endl;*/
-//>>>>>>> Stashed changes
+	objectsList.clear();*/
+
+	delete tilemaps;
 }
 
 void LevelTest::LevelUnload()

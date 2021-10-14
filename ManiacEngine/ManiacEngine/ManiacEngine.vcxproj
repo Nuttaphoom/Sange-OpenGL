@@ -39,6 +39,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
+    <ClCompile Include="TileMap.h" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
   </ItemGroup>
   <ItemGroup>

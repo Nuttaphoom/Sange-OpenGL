@@ -7,6 +7,7 @@ class LevelTest : public Level
 private:
 	vector<DrawableObject*> objectsList;
 	GameObject * player;
+	TileMap* tilemaps;
 
 public:
 	virtual void LevelLoad();

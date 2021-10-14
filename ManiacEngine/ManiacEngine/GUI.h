@@ -16,6 +16,6 @@ public:
 	GUI(GUIName GUIname) :GUIname(GUIname) {};
 	void Render(glm::mat4 globalModelTransform);
 	void Update(float deltaTime);   
- 
+  
 };
 

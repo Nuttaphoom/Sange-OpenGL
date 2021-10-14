@@ -25,7 +25,6 @@ void Level::LevelInit()
 	objectsList.push_back(img);
 
 	Button* butt = new Button(ButtonName::NEXT_LEVEL_BUTTON) ; 
-		//new GUI(GUIName::GUI_TEST,glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 , GameEngine::GetInstance()->GetWindowHeight() , 1), glm::vec3(451, -121, 0));
 	butt->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 4 * -1 + GameEngine::GetInstance()->GetWindowWidth() / 13 * -1,
 		GameEngine::GetInstance()->GetWindowHeight() / 2 - GameEngine::GetInstance()->GetWindowHeight() / 6, 0));
 	butt->SetSize(451, -121); 
@@ -62,7 +61,7 @@ void Level::LevelFree()
 	/*for (DrawableObject* obj : objectsList) {
 		delete obj;
 	}
-	objectsList.clear();
+	objectsList.clear();*/
 	//cout << "Free Level" << endl;*/
 }
 
@@ -74,7 +73,6 @@ void Level::LevelUnload()
 
 void Level::HandleKey(char key)
 {
-
 	switch (key)
 	{
 		case 'w': player->Translate(glm::vec3(0, 0.3, 0)); break;

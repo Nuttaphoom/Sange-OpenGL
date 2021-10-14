@@ -28,5 +28,8 @@ public:
 	void GenUV();
 	void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame); // 1000 = 1 second
 	void NextAnimation();
+	void SetTexture(string path);
+	void SetUV(float uvs[8]); 
+
 };
 
