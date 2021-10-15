@@ -12,5 +12,6 @@ class Entity : public SpriteObject
 	bool Death();
 	bool Collides(Entity other);
 	void InvincibleFrame(float deltatime);
- 	
+	void Update(float deltatime);
+	void Translate(glm::vec3 moveDistance);
 };

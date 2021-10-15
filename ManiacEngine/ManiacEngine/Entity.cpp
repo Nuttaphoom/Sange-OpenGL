@@ -23,3 +23,13 @@ void Entity::InvincibleFrame(float deltatime)
 		IFrame--;
 	}
 }
+
+void Entity::Update(float deltatime)
+{
+
+}
+
+void Entity::Translate(glm::vec3 moveDistance)
+{
+	pos.x = pos.x + moveDistance.x;
+}

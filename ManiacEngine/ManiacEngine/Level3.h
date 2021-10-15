@@ -1,13 +1,13 @@
 #pragma once
 #pragma once
 #include "Level.h"
-#include "Entity.h"
+#include "Player.h"
 
 class Level3 : public Level
 {
 private:
 	vector<DrawableObject*> objectsList;
-	GameObject* player;
+	SpriteObject* player;
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();

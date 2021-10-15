@@ -8,8 +8,8 @@ using namespace std;
 class DrawableObject
 {
 protected:
-	glm::vec3 pos;
-	glm::vec3 size;
+	glm::vec3 pos = glm::vec3(0, 0, 0);
+	glm::vec3 size = glm::vec3(0, 0, 0);
 
 public:
 	glm::mat4 getTransform();
