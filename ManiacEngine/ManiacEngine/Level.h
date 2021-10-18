@@ -7,11 +7,13 @@
 #include "SpriteObject.h"
 #include "Button.h" 
 #include "TileMap.h"
+#include "InvisibleObject.h" 
+
 class Level
 {
 private:
 	vector<DrawableObject*> objectsList;
-	GameObject * player;
+	Entity * player;
 
 public:
 	virtual void LevelLoad();

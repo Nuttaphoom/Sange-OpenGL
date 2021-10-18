@@ -7,6 +7,8 @@
 GameObject::GameObject()
 {
 	color = glm::vec3(0.0, 0.0, 0.0);
+	size =	glm::vec3(1.0, 1.0, 1.0); 
+	pos =	glm::vec3(1.0, 1.0, 1.0); 
 }
 
 
@@ -17,6 +19,10 @@ GameObject::~GameObject()
 void GameObject::SetColor(float r, float g, float b)
 {
 	color = glm::vec3(r, g, b);
+}
+
+glm::vec3 GameObject::GetColor() {
+	return this->color;
 }
 
 void GameObject::Render(glm::mat4 globalModelTransform)

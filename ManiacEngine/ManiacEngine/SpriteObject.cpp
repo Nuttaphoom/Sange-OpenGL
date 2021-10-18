@@ -2,7 +2,8 @@
 #include "SpriteObject.h"
 #include "GameEngine.h"
 #include "SquareMeshVbo.h"
-
+#include "gtc/matrix_transform.hpp"
+#include "gtc/type_ptr.hpp"
 SpriteObject::SpriteObject(string fileName, int row, int column)
 {
 	texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(fileName);
@@ -19,7 +20,26 @@ SpriteObject::SpriteObject(string fileName, int row, int column)
 	this->loopCount = 0;
 	this->animationTime = 0;
 	this->timeCount = 0;
+} 
+
+SpriteObject::SpriteObject(unsigned int texture,int row, int column)
+{
+	this->texture = texture; 
+
+	this->rowMax = row;
+	this->columnMax = column;
+	this->currentRow = 0;
+	this->currentColumn = 0;
+	this->GenUV();
+
+	this->startRow = 0;
+	this->startColumn = 0;
+	this->loopMax = 1;
+	this->loopCount = 0;
+	this->animationTime = 0;
+	this->timeCount = 0;
 }
+
 
 SpriteObject::~SpriteObject()
 {

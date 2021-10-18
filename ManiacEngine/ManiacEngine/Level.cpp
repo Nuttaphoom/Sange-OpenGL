@@ -12,9 +12,8 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-	GameObject * obj = new GameObject();
-	obj->SetColor(1.0, 0.0, 0.0);
-	obj->SetSize(100, 100);
+	Entity * obj = new Entity("../Resource/Texture/Sange/SangeRunning.png",1,8,1,1,1);
+ 	obj->SetSize(100, 100);
 	objectsList.push_back(obj);
 
 	player = obj;
@@ -37,6 +36,13 @@ void Level::LevelInit()
 	sprite->SetAnimationLoop(0, 0, 27, 50);
 	objectsList.push_back(sprite);
 
+	InvisibleObject* ivo = new InvisibleObject();
+	ivo->SetPosition(glm::vec3(0, 0, 0));
+	ivo->SetSize(64, 64);
+	objectsList.push_back(ivo);
+
+
+	
 	//cout << "Init Level" << endl;
 }
 
@@ -46,6 +52,18 @@ void Level::LevelUpdate()
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	for (DrawableObject* obj : objectsList) {
 		obj->Update(deltaTime);
+
+		if (dynamic_cast<InvisibleObject*>(obj)) {
+			InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj); 
+			for (DrawableObject* nObj : objectsList) {
+				if (dynamic_cast<Entity*>(nObj)) {
+					Entity* eptr = dynamic_cast<Entity*>(nObj); 
+					if (Iptr->Collide_W_Entity(*eptr))
+
+						cout << "COL" << endl; 
+				}
+			}
+		}
 	}
 
 }
@@ -57,7 +75,7 @@ void Level::LevelDraw()
 }
 
 void Level::LevelFree()
-{
+{	
 	/*for (DrawableObject* obj : objectsList) {
 		delete obj;
 	}

@@ -30,6 +30,7 @@
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="ImageObject.cpp" />
+    <ClCompile Include="InvisibleObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="LevelTest.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileMap.h" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
   </ItemGroup>
@@ -54,6 +56,7 @@
     <ClInclude Include="GameStateList.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="InvisibleObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="Level.h" />
