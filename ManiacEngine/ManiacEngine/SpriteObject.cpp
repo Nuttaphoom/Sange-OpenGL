@@ -71,7 +71,7 @@ void SpriteObject::Render(glm::mat4 globalModelTransform)
 	}
 }
 
-void SpriteObject::Update(float deltaTime)
+void SpriteObject::Update(int deltaTime)
 {
 	timeCount += deltaTime;
 	if (timeCount > animationTime)

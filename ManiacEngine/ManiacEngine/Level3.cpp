@@ -13,7 +13,7 @@ void Level3::LevelLoad()
 void Level3::LevelInit()
 {
 	SpriteObject* obj = new SpriteObject("../Resource/Texture/Sange/SangeRunning.png", 1, 8/*, 100, 10, 0*/);
-	obj->SetSize(200.0f, -200.0f);
+	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
 	obj->SetAnimationLoop(0, 0, 8, 50);
 	//obj->SetColor(0.0, 1.0, 0.0);

@@ -46,10 +46,11 @@ void LevelTest::LevelInit()
 		}
 	}
 
-	GameObject* obj = new GameObject();
-	obj->SetColor(0.0, 1.0, 0.0);
-	objectsList.push_back(obj);
-
+	SpriteObject* obj = new SpriteObject("../Resource/Texture/Sange/SangeRunning.png", 1, 8/*, 100, 10, 0*/);
+	obj->SetSize(64, -128.0f);
+	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
+	obj->SetAnimationLoop(0, 0, 8, 50);
+ 	objectsList.push_back(obj);
 	player = obj;
 
 	GameObject* obj2 = new GameObject();
@@ -100,13 +101,13 @@ void LevelTest::HandleKey(char key)
 
 	switch (key)
 	{
-	case 'w': player->Translate(glm::vec3(0, 0.3, 0)); break;
-	case 's': player->Translate(glm::vec3(0, -0.3, 0)); break;
-	case 'a': player->Translate(glm::vec3(-0.3, 0, 0)); break;
-	case 'd': player->Translate(glm::vec3(0.3, 0, 0)); break;
+	case 'w': player->Translate(glm::vec3(0.0, 10, 0)); break;
+	case 's': player->Translate(glm::vec3(0.0, -10, 0)); break;
+	case 'a': player->Translate(glm::vec3(-10, 0, 0)); break;
+	case 'd': player->Translate(glm::vec3(10, 0, 0)); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3; ; break;
+	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1; ; break;
 	}
 }
 

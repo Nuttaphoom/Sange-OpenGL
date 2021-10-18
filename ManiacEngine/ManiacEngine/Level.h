@@ -8,12 +8,13 @@
 #include "Button.h" 
 #include "TileMap.h"
 #include "InvisibleObject.h" 
+#include "Player.h"
 
 class Level
 {
 private:
 	vector<DrawableObject*> objectsList;
-	Entity * player;
+	Entity* player;
 
 public:
 	virtual void LevelLoad();

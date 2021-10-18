@@ -40,7 +40,7 @@ void DrawableObject::Translate(glm::vec3 moveDistance)
 	pos = pos + moveDistance;
 }
 
-void DrawableObject::Update(float deltaTime)
+void DrawableObject::Update(int deltaTime)
 {
  
 }

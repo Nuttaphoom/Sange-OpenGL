@@ -14,7 +14,7 @@ class Player : public Entity
 	public :
 	Player(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
 	StateMachine GetState();
-	void Update(float deltatime);
+	void Update(int deltatime);
 	void UpdateStateMachine(float deltatime);
 	void HandleKey(char Key);
 	void ChangeState(StateMachine NextState);

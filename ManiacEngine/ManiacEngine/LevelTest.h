@@ -6,7 +6,7 @@ class LevelTest : public Level
 {
 private:
 	vector<DrawableObject*> objectsList;
-	GameObject * player;
+	SpriteObject* player;
 	TileMap* tilemaps;
 
 public:

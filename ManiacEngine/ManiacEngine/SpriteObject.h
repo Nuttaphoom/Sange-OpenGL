@@ -25,7 +25,7 @@ public:
 	SpriteObject(unsigned int texture , int row, int column);
 	~SpriteObject();
 	void Render(glm::mat4 globalModelTransform);
-	void Update(float deltaTime);
+	void Update(int deltaTime);
 	void GenUV();
 	void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame); // 1000 = 1 second
 	void NextAnimation();

@@ -13,7 +13,7 @@ void Level::LevelLoad()
 void Level::LevelInit()
 {
 	Entity * obj = new Entity("../Resource/Texture/Sange/SangeRunning.png",1,8,1,1,1);
- 	obj->SetSize(100, 100);
+ 	obj->SetSize(64, -128);
 	objectsList.push_back(obj);
 
 	player = obj;
@@ -50,19 +50,37 @@ void Level::LevelUpdate()
 {
 	//cout << "Update Level" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
+
 	for (DrawableObject* obj : objectsList) {
+		//Player Update In every game object 
 		obj->Update(deltaTime);
 
-		if (dynamic_cast<InvisibleObject*>(obj)) {
-			InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj); 
+		/// Collision Check 
+		if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj)) { //Entity Collide With Collision 
 			for (DrawableObject* nObj : objectsList) {
-				if (dynamic_cast<Entity*>(nObj)) {
-					Entity* eptr = dynamic_cast<Entity*>(nObj); 
+				if (Entity* eptr = dynamic_cast<Entity*>(nObj)) {
 					if (Iptr->Collide_W_Entity(*eptr))
-
-						cout << "COL" << endl; 
+						cout << "COL WITH INV" << endl; 
 				}
 			}
+		} 
+
+		else if (Player* playerObj = dynamic_cast<Player*>(obj)) {
+			for (DrawableObject* nObj : objectsList) {
+				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
+					if (playerObj != eptr2) {
+						if (playerObj->Collides(*eptr2)) {
+							cout << "ENTITY COL" << endl; 
+						}
+					 }
+				}
+			}
+		}
+
+		///Apply Gravity 
+		if (Entity* eptr2 = dynamic_cast<Entity*>(obj)) {
+ 			if (deltaTime % 2 == 0) 
+				player->TranslateVelocity(glm::vec3(0, -0.5, 0));
 		}
 	}
 
@@ -93,8 +111,8 @@ void Level::HandleKey(char key)
 {
 	switch (key)
 	{
-		case 'w': player->Translate(glm::vec3(0, 0.3, 0)); break;
-		case 's': player->Translate(glm::vec3(0, -0.3, 0)); break;
+		case 'w': player->Translate(glm::vec3(0, 3, 0)); break;
+		case 's': player->Translate(glm::vec3(0, -3, 0)); break;
 		case 'a': player->Translate(glm::vec3(-0.3, 0, 0)); break;
 		case 'd': player->Translate(glm::vec3(0.3, 0, 0)); break;
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;

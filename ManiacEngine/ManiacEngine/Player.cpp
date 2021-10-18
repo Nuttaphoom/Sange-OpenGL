@@ -10,7 +10,7 @@ StateMachine Player::GetState()
 	return PlayerState;
 }
 
-void Player::Update(float deltatime)
+void Player::Update(int deltatime)
 {
 	UpdateStateMachine(deltatime);
 }

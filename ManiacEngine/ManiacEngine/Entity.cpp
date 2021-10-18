@@ -1,7 +1,7 @@
 #include "Entity.h"
 
 Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame){
-
+	this->velocity = glm::vec3(0, 0, 0); 
 }
 
  
@@ -18,7 +18,7 @@ bool Entity::Death()
 	else { return false; }
 }
 
-void Entity::InvincibleFrame(float deltatime)
+void Entity::InvincibleFrame(int deltatime)
 {
 	if (IFrame >= 0)
 	{
@@ -26,12 +26,21 @@ void Entity::InvincibleFrame(float deltatime)
 	}
 }
 
-void Entity::Update(float deltatime)
+void Entity::Update(int deltatime)
 {
-
+	this->Translate(velocity);
 }
 
 void Entity::Translate(glm::vec3 moveDistance)
 {
-	pos.x = pos.x + moveDistance.x;
+	printf("x");
+	pos = pos  + moveDistance   ;
+}
+
+void Entity::TranslateVelocity(glm::vec3 velocity) {
+	this->velocity = this->velocity + velocity;
+	if (this->velocity.y > 10) this->velocity.y = 10;
+	else if (this->velocity.y < -10) this->velocity.y = -10; 
+
+
 }
