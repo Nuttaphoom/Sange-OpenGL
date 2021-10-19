@@ -77,11 +77,16 @@ void Level::LevelUpdate()
 			}
 		}
 
-		///Apply Gravity 
+		///Apply Gravity to every Entities.
 		if (Entity* eptr2 = dynamic_cast<Entity*>(obj)) {
- 			if (deltaTime % 2 == 0) 
+			if (deltaTime % 2 == 0)
 				player->TranslateVelocity(glm::vec3(0, -0.5, 0));
-		}
+		} 
+
+		
+
+		
+
 	}
 
 }

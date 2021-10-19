@@ -54,9 +54,9 @@ bool InvisibleObject::Collide_W_Entity(Entity e) {
 	CollideX = (float) e.GetPos().x - e.GetSize().x / 2 < (float) this->GetPos().x + this->GetSize().x / 2 && 
 		(float) e.GetPos().x + e.GetSize().x / 2 > (float) this->GetPos().x - this->GetSize().x / 2 ;
 
-	CollideY = (float)e.GetPos().y - e.GetSize().y * -1 /2 > (float) this->GetPos().y + this->GetSize().y * -1 / 2 &&
-		(float)e.GetPos().y + e.GetSize().y * -1 / 2 < (float)this->GetPos().y - this->GetSize().y *-1 / 2;
-	
+	CollideY = (float)e.GetPos().y - e.GetSize().y * -1 /2 < (float) this->GetPos().y + this->GetSize().y * -1 / 2 &&
+		(float)e.GetPos().y + e.GetSize().y * -1 / 2 > (float)this->GetPos().y - this->GetSize().y *-1 / 2;
+ 
 	return  CollideX & CollideY ;
 }
 
