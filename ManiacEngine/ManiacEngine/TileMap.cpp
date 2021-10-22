@@ -1,14 +1,17 @@
 #include "TileMap.h"
 
 
-TileMap::TileMap(int width, int height, int** Mapdata, string texture_path, int rowMax, int columnMax) {
+TileMap::TileMap(int width, int height, int** Mapdata_Middle_Layer,int **ColMapdata, string texture_path, int rowMax, int columnMax) {
 	width -= 1;
 	height -= 1;
 	unsigned int texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(texture_path);
 
 	for (int i = 0; i < width + 1; i++) {
 		tiles.push_back(vector<SpriteObject*>());
+		tiles_collision.push_back(vector<InvisibleObject*>());
+
 		for (int j = 0; j < height + 1; j++) {
+			/// Create every tile 
 			tiles[i].push_back(new SpriteObject(texture, rowMax, columnMax));
 
 			tiles[i][j]->SetAnimationLoop(0, 0, 0, 0);
@@ -27,23 +30,31 @@ TileMap::TileMap(int width, int height, int** Mapdata, string texture_path, int 
 
 			cout << "widthEachCell : " << widthEachCell << endl;
 
-			uvs[0] = widthEachCell * Mapdata[i][j];
-			uvs[1] = (height - (Mapdata[i][j] / width)) * (heightEachCell)-1;
+			uvs[0] = widthEachCell * Mapdata_Middle_Layer[i][j];
+			uvs[1] = (height - (Mapdata_Middle_Layer[i][j] / width)) * (heightEachCell)-1;
 
-			uvs[2] = (widthEachCell * Mapdata[i][j]) + widthEachCell;
-			uvs[3] = (height - (Mapdata[i][j] / width)) * (heightEachCell)-1;
+			uvs[2] = (widthEachCell * Mapdata_Middle_Layer[i][j]) + widthEachCell;
+			uvs[3] = (height - (Mapdata_Middle_Layer[i][j] / width)) * (heightEachCell)-1;
 
-			uvs[4] = (widthEachCell * Mapdata[i][j]) + widthEachCell;
-			uvs[5] = (height - (Mapdata[i][j] / width)) * (heightEachCell);
+			uvs[4] = (widthEachCell * Mapdata_Middle_Layer[i][j]) + widthEachCell;
+			uvs[5] = (height - (Mapdata_Middle_Layer[i][j] / width)) * (heightEachCell);
 
-			uvs[6] = (widthEachCell * Mapdata[i][j]);
-			uvs[7] = (height - (Mapdata[i][j] / width)) * (heightEachCell);
+			uvs[6] = (widthEachCell * Mapdata_Middle_Layer[i][j]);
+			uvs[7] = (height - (Mapdata_Middle_Layer[i][j] / width)) * (heightEachCell);
 
 			cout << uvs[6] << "," << uvs[7] << "\t" << uvs[4] << "," << uvs[5] << endl;
 			cout << uvs[0] << "," << uvs[1] << "\t" << uvs[2] << "," << uvs[3] << endl;
 			cout << endl << endl << endl;
 
 			tiles[i][j]->SetUV(uvs);
+
+			/// Create all collision object for every tiles. 
+			if (ColMapdata[i][j] == 1) {
+				tiles_collision[i].push_back(new InvisibleObject());
+				tiles_collision[i][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - i * 64 - 32, 1));
+				tiles_collision[i][j]->SetSize(64, -64);
+				tiles_collision[i][j]->SetRender(true); 
+			}
 		}
 	}
 }
@@ -58,4 +69,8 @@ TileMap::~TileMap() {
 
 vector<vector<SpriteObject*>> TileMap::GetTiles() {
 	return tiles;
+}
+
+vector<vector<InvisibleObject*>> TileMap::GetColTiles() {
+	return tiles_collision; 
 }

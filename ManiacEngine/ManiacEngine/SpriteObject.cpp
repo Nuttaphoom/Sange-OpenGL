@@ -59,6 +59,7 @@ void SpriteObject::Render(glm::mat4 globalModelTransform)
 	}
 
 	glm::mat4 currentMatrix = this->getTransform();
+ 
 
 	if (squareMesh != nullptr) {
 

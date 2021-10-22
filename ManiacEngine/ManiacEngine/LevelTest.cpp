@@ -4,6 +4,9 @@
 int MapHeight ;
 int MapWidth ;
 static int** sMapdata;
+static int** sColMapdata;
+
+
 void LevelTest::LevelLoad()
 {
 	SquareMeshVbo* square = new SquareMeshVbo();
@@ -24,14 +27,30 @@ void LevelTest::LevelLoad()
 			}
 		}
 		mapFile.close();
-		for (int i = 0;i < MapHeight;i++) {
-			for (int j = 0;j < MapWidth;j++) {
-				cout << sMapdata[i][j] << "\t";
+		
+ 	}
+
+	ifstream cMapFile("../Resource/Map/Col_Example_Mapdata.txt");
+	if (cMapFile.is_open()) {
+		cMapFile >> MapHeight;
+		cMapFile >> MapWidth;
+		sColMapdata = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sColMapdata[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				cMapFile >> sColMapdata[y][x];
+			}
+		}
+		cMapFile.close();
+		for (int i = 0; i < MapHeight; i++) {
+			for (int j = 0; j < MapWidth; j++) {
+				cout << sColMapdata[i][j] << "\t";
 			}
 			cout << endl;
 		}
-		
-	}
+
+ 	}
+
 
 	//cout << "Load Level" << endl;
 }
@@ -39,10 +58,16 @@ void LevelTest::LevelLoad()
 void LevelTest::LevelInit()
 {
  
-	tilemaps = new TileMap(MapWidth, MapHeight, sMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	tilemaps = new TileMap(MapWidth, MapHeight, sMapdata,sColMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]); 
+		}
+	}
+
+	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
+		for (int j = 0; j < tilemaps->GetColTiles()[i].size(); j++) {
+			objectsList.push_back(tilemaps->GetColTiles()[i][j]); 
 		}
 	}
 
@@ -76,6 +101,7 @@ void LevelTest::LevelUpdate()
 
 void LevelTest::LevelDraw()
 {
+	
 	GameEngine::GetInstance()->Render(objectsList);
  	//cout << "Draw Level" << endl;
 }
@@ -107,7 +133,7 @@ void LevelTest::HandleKey(char key)
 	case 'd': player->Translate(glm::vec3(10, 0, 0)); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1; ; break;
+	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3; ; break;
 	}
 }
 
