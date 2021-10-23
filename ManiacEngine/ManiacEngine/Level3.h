@@ -7,7 +7,7 @@ class Level3 : public Level
 {
 private:
 	vector<DrawableObject*> objectsList;
-	SpriteObject* player;
+	Player* player;
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();

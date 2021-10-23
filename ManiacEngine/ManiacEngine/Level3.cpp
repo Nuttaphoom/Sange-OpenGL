@@ -12,10 +12,10 @@ void Level3::LevelLoad()
 
 void Level3::LevelInit()
 {
-	SpriteObject* obj = new SpriteObject("../Resource/Texture/Sange/SangeRunning.png", 1, 8/*, 100, 10, 0*/);
+	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 8, 100, 10, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
-	obj->SetAnimationLoop(0, 0, 8, 50);
+	obj->SetAnimationLoop(0, 0, 8, 100);
 	//obj->SetColor(0.0, 1.0, 0.0);
 	objectsList.push_back(obj);
 	/*Entity* E1 = new Entity("../Resource/Texture/TestSprite.png", 4, 7, 100.0, 9.0, 0.0);
@@ -64,7 +64,16 @@ void Level3::LevelUpdate()
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	for (DrawableObject* obj : objectsList) {
 		obj->Update(deltaTime);
+		if (Player* eptr2 = dynamic_cast<Player*>(obj)) {
+			if (deltaTime % 2 == 0)
+				player->TranslateVelocity(glm::vec3(0, -0.5, 0));
+		}
 	}
+
+	/*if (Player* eptr2 = dynamic_cast<Player*>(obj)) {
+		if (deltaTime % 2 == 0)
+			player->TranslateVelocity(glm::vec3(0, -0.5, 0));
+	}*/
  }
 
 void Level3::LevelDraw()

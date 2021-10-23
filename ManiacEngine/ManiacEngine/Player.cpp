@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
+Player::Player(string fileName, int row, int column,float HP, float MoveSpeed, float IFrame) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
 {
 	PlayerState = StateMachine::IDLE;
 }
@@ -12,6 +12,7 @@ StateMachine Player::GetState()
 
 void Player::Update(int deltatime)
 {
+	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 }
 

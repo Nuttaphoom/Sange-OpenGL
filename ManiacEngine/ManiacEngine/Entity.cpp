@@ -18,6 +18,11 @@ bool Entity::Death()
 	else { return false; }
 }
 
+/*void Entity::Render(glm::mat4 globalModelTransform)
+{
+
+}*/
+
 void Entity::InvincibleFrame(int deltatime)
 {
 	if (IFrame >= 0)
@@ -29,6 +34,7 @@ void Entity::InvincibleFrame(int deltatime)
 void Entity::Update(int deltatime)
 {
 	this->Translate(velocity);
+	SpriteObject::Update(deltatime);
 }
 
 void Entity::Translate(glm::vec3 moveDistance)
@@ -41,6 +47,14 @@ void Entity::TranslateVelocity(glm::vec3 velocity) {
 	this->velocity = this->velocity + velocity;
 	if (this->velocity.y > 10) this->velocity.y = 10;
 	else if (this->velocity.y < -10) this->velocity.y = -10; 
+}
 
+void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame)
+{
+	SpriteObject::SetAnimationLoop(startRow, startColumn, howManyFrame, delayBetaweenFrame);
+}
 
+void Entity::AnimationFlip()
+{
+	
 }
