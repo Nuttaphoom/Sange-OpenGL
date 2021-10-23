@@ -3,9 +3,9 @@
 
 int MapHeight ;
 int MapWidth ;
-static int** sMapdata;
+static int** sMiddleMapdata;
 static int** sColMapdata;
-
+static int** sFrontMapData; 
 
 void LevelTest::LevelLoad()
 {
@@ -13,22 +13,33 @@ void LevelTest::LevelLoad()
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
 
-	ifstream mapFile("../Resource/Map/Example_Mapdata.txt");
+	ifstream mapFile("../Resource/Map/Example_Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
-		sMapdata = new int* [MapHeight];
+		sMiddleMapdata = new int* [MapHeight];
 		for (int y = 0;y < MapHeight;y++) {
-			sMapdata[y] = new int[MapWidth];
+			sMiddleMapdata[y] = new int[MapWidth];
 			for (int x = 0;x < MapWidth;x++) {
-				mapFile >> sMapdata[y][x];
-				//cout << sMapdata[y][x] << endl;
-				
+				mapFile >> sMiddleMapdata[y][x];
 			}
 		}
 		mapFile.close();
-		
  	}
+
+	ifstream FrontMapFile("../Resource/Map/Example_Front_Mapdata.txt");
+	if (FrontMapFile.is_open()) {
+		FrontMapFile >> MapHeight;
+		FrontMapFile >> MapWidth;
+		sFrontMapData = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sFrontMapData[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				FrontMapFile >> sFrontMapData[y][x];
+			}
+		}
+		FrontMapFile.close();
+	}
 
 	ifstream cMapFile("../Resource/Map/Col_Example_Mapdata.txt");
 	if (cMapFile.is_open()) {
@@ -42,13 +53,6 @@ void LevelTest::LevelLoad()
 			}
 		}
 		cMapFile.close();
-		for (int i = 0; i < MapHeight; i++) {
-			for (int j = 0; j < MapWidth; j++) {
-				cout << sColMapdata[i][j] << "\t";
-			}
-			cout << endl;
-		}
-
  	}
 
 
@@ -58,7 +62,7 @@ void LevelTest::LevelLoad()
 void LevelTest::LevelInit()
 {
  
-	tilemaps = new TileMap(MapWidth, MapHeight, sMapdata,sColMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	tilemaps = new TileMap(MapWidth, MapHeight,sFrontMapData ,sMiddleMapdata,sColMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]); 
