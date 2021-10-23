@@ -17,7 +17,7 @@ class InvisibleObject : public DrawableObject {
 		virtual void Update(float deltaTime);
 
 		void SetRender(bool b); 
-		bool Collide_W_Entity(Entity e); 
+		int Collide_W_Entity(Entity e); 
 };
 
 #endif 

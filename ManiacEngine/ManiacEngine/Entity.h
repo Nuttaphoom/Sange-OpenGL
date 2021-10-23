@@ -12,7 +12,8 @@ class Entity : public SpriteObject
 	public:
 	Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
 	bool Death();
-	bool Collides(Entity other);
+	int Collides(Entity e);
+	void Collides_W_Inv_Wall(int CollisionDetection); 
 	//void Render(glm::mat4 globalModelTransform);
 	void InvincibleFrame(int deltatime);
 	void Update(int deltatime);

@@ -13,7 +13,7 @@ void Level::LevelLoad()
 void Level::LevelInit()
 {
 	Entity * obj = new Entity("../Resource/Texture/Sange/SangeRunning.png",1,8,1,1,1);
- 	obj->SetSize(64, -128);
+ 	obj->SetSize(128, -128);
 	objectsList.push_back(obj);
 
 	player = obj;
@@ -29,12 +29,6 @@ void Level::LevelInit()
 	butt->SetSize(451, -121); 
 	butt->SetTexture("../Resource/Texture/HPBar.PNG");
 	objectsList.push_back(butt);
-
-	SpriteObject* sprite = new SpriteObject("../Resource/Texture/TestSprite.png", 4, 7);
-	sprite->SetSize(200.0f, -200.0f);
-	sprite->SetPosition(glm::vec3(1.0f, 0.0f, 0.0f));
-	sprite->SetAnimationLoop(0, 0, 27, 50);
-	objectsList.push_back(sprite);
 
 	InvisibleObject* ivo = new InvisibleObject();
 	ivo->SetPosition(glm::vec3(0, 0, 0));
@@ -59,8 +53,8 @@ void Level::LevelUpdate()
 		if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj)) { //Entity Collide With Collision 
 			for (DrawableObject* nObj : objectsList) {
 				if (Entity* eptr = dynamic_cast<Entity*>(nObj)) {
-					if (Iptr->Collide_W_Entity(*eptr))
-						cout << "COL WITH INV" << endl; 
+					if (int CollideDetection = Iptr->Collide_W_Entity(*eptr))
+						eptr->Collides_W_Inv_Wall(CollideDetection); 
 				}
 			}
 		} 
@@ -80,7 +74,7 @@ void Level::LevelUpdate()
 		///Apply Gravity to every Entities.
 		if (Entity* eptr2 = dynamic_cast<Entity*>(obj)) {
 			if (deltaTime % 2 == 0)
-				player->TranslateVelocity(glm::vec3(0, -0.5, 0));
+				eptr2->TranslateVelocity(glm::vec3(0, -0.5, 0));
 		} 
 
 		
