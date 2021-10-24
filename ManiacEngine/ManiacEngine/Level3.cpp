@@ -12,6 +12,16 @@ void Level3::LevelLoad()
 
 void Level3::LevelInit()
 {
+	#pragma region ground_test
+	for (int i = 0 ; i < 12 ; i++)
+	{ 
+	InvisibleObject* ivo = new InvisibleObject();
+	ivo->SetPosition(glm::vec3(i*64 - 64*4, -128, 0));
+	ivo->SetSize(64, 64);
+	objectsList.push_back(ivo);
+	}
+	#pragma endregion 
+
 	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 8, 100, 10, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
@@ -51,23 +61,45 @@ void Level3::LevelInit()
 
 void Level3::LevelUpdate()
 {
-	//cout << "Update Level" << endl;
-	
-	//Player out of bound 
-	/*if (player->GetPos().x > 3.5) player->SetPosition(glm::vec3(player->GetPos().x * -1 + 1,player->GetPos().y,1)); 
-	if (player->GetPos().x < -3.5) player->SetPosition(glm::vec3(player->GetPos().x * -1 - 1, player->GetPos().y, 1));
-	if (player->GetPos().y < -3.5) player->SetPosition(glm::vec3(player->GetPos().x, player->GetPos().y * -1 - 1 , 1));
-	if (player->GetPos().y > 3.5) player->SetPosition(glm::vec3(player->GetPos().x, player->GetPos().y * -1 + 1, 1));
-	*/
-	//cout << player->GetPos().x + (player->GetSize().x / 2) << endl; 
-
+ 
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
+
 	for (DrawableObject* obj : objectsList) {
+		//Player Update In every game object 
 		obj->Update(deltaTime);
-		if (Player* eptr2 = dynamic_cast<Player*>(obj)) {
-			if (deltaTime % 2 == 0)
-				player->TranslateVelocity(glm::vec3(0, -0.5, 0));
+
+		/// Collision Check 
+		if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj)) { //Entity Collide With Collision 
+			for (DrawableObject* nObj : objectsList) {
+				if (Entity* eptr = dynamic_cast<Entity*>(nObj)) {
+					if (int CollideDetection = Iptr->Collide_W_Entity(*eptr))
+						eptr->Collides_W_Inv_Wall(CollideDetection);
+				}
+			}
 		}
+
+		else if (Player* playerObj = dynamic_cast<Player*>(obj)) {
+			for (DrawableObject* nObj : objectsList) {
+				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
+					if (playerObj != eptr2) {
+						if (playerObj->Collides(*eptr2)) {
+							cout << "ENTITY COL" << endl;
+						}
+					}
+				}
+			}
+		}
+
+		///Apply Gravity to every Entities.
+		if (Entity* eptr2 = dynamic_cast<Entity*>(obj)) {
+			if (deltaTime % 2 == 0)
+				eptr2->TranslateVelocity(glm::vec3(0, -0.5, 0));
+		}
+
+
+
+
+
 	}
 
 	/*if (Player* eptr2 = dynamic_cast<Player*>(obj)) {
@@ -99,22 +131,20 @@ void Level3::LevelUnload()
 
 void Level3::HandleKey(char key)
 {
-
 	switch (key)
 	{
-		/*case 'w': player->HandleKey('w'); break;
-		case 's': player->HandleKey('s'); break;
-		case 'a': player->HandleKey('a'); break;
-		case 'd': player->HandleKey('d'); break;*/
-		case 'w': player->Translate(glm::vec3(0.0, 10, 0)); break;
-		case 's': player->Translate(glm::vec3(0.0, -10, 0)); break;
-		case 'a': player->Translate(glm::vec3(-10, 0, 0)); break;
-		case 'd': player->Translate(glm::vec3(10, 0, 0)); break;
+		case 'w': player->Translate(glm::vec3(0, 3, 0)); break;
+		case 's': player->Translate(glm::vec3(0, -3, 0)); break;
+		case 'a': player->Translate(glm::vec3(-0.3, 0, 0)); break;
+		case 'd': player->Translate(glm::vec3(0.3, 0, 0)); break;
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1; ; break;
+		case 'g': Camera::GetInstance()->Translate(10.0f, 0);  break;//Move the cam to right
+		case 'f': Camera::GetInstance()->Translate(-10.0f, 0); break;//Move the cam to left  
+		case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
+		case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
 	}
-	//player->Translate(glm::vec3(0.3, 0, 0)); break;
 }
 
 void Level3::HandleMouse(int type, int x, int y)

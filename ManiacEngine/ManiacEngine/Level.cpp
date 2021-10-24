@@ -12,11 +12,14 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-	Entity * obj = new Entity("../Resource/Texture/Sange/SangeRunning.png",1,8,1,1,1);
- 	obj->SetSize(128, -128);
+	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 8, 100, 10, 0);
+	obj->SetSize(128, -128.0f);
+	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
+	obj->SetAnimationLoop(0, 0, 8, 100);
 	objectsList.push_back(obj);
 
 	player = obj;
+	
 
 	ImageObject* img = new ImageObject();
 	img->SetSize(100.0f, -100.0f);
@@ -112,7 +115,7 @@ void Level::HandleKey(char key)
 	{
 		case 'w': player->Translate(glm::vec3(0, 3, 0)); break;
 		case 's': player->Translate(glm::vec3(0, -3, 0)); break;
-		case 'a': player->Translate(glm::vec3(-0.3, 0, 0)); break;
+		case 'a': player->Translate(glm::vec3(-0.3, 0, 0)) ; break;
 		case 'd': player->Translate(glm::vec3(0.3, 0, 0)); break;
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
