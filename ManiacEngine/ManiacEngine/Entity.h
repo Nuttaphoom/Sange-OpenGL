@@ -11,14 +11,14 @@ class Entity : public SpriteObject
 
 	public:
 	Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
-	bool Death();
-	int Collides(Entity e);
-	void Collides_W_Inv_Wall(int CollisionDetection); 
+	virtual bool Death();
+	virtual int Collides(Entity e);
+	virtual void Collides_W_Inv_Wall(int CollisionDetection); 
 	//void Render(glm::mat4 globalModelTransform);
-	void InvincibleFrame(int deltatime);
-	void Update(int deltatime);
-	void Translate(glm::vec3 moveDistance);
-	void TranslateVelocity(glm::vec3 velocity); 
-	void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
-	void AnimationFlip();
+	virtual void InvincibleFrame(int deltatime);
+	virtual void Update(int deltatime);
+	virtual void Translate(glm::vec3 moveDistance);
+	virtual void TranslateVelocity(glm::vec3 velocity); 
+	virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
+	virtual void AnimationFlip();
 };

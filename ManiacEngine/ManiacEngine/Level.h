@@ -14,7 +14,7 @@ class Level
 {
 private:
 	vector<DrawableObject*> objectsList;
-	Entity* player;
+	Player* player;
 
 public:
 	virtual void LevelLoad();

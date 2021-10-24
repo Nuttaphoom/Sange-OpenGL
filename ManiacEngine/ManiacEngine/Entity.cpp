@@ -9,7 +9,7 @@ int Entity::Collides(Entity e)
 {
 	int CollideDetection = 0; //Check where it collide with Entity (In Other Entity POV) 
 						  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
-
+	
 	float LeftX_Inv_Obj = (float)this->GetPos().x - this->GetSize().x / 2;
 	float RightX_Inv_Obj = (float)this->GetPos().x + this->GetSize().x / 2;
 
@@ -114,7 +114,7 @@ void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
 	if (CollisionDetection % 2 != 0) { //COLLIDE TOP
 
 	}
-
+	 
 	if ((CollisionDetection >> 1) % 2 != 0) { //COLLIDE BOTTOM
 		this->velocity.y = 0;
 	}

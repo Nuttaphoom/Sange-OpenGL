@@ -113,10 +113,10 @@ void Level::HandleKey(char key)
 {
 	switch (key)
 	{
-		case 'w': player->Translate(glm::vec3(0, 3, 0)); break;
-		case 's': player->Translate(glm::vec3(0, -3, 0)); break;
-		case 'a': player->Translate(glm::vec3(-0.3, 0, 0)) ; break;
-		case 'd': player->Translate(glm::vec3(0.3, 0, 0)); break;
+		case 'w': player->HandleKey(key); break;
+		case 's': player->HandleKey(key); break;
+		case 'a': player->HandleKey(key); break;
+		case 'd': player->HandleKey(key); break;
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;

@@ -4,10 +4,11 @@ void Player::HandleKey(char Key)
 {
  	switch (Key)
 	{
-	case 'w': TranslateVelocity(glm::vec3(0.0, 3, 0)); break;
-	case 's': TranslateVelocity(glm::vec3(0, -3, 0)); break;
-	case 'a': TranslateVelocity(glm::vec3(-0.3, 0, 0)); break;
-	case 'd': TranslateVelocity(glm::vec3(0.3, 0, 0)); break;
+		cout << "input is " << Key << endl;
+		case 'w': TranslateVelocity(glm::vec3(0.0, 3, 0)); break;
+		case 's': TranslateVelocity(glm::vec3(0, -3, 0)); break;
+		case 'a': TranslateVelocity(glm::vec3(-0.3, 0, 0)); break;
+		case 'd': TranslateVelocity(glm::vec3(0.3, 0, 0)); break;
 	}
 
 }
