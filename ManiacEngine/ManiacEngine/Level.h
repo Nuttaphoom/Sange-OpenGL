@@ -9,12 +9,21 @@
 #include "TileMap.h"
 #include "InvisibleObject.h" 
 #include "Player.h"
+#include <fstream>
+
 
 class Level
 {
 private:
 	vector<DrawableObject*> objectsList;
 	Player* player;
+	TileMap* tilemaps;
+	int MapWidth;
+	int MapHeight; 
+	int** sMiddleMapdata;
+	int** sColMapdata;
+	int** sFrontMapData;
+
 
 public:
 	virtual void LevelLoad();

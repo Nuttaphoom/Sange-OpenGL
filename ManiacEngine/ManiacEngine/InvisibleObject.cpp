@@ -99,8 +99,7 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 		}
 	}
  
-	cout << CollideDetection << endl; 
-	return  CollideDetection;
+ 	return  CollideDetection;
 }
 
 InvisibleObject::InvisibleObject() {

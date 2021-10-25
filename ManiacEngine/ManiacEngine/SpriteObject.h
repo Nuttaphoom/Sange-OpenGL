@@ -19,6 +19,7 @@ private:
 	int loopCount;
 	int animationTime;
 	int timeCount;
+	bool playAnim; 
 
 public:
 	SpriteObject(string fileName, int row, int column) ;
@@ -27,7 +28,7 @@ public:
 	void Render(glm::mat4 globalModelTransform);
 	void Update(int deltaTime);
 	void GenUV();
-	void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame); // 1000 = 1 second
+	void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame,bool playanim); // 1000 = 1 second
 	void NextAnimation();
 	void SetTexture(string path);
 	void SetUV(float uvs[8]); 

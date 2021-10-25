@@ -17,6 +17,7 @@ class TileMap  {
 		vector<vector<SpriteObject*>> GetTiles(); 
 		vector<vector<InvisibleObject*>> GetColTiles();
 		
- };
+
+  };
 
 #endif 

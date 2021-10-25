@@ -8,6 +8,11 @@ private:
 	vector<DrawableObject*> objectsList;
 	SpriteObject* player;
 	TileMap* tilemaps;
+	int MapHeight;
+	int MapWidth;
+	int** sMiddleMapdata;
+	int** sColMapdata;
+	int** sFrontMapData;
 
 public:
 	virtual void LevelLoad();

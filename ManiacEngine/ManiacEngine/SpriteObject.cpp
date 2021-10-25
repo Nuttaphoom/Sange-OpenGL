@@ -75,14 +75,12 @@ void SpriteObject::Render(glm::mat4 globalModelTransform)
 void SpriteObject::Update(int deltaTime)
 {
 	timeCount += deltaTime;
-	if (timeCount > animationTime)
+	if (timeCount > animationTime && playAnim)
 	{
 		this->NextAnimation();
 		this->GenUV();
 		timeCount = 0;
 	}
-
-
 }
 
 void SpriteObject::GenUV()
@@ -100,13 +98,14 @@ void SpriteObject::GenUV()
 	uv[7] = (currentRow + 1) / (rowMax * 1.0f);
 }
 
-void SpriteObject::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame)
+void SpriteObject::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame,bool playAnim = true)
 {
 	this->startRow = startRow;
 	this->startColumn = startColumn;
 	this->loopMax = howManyFrame;
 	this->loopCount = 0;
 	this->animationTime = delayBetaweenFrame;
+	this->playAnim = playAnim; 
 
 	currentColumn = startColumn;
 	currentRow = startRow;

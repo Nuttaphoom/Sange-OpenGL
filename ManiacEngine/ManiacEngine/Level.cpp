@@ -1,26 +1,83 @@
 #include "Level.h"
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT; 
+ 
+
+
 void Level::LevelLoad()
 {
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
+	ifstream mapFile("../Resource/Map/Example_Middle_Mapdata.txt");
+	if (mapFile.is_open()) {
+		mapFile >> MapHeight;
+		mapFile >> MapWidth;
+		sMiddleMapdata = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sMiddleMapdata[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				mapFile >> sMiddleMapdata[y][x];
+ 			}
+ 		}
+		mapFile.close();
+	}
+ 
+		
+	ifstream FrontMapFile("../Resource/Map/Example_Front_Mapdata.txt");
+	if (FrontMapFile.is_open()) {
+		FrontMapFile >> MapHeight;
+		FrontMapFile >> MapWidth;
+		sFrontMapData = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sFrontMapData[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				FrontMapFile >> sFrontMapData[y][x];
+			}
+		}
+		FrontMapFile.close();
+	}
 
+	ifstream cMapFile("../Resource/Map/Col_Example_Mapdata.txt");
+	if (cMapFile.is_open()) {
+		cMapFile >> MapHeight;
+		cMapFile >> MapWidth;
+		sColMapdata = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sColMapdata[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				cMapFile >> sColMapdata[y][x];
+			}
+		}
+		cMapFile.close();
+	}
 	//cout << "Load Level" << endl;
 }
 
 void Level::LevelInit()
 {
-	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 8, 100, 10, 0);
+	tilemaps = new TileMap(MapHeight,MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
+		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
+			objectsList.push_back(tilemaps->GetTiles()[i][j]);
+		}
+	}
+
+	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
+		for (int j = 0; j < tilemaps->GetColTiles()[i].size(); j++) {
+			objectsList.push_back(tilemaps->GetColTiles()[i][j]);
+		}
+	}
+
+	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 7, 100, 10, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
 	obj->SetAnimationLoop(0, 0, 8, 100);
 	objectsList.push_back(obj);
 
-	player = obj;
+	player = obj; 
 	
-
+	/*
 	ImageObject* img = new ImageObject();
 	img->SetSize(100.0f, -100.0f);
 	img->SetTexture("../Resource/Texture/penguin.png");
@@ -37,7 +94,7 @@ void Level::LevelInit()
 	ivo->SetPosition(glm::vec3(0, 0, 0));
 	ivo->SetSize(64, 64);
 	objectsList.push_back(ivo);
-
+	*/
 
 	
 	//cout << "Init Level" << endl;
@@ -47,9 +104,9 @@ void Level::LevelUpdate()
 {
 	//cout << "Update Level" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
-
+	 
 	for (DrawableObject* obj : objectsList) {
-		//Player Update In every game object 
+		//Play Update In every game object 
 		obj->Update(deltaTime);
 
 		/// Collision Check 
@@ -90,6 +147,7 @@ void Level::LevelUpdate()
 
 void Level::LevelDraw()
 {
+
 	GameEngine::GetInstance()->Render(objectsList);
 	//cout << "Draw Level" << endl;
 }
@@ -100,6 +158,7 @@ void Level::LevelFree()
 		delete obj;
 	}
 	objectsList.clear();*/
+ 
 	//cout << "Free Level" << endl;*/
 }
 
@@ -120,8 +179,8 @@ void Level::HandleKey(char key)
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;
-		case 'g': Camera::GetInstance()->Translate(10.0f, 0);  break;//Move the cam to right
-		case 'f': Camera::GetInstance()->Translate(-10.0f, 0); break;//Move the cam to left  
+		case 'g': Camera::GetInstance()->Translate(100.0f, 0);  break;//Move the cam to right
+		case 'f': Camera::GetInstance()->Translate(-100.0f, 0); break;//Move the cam to left  
 		case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 		case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
 	}

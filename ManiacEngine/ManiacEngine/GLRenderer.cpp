@@ -4,7 +4,8 @@
 #include "gtc/type_ptr.hpp"
 #include "SDL_surface.h"
 #include "SDL_image.h"
-
+#include "Camera.h"
+#include "Entity.h"
 using namespace std;
 
 GLRenderer::GLRenderer(int w, int h)
@@ -142,6 +143,7 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 	
 
 	for (DrawableObject *obj : objList) {
+		if (  Camera::GetInstance()->IsInCamera(obj->GetPos(),obj->GetSize())  )
 		obj->Render(camera);
 	}
 

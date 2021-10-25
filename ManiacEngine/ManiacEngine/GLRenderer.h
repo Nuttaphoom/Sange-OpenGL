@@ -8,7 +8,8 @@
 #include <string>
 #include "MeshVbo.h"
 #include "glm.hpp"
-#include "DrawableObject.h"
+#include "ImageObject.h"
+
 
 
 using namespace std;

@@ -8,7 +8,7 @@ class Camera {
 private:
 	static Camera* instance;
 	glm::vec3 CamOffset;
-	float zoomOffset; 
+	float zoomOffset;
 public:
 	Camera();
 	static Camera* GetInstance();
@@ -16,7 +16,7 @@ public:
 	void Translate(float x, float y);
 	void Zoom(float p);
 	float GetZoomOffset();
+	bool IsInCamera(glm::vec3 pos, glm::vec3 size);
+
 };
-
-
 #endif 

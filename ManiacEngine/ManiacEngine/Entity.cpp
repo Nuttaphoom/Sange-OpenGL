@@ -105,7 +105,7 @@ void Entity::TranslateVelocity(glm::vec3 velocity) {
 
 void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame)
 {
-	SpriteObject::SetAnimationLoop(startRow, startColumn, howManyFrame, delayBetaweenFrame);
+	SpriteObject::SetAnimationLoop(startRow, startColumn, howManyFrame, delayBetaweenFrame,true);
 }
 
 void Entity::AnimationFlip()
