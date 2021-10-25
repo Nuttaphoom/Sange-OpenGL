@@ -5,7 +5,10 @@
 
 enum class StateMachine {
 	IDLE,
-	RUNNING
+	RUNNING,
+	JUMPPING,
+	MIDJUMP,
+	FALLING
 };
 
 class Player : public Entity

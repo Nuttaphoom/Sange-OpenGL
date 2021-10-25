@@ -5,10 +5,10 @@ void Player::HandleKey(char Key)
  	switch (Key)
 	{
 		cout << "input is " << Key << endl;
-		case 'w': TranslateVelocity(glm::vec3(0.0, 3, 0)); break;
+		case 'w': TranslateVelocity(glm::vec3(0, 3, 0)); break;
 		case 's': TranslateVelocity(glm::vec3(0, -3, 0)); break;
-		case 'a': TranslateVelocity(glm::vec3(-0.3, 0, 0)); break;
-		case 'd': TranslateVelocity(glm::vec3(0.3, 0, 0)); break;
+		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
+		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;
 	}
 
 }
@@ -47,11 +47,13 @@ void Player::ChangeState(StateMachine NextState)
 	{
 		//SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
 	}
+	else if (this->GetState() == StateMachine::JUMPPING)
+	{
+		//SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
+	}
 }
 
 void Player::Translate(glm::vec3 moveDistance)
 {
 	pos = pos + moveDistance;
 }
-
- 

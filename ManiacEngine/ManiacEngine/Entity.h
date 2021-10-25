@@ -7,7 +7,7 @@ class Entity : public SpriteObject
 	float MoveSpeed;
 	glm::vec3 velocity; 
 	float IFrame;
-	float DirectionSet = -1;
+	int DirectionSet = 1;
 
 	public:
 	Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
@@ -18,7 +18,9 @@ class Entity : public SpriteObject
 	virtual void InvincibleFrame(int deltatime);
 	virtual void Update(int deltatime);
 	virtual void Translate(glm::vec3 moveDistance);
-	virtual void TranslateVelocity(glm::vec3 velocity); 
+	virtual void TranslateVelocity(glm::vec3 velocity);
 	virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
 	virtual void AnimationFlip();
+	virtual float GetMoveSpeed();
+	virtual void SetDirection(int x);
 };

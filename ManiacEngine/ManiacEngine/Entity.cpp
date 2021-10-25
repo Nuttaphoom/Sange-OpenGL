@@ -1,10 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame){
-	this->velocity = glm::vec3(0, 0, 0); 
+Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame) {
+	this->velocity = glm::vec3(0, 0, 0);
 }
 
- 
+
 int Entity::Collides(Entity e)
 {
 	int CollideDetection = 0; //Check where it collide with Entity (In Other Entity POV) 
@@ -86,6 +86,10 @@ void Entity::Update(int deltatime)
 {
 	this->Translate(velocity);
 	SpriteObject::Update(deltatime);
+	if ((GetSize().x < 0 && DirectionSet > 0) || (GetSize().x > 0 && DirectionSet < 0))
+	{
+		SetSize(GetSize().x * -1, GetSize().y);
+	}
 }
 
 void Entity::Translate(glm::vec3 moveDistance)
@@ -128,4 +132,14 @@ void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
 	}
 
 
+}
+
+float Entity::GetMoveSpeed()
+{
+	return MoveSpeed;
+}
+
+void Entity::SetDirection(int x)
+{
+	DirectionSet = x;
 }
