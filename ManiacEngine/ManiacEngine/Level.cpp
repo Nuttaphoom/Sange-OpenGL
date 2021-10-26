@@ -113,8 +113,7 @@ void Level::LevelUpdate()
 		if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj)) { //Entity Collide With Collision 
 			for (DrawableObject* nObj : objectsList) {
 				if (Entity* eptr = dynamic_cast<Entity*>(nObj)) {
-					if (int CollideDetection = Iptr->Collide_W_Entity(*eptr))
-						eptr->Collides_W_Inv_Wall(CollideDetection); 
+ 					eptr->Collides_W_Inv_Wall(Iptr->Collide_W_Entity(*eptr));
 				}
 			}
 		} 
@@ -131,11 +130,7 @@ void Level::LevelUpdate()
 			}
 		}
 
-		///Apply Gravity to every Entities.
-		if (Entity* eptr2 = dynamic_cast<Entity*>(obj)) {
-			if (deltaTime % 2 == 0)
-				eptr2->TranslateVelocity(glm::vec3(0, -0.5, 0));
-		} 
+ 
 
 		
 

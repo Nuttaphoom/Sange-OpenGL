@@ -95,6 +95,7 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X > LeftX_Inv_Obj) ||
 		(TOP_BOTTOM_X + e.GetSize().x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e.GetSize().x / 2 > LeftX_Inv_Obj)) {
 		if (BOTTOM_Y > TOPY_Inv_Obj && BOTTOM_Y < BOTTOMY_Inv_Obj) {
+			cout << "bottom col " << endl; 
 			CollideDetection += 2;
 		}
 	}

@@ -5,7 +5,11 @@ void Player::HandleKey(char Key)
  	switch (Key)
 	{
 		cout << "input is " << Key << endl;
-		case 'w': TranslateVelocity(glm::vec3(0, 3, 0)); break;
+	case 'w': if (Entity::OnGround) {
+				TranslateVelocity(glm::vec3(0, 3, 0)); 
+				Entity::OnGround = false;
+			} 
+			break;
 		case 's': TranslateVelocity(glm::vec3(0, -3, 0)); break;
 		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
 		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;

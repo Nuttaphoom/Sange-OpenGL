@@ -1,5 +1,5 @@
 #include "Entity.h"
-
+#include "GameEngine.h"
 Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame) {
 	this->velocity = glm::vec3(0, 0, 0);
 }
@@ -84,12 +84,20 @@ void Entity::InvincibleFrame(int deltatime)
 
 void Entity::Update(int deltatime)
 {
-	this->Translate(velocity);
 	SpriteObject::Update(deltatime);
 	if ((GetSize().x < 0 && DirectionSet > 0) || (GetSize().x > 0 && DirectionSet < 0))
 	{
 		SetSize(GetSize().x * -1, GetSize().y);
 	}
+
+	if (!OnGround && deltatime % 2 == 0) {
+		TranslateVelocity(glm::vec3(0, -0.5f, 0));
+		cout << "Not On Ground" << endl; 
+	}	
+	velocity += applyingVelocity;
+	this->Translate(velocity);
+	applyingVelocity = glm::vec3(0, 0, 0);
+
 }
 
 void Entity::Translate(glm::vec3 moveDistance)
@@ -98,9 +106,7 @@ void Entity::Translate(glm::vec3 moveDistance)
 }
 
 void Entity::TranslateVelocity(glm::vec3 velocity) {
-	this->velocity = this->velocity + velocity;
-	if (this->velocity.y > 10) this->velocity.y = 10;
-	else if (this->velocity.y < -10) this->velocity.y = -10; 
+	this->applyingVelocity +=  + velocity;
 }
 
 void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame)
@@ -116,12 +122,23 @@ void Entity::AnimationFlip()
 void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
 	//CollisionDetection :: 1 = TOP , 2 = BOTTOM , 4 = RIGHT , 8 = LEFT 
 	if (CollisionDetection % 2 != 0) { //COLLIDE TOP
+		this->velocity = glm::vec3(this->velocity.x, 0, this->velocity.z);
 
 	}
 	 
 	if ((CollisionDetection >> 1) % 2 != 0) { //COLLIDE BOTTOM
-		this->velocity.y = 0;
+		/*
+		SetPosition(glm::vec3(GetPos().x, GetPos().y, GetPos().z));
+		/*cout << GameEngine::GetInstance()->GetWindowHeight() << endl;
+		cout << GetPos().y << endl;
+		TranslateVelocity(glm::vec3(0, velocity.y / 2 * -1, 0));*/
+		if (!OnGround) {
+			OnGround = true;
+			this->velocity = glm::vec3(this->velocity.x, 0, this->velocity.z); 
+		}
 	}
+ 
+ 
 
 	if ((CollisionDetection >> 2) % 2 != 0) { //COLLIDE RIGHT
 		 

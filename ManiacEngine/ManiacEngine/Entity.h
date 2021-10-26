@@ -6,10 +6,14 @@ class Entity : public SpriteObject
 	float HP;
 	float MoveSpeed;
 	glm::vec3 velocity; 
+	glm::vec3 applyingVelocity; 
 	float IFrame;
 	int DirectionSet = 1;
 
 	public:
+	bool OnGround = false;
+
+
 	Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
 	virtual bool Death();
 	virtual int Collides(Entity e);

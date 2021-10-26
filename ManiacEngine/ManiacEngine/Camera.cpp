@@ -48,7 +48,6 @@ bool Camera::IsInCamera(glm::vec3 pos, glm::vec3 size) {
  
 	CollideX = (pos.x - size.x / 2 <= RightCam  && pos.x + size.x / 2 >= LeftCam);
 	CollideY = (pos.y - size.y * -1 / 2 >= BottomCam && pos.y + size.y * -1 / 2 <= TopCam );
-	if (CollideX && CollideY) cout << "true" << endl;
-	else cout << "false" << endl; 
+ 
 	return CollideX && CollideY ;
  }
