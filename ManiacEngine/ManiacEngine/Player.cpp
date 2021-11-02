@@ -5,7 +5,7 @@ void Player::HandleKey(char Key)
  	switch (Key)
 	{
 		cout << "input is " << Key << endl;
-	case 'w': if (Entity::OnGround) {
+		case 'w': if (Entity::OnGround) {
 				TranslateVelocity(glm::vec3(0, 3, 0)); 
 				Entity::OnGround = false;
 			} 
@@ -35,7 +35,38 @@ void Player::Update(int deltatime)
 
 void Player::UpdateStateMachine(float deltatime)
 {
-
+	if (GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING)
+	{
+		if (GetVelocity().x == 0 && OnGround == true)
+		{
+			ChangeState(StateMachine::IDLE);
+		}
+	}
+	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::FALLING)
+	{
+		if (GetVelocity().x != 0 && OnGround == true)
+		{
+			ChangeState(StateMachine::RUNNING);
+		}
+	}
+	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING)
+	{
+		if (GetVelocity().y > 0)
+		{
+			ChangeState(StateMachine::JUMPPING);
+		}
+	}
+	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::JUMPPING)
+	{
+		if (GetVelocity().y == 0 && OnGround == false)
+		{
+			ChangeState(StateMachine::MIDJUMP);
+		}
+	}
+	if (GetState() == StateMachine::MIDJUMP && OnGround == false && GetVelocity().y < 0)
+	{
+		ChangeState(StateMachine::FALLING);
+	}
 }
 
 
@@ -45,15 +76,23 @@ void Player::ChangeState(StateMachine NextState)
 
 	if (this->GetState() == StateMachine::IDLE)
 	{
-		//SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
+		SetAnimationLoop(0, 0, 4, 100);
 	}
 	else if (this->GetState() == StateMachine::RUNNING)
 	{
-		//SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
+		SetAnimationLoop(1, 0, 4, 100);
 	}
 	else if (this->GetState() == StateMachine::JUMPPING)
 	{
-		//SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
+		SetAnimationLoop(2, 0, 3, 100);
+	}
+	else if (this->GetState() == StateMachine::MIDJUMP)
+	{
+		SetAnimationLoop(2, 3, 1, 100);
+	}
+	else if (this->GetState() == StateMachine::FALLING)
+	{
+		SetAnimationLoop(3, 0, 4, 100);
 	}
 }
 

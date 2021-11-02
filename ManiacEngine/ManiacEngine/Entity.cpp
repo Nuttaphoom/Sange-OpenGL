@@ -160,3 +160,8 @@ void Entity::SetDirection(int x)
 {
 	DirectionSet = x;
 }
+
+glm::vec3 Entity::GetVelocity()
+{
+	return velocity;
+}

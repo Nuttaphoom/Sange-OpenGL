@@ -22,10 +22,10 @@ void Level3::LevelInit()
 	}
 	#pragma endregion 
 
-	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 8, 100, 0.3, 0);
+	Player* obj = new Player("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
-	obj->SetAnimationLoop(0, 0, 8, 100);
+	obj->SetAnimationLoop(0, 0, 4, 100);
 	//obj->SetColor(0.0, 1.0, 0.0);
 	objectsList.push_back(obj);
 	/*Entity* E1 = new Entity("../Resource/Texture/TestSprite.png", 4, 7, 100.0, 9.0, 0.0);

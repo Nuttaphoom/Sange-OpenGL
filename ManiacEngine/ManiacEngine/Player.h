@@ -23,8 +23,7 @@ class Player : public Entity
 	void UpdateStateMachine(float deltatime);
  	void ChangeState(StateMachine NextState);
 	void Translate(glm::vec3 moveDistance);
-	void HandleKey(char key); 
-
+	void HandleKey(char key);
  };
 
 

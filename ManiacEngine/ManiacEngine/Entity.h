@@ -27,4 +27,5 @@ class Entity : public SpriteObject
 	virtual void AnimationFlip();
 	virtual float GetMoveSpeed();
 	virtual void SetDirection(int x);
+	virtual glm::vec3 GetVelocity();
 };
