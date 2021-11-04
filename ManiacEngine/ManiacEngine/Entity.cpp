@@ -1,6 +1,6 @@
 #include "Entity.h"
 #include "GameEngine.h"
-Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame) {
+ Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame) {
 	this->velocity = glm::vec3(0, 0, 0);
 }
 
@@ -90,10 +90,10 @@ void Entity::Update(int deltatime)
 		SetSize(GetSize().x * -1, GetSize().y);
 	}
 
-	if (!OnGround && deltatime % 2 == 0) {
+	if (!OnGround &&deltatime % 2 == 0 ) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -0.5f, 0));
-		cout << "Not On Ground" << endl; 
-	}	
+ 	}	
+
 	velocity += applyingVelocity;
 	this->Translate(velocity);
 	applyingVelocity = glm::vec3(0, 0, 0);
@@ -120,23 +120,26 @@ void Entity::AnimationFlip()
 }
 
 void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
-	//CollisionDetection :: 1 = TOP , 2 = BOTTOM , 4 = RIGHT , 8 = LEFT 
+ 	//CollisionDetection :: 1 = TOP , 2 = BOTTOM , 4 = RIGHT , 8 = LEFT 
 	if (CollisionDetection % 2 != 0) { //COLLIDE TOP
 		this->velocity = glm::vec3(this->velocity.x, 0, this->velocity.z);
 
 	}
 	 
 	if ((CollisionDetection >> 1) % 2 != 0) { //COLLIDE BOTTOM
-		/*
-		SetPosition(glm::vec3(GetPos().x, GetPos().y, GetPos().z));
-		/*cout << GameEngine::GetInstance()->GetWindowHeight() << endl;
-		cout << GetPos().y << endl;
-		TranslateVelocity(glm::vec3(0, velocity.y / 2 * -1, 0));*/
+ 
 		if (!OnGround) {
 			OnGround = true;
 			this->velocity = glm::vec3(this->velocity.x, 0, this->velocity.z); 
-		}
+			//glm::vec3 roundedPos = glm::vec3(this->GetPos().x, Inv_Wall_Pos.y + (64 / 2) + this->GetSize().y * -1 / 2 , this->GetPos().z);
+ 			//SetPosition(roundedPos);
+ 		}
 	}
+	else {
+ 		OnGround = false; 
+	}
+
+ 
  
  
 

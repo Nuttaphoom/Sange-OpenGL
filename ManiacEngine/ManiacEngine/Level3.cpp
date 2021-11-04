@@ -69,14 +69,31 @@ void Level3::LevelUpdate()
 		obj->Update(deltaTime);
 
 		/// Collision Check 
-		/// Collision Check 
-		if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj)) { //Entity Collide With Collision 
-			for (DrawableObject* nObj : objectsList) {
-				if (Entity* eptr = dynamic_cast<Entity*>(nObj)) {
-					eptr->Collides_W_Inv_Wall(Iptr->Collide_W_Entity(*eptr));
+		// Check with Invisible Walls
+		if (Entity* eptr = dynamic_cast<Entity*>(obj)) {
+			int CollideDetection = 0; 
+			for (DrawableObject* i : objectsList) {
+				if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(i)) {
+					int p = Iptr->Collide_W_Entity(*eptr); 
+					if (p % 2 != 0) { //COLLIDE TOP
+						if (CollideDetection % 2 == 0) CollideDetection += 1; 
+					}
+					if ((p >> 1) % 2 != 0) { //COLLIDE BOTTOM
+						if ((CollideDetection >> 1) % 2 == 0) CollideDetection += 2;
+					}
+					if ((p >> 2) % 2 != 0) { //COLLIDE RIGHT
+						if ((CollideDetection >> 2) % 2 == 0) CollideDetection += 4;
+					}
+					if ((p >> 3) % 2 != 0) { //COLLIDE LEFT
+						if ((CollideDetection >> 3) % 2 == 0) CollideDetection += 8;
+					}
 				}
+				if (CollideDetection >= 8 + 4 + 2 + 1) break; 
 			}
-		}
+			eptr->Collides_W_Inv_Wall(CollideDetection );
+ 		}		
+		
+ 
 
 		else if (Player* playerObj = dynamic_cast<Player*>(obj)) {
 			for (DrawableObject* nObj : objectsList) {

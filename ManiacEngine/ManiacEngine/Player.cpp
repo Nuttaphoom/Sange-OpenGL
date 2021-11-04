@@ -1,5 +1,6 @@
 #include "Player.h"
  
+#define PlayerIsJumpingOrFalling PlayerState == StateMachine::JUMPPING || PlayerState == StateMachine::MIDJUMP || PlayerState == StateMachine :: FALLING 
 void Player::HandleKey(char Key)
 {
  	switch (Key)
@@ -19,7 +20,7 @@ void Player::HandleKey(char Key)
 
 Player::Player(string fileName, int row, int column,float HP, float MoveSpeed, float IFrame) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
 {	
-	PlayerState = StateMachine::IDLE;
+	PlayerState = StateMachine::JUMPPING;
 }
 
 StateMachine Player::GetState()
@@ -37,7 +38,7 @@ void Player::UpdateStateMachine(float deltatime)
 {
 	if (GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING)
 	{
-		if (GetVelocity().x == 0 && OnGround == true)
+		if (GetVelocity().x == 0 && GetVelocity().y == 0 )
 		{
 			ChangeState(StateMachine::IDLE);
 		}
@@ -100,3 +101,5 @@ void Player::Translate(glm::vec3 moveDistance)
 {
 	pos = pos + moveDistance;
 }
+
+ 

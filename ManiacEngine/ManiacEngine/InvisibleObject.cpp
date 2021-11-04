@@ -64,7 +64,7 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 
  	float Middle_2_Y = (float)e.GetPos().y - e.GetSize().y * -1 / 4; 
 
-	float BOTTOM_Y = (float)e.GetPos().y - e.GetSize().y * -1 / 2; 
+	float BOTTOM_Y = (float) e.GetPos().y - 1 - e.GetSize().y  * -1 / 2 ;
 
 	//TOP 
 	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X > LeftX_Inv_Obj) ||
@@ -92,12 +92,18 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	}
  	
 	//TOP 
-	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X > LeftX_Inv_Obj) ||
+	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X   > LeftX_Inv_Obj) ||
 		(TOP_BOTTOM_X + e.GetSize().x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e.GetSize().x / 2 > LeftX_Inv_Obj)) {
 		if (BOTTOM_Y > TOPY_Inv_Obj && BOTTOM_Y < BOTTOMY_Inv_Obj) {
 			cout << "bottom col " << endl; 
 			CollideDetection += 2;
 		}
+		else {
+			cout << "not bottom col 1 " << endl; 
+		}
+	}
+	else {
+		cout << "not bottom col 2 " << endl;
 	}
  
  	return  CollideDetection;

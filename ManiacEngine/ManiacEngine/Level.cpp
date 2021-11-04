@@ -113,7 +113,7 @@ void Level::LevelUpdate()
 		if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj)) { //Entity Collide With Collision 
 			for (DrawableObject* nObj : objectsList) {
 				if (Entity* eptr = dynamic_cast<Entity*>(nObj)) {
- 					eptr->Collides_W_Inv_Wall(Iptr->Collide_W_Entity(*eptr));
+ 					eptr->Collides_W_Inv_Wall(Iptr->Collide_W_Entity(*eptr) );
 				}
 			}
 		} 
