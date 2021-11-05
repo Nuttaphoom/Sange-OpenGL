@@ -6,8 +6,17 @@
 class Level3 : public Level
 {
 private:
-	vector<DrawableObject*> objectsList;
+	vector<DrawableObject*> objectsList				;
+	vector< DrawableObject*> invisibleObjectsList	; 
+	vector < DrawableObject*> EntityObjectsList		;
 	Player* player;
+
+	TileMap* tilemaps;
+	int MapHeight;
+	int MapWidth;
+	int** sMiddleMapdata;
+	int** sColMapdata;
+	int** sFrontMapData;
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();

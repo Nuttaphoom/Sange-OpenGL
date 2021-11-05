@@ -39,7 +39,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 				tiles[i][j]->SetSize(64, -64);
 
 				/// Set position of each tile 
-				tiles[i][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 1));
+				tiles[i][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
 				/// Calculate UV 
 				float uvs[8];
 
@@ -88,14 +88,15 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 
 	/// Create all collision object for every tiles. 
 	for (int i = 0; i < width + 1; i++) {
-		tiles_collision.push_back(vector<InvisibleObject*>());
 		for (int j = 0; j < height + 1; j++) {
-			tiles_collision[i].push_back(new InvisibleObject());
-
-			if (ColMapdata[i][j] != -1) {
-				tiles_collision[i][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 1));
-				tiles_collision[i][j]->SetSize(64, -64);
-				tiles_collision[i][j]->SetRender(true);
+			if (ColMapdata[i][j] != 0) {
+				InvisibleObject* newInv = new InvisibleObject();
+				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 1));
+				//newInv->SetPosition(glm::vec3(0, -256, 0));
+				newInv->SetSize(64, 64);
+				newInv->SetRender(true);
+				tiles_collision.push_back(newInv);
+				 
 			}
 		}
 	}
@@ -113,7 +114,7 @@ vector<vector<SpriteObject*>> TileMap::GetTiles() {
 	return tiles;
 }
 
-vector<vector<InvisibleObject*>> TileMap::GetColTiles() {
+vector<InvisibleObject*> TileMap::GetColTiles() {
 	return tiles_collision; 
 }
 

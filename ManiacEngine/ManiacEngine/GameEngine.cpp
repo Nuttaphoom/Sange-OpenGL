@@ -32,7 +32,7 @@ void GameEngine::Init(int width, int height)
 
 }
 
-void GameEngine::Render(vector<DrawableObject*> renderObjects)
+void GameEngine::Render(vector<DrawableObject*> renderObjects )
 {
 	///Adjust Cam
 	glm::vec3 cs = Camera::GetInstance()->GetCamOffset();  //Translate Cam
@@ -43,6 +43,8 @@ void GameEngine::Render(vector<DrawableObject*> renderObjects)
 	renderer->SetOrthoProjection((-ScX  / (p)) + cs.x, (ScX/(p)) + cs.x, (-ScY/(p))+cs.y , (ScY/(p))+cs.y); 
 	
 	this->GetRenderer()->Render(renderObjects);
+ 
+
 }
 
 void GameEngine::SetDrawArea(float left, float right, float bottom, float top)

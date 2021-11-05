@@ -66,9 +66,7 @@ void LevelTest::LevelInit()
 	}
 
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
-		for (int j = 0; j < tilemaps->GetColTiles()[i].size(); j++) {
-			objectsList.push_back(tilemaps->GetColTiles()[i][j]); 
-		}
+		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 
 	SpriteObject* obj = new SpriteObject("../Resource/Texture/Sange/SangeRunning.png", 1, 8/*, 100, 10, 0*/);

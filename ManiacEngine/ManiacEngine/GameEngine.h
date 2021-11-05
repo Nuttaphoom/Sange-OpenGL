@@ -25,7 +25,7 @@ public:
 	void SetBackgroundColor(float r, float g, float b);
 	void AddMesh(string name, MeshVbo* mesh);
 	void ClearMesh();
-	void Render(vector<DrawableObject*> renderObjects);
+	void Render(vector<DrawableObject*> renderObjects );
 	int GetWindowWidth();
 	int GetWindowHeight();
 	int GetDeltaTime();

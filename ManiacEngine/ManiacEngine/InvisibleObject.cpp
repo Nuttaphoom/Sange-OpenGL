@@ -50,6 +50,9 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 							  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
 
+	if (e.GetPos().x - this->GetPos().x > 100 || e.GetPos().x - this->GetPos().x < -100) 
+		return 0; 
+
 	float LeftX_Inv_Obj = (float)this->GetPos().x - this->GetSize().x / 2;
 	float RightX_Inv_Obj = (float)this->GetPos().x + this->GetSize().x / 2;
 
@@ -95,18 +98,10 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X   > LeftX_Inv_Obj) ||
 		(TOP_BOTTOM_X + e.GetSize().x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e.GetSize().x / 2 > LeftX_Inv_Obj)) {
 		if (BOTTOM_Y > TOPY_Inv_Obj && BOTTOM_Y < BOTTOMY_Inv_Obj) {
-			cout << "bottom col " << endl; 
-			CollideDetection += 2;
-		}
-		else {
-			cout << "not bottom col 1 " << endl; 
+ 			CollideDetection += 2;
 		}
 	}
-	else {
-		cout << "not bottom col 2 " << endl;
-	}
- 
- 	return  CollideDetection;
+  	return  CollideDetection;
 }
 
 InvisibleObject::InvisibleObject() {

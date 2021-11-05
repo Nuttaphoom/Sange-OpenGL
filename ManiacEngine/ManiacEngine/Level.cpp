@@ -64,9 +64,7 @@ void Level::LevelInit()
 	}
 
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
-		for (int j = 0; j < tilemaps->GetColTiles()[i].size(); j++) {
-			objectsList.push_back(tilemaps->GetColTiles()[i][j]);
-		}
+		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 
 	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 7, 100, 10, 0);
@@ -123,19 +121,12 @@ void Level::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							cout << "ENTITY COL" << endl; 
+							cout << "ENTITY COL" << endl;
 						}
-					 }
+					}
 				}
 			}
 		}
-
- 
-
-		
-
-		
-
 	}
 
 }
