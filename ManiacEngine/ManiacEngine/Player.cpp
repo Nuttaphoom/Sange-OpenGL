@@ -20,7 +20,7 @@ void Player::HandleKey(char Key)
 
 Player::Player(string fileName, int row, int column,float HP, float MoveSpeed, float IFrame) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
 {	
-	PlayerState = StateMachine::JUMPPING;
+	PlayerState = StateMachine::FALLING;
 }
 
 StateMachine Player::GetState()
@@ -38,7 +38,7 @@ void Player::UpdateStateMachine(float deltatime)
 {
 	if (GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING)
 	{
-		if (GetVelocity().x == 0 && GetVelocity().y == 0 )
+		if (GetVelocity().x == 0 && GetVelocity().y == 0)
 		{
 			ChangeState(StateMachine::IDLE);
 		}

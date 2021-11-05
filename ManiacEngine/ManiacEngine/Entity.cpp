@@ -97,7 +97,14 @@ void Entity::Update(int deltatime)
 	velocity += applyingVelocity;
 	this->Translate(velocity);
 	applyingVelocity = glm::vec3(0, 0, 0);
-
+	if (velocity.x != 0)
+	{
+		velocity.x = velocity.x / 1.05;
+		if (velocity.x < 0.02 && velocity.x > -0.02)
+		{
+			velocity.x = 0;
+		}
+	}
 }
 
 void Entity::Translate(glm::vec3 moveDistance)

@@ -2,7 +2,7 @@
 #include "SpriteObject.h"
  class Entity : public SpriteObject
 {
-	protected : 
+	protected:
 		float HP;
 		float MoveSpeed;
 		glm::vec3 velocity; 

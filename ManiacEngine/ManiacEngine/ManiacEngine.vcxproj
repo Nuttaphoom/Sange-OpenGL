@@ -38,6 +38,7 @@
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="TileMap.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="GameStateList.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="InvisibleObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ImageObject.h" />
