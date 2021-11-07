@@ -77,7 +77,6 @@ void Level3::LevelInit()
 			objectsList.push_back(tilemaps->GetColTiles()[i]);
 
 	}
-
 	Player* obj = new Player("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
@@ -85,7 +84,6 @@ void Level3::LevelInit()
 	//obj->SetColor(0.0, 1.0, 0.0);
 	EntityObjectsList.push_back(obj); 
 	objectsList.push_back(obj);
-
 	player = obj;
 
 }
