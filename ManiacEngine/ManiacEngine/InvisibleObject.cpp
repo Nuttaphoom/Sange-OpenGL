@@ -50,7 +50,7 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 							  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
 
-	if (e.GetPos().x - this->GetPos().x > 100 || e.GetPos().x - this->GetPos().x < -100) 
+	if (e.GetPos().x - this->GetPos().x > 64 || e.GetPos().x - this->GetPos().x < -64) 
 		return 0; 
 
 	float LeftX_Inv_Obj = (float)this->GetPos().x - this->GetSize().x / 2;

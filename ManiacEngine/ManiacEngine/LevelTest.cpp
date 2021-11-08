@@ -9,7 +9,7 @@ void LevelTest::LevelLoad()
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
 
-	ifstream mapFile("../Resource/Map/Example_Middle_Mapdata.txt");
+	/*ifstream mapFile("../Resource/Map/Example_Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -51,14 +51,14 @@ void LevelTest::LevelLoad()
 		cMapFile.close();
  	}
 
-
+	*/
 	//cout << "Load Level" << endl;
 }
 
 void LevelTest::LevelInit()
 {
  
-	tilemaps = new TileMap(MapWidth, MapHeight,sFrontMapData ,sMiddleMapdata,sColMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	/*tilemaps = new TileMap(MapWidth, MapHeight,sFrontMapData ,sMiddleMapdata,sColMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]); 
@@ -67,7 +67,7 @@ void LevelTest::LevelInit()
 
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
-	}
+	}*/
 
 	SpriteObject* obj = new SpriteObject("../Resource/Texture/Sange/SangeRunning.png", 1, 8/*, 100, 10, 0*/);
 	obj->SetSize(64, -128.0f);
@@ -131,7 +131,7 @@ void LevelTest::HandleKey(char key)
 	case 'd': player->Translate(glm::vec3(10, 0, 0)); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3; ; break;
+	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3;    ; break;
 	}
 }
 
