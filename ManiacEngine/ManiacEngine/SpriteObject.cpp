@@ -142,6 +142,14 @@ void SpriteObject::SetTexture(string path)
 	texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(path);
 }
 
+unsigned int SpriteObject::GetTexture() {
+	return texture; 
+}
+
 void SpriteObject::SetUV(float uvs[8]) {
 	for (int i = 0; i < 8; i++) this->uv[i] = uvs[i]; 
+}
+
+float* SpriteObject::GetUV() {
+	return uv;
 }

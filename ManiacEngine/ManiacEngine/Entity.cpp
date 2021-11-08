@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "GameEngine.h"
+#include "SquareMeshVbo.h" 
  Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame) {
 	this->velocity = glm::vec3(0, 0, 0);
 }
@@ -69,10 +70,34 @@ bool Entity::Death()
 	else { return false; }
 }
 
-/*void Entity::Render(glm::mat4 globalModelTransform)
-{
 
-}*/
+void Entity::Render(glm::mat4 globalModelTransform)
+{
+	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+
+	GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
+	GLuint modeId = GameEngine::GetInstance()->GetRenderer()->GetModeUniformId();
+
+	glBindTexture(GL_TEXTURE_2D, GetTexture());
+	if (modelMatixId == -1) {
+		cout << "Error: Can't perform transformation " << endl;
+		return;
+	}
+
+	glm::mat4 currentMatrix = this->getTransform(); 
+	/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
+ 	currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1)) ;
+
+
+	if (squareMesh != nullptr) {
+		currentMatrix = globalModelTransform * currentMatrix;
+		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
+		glUniform1i(modeId, 1);
+		squareMesh->AdjustTexcoord(GetUV());
+		squareMesh->Render();
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+}
 
 void Entity::InvincibleFrame(int deltatime)
 {
@@ -85,10 +110,6 @@ void Entity::InvincibleFrame(int deltatime)
 void Entity::Update(int deltatime)
 {
 	SpriteObject::Update(deltatime);
-	if ((GetSize().x < 0 && DirectionSet > 0) || (GetSize().x > 0 && DirectionSet < 0))
-	{
-		SetSize(GetSize().x * -1, GetSize().y);
-	}
 
 	if (!OnGround &&deltatime % 2 == 0 ) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -0.5f, 0));
@@ -121,16 +142,12 @@ void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, i
 	SpriteObject::SetAnimationLoop(startRow, startColumn, howManyFrame, delayBetaweenFrame,true);
 }
 
-void Entity::AnimationFlip()
-{
-	
-}
+ 
 
 void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
  	//CollisionDetection :: 1 = TOP , 2 = BOTTOM , 4 = RIGHT , 8 = LEFT 
 	if (CollisionDetection % 2 != 0) { //COLLIDE TOP
 		this->velocity = glm::vec3(this->velocity.x, 0, this->velocity.z);
-
 	}
 	 
 	if ((CollisionDetection >> 1) % 2 != 0) { //COLLIDE BOTTOM
@@ -146,16 +163,14 @@ void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
  		OnGround = false; 
 	}
 
- 
- 
- 
-
-	if ((CollisionDetection >> 2) % 2 != 0) { //COLLIDE RIGHT
-		 
+	if ((CollisionDetection >> 2) % 2 != 0) { //COLLIDE LEFT
+		this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0,0));
+		cout << "LEFT" << endl;
 	}
 
-	if ((CollisionDetection >> 3) % 2 != 0) { //COLLIDE LEFT
-
+	if ((CollisionDetection >> 3) % 2 != 0) { //COLLIDE RIGHT
+		this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0, 0));
+		cout << "RIGHT" << endl;
 	}
 
 

@@ -5,8 +5,7 @@ void Player::HandleKey(char Key)
 {
  	switch (Key)
 	{
-		cout << "input is " << Key << endl;
-		case 'w': if (Entity::OnGround) {
+ 		case 'w': if (Entity::OnGround) {
 				TranslateVelocity(glm::vec3(0, 3, 0)); 
 				Entity::OnGround = false;
 			} 
@@ -15,7 +14,6 @@ void Player::HandleKey(char Key)
 		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
 		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;
 	}
-
 }
 
 Player::Player(string fileName, int row, int column,float HP, float MoveSpeed, float IFrame) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)

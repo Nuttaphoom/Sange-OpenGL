@@ -31,7 +31,9 @@ public:
 	void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame,bool playanim); // 1000 = 1 second
 	void NextAnimation();
 	void SetTexture(string path);
+	unsigned int GetTexture();
 	void SetUV(float uvs[8]); 
+	float* GetUV(); 
 
 };
 

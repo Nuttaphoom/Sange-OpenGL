@@ -49,9 +49,7 @@ void InvisibleObject::SetRender(bool b) {
 int InvisibleObject::Collide_W_Entity(Entity e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 							  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
-
-	if (e.GetPos().x - this->GetPos().x > 64 || e.GetPos().x - this->GetPos().x < -64) 
-		return 0; 
+ 
 
 	float LeftX_Inv_Obj = (float)this->GetPos().x - this->GetSize().x / 2;
 	float RightX_Inv_Obj = (float)this->GetPos().x + this->GetSize().x / 2;
@@ -63,6 +61,7 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	float TOP_Y = (float)e.GetPos().y + e.GetSize().y / 2 * -1; 
 
 	float Middle_1_2_X = (float)e.GetPos().x - e.GetSize().x / 2 ; 
+ 
 	float Middle_1_Y = (float)e.GetPos().y + e.GetSize().y * -1 / 4; 
 
  	float Middle_2_Y = (float)e.GetPos().y - e.GetSize().y * -1 / 4; 
@@ -86,12 +85,13 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	}
 
 	//MIDDLE_RIGHT
-	Middle_1_2_X += e.GetSize().x;
+	Middle_1_2_X = (float)e.GetPos().x + e.GetSize().x / 2    ;
+	//cout << "MIDDLE RIGHT : " << Middle_1_2_X << " GetPos().x : " << e.GetPos().x << endl;
 	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
 		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
 			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)) {
 			CollideDetection += 8;
-		}
+ 		}
 	}
  	
 	//TOP 

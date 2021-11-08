@@ -58,7 +58,7 @@ void Level3::LevelInit()
 	for (int i = 0 ; i < 12 ; i++)
 	{ 
 		InvisibleObject* ivo = new InvisibleObject();
-		ivo->SetPosition(glm::vec3(i*64 - 64*4, -256, 0));
+		ivo->SetPosition(glm::vec3(64, -256 - 64*i, 0));
 		ivo->SetSize(64, 64);
 		invisibleObjectsList.push_back(ivo);
 		objectsList.push_back(ivo); 
@@ -75,8 +75,8 @@ void Level3::LevelInit()
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
 			invisibleObjectsList.push_back(tilemaps->GetColTiles()[i]);
 			objectsList.push_back(tilemaps->GetColTiles()[i]);
-
 	}
+
 	Player* obj = new Player("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
@@ -92,7 +92,7 @@ void Level3::LevelUpdate()
 {
  
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
-
+	
 	/// Collision Check 
 	// Check with Invisible Walls
 	for (DrawableObject* en : EntityObjectsList) {
@@ -100,18 +100,17 @@ void Level3::LevelUpdate()
 			int CollideDetection = 0;
 			for (DrawableObject* i : invisibleObjectsList) {
 				if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(i)) {
-					cout << "Iptr : " << Iptr->GetPos().x << endl;
-					int p = Iptr->Collide_W_Entity(*eptr);
+ 					int p = Iptr->Collide_W_Entity(*eptr);
  					if (p % 2 != 0) { //COLLIDE TOP
 						if (CollideDetection % 2 == 0) CollideDetection += 1;
 					}
 					if ((p >> 1) % 2 != 0) { //COLLIDE BOTTOM
 						if ((CollideDetection >> 1) % 2 == 0) CollideDetection += 2;
 					}
-					if ((p >> 2) % 2 != 0) { //COLLIDE RIGHT
+					if ((p >> 2) % 2 != 0) { //COLLIDE LEFT
 						if ((CollideDetection >> 2) % 2 == 0) CollideDetection += 4;
 					}
-					if ((p >> 3) % 2 != 0) { //COLLIDE LEFT
+					if ((p >> 3) % 2 != 0) { //COLLIDE RIGHT
 						if ((CollideDetection >> 3) % 2 == 0) CollideDetection += 8;
 					}
 				}
@@ -132,23 +131,15 @@ void Level3::LevelUpdate()
 			}
 		}
 	}
-
-
-	for (DrawableObject* obj : objectsList) {
+	for (DrawableObject* obj : EntityObjectsList) {
 		//Player Update In every game object 
 		obj->Update(deltaTime);
-		
 	}
-
- 
  }
 
 void Level3::LevelDraw()
 {
 	GameEngine::GetInstance()->Render(objectsList);
- 
-
-
 	//cout << "Draw Level" << endl;
 }
 
@@ -180,8 +171,12 @@ void Level3::HandleKey(char key)
 		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1; ; break;
 		case 'g': Camera::GetInstance()->Translate(10.0f, 0);  break;//Move the cam to right
 		case 'f': Camera::GetInstance()->Translate(-10.0f, 0); break;//Move the cam to left  
+		case 't': Camera::GetInstance()->Translate(0, 10); break; 
+		case 'h': Camera::GetInstance()->Translate(0, -10); break; 
+
 		case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 		case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
+
 	}
 }
 

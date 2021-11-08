@@ -41,12 +41,12 @@ float Camera::GetZoomOffset() {
 
 bool Camera::IsInCamera(glm::vec3 pos, glm::vec3 size) {
 	bool CollideX, CollideY;
-	float LeftCam = (-1 * GameEngine::GetInstance()->GetWindowWidth() / 2 + this->GetCamOffset().x) / this->GetZoomOffset()  ;
-	float RightCam = (GameEngine::GetInstance()->GetWindowWidth() / 2 + this->GetCamOffset().x ) / this->GetZoomOffset() ; 
-	float TopCam = (GameEngine::GetInstance()->GetWindowHeight() / 2 + this->GetCamOffset().y) / this->GetZoomOffset() ; 
-	float BottomCam = (-1 * GameEngine::GetInstance()->GetWindowHeight() / 2 + this->GetCamOffset().y) / this->GetZoomOffset() ;
+	float LeftCam = (-1 * GameEngine::GetInstance()->GetWindowWidth() / 2 / GetZoomOffset() + this->GetCamOffset().x)    ;
+	float RightCam = (GameEngine::GetInstance()->GetWindowWidth() / 2 / GetZoomOffset() + this->GetCamOffset().x  ) ;
+	float TopCam = (GameEngine::GetInstance()->GetWindowHeight() / 2 / GetZoomOffset() + this->GetCamOffset().y  ) ;
+	float BottomCam = (-1 * GameEngine::GetInstance()->GetWindowHeight() / 2 / GetZoomOffset() + this->GetCamOffset().y  ) ;
  
-	CollideX = (pos.x - size.x / 2 <= RightCam  && pos.x + size.x / 2 >= LeftCam);
+	CollideX = (pos.x + size.x / 2 <= RightCam  && pos.x - size.x / 2 >= LeftCam);
 	CollideY = (pos.y - size.y * -1 / 2 >= BottomCam && pos.y + size.y * -1 / 2 <= TopCam );
  
 	return CollideX && CollideY ;
