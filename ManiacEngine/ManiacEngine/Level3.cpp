@@ -98,25 +98,42 @@ void Level3::LevelUpdate()
 	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
 			int CollideDetection = 0;
+			 glm::vec3 ivbobjs[4][2] ;
 			for (DrawableObject* i : invisibleObjectsList) {
 				if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(i)) {
  					int p = Iptr->Collide_W_Entity(*eptr);
  					if (p % 2 != 0) { //COLLIDE TOP
-						if (CollideDetection % 2 == 0) CollideDetection += 1;
+						if (CollideDetection % 2 == 0) {
+							CollideDetection += 1;
+							ivbobjs[0][0] = Iptr->GetPos() ;
+							ivbobjs[0][1] = Iptr->GetSize();
+						}
 					}
 					if ((p >> 1) % 2 != 0) { //COLLIDE BOTTOM
-						if ((CollideDetection >> 1) % 2 == 0) CollideDetection += 2;
+						if ((CollideDetection >> 1) % 2 == 0) { 
+							CollideDetection += 2;
+							ivbobjs[1][0] = Iptr->GetPos();
+							ivbobjs[1][1] = Iptr->GetSize();
+						}
 					}
 					if ((p >> 2) % 2 != 0) { //COLLIDE LEFT
-						if ((CollideDetection >> 2) % 2 == 0) CollideDetection += 4;
+						if ((CollideDetection >> 2) % 2 == 0) { 
+							CollideDetection += 4;
+							ivbobjs[2][0] = Iptr->GetPos();
+							ivbobjs[2][1] = Iptr->GetSize();
+						};
 					}
 					if ((p >> 3) % 2 != 0) { //COLLIDE RIGHT
-						if ((CollideDetection >> 3) % 2 == 0) CollideDetection += 8;
+						if ((CollideDetection >> 3) % 2 == 0) {
+							CollideDetection += 8;
+							ivbobjs[3][0] = Iptr->GetPos();
+							ivbobjs[3][1] = Iptr->GetSize();
+						}
 					}
 				}
 				if (CollideDetection >= 8 + 4 + 2 + 1) break;
 			}
-			eptr->Collides_W_Inv_Wall(CollideDetection);
+			eptr->Collides_W_Inv_Wall(CollideDetection, ivbobjs);
 		}
 
 		if (Player* playerObj = dynamic_cast<Player*>(en)) {
@@ -173,10 +190,8 @@ void Level3::HandleKey(char key)
 		case 'f': Camera::GetInstance()->Translate(-10.0f, 0); break;//Move the cam to left  
 		case 't': Camera::GetInstance()->Translate(0, 10); break; 
 		case 'h': Camera::GetInstance()->Translate(0, -10); break; 
-
 		case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 		case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
-
 	}
 }
 

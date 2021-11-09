@@ -56,7 +56,18 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-	tilemaps = new TileMap(MapHeight,MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	#pragma region ground_test
+		for (int i = 0; i < 12; i++)
+		{
+			InvisibleObject* ivo = new InvisibleObject();
+			ivo->SetPosition(glm::vec3(64, -256 - 64 * i, 0));
+			ivo->SetSize(64, 64);
+			invisibleObjectsList.push_back(ivo);
+			objectsList.push_back(ivo);
+		}
+	#pragma endregion 
+
+	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
@@ -64,59 +75,70 @@ void Level::LevelInit()
 	}
 
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
+		invisibleObjectsList.push_back(tilemaps->GetColTiles()[i]);
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 
-	Player* obj = new Player("../Resource/Texture/Sange/SangeRunning.png", 1, 7, 100, 10, 0);
+	Player* obj = new Player("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
-	obj->SetAnimationLoop(0, 0, 8, 100);
+	obj->SetAnimationLoop(0, 0, 4, 100);
+	//obj->SetColor(0.0, 1.0, 0.0);
+	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
+	player = obj;
 
-	player = obj; 
-	
-	/*
-	ImageObject* img = new ImageObject();
-	img->SetSize(100.0f, -100.0f);
-	img->SetTexture("../Resource/Texture/penguin.png");
-	objectsList.push_back(img);
-
-	Button* butt = new Button(ButtonName::NEXT_LEVEL_BUTTON) ; 
-	butt->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 4 * -1 + GameEngine::GetInstance()->GetWindowWidth() / 13 * -1,
-		GameEngine::GetInstance()->GetWindowHeight() / 2 - GameEngine::GetInstance()->GetWindowHeight() / 6, 0));
-	butt->SetSize(451, -121); 
-	butt->SetTexture("../Resource/Texture/HPBar.PNG");
-	objectsList.push_back(butt);
-
-	InvisibleObject* ivo = new InvisibleObject();
-	ivo->SetPosition(glm::vec3(0, 0, 0));
-	ivo->SetSize(64, 64);
-	objectsList.push_back(ivo);
-	*/
-
-	
 	//cout << "Init Level" << endl;
 }
 
 void Level::LevelUpdate()
 {
-	//cout << "Update Level" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
-	 
-	for (DrawableObject* obj : objectsList) {
-		//Play Update In every game object 
-		obj->Update(deltaTime);
 
-		/// Collision Check 
-		if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(obj)) { //Entity Collide With Collision 
-			for (DrawableObject* nObj : objectsList) {
-				if (Entity* eptr = dynamic_cast<Entity*>(nObj)) {
- 					eptr->Collides_W_Inv_Wall(Iptr->Collide_W_Entity(*eptr) );
+	/// Collision Check 
+	// Check with Invisible Walls
+	for (DrawableObject* en : EntityObjectsList) {
+		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
+			int CollideDetection = 0;
+			glm::vec3 ivbobjs[4][2];
+			for (DrawableObject* i : invisibleObjectsList) {
+				if (InvisibleObject* Iptr = dynamic_cast<InvisibleObject*>(i)) {
+					int p = Iptr->Collide_W_Entity(*eptr);
+					if (p % 2 != 0) { //COLLIDE TOP
+						if (CollideDetection % 2 == 0) {
+							CollideDetection += 1;
+							ivbobjs[0][0] = Iptr->GetPos();
+							ivbobjs[0][1] = Iptr->GetSize();
+						}
+					}
+					if ((p >> 1) % 2 != 0) { //COLLIDE BOTTOM
+						if ((CollideDetection >> 1) % 2 == 0) {
+							CollideDetection += 2;
+							ivbobjs[1][0] = Iptr->GetPos();
+							ivbobjs[1][1] = Iptr->GetSize();
+						}
+					}
+					if ((p >> 2) % 2 != 0) { //COLLIDE LEFT
+						if ((CollideDetection >> 2) % 2 == 0) {
+							CollideDetection += 4;
+							ivbobjs[2][0] = Iptr->GetPos();
+							ivbobjs[2][1] = Iptr->GetSize();
+						};
+					}
+					if ((p >> 3) % 2 != 0) { //COLLIDE RIGHT
+						if ((CollideDetection >> 3) % 2 == 0) {
+							CollideDetection += 8;
+							ivbobjs[3][0] = Iptr->GetPos();
+							ivbobjs[3][1] = Iptr->GetSize();
+						}
+					}
 				}
+				if (CollideDetection >= 8 + 4 + 2 + 1) break;
 			}
-		} 
+			eptr->Collides_W_Inv_Wall(CollideDetection, ivbobjs);
+		}
 
-		else if (Player* playerObj = dynamic_cast<Player*>(obj)) {
+		if (Player* playerObj = dynamic_cast<Player*>(en)) {
 			for (DrawableObject* nObj : objectsList) {
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
@@ -128,7 +150,10 @@ void Level::LevelUpdate()
 			}
 		}
 	}
-
+	for (DrawableObject* obj : EntityObjectsList) {
+		//Player Update In every game object 
+		obj->Update(deltaTime);
+	}
 }
 
 void Level::LevelDraw()

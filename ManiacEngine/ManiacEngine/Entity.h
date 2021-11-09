@@ -1,6 +1,7 @@
 #pragma once
 #include "SpriteObject.h"
- class Entity : public SpriteObject
+ 
+class Entity : public SpriteObject
 {
 	protected:
 		float HP;
@@ -16,7 +17,7 @@
 		Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
 		virtual bool Death();
 		virtual int Collides(Entity e);
-		virtual void Collides_W_Inv_Wall(int CollisionDetection);
+		virtual void Collides_W_Inv_Wall(int CollisionDetection, glm::vec3 ivbObj[4][2]);
 		virtual void Render(glm::mat4 globalModelTransform);
 		virtual void InvincibleFrame(int deltatime);
 		virtual void Update(int deltatime);

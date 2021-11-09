@@ -144,19 +144,17 @@ void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, i
 
  
 
-void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
+void Entity::Collides_W_Inv_Wall(int CollisionDetection, glm::vec3 ivbObj[4][2]) {
  	//CollisionDetection :: 1 = TOP , 2 = BOTTOM , 4 = RIGHT , 8 = LEFT 
 	if (CollisionDetection % 2 != 0) { //COLLIDE TOP
 		this->velocity = glm::vec3(this->velocity.x, 0, this->velocity.z);
 	}
 	 
 	if ((CollisionDetection >> 1) % 2 != 0) { //COLLIDE BOTTOM
- 
 		if (!OnGround) {
 			OnGround = true;
 			this->velocity = glm::vec3(this->velocity.x, 0, this->velocity.z); 
-			//glm::vec3 roundedPos = glm::vec3(this->GetPos().x, Inv_Wall_Pos.y + (64 / 2) + this->GetSize().y * -1 / 2 , this->GetPos().z);
- 			//SetPosition(roundedPos);
+			this->SetPosition ( glm::vec3(GetPos().x,ivbObj[1][0].y + ivbObj[1][1].y  + ivbObj[1][1].y / 2  , GetPos().z));
  		}
 	}
 	else {
@@ -166,10 +164,14 @@ void Entity::Collides_W_Inv_Wall(int CollisionDetection) {
 	if ((CollisionDetection >> 2) % 2 != 0) { //COLLIDE LEFT
 		this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0,0));
 		cout << "LEFT" << endl;
+		this->SetPosition(glm::vec3(ivbObj[2][0].x + ivbObj[2][1].x + ivbObj[2][1].x / 2 + 1 , GetPos().y, GetPos().z));
+
 	}
 
 	if ((CollisionDetection >> 3) % 2 != 0) { //COLLIDE RIGHT
 		this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0, 0));
+		this->SetPosition(glm::vec3(ivbObj[3][0].x - ivbObj[3][1].x - ivbObj[3][1].x / 2 - 1,GetPos().y, GetPos().z));
+
 		cout << "RIGHT" << endl;
 	}
 

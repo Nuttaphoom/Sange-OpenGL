@@ -9,7 +9,7 @@ void LevelTest::LevelLoad()
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
 
-	/*ifstream mapFile("../Resource/Map/Example_Middle_Mapdata.txt");
+	ifstream mapFile("../Resource/Map/Example_Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -51,7 +51,6 @@ void LevelTest::LevelLoad()
 		cMapFile.close();
  	}
 
-	*/
 	//cout << "Load Level" << endl;
 }
 
