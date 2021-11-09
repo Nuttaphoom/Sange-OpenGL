@@ -27,7 +27,6 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 	/// Create tile in Middle Layer 
 	for (int i = 0; i <  width + 1   ; i++) {
 		tiles.push_back(vector<SpriteObject*>());
-
 		for (int j = 0; j < height + 1; j++) {
 			/// Create every tile 
 			tiles[i].push_back(new SpriteObject(texture, rowMax, columnMax));
@@ -50,42 +49,37 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 
 			SetUV(widthEachCell, heightEachCell, width, height, i, j,
 					Mapdata_Middle_Layer, uvs);
-
+			
 			tiles[i][j]->SetUV(uvs);
 			
 		}
 	}
-	
 	/// Create tile in Front Layer 
-	
-	for (int i = 0; i < width + 1; i++) {
-		tiles.push_back(vector<SpriteObject*>());
-
+		for (int i = 0; i <  width + 1   ; i++) {
+			tiles.push_back(vector<SpriteObject*>());
 		for (int j = 0; j < height + 1; j++) {
-			/// Create every tile 
+			/// Create every tile
 			tiles[i + width + 1].push_back(new SpriteObject(texture, rowMax, columnMax));
 
- 			tiles[i + width + 1][j]->SetAnimationLoop(0, 0, 0, 0,false);
+			tiles[i + width + 1][j]->SetAnimationLoop(0, 0, 0, 0,false);
 
-			/// Set Size of each tile to 64 pixle width and height  
+			/// Set Size of each tile to 64 pixle width and height
 			tiles[i + width + 1][j]->SetSize(64, -64);
 
-			/// Set position of each tile 
+			/// Set position of each tile
 			tiles[i + width + 1][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
-			if (Mapdata_Middle_Layer[i][j] == -1)tiles[i + width + 1][j]->SetPosition(glm::vec3(width * 10, height * 10, 0));
+			if (Mapdata_Front_Layer[i][j] == -1)tiles[i + width + 1][j]->SetPosition(glm::vec3(width * 10, height * 10, 0));
 
-			/// Calculate UV 
+			/// Calculate UV
 			float uvs[8];
- 	
-			float widthEachCell = 1.0f / (float)width;
-			float heightEachCell = 1.0f / (float)height;
 
-			if (Mapdata_Front_Layer[i][j] != -1)
-				SetUV(widthEachCell, heightEachCell, width, height, i, j,
+			//Need to use Mapdata[i][j] for UV
+			float widthEachCell = 1.0f / (float)columnMax;
+			float heightEachCell = 1.0f / (float)rowMax;
+
+			SetUV(widthEachCell, heightEachCell, width, height, i, j,
 					Mapdata_Front_Layer, uvs);
-
 			tiles[i + width + 1][j]->SetUV(uvs);
-			 
 		}
 	}
 
