@@ -1,10 +1,10 @@
 #pragma once
-#include "InteracableObject.h"
+#include "InteractableObject.h"
 
 
-class Flower : public InteracableObject{
+class Flower : public InteractableObject{
 	public :
 		Flower(string fileName, int row, int column);
-		void called();
+		void Called();
 
 };

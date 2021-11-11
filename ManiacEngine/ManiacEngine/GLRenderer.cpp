@@ -143,7 +143,7 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 	
 
 	for (DrawableObject *obj : objList) {
-		if (  Camera::GetInstance()->IsInCamera(obj->GetPos(),obj->GetSize())  )
+		if (Camera::GetInstance()->IsInCamera(obj->GetPos(),obj->GetSize())  )
 		obj->Render(camera);
 	}
 

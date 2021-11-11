@@ -6,7 +6,10 @@ class LevelTest : public Level
 {
 private:
 	vector<DrawableObject*> objectsList;
-	SpriteObject* player;
+	vector< DrawableObject*> invisibleObjectsList;
+	vector < DrawableObject*> EntityObjectsList;
+	Player* player;
+	CameraController* cameraController;
 	TileMap* tilemaps;
 	int MapHeight;
 	int MapWidth;

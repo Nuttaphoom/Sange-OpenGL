@@ -77,7 +77,7 @@ void Level3::LevelInit()
 			objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 
-	Player* obj = new Player("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
+	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
 	obj->SetAnimationLoop(0, 0, 4, 100);
@@ -162,11 +162,13 @@ void Level3::LevelDraw()
 
 void Level3::LevelFree()
 {
-	for (DrawableObject* obj : objectsList) {
-		delete obj;
-	}
-	objectsList.clear();
-	//cout << "Free Level" << endl;
+	/*for (int i = objectsList.size() - 1; i >= 0; i--) {
+		delete objectsList[i];
+	}*/
+	
+	delete player;
+	delete cameraController;
+	delete tilemaps;
 }
 
 void Level3::LevelUnload()

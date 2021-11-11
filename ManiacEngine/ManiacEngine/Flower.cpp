@@ -1,12 +1,12 @@
 #include "Flower.h"
+#include "CheckPoint.h"
 
 
 
-
-Flower::Flower(string fileName, int row, int column) : InteracableObject(fileName,row,column) {
+Flower::Flower(string fileName, int row, int column) : InteractableObject(fileName,row,column) {
 
 }
 
-void Flower::called() {
-	printf("A\n");
+void Flower::Called() {
+	Static_SetCheckPoint(this->GetPos()); 
 }

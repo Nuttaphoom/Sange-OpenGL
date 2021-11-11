@@ -8,7 +8,8 @@
 #include "Button.h" 
 #include "TileMap.h"
 #include "InvisibleObject.h" 
-#include "Player.h"
+#include "Player.h" 
+#include "CameraController.h"
 #include <fstream>
 
 
@@ -19,7 +20,7 @@ private:
 	vector< DrawableObject*> invisibleObjectsList;
 	vector < DrawableObject*> EntityObjectsList;
 	Player* player;
-
+	CameraController* cameraController; 
 	TileMap* tilemaps;
 	int MapHeight;
 	int MapWidth;

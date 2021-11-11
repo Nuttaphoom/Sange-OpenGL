@@ -15,7 +15,7 @@ public:
 	glm::mat4 getTransform();
 	
 	DrawableObject();
-	//~DrawableObject();
+	~DrawableObject();
 	virtual void Render(glm::mat4 globalModelTransform) = 0;
 	virtual void Update(int deltaTime);
 	glm::vec3 GetPos(); 

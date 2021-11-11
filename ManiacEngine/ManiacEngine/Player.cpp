@@ -1,6 +1,9 @@
 #include "Player.h"
  
 #define PlayerIsJumpingOrFalling PlayerState == StateMachine::JUMPPING || PlayerState == StateMachine::MIDJUMP || PlayerState == StateMachine :: FALLING 
+
+Player* Player::instance = nullptr; 
+
 void Player::HandleKey(char Key)
 {
  	switch (Key)
@@ -100,4 +103,20 @@ void Player::Translate(glm::vec3 moveDistance)
 	pos = pos + moveDistance;
 }
 
+Player* Player::GetInstance() {
+	if (instance == nullptr) {
+		while (instance == nullptr) {
+			cout << "ERROR -- Player Instance is called before init" << endl; 
+			cout << "See more at Player.cpp -- " << endl; 
+		}
+	}
+	return instance;
+}
+
+Player* Player::GetInstance(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) 
+{
+	instance = new Player(fileName, row, column, HP, MoveSpeed, IFrame);
+	return instance; 
+
+}
  

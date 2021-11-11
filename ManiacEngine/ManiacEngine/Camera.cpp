@@ -16,6 +16,9 @@ Camera* Camera::GetInstance()
 	return instance;
 }
 
+void Camera::SetPosition(glm::vec3 newPos) {
+	this->CamOffset = newPos; 
+}
 void Camera::Translate(float x, float y) {
 
 	CamOffset = glm::vec3(CamOffset.x + x, CamOffset.y + y, CamOffset.z);
@@ -49,5 +52,5 @@ bool Camera::IsInCamera(glm::vec3 pos, glm::vec3 size) {
 	CollideX = (pos.x - size.x / 2 <= RightCam  && pos.x + size.x / 2 >= LeftCam);
 	CollideY = (pos.y + size.y * -1 / 2 >= BottomCam && pos.y - size.y * -1 / 2 <= TopCam );
  
-	return CollideX && CollideY ;
+	return   CollideX && CollideY ;
  }

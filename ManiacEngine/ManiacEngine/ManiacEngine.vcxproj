@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Flower.cpp" />
@@ -31,13 +32,15 @@
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="ImageObject.cpp" />
-    <ClCompile Include="InteracableObject.cpp" />
+    <ClCompile Include="InteractableObject.cpp" />
+    <ClCompile Include="InteractableObjectManager.cpp" />
     <ClCompile Include="InvisibleObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
+    <ClCompile Include="Observer.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -50,6 +53,8 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraController.h" />
+    <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Flower.h" />
@@ -61,7 +66,8 @@
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="InteracableObject.h" />
+    <ClInclude Include="InteractableObject.h" />
+    <ClInclude Include="InteractableObjectManager.h" />
     <ClInclude Include="InvisibleObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ImageObject.h" />
@@ -72,6 +78,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="SquareMeshVbo.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="TriangleMeshVbo.h" />
   </ItemGroup>
   <ItemGroup>

@@ -6,11 +6,11 @@
 class Level3 : public Level
 {
 private:
-	vector<DrawableObject*> objectsList				;
-	vector< DrawableObject*> invisibleObjectsList	; 
-	vector < DrawableObject*> EntityObjectsList		;
+	vector<DrawableObject*> objectsList;
+	vector< DrawableObject*> invisibleObjectsList;
+	vector < DrawableObject*> EntityObjectsList;
 	Player* player;
-
+	CameraController* cameraController;
 	TileMap* tilemaps;
 	int MapHeight;
 	int MapWidth;

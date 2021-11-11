@@ -67,6 +67,7 @@ void Level::LevelInit()
 		}
 	#pragma endregion 
 
+
 	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
@@ -78,24 +79,27 @@ void Level::LevelInit()
 		invisibleObjectsList.push_back(tilemaps->GetColTiles()[i]);
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
-
-	Player* obj = new Player("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
+	
+	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0) ;
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
 	obj->SetAnimationLoop(0, 0, 4, 100);
-	//obj->SetColor(0.0, 1.0, 0.0);
-	EntityObjectsList.push_back(obj);
+ 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
-
+	
 	//cout << "Init Level" << endl;
 }
 
 void Level::LevelUpdate()
 {
-	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 
-	/// Collision Check 
+
+	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
+	//Camera Controller Behavior
+	cameraController->Update();
+
+ 	/// Collision Check 
 	// Check with Invisible Walls
 	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
@@ -154,6 +158,7 @@ void Level::LevelUpdate()
 		//Player Update In every game object 
 		obj->Update(deltaTime);
 	}
+
 }
 
 void Level::LevelDraw()
@@ -165,10 +170,13 @@ void Level::LevelDraw()
 
 void Level::LevelFree()
 {	
-	/*for (DrawableObject* obj : objectsList) {
-		delete obj;
-	}
-	objectsList.clear();*/
+	/*for (int i = objectsList.size() - 1; i >= 0 ; i--) {
+		delete objectsList[i];
+	}*/
+
+	delete player; 
+	delete cameraController; 
+	delete tilemaps;  
  
 	//cout << "Free Level" << endl;*/
 }

@@ -14,6 +14,7 @@ enum class StateMachine {
 class Player : public Entity
 {
 	private :
+	static Player* instance;
 	enum StateMachine PlayerState;
  	
 	public :
@@ -24,6 +25,9 @@ class Player : public Entity
  	void ChangeState(StateMachine NextState);
 	void Translate(glm::vec3 moveDistance);
 	void HandleKey(char key);
+
+	static Player* GetInstance();
+	static Player* GetInstance(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
  };
 
 

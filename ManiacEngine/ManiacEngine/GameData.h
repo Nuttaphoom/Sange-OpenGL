@@ -1,6 +1,7 @@
 #pragma once
 #include "GameStateList.h"
-
+#include "iostream"
+using namespace std;
 class GameData
 {
 	static GameData* instance;
@@ -14,3 +15,21 @@ public :
 	static GameData* GetInstance();
 };
 
+class PlayerData {
+	static PlayerData* instance; 
+
+	public :
+	int HP; 
+	int MoveSpeed;
+	
+	
+	PlayerData(int HP, int MoveSpeed);
+
+	static PlayerData* GetInstance();
+
+	void LoadData();
+
+	void SaveData();
+};
+
+ 

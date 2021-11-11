@@ -43,6 +43,21 @@
     <Filter Include="Header Files\Rendering">
       <UniqueIdentifier>{15b52efa-429c-45f7-97e0-eef368da867e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects\InteractableObjects">
+      <UniqueIdentifier>{1e96b487-0335-4bdc-b38b-2a4f3ac9e9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Interactable Objects">
+      <UniqueIdentifier>{5c632df0-3269-4e7e-99c6-7f3212aa88ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DesignPattern">
+      <UniqueIdentifier>{3c0d6d83-e04c-4f8a-bb59-cf2cee8c3fd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DesignPattern">
+      <UniqueIdentifier>{e97af8ff-67c7-4089-b786-a7484161742a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Manager">
+      <UniqueIdentifier>{4d3a5ef8-89b6-4226-b08c-a99448444ade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameData.cpp">
@@ -120,11 +135,20 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="InteracableObject.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Flower.cpp">
-      <Filter>Source Files\Objects</Filter>
+      <Filter>Source Files\Objects\Interactable Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.h">
+      <Filter>Header Files\DesignPattern</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractableObject.cpp">
+      <Filter>Source Files\Objects\Interactable Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractableObjectManager.cpp">
+      <Filter>Source Files\Objects\Interactable Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>Source Files\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,11 +221,23 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="InteracableObject.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Flower.h">
-      <Filter>Header Files\Objects</Filter>
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Header Files\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractableObject.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractableObjectManager.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>Header Files\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

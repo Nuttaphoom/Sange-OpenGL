@@ -68,10 +68,10 @@ void LevelTest::LevelInit()
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}*/
 
-	SpriteObject* obj = new SpriteObject("../Resource/Texture/Sange/SangeRunning.png", 1, 8/*, 100, 10, 0*/);
+	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
 	obj->SetSize(64, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
-	obj->SetAnimationLoop(0, 0, 8, 50,true);
+	obj->SetAnimationLoop(0, 0, 8, 50);
  	objectsList.push_back(obj);
 	player = obj;
 
@@ -105,11 +105,12 @@ void LevelTest::LevelDraw()
 
 void LevelTest::LevelFree()
 {
-	/*for (DrawableObject* obj : objectsList) {
-		delete obj;
-	}
-	objectsList.clear();*/
+	/*for (int i = objectsList.size() - 1; i >= 0; i--) {
+		delete objectsList[i];
+	}*/
 
+	delete player;
+	delete cameraController;
 	delete tilemaps;
 }
 

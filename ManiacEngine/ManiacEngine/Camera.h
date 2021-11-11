@@ -17,6 +17,6 @@ public:
 	void Zoom(float p);
 	float GetZoomOffset();
 	bool IsInCamera(glm::vec3 pos, glm::vec3 size);
-
+	void SetPosition(glm::vec3 newPos);
 };
 #endif 
