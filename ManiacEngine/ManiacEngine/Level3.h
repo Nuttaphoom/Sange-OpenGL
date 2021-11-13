@@ -2,6 +2,7 @@
 #pragma once
 #include "Level.h"
 #include "Player.h"
+#include "Enemy.h"
 
 class Level3 : public Level
 {
@@ -10,6 +11,7 @@ private:
 	vector< DrawableObject*> invisibleObjectsList;
 	vector < DrawableObject*> EntityObjectsList;
 	Player* player;
+	Enemy* enemy;
 	CameraController* cameraController;
 	TileMap* tilemaps;
 	int MapHeight;

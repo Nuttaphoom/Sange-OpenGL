@@ -86,6 +86,13 @@ void Level3::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
+	Enemy* test = new Enemy("../Resources/Texture/TestNumber.png", 4, 4, 100, 0.3, 0, glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f), obj);
+	test->SetSize(128.0, -128.0f);
+	test->SetPosition(glm::vec3(300.0f, 0.0f, 0.0f));
+	test->SetAnimationLoop(0, 0, 4, 100);
+	EntityObjectsList.push_back(test);
+	objectsList.push_back(test);
+	enemy = test;
 }
 
 void Level3::LevelUpdate()
