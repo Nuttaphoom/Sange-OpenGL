@@ -8,5 +8,5 @@ Flower::Flower(string fileName, int row, int column) : InteractableObject(fileNa
 }
 
 void Flower::Called() {
-	Static_SetCheckPoint(this->GetPos()); 
+ 	Static_SetCheckPoint(this->GetPos()); 
 }

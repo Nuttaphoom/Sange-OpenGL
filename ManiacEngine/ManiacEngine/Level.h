@@ -10,6 +10,8 @@
 #include "InvisibleObject.h" 
 #include "Player.h" 
 #include "CameraController.h"
+#include "InteractableObjectManager.h"
+#include "Flower.h"
 #include <fstream>
 
 
@@ -22,6 +24,7 @@ private:
 	Player* player;
 	CameraController* cameraController; 
 	TileMap* tilemaps;
+	InteractableObjectManager interactableManager; 
 	int MapHeight;
 	int MapWidth;
 	int** sMiddleMapdata;

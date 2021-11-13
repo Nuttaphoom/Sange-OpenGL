@@ -86,8 +86,7 @@ void Entity::Render(glm::mat4 globalModelTransform)
 
 	glm::mat4 currentMatrix = this->getTransform(); 
 	/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
- 	currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1)) ;
-
+ 
 
 	if (squareMesh != nullptr) {
 		currentMatrix = globalModelTransform * currentMatrix;

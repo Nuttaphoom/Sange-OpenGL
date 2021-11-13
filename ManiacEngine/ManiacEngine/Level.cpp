@@ -6,6 +6,7 @@ static int SCREEN_HEIGHT;
 
 void Level::LevelLoad()
 {
+ 
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -67,7 +68,7 @@ void Level::LevelInit()
 		}
 	#pragma endregion 
 
-
+	#pragma region tilemaps
 	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
@@ -79,7 +80,16 @@ void Level::LevelInit()
 		invisibleObjectsList.push_back(tilemaps->GetColTiles()[i]);
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
-	
+	#pragma endregion 
+
+	#pragma region interactableObject 
+	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1);
+	flower_1->SetPosition(glm::vec3(-64*2, -64*9 + 15, 0));
+	flower_1->SetSize(64, -128);
+	interactableManager.addInteractableObjects(flower_1);
+
+	objectsList.push_back(flower_1); 
+	#pragma endregion 
 	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0) ;
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
@@ -197,7 +207,8 @@ void Level::HandleKey(char key)
 		case 'd': player->HandleKey(key); break;
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;
+		case 'e': interactableManager.notify(player)  ; break;
+		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;
 		case 'g': Camera::GetInstance()->Translate(100.0f, 0);  break;//Move the cam to right
 		case 'f': Camera::GetInstance()->Translate(-100.0f, 0); break;//Move the cam to left 
 		case 't': Camera::GetInstance()->Translate(0, 10); break;

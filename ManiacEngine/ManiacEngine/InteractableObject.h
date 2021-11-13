@@ -5,6 +5,6 @@
 class InteractableObject : public SpriteObject {
 	public :
 		InteractableObject(string fileName, int row, int column);
-		virtual void isCalled(Entity e);
+		virtual void isCalled(Entity* e);
 		virtual void Called() = 0;
 };

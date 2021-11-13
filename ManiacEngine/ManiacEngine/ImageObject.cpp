@@ -42,7 +42,7 @@ void ImageObject::Render(glm::mat4 globalModelTransform)
 	vector <glm::mat4> matrixStack;
 
 	glm::mat4 currentMatrix = this->getTransform();
-
+ 
 	if (squareMesh != nullptr) {
 
 		currentMatrix = globalModelTransform * currentMatrix;
