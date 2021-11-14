@@ -57,22 +57,23 @@ void LevelTest::LevelLoad()
 void LevelTest::LevelInit()
 {
  
-	/*tilemaps = new TileMap(MapWidth, MapHeight,sFrontMapData ,sMiddleMapdata,sColMapdata,"../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
-			objectsList.push_back(tilemaps->GetTiles()[i][j]); 
+			objectsList.push_back(tilemaps->GetTiles()[i][j]);
 		}
 	}
 
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
+		invisibleObjectsList.push_back(tilemaps->GetColTiles()[i]);
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
-	}*/
+	}
 
-	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
-	obj->SetSize(64, -128.0f);
-	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
-	obj->SetAnimationLoop(0, 0, 8, 50);
- 	objectsList.push_back(obj);
+	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 5, 0.3, 0);
+	obj->SetSize(128, -128.0f);
+	obj->SetAnimationLoop(0, 0, 4, 100);
+	EntityObjectsList.push_back(obj);
+	objectsList.push_back(obj);
 	player = obj;
 
 	GameObject* obj2 = new GameObject();

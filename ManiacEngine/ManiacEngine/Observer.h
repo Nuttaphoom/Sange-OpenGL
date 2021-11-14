@@ -7,5 +7,6 @@ using namespace std;
 class Observer {
 	public : 
 	virtual void OnNotify() = 0;
+	~Observer(); 
 };
 

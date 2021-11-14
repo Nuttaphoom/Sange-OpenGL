@@ -2,6 +2,8 @@
 #define ENTITY
 
 #include "Entity.h"
+#include "Subject.h"
+#include "Observer.h"
 
 enum class StateMachine {
 	IDLE,
@@ -11,7 +13,7 @@ enum class StateMachine {
 	FALLING
 };
 
-class Player : public Entity
+class Player : public Entity, public Subject
 {
 	private :
 	static Player* instance;
@@ -28,6 +30,9 @@ class Player : public Entity
 
 	static Player* GetInstance();
 	static Player* GetInstance(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
+
+	void OnDamaged(int damage);
+
  };
 
 

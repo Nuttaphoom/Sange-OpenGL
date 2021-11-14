@@ -12,6 +12,7 @@
 #include "CameraController.h"
 #include "InteractableObjectManager.h"
 #include "Flower.h"
+#include "HPBar.h"
 #include "CheckPoint.h"
 #include <fstream>
 
@@ -22,10 +23,15 @@ private:
 	vector<DrawableObject*> objectsList;
 	vector< DrawableObject*> invisibleObjectsList;
 	vector < DrawableObject*> EntityObjectsList;
+
 	Player* player;
+
 	CameraController* cameraController; 
-	TileMap* tilemaps;
+	
 	InteractableObjectManager interactableManager; 
+	CheckPoint* checkPoint; 
+
+	TileMap* tilemaps;
 	int MapHeight;
 	int MapWidth;
 	int** sMiddleMapdata;

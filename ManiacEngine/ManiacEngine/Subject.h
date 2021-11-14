@@ -4,8 +4,10 @@
 using namespace std; 
 class Subject {
 	public :
-	vector<Observer*> observers ;  
-	virtual void notify() = 0 ;
-	virtual void attach(Observer* o) = 0 ; 
-	virtual void detach(Observer* o) = 0 ; 
+	vector<vector<Observer*>> observers ;  
+	virtual void notify(int Type)   ;
+	virtual void attach(Observer* o, int Type)  ; 
+	virtual void detach(Observer* o)   ; 
+
+	~Subject(); 
 };

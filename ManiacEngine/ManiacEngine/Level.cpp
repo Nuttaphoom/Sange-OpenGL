@@ -6,8 +6,7 @@ static int SCREEN_HEIGHT;
 
 void Level::LevelLoad()
 {
-	SetCheckPoint(glm::vec3(0, 0, 0));
- 
+  
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -58,8 +57,8 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-	SetCheckPoint(glm::vec3(0, 0, 0)); 
-
+	checkPoint = CheckPoint::GetInstance();
+ 
 	#pragma region ground_test
 		for (int i = 0; i < 12; i++)
 		{
@@ -90,11 +89,11 @@ void Level::LevelInit()
 	flower_1->SetPosition(glm::vec3(-64*2, -64*9 + 15, 0));
 	flower_1->SetSize(64, -128);
 	interactableManager.addInteractableObjects(flower_1);
-
 	objectsList.push_back(flower_1); 
+
 	#pragma endregion 
 
-	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0) ;
+	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 5, 0.3, 0) ;
 	obj->SetSize(128, -128.0f);
  	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
@@ -102,11 +101,16 @@ void Level::LevelInit()
 	player = obj;
 	
 	#pragma region GUI 
-	GUI* SangeImage = new GUI(GUIName::Decroative, "../Resource/Texture/GUI/Sange.png",1,1);
+	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png",1,1);
 	SangeImage->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2*-1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2  - 85 , 0));
 	SangeImage->SetSize(1668 / 11, 2224 / 11 * -1);
 	objectsList.push_back(SangeImage); 
-	#pragma endregion 
+
+	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 165, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
+	hpbar->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 150, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
+	//hpbar->SetSize(238 , 448  * -1);	
+	objectsList.push_back(hpbar);
+	#pragma endregion
 
 	//cout << "Init Level" << endl;
 }
@@ -194,10 +198,10 @@ void Level::LevelFree()
 		delete objectsList[i];
 	}*/
 
-	delete player; 
+	/*delete player; 
 	delete cameraController; 
 	delete tilemaps;  
- 
+	delete checkPoint;*/
 	//cout << "Free Level" << endl;*/
 }
 
@@ -218,11 +222,12 @@ void Level::HandleKey(char key)
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': interactableManager.notify(player)  ; break;
+		case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
 		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2 ;   break;
-		case 'g': Camera::GetInstance()->Translate(100.0f, 0);  break;//Move the cam to right
-		case 'f': Camera::GetInstance()->Translate(-100.0f, 0); break;//Move the cam to left 
-		case 't': Camera::GetInstance()->Translate(0, 10); break;
-		case 'h': Camera::GetInstance()->Translate(0, -10); break;
+		case 'g':  player->OnDamaged(1); break;
+		case 'f':  
+		case 't':  
+		case 'h':  
 		case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 		case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
 	}

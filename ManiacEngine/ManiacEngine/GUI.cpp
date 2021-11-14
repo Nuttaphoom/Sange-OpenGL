@@ -1,9 +1,6 @@
 #include "GUI.h" 
 
-//Test function that can be called for specific GUI object in Update function
-void UPDATE_TEST(float deltaTime) {
-	cout << "test" << endl;
-}
+ 
 
 void GUI::Render(glm::mat4 globalModelTransform)
 {
@@ -28,10 +25,7 @@ void GUI::Render(glm::mat4 globalModelTransform)
 	currentMatrix = glm::translate(currentMatrix, Camera::GetInstance()->GetCamOffset());
 	currentMatrix = glm::scale(currentMatrix, GetSize() / Camera::GetInstance()->GetZoomOffset());
 	currentMatrix = glm::translate(currentMatrix, glm::vec3(GetPos().x / GetSize().x, GetPos().y / GetSize().y, 0));
-
-	//currentMatrix += glm::translate(currentMatrix, GUIPos);
-	cout << "T";
-	//currentMatrix =   s  ;
+ 
 	if (squareMesh != nullptr) {
 		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
@@ -43,13 +37,7 @@ void GUI::Render(glm::mat4 globalModelTransform)
 	}
 }
 
-void GUI::Update(float deltaTime) {
- 	if (this->GUIname == GUIName::Button) {
-		UPDATE_TEST(deltaTime); 
-	}
-
-}
-
+ 
 
  
 

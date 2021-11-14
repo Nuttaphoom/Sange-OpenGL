@@ -4,6 +4,7 @@
 
 Player* Player::instance = nullptr; 
 
+
 void Player::HandleKey(char Key)
 {
  	switch (Key)
@@ -116,8 +117,12 @@ Player* Player::GetInstance() {
 Player* Player::GetInstance(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) 
 {
 	instance = new Player(fileName, row, column, HP, MoveSpeed, IFrame);
-	LoadCheckPoint();
+	CheckPoint::GetInstance()->LoadCheckPoint();
 	return instance;
 
 }
  
+void Player::OnDamaged(int damage) {
+	this->HP -= damage;
+	notify(0); //Notify HP Observer 
+}

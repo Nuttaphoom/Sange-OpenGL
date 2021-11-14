@@ -1,16 +1,25 @@
 #pragma 
 #include "CheckPoint.h"
 
-glm::vec3 CheckPoint = glm::vec3(0, 0, 0);
+CheckPoint* CheckPoint::instance = nullptr; 
 
-glm::vec3 LoadCheckPoint() {
-	printf("l");
-	Player::GetInstance()->SetPosition(CheckPoint); 
-	return CheckPoint; 
+ 
+CheckPoint* CheckPoint::GetInstance() {
+	if (instance == nullptr) {
+		instance = new CheckPoint(); 
+	}
+	return instance;
 }
 
-void SetCheckPoint(glm::vec3 newPoint){
+
+glm::vec3 CheckPoint::LoadCheckPoint() {
+	printf("l");
+	Player::GetInstance()->SetPosition(curCheckPoint);
+	return curCheckPoint; 
+}
+
+void CheckPoint::SetCheckPoint(glm::vec3 newPoint){
 	printf("s");
-	CheckPoint = newPoint; 
+	curCheckPoint = newPoint;
 	
 }

@@ -191,3 +191,11 @@ glm::vec3 Entity::GetVelocity()
 {
 	return velocity;
 }
+
+void Entity::OnDamaged(int damage) {
+	HP -= damage; 
+}
+
+float Entity::GetHP() {
+	return HP; 
+}

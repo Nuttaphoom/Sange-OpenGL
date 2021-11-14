@@ -32,6 +32,7 @@
     <ClCompile Include="GameStateController.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="ImageObject.cpp" />
     <ClCompile Include="InteractableObject.cpp" />
     <ClCompile Include="InteractableObjectManager.cpp" />
@@ -41,12 +42,14 @@
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Observer.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileMap.h" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
@@ -67,6 +70,7 @@
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="HPBar.h" />
     <ClInclude Include="InteractableObject.h" />
     <ClInclude Include="InteractableObjectManager.h" />
     <ClInclude Include="InvisibleObject.h" />

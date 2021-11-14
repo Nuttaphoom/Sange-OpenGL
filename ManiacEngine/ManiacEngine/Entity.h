@@ -26,6 +26,8 @@ class Entity : public SpriteObject
 		virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
  		virtual float GetMoveSpeed();
 		virtual void SetDirection(int x);
- 
+		virtual void OnDamaged(int damage); 
 		virtual glm::vec3 GetVelocity();
+
+		float GetHP(); 
 };
