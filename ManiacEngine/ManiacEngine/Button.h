@@ -13,7 +13,7 @@ class Button : public GUI {
 	ButtonName buttonName ; 
 	vector<FuncPtr_ButtonType> buttonTypesFunc; 
 public : 
-		Button(ButtonName buttonName); 
+		Button(ButtonName buttonName, string fileName, int row, int column);
 		bool isClick(glm::vec3 CamSpace_MousePosition);
 		void OnClick(glm::vec3 CamSpace_MousePosition);
 		 

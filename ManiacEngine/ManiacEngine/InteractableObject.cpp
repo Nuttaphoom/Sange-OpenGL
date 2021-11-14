@@ -8,8 +8,6 @@ InteractableObject::InteractableObject(string fileName, int row, int column) : S
 void InteractableObject::isCalled(Entity* e) {
 
 	if (InCollideRadius(this,e) > 0) {
-		printf("Set Check Point");
-
 		Called();
 	}
 }

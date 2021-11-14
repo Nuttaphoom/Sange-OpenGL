@@ -58,6 +58,9 @@
     <Filter Include="Header Files\Manager">
       <UniqueIdentifier>{4d3a5ef8-89b6-4226-b08c-a99448444ade}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Manager">
+      <UniqueIdentifier>{6894ebf5-9240-46c2-a85a-8e3689258634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameData.cpp">
@@ -149,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="CameraController.cpp">
       <Filter>Source Files\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint.cpp">
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

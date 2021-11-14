@@ -1,7 +1,6 @@
 #include "Button.h"
 void NextLevel_Button(); 
-
-Button::Button(ButtonName buttonName) :buttonName(buttonName), GUI(GUIName::Button) 
+Button::Button(ButtonName buttonName, string fileName, int row, int column) :buttonName(buttonName), GUI(GUIName::Button, fileName, row, column)
 {
 	buttonTypesFunc.push_back(NextLevel_Button);  // NEXT_LEVEL_BUTTON
 }

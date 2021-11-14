@@ -30,13 +30,13 @@ void GUI::Render(glm::mat4 globalModelTransform)
 	currentMatrix = glm::translate(currentMatrix, glm::vec3(GetPos().x / GetSize().x, GetPos().y / GetSize().y, 0));
 
 	//currentMatrix += glm::translate(currentMatrix, GUIPos);
-
+	cout << "T";
 	//currentMatrix =   s  ;
 	if (squareMesh != nullptr) {
 		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 		glUniform1i(renderModeId, 1);
-		glBindTexture(GL_TEXTURE_2D, ImageObject::GetTexture());
+		glBindTexture(GL_TEXTURE_2D, SpriteObject::GetTexture());
 		squareMesh->ResetTexcoord();
 		squareMesh->Render();
 

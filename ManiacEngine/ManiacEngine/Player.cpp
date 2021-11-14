@@ -1,5 +1,5 @@
 #include "Player.h"
- 
+#include "CheckPoint.h"
 #define PlayerIsJumpingOrFalling PlayerState == StateMachine::JUMPPING || PlayerState == StateMachine::MIDJUMP || PlayerState == StateMachine :: FALLING 
 
 Player* Player::instance = nullptr; 
@@ -116,7 +116,8 @@ Player* Player::GetInstance() {
 Player* Player::GetInstance(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) 
 {
 	instance = new Player(fileName, row, column, HP, MoveSpeed, IFrame);
-	return instance; 
+	LoadCheckPoint();
+	return instance;
 
 }
  

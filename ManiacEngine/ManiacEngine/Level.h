@@ -12,6 +12,7 @@
 #include "CameraController.h"
 #include "InteractableObjectManager.h"
 #include "Flower.h"
+#include "CheckPoint.h"
 #include <fstream>
 
 

@@ -6,6 +6,7 @@ static int SCREEN_HEIGHT;
 
 void Level::LevelLoad()
 {
+	SetCheckPoint(glm::vec3(0, 0, 0));
  
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
@@ -57,6 +58,8 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
+	SetCheckPoint(glm::vec3(0, 0, 0)); 
+
 	#pragma region ground_test
 		for (int i = 0; i < 12; i++)
 		{
@@ -90,14 +93,21 @@ void Level::LevelInit()
 
 	objectsList.push_back(flower_1); 
 	#pragma endregion 
+
 	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0) ;
 	obj->SetSize(128, -128.0f);
-	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
-	obj->SetAnimationLoop(0, 0, 4, 100);
+ 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
 	
+	#pragma region GUI 
+	GUI* SangeImage = new GUI(GUIName::Decroative, "../Resource/Texture/GUI/Sange.png",1,1);
+	SangeImage->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2*-1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2  - 85 , 0));
+	SangeImage->SetSize(1668 / 11, 2224 / 11 * -1);
+	objectsList.push_back(SangeImage); 
+	#pragma endregion 
+
 	//cout << "Init Level" << endl;
 }
 
@@ -208,7 +218,7 @@ void Level::HandleKey(char key)
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': interactableManager.notify(player)  ; break;
-		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; ; break;
+		case 'n': /*GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2*/ LoadCheckPoint();   break;
 		case 'g': Camera::GetInstance()->Translate(100.0f, 0);  break;//Move the cam to right
 		case 'f': Camera::GetInstance()->Translate(-100.0f, 0); break;//Move the cam to left 
 		case 't': Camera::GetInstance()->Translate(0, 10); break;
