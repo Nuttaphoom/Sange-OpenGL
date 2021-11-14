@@ -218,7 +218,7 @@ void Level::HandleKey(char key)
 		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': interactableManager.notify(player)  ; break;
-		case 'n': /*GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2*/ LoadCheckPoint();   break;
+		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2 ;   break;
 		case 'g': Camera::GetInstance()->Translate(100.0f, 0);  break;//Move the cam to right
 		case 'f': Camera::GetInstance()->Translate(-100.0f, 0); break;//Move the cam to left 
 		case 't': Camera::GetInstance()->Translate(0, 10); break;
