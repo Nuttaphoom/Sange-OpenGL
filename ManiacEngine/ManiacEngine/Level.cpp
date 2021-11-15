@@ -52,6 +52,21 @@ void Level::LevelLoad()
 		}
 		cMapFile.close();
 	}
+
+	ifstream BackGroundMapFile("../Resource/Map/Col_Example_Mapdata.txt");
+	if (BackGroundMapFile.is_open()) {
+		BackGroundMapFile >> MapHeight;
+		BackGroundMapFile >> MapWidth;
+		sBackGroundMapData = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sBackGroundMapData[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				BackGroundMapFile >> sBackGroundMapData[y][x];
+			}
+		}
+		BackGroundMapFile.close();
+	}
+	
 	//cout << "Load Level" << endl;
 }
 
@@ -71,7 +86,7 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region tilemaps
-	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
+	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 21,40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);

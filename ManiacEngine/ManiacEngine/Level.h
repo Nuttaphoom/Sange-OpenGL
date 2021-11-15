@@ -37,6 +37,7 @@ private:
 	int** sMiddleMapdata;
 	int** sColMapdata;
 	int** sFrontMapData;
+	int** sBackGroundMapData; 
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();
