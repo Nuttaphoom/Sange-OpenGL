@@ -132,8 +132,6 @@ void Level::LevelInit()
 
 void Level::LevelUpdate()
 {
-
-
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();

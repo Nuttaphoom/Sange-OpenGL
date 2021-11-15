@@ -86,7 +86,7 @@ void Entity::Render(glm::mat4 globalModelTransform)
 
 	glm::mat4 currentMatrix = this->getTransform(); 
 	/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
- 
+	currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1));
 
 	if (squareMesh != nullptr) {
 		currentMatrix = globalModelTransform * currentMatrix;
@@ -110,9 +110,11 @@ void Entity::Update(int deltatime)
 {
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround &&deltatime % 2 == 0 ) { //Apply velocity 
+	if (!OnGround && deltatime % 2 == 0 ) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -0.5f, 0));
  	}	
+
+	 
 
 	velocity += applyingVelocity;
 	this->Translate(velocity);
@@ -199,3 +201,5 @@ void Entity::OnDamaged(int damage) {
 float Entity::GetHP() {
 	return HP; 
 }
+
+ 

@@ -25,15 +25,15 @@ public:
 	SpriteObject(string fileName, int row, int column) ;
 	SpriteObject(unsigned int texture , int row, int column);
 	~SpriteObject();
-	void Render(glm::mat4 globalModelTransform);
-	void Update(int deltaTime);
-	void GenUV();
-	void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame,bool playanim); // 1000 = 1 second
-	void NextAnimation();
-	void SetTexture(string path);
-	unsigned int GetTexture();
-	void SetUV(float uvs[8]); 
-	float* GetUV(); 
+	virtual void Render(glm::mat4 globalModelTransform);
+	virtual void Update(int deltaTime);
+	virtual void GenUV();
+	virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame,bool playanim); // 1000 = 1 second
+	virtual void NextAnimation();
+	virtual void SetTexture(string path);
+	virtual unsigned int GetTexture();
+	virtual void SetUV(float uvs[8]); 
+	virtual float* GetUV(); 
 
 };
 

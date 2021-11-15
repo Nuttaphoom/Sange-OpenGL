@@ -16,10 +16,10 @@ class Entity : public SpriteObject
 
 		Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
 		virtual bool Death();
+		virtual void Render(glm::mat4 globalModelTransform);
 		virtual int Collides(Entity e);
 		virtual void Collides_W_Inv_Wall(int CollisionDetection, glm::vec3 ivbObj[4][2]);
-		virtual void Render(glm::mat4 globalModelTransform);
-		virtual void InvincibleFrame(int deltatime);
+ 		virtual void InvincibleFrame(int deltatime);
 		virtual void Update(int deltatime);
 		virtual void Translate(glm::vec3 moveDistance);
 		virtual void TranslateVelocity(glm::vec3 velocity);
@@ -28,6 +28,6 @@ class Entity : public SpriteObject
 		virtual void SetDirection(int x);
 		virtual void OnDamaged(int damage); 
 		virtual glm::vec3 GetVelocity();
-
+ 
 		float GetHP(); 
 };
