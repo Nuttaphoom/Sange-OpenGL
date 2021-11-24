@@ -1,5 +1,5 @@
 #include "Enemy.h"
-
+#include "Raycast.h"
 Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2, Player* p) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
 {
 	EnemyState = EnemyStateMachine::IDLE;
@@ -64,6 +64,23 @@ void Enemy::ChangeState(EnemyStateMachine nextState)
 
 bool Enemy::PlayerDetect(Player* p)
 {
+	glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()) ;
+	glm::vec3 Distance = glm::vec3(GetPos().x - p->GetPos().x, GetPos().y - p->GetPos().y, 0);
+
+	cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
+	cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
+
+	if (resultVec.x < 300 && resultVec.y < 100) {
+		if (abs(resultVec.x - Distance.x) < 0.1f && abs(resultVec.y - Distance.y) < 0.1f) {
+			return true;
+		}
+	}
+
+	
+	
+	return false;
+
+	/*
 	glm::vec3 Distance = glm::vec3(GetPos().x - p->GetPos().x, GetPos().y - p->GetPos().y, 0);
 	if (Distance.x < 300 && Distance.y < 100)
 	{
@@ -80,7 +97,7 @@ bool Enemy::PlayerDetect(Player* p)
 	else
 	{
 		return false;
-	}
+	}*/
 }
 
 void Enemy::AddPatrolPos(glm::vec3 pos)

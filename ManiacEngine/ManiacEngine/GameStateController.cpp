@@ -1,5 +1,14 @@
 #include "GameStateController.h"
 
+GameStateController* GameStateController::instance = nullptr; 
+
+GameStateController* GameStateController::GetInstance() {
+	if (instance == nullptr) {
+		instance = new GameStateController(); 
+	}
+	return instance;
+}
+
 GameStateController::GameStateController()
 {
 	// set the initial game state

@@ -7,7 +7,6 @@ Button::Button(ButtonName buttonName, string fileName, int row, int column) :but
 
 
 bool Button::isClick(glm::vec3 CamSpace_MousePosition ) {
-
 	bool CollideX;
 	bool CollideY;
 	CollideX = CamSpace_MousePosition.x <= GetPos().x + GetSize().x / 2 && CamSpace_MousePosition.x >= GetPos().x - GetSize().x / 2   ;

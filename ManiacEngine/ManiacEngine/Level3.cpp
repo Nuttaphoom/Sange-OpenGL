@@ -206,5 +206,27 @@ void Level3::HandleKey(char key)
 
 void Level3::HandleMouse(int type, int x, int y)
 {
-	Level::HandleMouse(type, x, y); 
+	float realX = x, realY = y;
+	glm::vec3 mouseVec3;
+	// Calculate Real X Y 
+	Level::WorldToCam(realX, realY);
+	mouseVec3 = glm::vec3(realX, realY, 1);
+
+	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
+
+	//Detecting Button 
+	for (int i = 0; i < objectsList.size(); i++) {
+		if (Button* bptr = dynamic_cast<Button*>(objectsList[i])) {
+			bptr->OnClick(mouseVec3);
+		}
+	}
+
+	//move object to current position with respect to Camera position 
+	glm::vec3 MoveObjectToMuseVec3 = (glm::vec3(realX, realY, 0));
+	MoveObjectToMuseVec3.x /= Camera::GetInstance()->GetZoomOffset();
+	MoveObjectToMuseVec3.y /= Camera::GetInstance()->GetZoomOffset();
+
+	MoveObjectToMuseVec3 += Camera::GetInstance()->GetCamOffset();
+
+	player->SetPosition(MoveObjectToMuseVec3);
 }

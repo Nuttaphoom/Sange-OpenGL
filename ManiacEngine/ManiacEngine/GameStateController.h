@@ -1,6 +1,8 @@
 #pragma once
 
 #include "GameEngine.h"
+#ifndef GameStateControllerHEADER 
+#define GameStateControllerHEADER
 #include "GameStateList.h"
 #include "GameData.h"
 #include "Level.h"
@@ -11,12 +13,15 @@ using namespace std;
 class GameStateController
 {
 
-public:
-
-	
-	Level* currentLevel;
-
+private :
+	static GameStateController* instance;
+protected :
 	GameStateController();
+public:
+	Level* currentLevel;
+	static GameStateController* GetInstance();
 	void Init(GameState gameStateInit);
 	void Update();
 };
+
+#endif 

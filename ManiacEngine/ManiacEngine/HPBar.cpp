@@ -3,7 +3,6 @@
 HPBar::HPBar(string fileName, int row, int column,glm::vec3 pos) : GUI(fileName,row,column){
 	float offsetX = 32; 
 	for (int i = 0; i < Player::GetInstance()->GetHP() ; i++) {
-		printf("a");
  		GUI* newP = new GUI(fileName, row, column); 
 		newP->SetPosition(glm::vec3(pos.x + offsetX * i, pos.y, this->GetPos().z));
 		newP->SetSize(238/10, -448/10);
@@ -25,6 +24,5 @@ void HPBar::Render(glm::mat4 globalModelTransform)
 	//GUI::Render(globalModelTransform); 
 	for (int i = 0; i < HPPoints.size(); i++) {
 		HPPoints[i]->Render(globalModelTransform);
-		printf("%d", i);
 	}
 }

@@ -29,4 +29,11 @@ public:
 
 	virtual void HandleKey(char key);
 	virtual void HandleMouse(int type, int x, int y);
+
+#pragma region getter 
+	vector<DrawableObject*> GetInvisibleWallList() { 
+		return Level3::invisibleObjectsList; }
+	vector<DrawableObject*> GetEntityList() { return Level3::EntityObjectsList; }
+
+#pragma endregion 
 };

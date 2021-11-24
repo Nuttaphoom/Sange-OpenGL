@@ -14,6 +14,7 @@
 #include "Flower.h"
 #include "HPBar.h"
 #include "CheckPoint.h"
+#include "Raycast.h"
 #include <fstream>
 
 
@@ -26,10 +27,10 @@ private:
 
 	Player* player;
 
-	CameraController* cameraController; 
-	
-	InteractableObjectManager interactableManager; 
-	CheckPoint* checkPoint; 
+	CameraController* cameraController;
+
+	InteractableObjectManager interactableManager;
+	CheckPoint* checkPoint;
 
 	TileMap* tilemaps;
 	int MapHeight;
@@ -37,7 +38,7 @@ private:
 	int** sMiddleMapdata;
 	int** sColMapdata;
 	int** sFrontMapData;
-	int** sBackGroundMapData; 
+	int** sBackGroundMapData;
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();
@@ -50,4 +51,10 @@ public:
 	virtual void HandleMouse(int type, int x, int y);
 
 	void WorldToCam(float& x, float& y);
+
+	#pragma region getter 
+	virtual vector<DrawableObject*> GetInvisibleWallList() { return this->invisibleObjectsList; }
+	virtual vector<DrawableObject*> GetEntityList() { return this->EntityObjectsList; }
+
+	#pragma endregion 
 };

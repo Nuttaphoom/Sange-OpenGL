@@ -72,6 +72,20 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
+	#pragma region RAYCAST_TSET 
+	glm::vec3 P1 = glm::vec3(-5, 0, 1); 
+
+	glm::vec3 P2 = glm::vec3(-50, -100, 1);
+
+	InvisibleObject* ivo = new InvisibleObject();
+	ivo->SetPosition(glm::vec3(-25, -50, 0));
+	ivo->SetSize(64, 64);
+	invisibleObjectsList.push_back(ivo);
+	objectsList.push_back(ivo);
+	
+	glm::vec3 outputvec = RayCast(P1, P2); 
+	cout << "Lenght" << outputvec.x << "," << outputvec.y << endl;
+	#pragma endregion 
 	checkPoint = CheckPoint::GetInstance();
  
 	#pragma region ground_test
@@ -98,7 +112,7 @@ void Level::LevelInit()
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 	#pragma endregion 
-
+	
 	#pragma region interactableObject 
 	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1);
 	flower_1->SetPosition(glm::vec3(-64*2, -64*9 + 15, 0));
@@ -107,7 +121,7 @@ void Level::LevelInit()
 	objectsList.push_back(flower_1); 
 
 	#pragma endregion 
-
+	
 	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 5, 0.3, 0) ;
 	obj->SetSize(128, -128.0f);
  	obj->SetAnimationLoop(0, 0, 4, 100);
@@ -126,7 +140,7 @@ void Level::LevelInit()
 	//hpbar->SetSize(238 , 448  * -1);	
 	objectsList.push_back(hpbar);
 	#pragma endregion
-
+	
 	//cout << "Init Level" << endl;
 }
 
