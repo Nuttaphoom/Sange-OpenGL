@@ -61,7 +61,9 @@ void Level::LevelLoad()
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
+				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
+			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}

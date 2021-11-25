@@ -2,9 +2,11 @@
 
 void SetUV(float widthEachCell , float heightEachCell, int columnMax, int rowMax,int i,int j,int** Mapdata,
 	float uvs[8]) {
-		
-	int currentColumn = Mapdata[i][j] % columnMax;
-	int r = floor(Mapdata[i][j] / (float)columnMax) >= 0 ? floor(Mapdata[i][j] / (float)columnMax) : 0 ;
+	int data = Mapdata[i][j]; 
+	if (data > columnMax) data = abs(data - columnMax * rowMax);
+ 
+ 	int currentColumn = data % columnMax;
+	int r = floor(data / (float)columnMax) >= 0 ? floor(data / (float)columnMax) : 0 ;
 	int currentRow =   rowMax  - r ;
 
 	uvs[0] = currentColumn / (columnMax * 1.0f);
@@ -21,11 +23,14 @@ void SetUV(float widthEachCell , float heightEachCell, int columnMax, int rowMax
 
  }
 
+ 
+
 TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdata_Middle_Layer,int** Mapdata_Back_Layer, int **ColMapdata, string texture_path, int rowMax, int columnMax) {
 	this->Map_Height = height; 
 	this->Map_Width = width; 
 	width -= 1;
 	height -= 1;
+
 	unsigned int texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(texture_path);
 
 	/// Create Background Layer 
@@ -41,13 +46,15 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 			tiles[i][j]->SetSize(64, -64);
 
 			/// Set position of each tile 
-
-			tiles[i][j]->SetPosition(glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32), GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
+			int offsetX = 1;
+			if (i == 0) offsetX = 0;
+			tiles[i][j]->SetPosition(glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32) + offsetX, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
 			if (Mapdata_Back_Layer[i][j] == -1)tiles[i][j]->SetPosition(glm::vec3(width * 10000, height * 10000, 0));
 
 			/// Calculate UV 
 			float uvs[8];
 
+ 
 			//Need to use Mapdata[i][j] for UV 
 			float widthEachCell = 1.0f / (float)columnMax;
 			float heightEachCell = 1.0f / (float)rowMax;
@@ -72,7 +79,9 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 			tiles[i + width + 1][j]->SetSize(64, -64);
 
 			/// Set position of each tile
-			tiles[i + width + 1][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
+			int offsetX = 1; 
+			if (i == 0) offsetX = 0;
+			tiles[i + width + 1][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32 + offsetX, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
 			if (Mapdata_Middle_Layer[i][j] == -1)tiles[i + width + 1][j]->SetPosition(glm::vec3(width * 10000, height * 10000, 0));
 
 			/// Calculate UV
@@ -100,7 +109,9 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 			tiles[i + width + 1 + width][j]->SetSize(64, -64);
 
 			/// Set position of each tile
-			tiles[i + width + 1 + width][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
+			int offsetX = 1;
+			if (i == 0) offsetX = 0;
+			tiles[i + width + 1 + width][j]->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32 + offsetX, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0));
 			if (Mapdata_Front_Layer[i][j] == -1)tiles[i + width  + width + 1][j]->SetPosition(glm::vec3(width * 10000, height * 10000, 0));
 
 			/// Calculate UV
