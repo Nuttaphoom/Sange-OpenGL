@@ -9,10 +9,10 @@ class Entity : public SpriteObject
 		glm::vec3 velocity; 
 		glm::vec3 applyingVelocity; 
 		float IFrame;
-		int DirectionSet = 1;
 
 	public:
 		bool OnGround = false;
+		int DirectionSet = 1;
 
 		Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
 		virtual bool Death();
@@ -27,6 +27,8 @@ class Entity : public SpriteObject
  		virtual float GetMoveSpeed();
 		virtual void SetDirection(int x);
 		virtual void OnDamaged(int damage); 
+		virtual void Attack(Entity* target) ;
+		virtual bool isDead();
 		virtual glm::vec3 GetVelocity();
  
 		float GetHP(); 

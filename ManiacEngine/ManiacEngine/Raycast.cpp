@@ -12,11 +12,11 @@ glm::vec3 RayCast(glm::vec3 p1, glm::vec3 p2) {
 		while (collidedObjs.size() == 0) { //Until collide with some entity (it will collide with p2 in the end)
 			curPoint.x += p1.x - p2.x > 0 ? -64 : 64;
 			curDependentValue += p1.y - p2.y > 0 ? 1 / m : -1 / m;
-			float decision = (int)curDependentValue % 64;
+ 			float decision = (int)curDependentValue % 64;
 			if (decision > 32) /*Round up*/ {
 				curPoint.y = curDependentValue + (64 - decision);
 			}
-			else  if (decision != 0)/*Round down*/ {
+			else   /*Round down*/ {
 				curPoint.y = curDependentValue - decision;
 			}
  

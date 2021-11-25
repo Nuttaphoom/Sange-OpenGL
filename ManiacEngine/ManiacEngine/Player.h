@@ -29,6 +29,8 @@ class Player : public Entity, public Subject
  	void ChangeState(StateMachine NextState);
 	void Translate(glm::vec3 moveDistance);
 	void HandleKey(char key);
+	void HandleMouse(glm::vec3 mouseRealPos); 
+	virtual void Attack(Entity* target);
 
 	static Player* GetInstance();
 	static Player* GetInstance(string fileName, int row, int column, float HP, float IFrame);

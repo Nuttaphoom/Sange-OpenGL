@@ -15,6 +15,7 @@
 #include "HPBar.h"
 #include "CheckPoint.h"
 #include "Raycast.h"
+#include "Enemy.h"
 #include <fstream>
 
 

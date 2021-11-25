@@ -1,12 +1,27 @@
 #include "Player.h"
 #include "CheckPoint.h"
 #include "GameEngine.h"
-#define PlayerIsJumpingOrFalling PlayerState == StateMachine::JUMPPING || PlayerState == StateMachine::MIDJUMP || PlayerState == StateMachine :: FALLING 
+#include "InvisibleObject.h"
+#include "GameStateController.h"
 
+#define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
+ 
 Player* Player::instance = nullptr; 
 int delay = 0;
 int delay1 = 0;
 
+
+void Player::HandleMouse(glm::vec3 mouseRealPos) {
+	
+	cout << "here1" << endl;
+	for (int i = 0 ; i < ENTITYLIST.size() ; i++) {
+		cout << "here2" << endl;
+
+		if (Enemy* eptr = dynamic_cast<Enemy*>(ENTITYLIST[i])) {
+ 			Attack(eptr);
+		}
+	};
+}
 
 void Player::HandleKey(char Key)
 {
@@ -20,8 +35,7 @@ void Player::HandleKey(char Key)
 		case 's': TranslateVelocity(glm::vec3(0, -3, 0)); break;
 		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
 		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;
-		//velo when no key == 0
-	}
+ 	}
 }
 
 Player::Player(string fileName, int row, int column,float HP, float IFrame) : Entity(fileName, row, column, HP, 0.29, IFrame)
@@ -169,4 +183,21 @@ Player* Player::GetInstance(string fileName, int row, int column, float HP, floa
 void Player::OnDamaged(int damage) {
 	this->HP -= damage;
 	notify(0); //Notify HP Observer 
+}
+
+void Player::Attack(Entity* target) {
+	InvisibleObject invWALLs[2] ;
+	 
+	for (int i = 0; i < 2; i++) {
+		invWALLs[i].SetPosition(glm::vec3(this->GetPos().x + (64 * this->DirectionSet * i), this->GetPos().y + this->GetSize().y * -1 / 2, 1));
+		invWALLs[i].SetSize(64, 64);
+	}
+	if (target->DirectionSet == this->DirectionSet) {
+		for (int i = 0; i < 2; i++) {
+			if (invWALLs[i].Collide_W_Entity(*target)) {
+				target->OnDamaged(999999);
+
+			}
+		}
+	}
 }

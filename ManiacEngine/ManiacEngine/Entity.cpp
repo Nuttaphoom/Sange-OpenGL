@@ -1,6 +1,8 @@
 #include "Entity.h"
 #include "GameEngine.h"
 #include "SquareMeshVbo.h" 
+#include "InvisibleObject.h"
+
  Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame) {
 	this->velocity = glm::vec3(0, 0, 0);
 }
@@ -197,6 +199,21 @@ void Entity::OnDamaged(int damage) {
 
 float Entity::GetHP() {
 	return HP; 
+}
+
+bool Entity::isDead() {
+	if (HP > 0) return false; 
+	return true;
+}
+
+void Entity::Attack(Entity* target) {
+	InvisibleObject invWALL;
+
+	invWALL.SetPosition(glm::vec3(this->GetPos().x + (64 * this->DirectionSet), this->GetPos().y, 1));
+
+	if (invWALL.Collide_W_Entity(*target)) {
+		target->OnDamaged(1);
+	}
 }
 
  

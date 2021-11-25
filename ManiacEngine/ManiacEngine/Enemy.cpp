@@ -1,16 +1,20 @@
 #include "Enemy.h"
+#include "Player.h"
 #include "Raycast.h"
-Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2, Player* p) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
+Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2 ) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
 {
-	EnemyState = EnemyStateMachine::IDLE;
-	Target = p;
-	AddPatrolPos(PatrolPos1);
+	EnemyState = EnemyStateMachine::WALKING;
+ 	AddPatrolPos(PatrolPos1);
 	AddPatrolPos(PatrolPos2);
 }
 
 EnemyStateMachine Enemy::GetState()
 {
 	return EnemyState;
+}
+
+void Enemy::Attack(Entity* target) {
+
 }
 
 void Enemy::Translate(glm::vec3 moveDistance)
@@ -22,27 +26,25 @@ void Enemy::Update(int deltatime)
 {
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
-	if (PlayerDetect(Target) == true)
-	{
-		PlayerChase(Target);
-	}
-	else
-	{
-		//Patrol();
-	}
+  
 }
 
 void Enemy::UpdateStateMachine(float deltatime)
 {
 	if (GetState() == EnemyStateMachine::WALKING)
 	{
-		if (GetVelocity().x == 0)
+		if (PlayerDetect(Player::GetInstance()) == true)
 		{
-			ChangeState(EnemyStateMachine::IDLE);
-			//cout << "IDLE" << endl;
+			ChangeState(EnemyStateMachine::CHASING);
 		}
+		else
+		{
+			Patrol();
+		}
+
+
 	}
-	if (GetState() == EnemyStateMachine::IDLE)
+	else if (GetState() == EnemyStateMachine::IDLE)
 	{
 		if (GetVelocity().x != 0)
 		{
@@ -50,11 +52,21 @@ void Enemy::UpdateStateMachine(float deltatime)
 			//cout << "WALKING" << endl;
 		}
 	}
+	else if (GetState() == EnemyStateMachine::CHASING) {
+		if (PlayerDetect(Player::GetInstance()) == false)
+		{
+			ChangeState(EnemyStateMachine::WALKING);
+		}
+		else {
+			PlayerChase(Player::GetInstance());
+		}
+	}
 }
 
 void Enemy::ChangeState(EnemyStateMachine nextState)
 {
 	EnemyState = nextState;
+	this->velocity = glm::vec3(0, 0, 0); 
 
 	if (GetState() == EnemyStateMachine::IDLE)
 	{
@@ -63,26 +75,28 @@ void Enemy::ChangeState(EnemyStateMachine nextState)
 	else if (GetState() == EnemyStateMachine::WALKING)
 	{
 		SetAnimationLoop(0, 0, 12, 100);
-
 	}
 }
 
-bool Enemy::PlayerDetect(Player* p)
+bool Enemy::PlayerDetect(Entity* p)
 {
-	glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()) ;
-	glm::vec3 Distance = glm::vec3(GetPos().x - p->GetPos().x, GetPos().y - p->GetPos().y, 0);
+	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
 
-	cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
-	cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
+	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
+	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false; 
+	//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
+	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
 
-	if (resultVec.x < 300 && resultVec.y < 100) {
-		if (abs(resultVec.x - Distance.x) < 0.1f && abs(resultVec.y - Distance.y) < 0.1f) {
+	if (Distance.x < 300 && Distance.y < 100) {
+		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos());
+		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
+		//	cout << "SEE PLAYER" << endl; 
 			return true;
 		}
 	}
 
 	
-	
+	//cout << "DON'T SEE PLAYER" << endl;
 	return false;
 
 	/*
@@ -123,11 +137,9 @@ void Enemy::Patrol()
 	}
 }
 
-void Enemy::PlayerChase(Player* p)
+void Enemy::PlayerChase(Entity* p)
 {
-	cout << "arm" << endl;
-	//Thammmmm ARMMMMMM
-	if (p->GetPos().x - GetPos().x < 0)
+ 	if (p->GetPos().x - GetPos().x < 0)
 	{
 		TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0));
 	}

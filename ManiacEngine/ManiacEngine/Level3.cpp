@@ -102,7 +102,7 @@ void Level3::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
-	Enemy* test = new Enemy("../Resource/Texture/Enemy1_Sprite.png", 1, 12, 100, 0.18, 0, glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f), obj);
+	Enemy* test = new Enemy("../Resource/Texture/Enemy/Decon/Decon_Walking.png", 1, 12, 100, 0.18, 0, glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f));
 	test->SetSize(128.0, -128.0f);
 	test->SetPosition(glm::vec3(300.0f, 0.0f, 0.0f));
 	test->SetAnimationLoop(0, 0, 12, 100);

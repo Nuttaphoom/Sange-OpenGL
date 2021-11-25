@@ -23,6 +23,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
+    <ClCompile Include="Decon.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Flower.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraController.h" />
     <ClInclude Include="CheckPoint.h" />
+    <ClInclude Include="Decon.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Flower.h" />

@@ -64,6 +64,12 @@
     <Filter Include="Header Files\GameDesign Stuffs">
       <UniqueIdentifier>{1c58edfa-4f8d-4b7d-a1d9-c0a7f59dee6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects\Enemy Types">
+      <UniqueIdentifier>{27718ca1-3064-44e2-97ad-8839a75b0e51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Enemy Types">
+      <UniqueIdentifier>{723d16bd-d7c3-472f-bdeb-ffa1e6c61793}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameData.cpp">
@@ -171,6 +177,9 @@
     <ClCompile Include="Raycast.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Decon.cpp">
+      <Filter>Source Files\Objects\Enemy Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -239,9 +248,6 @@
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Flower.h">
       <Filter>Header Files\Objects\InteractableObjects</Filter>
     </ClInclude>
@@ -265,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="Raycast.h">
       <Filter>Header Files\GameDesign Stuffs</Filter>
+    </ClInclude>
+    <ClInclude Include="Decon.h">
+      <Filter>Header Files\Objects\Enemy Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Objects\Enemy Types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
