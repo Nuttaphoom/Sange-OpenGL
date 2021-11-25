@@ -73,7 +73,7 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-#pragma region RAYCAST_TSET 
+	#pragma region RAYCAST_TSET 
 	glm::vec3 P1 = glm::vec3(-5, 0, 1);
 
 	glm::vec3 P2 = glm::vec3(-50, -100, 1);
@@ -86,7 +86,7 @@ void Level::LevelInit()
 
 	glm::vec3 outputvec = RayCast(P1, P2);
 	cout << "Lenght" << outputvec.x << "," << outputvec.y << endl;
-#pragma endregion 
+	#pragma endregion 
 	checkPoint = CheckPoint::GetInstance();
 
 #pragma region ground_test
@@ -118,7 +118,7 @@ void Level::LevelInit()
 #pragma region interactableObject 
 	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1);
 	flower_1->SetPosition(glm::vec3(-64 * 2, -64 * 9 + 15, 0));
-	flower_1->SetSize(64, -128);
+	flower_1->SetSize(64, -64);
 	interactableManager.addInteractableObjects(flower_1);
 	objectsList.push_back(flower_1);
 
@@ -148,7 +148,7 @@ void Level::LevelInit()
 	EntityObjectsList.push_back(test);
 	objectsList.push_back(test);
 
-#pragma region GUI 
+	#pragma region GUI 
 	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1);
 	SangeImage->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
 	SangeImage->SetSize(1668 / 11, 2224 / 11 * -1);
@@ -158,7 +158,7 @@ void Level::LevelInit()
 	hpbar->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 150, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
 	//hpbar->SetSize(238 , 448  * -1);	
 	objectsList.push_back(hpbar);
-#pragma endregion
+	#pragma endregion
 
 	//cout << "Init Level" << endl;
 }
@@ -256,10 +256,10 @@ void Level::LevelFree()
 		delete objectsList[i];
 	}*/
 
-	/*delete player;
-	delete cameraController;
-	delete tilemaps;
-	delete checkPoint;*/
+	//delete player;
+	//delete cameraController;
+	//delete tilemaps;
+	//delete checkPoint;
 	//cout << "Free Level" << endl;*/
 }
 
