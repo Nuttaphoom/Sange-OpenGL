@@ -6,11 +6,10 @@ static int SCREEN_HEIGHT;
 
 void Level::LevelLoad()
 {
-  
 	SquareMeshVbo * square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
-	ifstream mapFile("../Resource/Map/Example_Middle_Mapdata.txt");
+	ifstream mapFile("../Resource/Map/Level_1/Example_Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -25,7 +24,7 @@ void Level::LevelLoad()
 	}
  
 		
-	ifstream FrontMapFile("../Resource/Map/Example_Front_Mapdata.txt");
+	ifstream FrontMapFile("../Resource/Map/Level_1/Example_Front_Mapdata.txt");
 	if (FrontMapFile.is_open()) {
 		FrontMapFile >> MapHeight;
 		FrontMapFile >> MapWidth;
@@ -39,7 +38,7 @@ void Level::LevelLoad()
 		FrontMapFile.close();
 	}
 
-	ifstream cMapFile("../Resource/Map/Col_Example_Mapdata.txt");
+	ifstream cMapFile("../Resource/Map/Level_1/Col_Example_Mapdata.txt");
 	if (cMapFile.is_open()) {
 		cMapFile >> MapHeight;
 		cMapFile >> MapWidth;
@@ -53,7 +52,7 @@ void Level::LevelLoad()
 		cMapFile.close();
 	}
 
-	ifstream BackGroundMapFile("../Resource/Map/Col_Example_Mapdata.txt");
+	ifstream BackGroundMapFile("../Resource/Map/Level_1/Example_Background_Mapdata.txt");
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
@@ -89,28 +88,29 @@ void Level::LevelInit()
 	checkPoint = CheckPoint::GetInstance();
  
 	#pragma region ground_test
-		for (int i = 0; i < 12; i++)
-		{
-			InvisibleObject* ivo = new InvisibleObject();
-			ivo->SetPosition(glm::vec3(64, -256 - 64 * i, 0));
-			ivo->SetSize(64, 64);
-			invisibleObjectsList.push_back(ivo);
-			objectsList.push_back(ivo);
-		}
+	for (int i = 0; i < 12; i++)
+	{
+		InvisibleObject* ivo = new InvisibleObject();
+		ivo->SetPosition(glm::vec3(64, -256 - 64 * i, 0));
+		ivo->SetSize(64, 64);
+		invisibleObjectsList.push_back(ivo);
+		objectsList.push_back(ivo);
+	}
 	#pragma endregion 
 
 	#pragma region tilemaps
-	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 21,40);
+	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 21,40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
-		}
+		}  
 	}
 
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
 		invisibleObjectsList.push_back(tilemaps->GetColTiles()[i]);
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
+
 	#pragma endregion 
 	
 	#pragma region interactableObject 

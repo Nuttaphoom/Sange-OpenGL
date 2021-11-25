@@ -4,6 +4,8 @@
 #include "SquareMeshVbo.h"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
+
+
 SpriteObject::SpriteObject(string fileName, int row, int column)
 {
 	texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(fileName);

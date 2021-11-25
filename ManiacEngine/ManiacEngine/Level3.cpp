@@ -65,7 +65,7 @@ void Level3::LevelInit()
 	}
 	#pragma endregion 
 
-	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 40, 22);
+	/*tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 40, 22);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
@@ -75,7 +75,7 @@ void Level3::LevelInit()
 	for (int i = 0; i < tilemaps->GetColTiles().size(); i++) {
 			invisibleObjectsList.push_back(tilemaps->GetColTiles()[i]);
 			objectsList.push_back(tilemaps->GetColTiles()[i]);
-	}
+	}*/
 
 	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
 	obj->SetSize(128, -128.0f);
