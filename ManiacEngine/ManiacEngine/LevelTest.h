@@ -13,6 +13,7 @@ private:
 	TileMap* tilemaps;
 	int MapHeight;
 	int MapWidth;
+	int**sBackGroundMapData; 
 	int** sMiddleMapdata;
 	int** sColMapdata;
 	int** sFrontMapData;
