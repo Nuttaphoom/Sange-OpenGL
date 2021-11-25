@@ -28,7 +28,7 @@ void Enemy::Update(int deltatime)
 	}
 	else
 	{
-		Patrol();
+		//Patrol();
 	}
 }
 
@@ -39,6 +39,7 @@ void Enemy::UpdateStateMachine(float deltatime)
 		if (GetVelocity().x == 0)
 		{
 			ChangeState(EnemyStateMachine::IDLE);
+			//cout << "IDLE" << endl;
 		}
 	}
 	if (GetState() == EnemyStateMachine::IDLE)
@@ -46,19 +47,23 @@ void Enemy::UpdateStateMachine(float deltatime)
 		if (GetVelocity().x != 0)
 		{
 			ChangeState(EnemyStateMachine::WALKING);
+			//cout << "WALKING" << endl;
 		}
 	}
 }
 
 void Enemy::ChangeState(EnemyStateMachine nextState)
 {
+	EnemyState = nextState;
+
 	if (GetState() == EnemyStateMachine::IDLE)
 	{
-		SetAnimationLoop(0, 0, 4, 100);
+		SetAnimationLoop(0, 0, 1, 100);
 	}
-	if (GetState() == EnemyStateMachine::WALKING)
+	else if (GetState() == EnemyStateMachine::WALKING)
 	{
-		SetAnimationLoop(1, 0, 4, 100);
+		SetAnimationLoop(0, 0, 12, 100);
+
 	}
 }
 
@@ -120,6 +125,8 @@ void Enemy::Patrol()
 
 void Enemy::PlayerChase(Player* p)
 {
+	cout << "arm" << endl;
+	//Thammmmm ARMMMMMM
 	if (p->GetPos().x - GetPos().x < 0)
 	{
 		TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0));

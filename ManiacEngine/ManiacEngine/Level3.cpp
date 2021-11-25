@@ -93,7 +93,7 @@ void Level3::LevelInit()
 			objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 
-	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 100, 0.3, 0);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_Re.png", 3, 10, 100, 0);
 	obj->SetSize(128, -128.0f);
 	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
 	obj->SetAnimationLoop(0, 0, 4, 100);
@@ -102,10 +102,10 @@ void Level3::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
-	Enemy* test = new Enemy("../Resources/Texture/TestNumber.png", 4, 4, 100, 0.3, 0, glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f), obj);
+	Enemy* test = new Enemy("../Resource/Texture/Enemy1_Sprite.png", 1, 12, 100, 0.18, 0, glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f), obj);
 	test->SetSize(128.0, -128.0f);
 	test->SetPosition(glm::vec3(300.0f, 0.0f, 0.0f));
-	test->SetAnimationLoop(0, 0, 4, 100);
+	test->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test);
 	objectsList.push_back(test);
 	enemy = test;

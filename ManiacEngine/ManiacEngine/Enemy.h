@@ -6,7 +6,9 @@
 enum class EnemyStateMachine {
 	IDLE,
 	WALKING,
-	ATTACKING
+	ATTACKING,
+	CHASE,
+	FOLLOW
 };
 
 class Enemy : public Entity

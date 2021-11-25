@@ -124,7 +124,7 @@ void Level::LevelInit()
 
 	#pragma endregion 
 	
-	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 5, 0.3, 0) ;
+	Player* obj = Player::GetInstance("../Resource/Texture/TestNumber.png", 4, 4, 5, 0) ;
 	obj->SetSize(128, -128.0f);
  	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
@@ -252,7 +252,7 @@ void Level::HandleKey(char key)
 		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 		case 'e': interactableManager.notify(player)  ; break;
 		case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2 ;   break;
+		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3 ;   break;
 		case 'g':  player->OnDamaged(1); break;
 		case 'f':  
 		case 't':  

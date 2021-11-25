@@ -9,8 +9,10 @@ enum class StateMachine {
 	IDLE,
 	RUNNING,
 	JUMPPING,
+	HOPPING,
 	MIDJUMP,
-	FALLING
+	FALLING,
+	LANDING
 };
 
 class Player : public Entity, public Subject
@@ -20,7 +22,7 @@ class Player : public Entity, public Subject
 	enum StateMachine PlayerState;
  	
 	public :
-	Player(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
+	Player(string fileName, int row, int column, float HP, float IFrame);
 	StateMachine GetState();
 	void Update(int deltatime);
 	void UpdateStateMachine(float deltatime);
@@ -29,7 +31,7 @@ class Player : public Entity, public Subject
 	void HandleKey(char key);
 
 	static Player* GetInstance();
-	static Player* GetInstance(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
+	static Player* GetInstance(string fileName, int row, int column, float HP, float IFrame);
 
 	void OnDamaged(int damage);
 
