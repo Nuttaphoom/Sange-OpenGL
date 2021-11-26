@@ -107,6 +107,7 @@ void SpriteObject::GenUV()
 
 void SpriteObject::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame,bool playAnim = true)
 {
+	timeCount = 0;
 	this->startRow = startRow;
 	this->startColumn = startColumn;
 	this->loopMax = howManyFrame;

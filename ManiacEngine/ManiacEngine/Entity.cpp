@@ -67,7 +67,7 @@ int Entity::Collides(Entity e)
 		}
 	}
 
-	cout << CollideDetection << endl;
+	//cout << CollideDetection << endl;
 	return  CollideDetection;
 }
 
@@ -117,7 +117,7 @@ void Entity::Update(int deltatime)
 {
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround && deltatime % 2 == 0 ) { //Apply velocity 
+	if (!OnGround) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -0.5f, 0));
  	}	
 

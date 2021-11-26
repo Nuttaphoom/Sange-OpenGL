@@ -27,11 +27,13 @@ void Player::HandleKey(char Key)
 {
  	switch (Key)
 	{
- 		case 'w': if (Entity::OnGround) {
-				TranslateVelocity(glm::vec3(0, 5, 0)); 
+	case 'w': if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
+				TranslateVelocity(glm::vec3(0, 15, 0)); 
 				Entity::OnGround = false;
-			} 
-			break;
+				ChangeState(StateMachine::JUMPPING);
+				cout << "jump" << endl;
+		} 
+		break;
 		case 's': TranslateVelocity(glm::vec3(0, -3, 0)); break;
 		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
 		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;
@@ -45,7 +47,7 @@ Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm:
 
 void Player::Update(int deltatime)
 {
-	cout << "PLAYER LOCAITON : " << GetPos().x << "," << GetPos().y << endl; 
+	//cout << "PLAYER LOCAITON : " << GetPos().x << "," << GetPos().y << endl; 
 	Entity::Update(deltatime);
 
 	UpdateStateMachine(deltatime);

@@ -33,7 +33,7 @@ void Decon::Attack(Entity* target) {
 void Decon::Update(int deltatime) {
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
-	cout << "Decon is " << GetPos().x << "," << GetPos().y << endl; 
+	//cout << "Decon is " << GetPos().x << "," << GetPos().y << endl; 
 }
 
 void Decon::EnterAttackZone(Entity* target) {
