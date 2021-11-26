@@ -47,6 +47,7 @@
     <ClCompile Include="Observer.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Raycast.cpp" />
+    <ClCompile Include="ReSpawner.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
@@ -80,10 +81,15 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="ImageObject.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="Level3.h" />
-    <ClInclude Include="LevelTest.h" />
+    <ClInclude Include="Level3.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="LevelTest.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="MeshVbo.h" />
     <ClInclude Include="Raycast.h" />
+    <ClInclude Include="ReSpawner.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="SquareMeshVbo.h" />

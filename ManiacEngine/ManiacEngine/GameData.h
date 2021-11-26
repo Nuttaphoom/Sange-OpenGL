@@ -31,5 +31,12 @@ class PlayerData {
 
 	void SaveData();
 };
+ 
+
+struct EntityDefaultValue {
+	int HP = 100 ; 
+	float MoveSpeed = 0.18f;  
+};
+
 
  

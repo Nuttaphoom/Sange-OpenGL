@@ -10,11 +10,16 @@ class Entity : public SpriteObject
 		glm::vec3 applyingVelocity; 
 		float IFrame;
 
+	/*Default Value that will be used when we respawn this obj*/ 
+		glm::vec3 Default_pos; 
+		float Default_HP;  
+		float Default_MoveSpeed;
+
 	public:
 		bool OnGround = false;
 		int DirectionSet = 1;
 
-		Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame);
+		Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos,glm::vec3 Size);
 		virtual bool Death();
 		virtual void Render(glm::mat4 globalModelTransform);
 		virtual int Collides(Entity e);
@@ -30,6 +35,7 @@ class Entity : public SpriteObject
 		virtual void Attack(Entity* target) ;
 		virtual bool isDead();
 		virtual glm::vec3 GetVelocity();
+		virtual void RespawnThisObject(); 
  
 		float GetHP(); 
 };

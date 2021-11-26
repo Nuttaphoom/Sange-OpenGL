@@ -3,8 +3,13 @@
 #include "SquareMeshVbo.h" 
 #include "InvisibleObject.h"
 
- Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame) : SpriteObject(fileName, row, column), HP(HP), MoveSpeed(MoveSpeed), IFrame(IFrame) {
+ Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName, row, column,Pos,Size), HP(HP), MoveSpeed(MoveSpeed) {
+ 
 	this->velocity = glm::vec3(0, 0, 0);
+
+	Default_pos = GetPos() ;
+	Default_HP = HP ;
+	Default_MoveSpeed = MoveSpeed ;
 }
 
 
@@ -217,3 +222,10 @@ void Entity::Attack(Entity* target) {
 }
 
  
+
+
+void Entity::RespawnThisObject() {
+	SetPosition(Default_pos); 
+	this->HP = Default_HP;  
+	this->MoveSpeed = Default_MoveSpeed; 
+}

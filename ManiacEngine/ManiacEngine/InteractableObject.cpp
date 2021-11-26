@@ -2,7 +2,7 @@
 
 int InCollideRadius(InteractableObject* in, Entity* e);
 
-InteractableObject::InteractableObject(string fileName, int row, int column) : SpriteObject(fileName,row,column){}
+InteractableObject::InteractableObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName,row,column,Pos,Size){}
 
 
 void InteractableObject::isCalled(Entity* e) {

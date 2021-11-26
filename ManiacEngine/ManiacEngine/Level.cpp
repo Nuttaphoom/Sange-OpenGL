@@ -89,18 +89,8 @@ void Level::LevelInit()
 	#pragma endregion 
 	checkPoint = CheckPoint::GetInstance();
 
-#pragma region ground_test
-	for (int i = 0; i < 12; i++)
-	{
-		InvisibleObject* ivo = new InvisibleObject();
-		ivo->SetPosition(glm::vec3(64, -256 - 64 * i, 0));
-		ivo->SetSize(64, 64);
-		invisibleObjectsList.push_back(ivo);
-		objectsList.push_back(ivo);
-	}
-#pragma endregion 
 
-#pragma region tilemaps
+	#pragma region tilemaps
 	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 21, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
@@ -113,54 +103,65 @@ void Level::LevelInit()
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 
-#pragma endregion 
+	#pragma endregion 
 
-#pragma region interactableObject 
-	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1);
-	flower_1->SetPosition(glm::vec3(-64 * 2, -64 * 9 + 15, 0));
-	flower_1->SetSize(64, -64);
+	#pragma region interactableObject 
+	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(glm::vec3(-64 * 2, -64 * 9 + 15, 0)), glm::vec3(64,-64,1));
+ 
 	interactableManager.addInteractableObjects(flower_1);
 	objectsList.push_back(flower_1);
 
-#pragma endregion 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_Re.png", 3, 10, 100, 0);
-	obj->SetSize(128, -128.0f);
-	obj->SetPosition(glm::vec3(-50.0f, 0.0f, 0.0f));
+	#pragma endregion 
+
+
+
+	#pragma region ground_test
+	for (int i = 0; i < 12; i++)
+	{
+		InvisibleObject* ivo = new InvisibleObject();
+		ivo->SetRender(true);
+		ivo->SetPosition(glm::vec3(64, -256 - 64 * i, 0));
+		ivo->SetSize(64, 64);
+		invisibleObjectsList.push_back(ivo);
+		objectsList.push_back(ivo);
+	}
+	#pragma endregion 
+#pragma region Entities 
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_Re.png", 3, 10, 3, glm::vec3(-50.0f, 0.0f, 0.0f),glm::vec3(128,-128,0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
-	//obj->SetColor(0.0, 1.0, 0.0);
-	EntityObjectsList.push_back(obj);
+ 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
 
-
-	InvisibleObject* invWALL = new InvisibleObject();
-	invWALL->SetRender(true);
-	invisibleObjectsList.push_back(invWALL);
-	objectsList.push_back(invWALL) ;
-	invWALL->SetPosition(glm::vec3(obj->GetPos().x + (64 * obj->DirectionSet), obj->GetPos().y, 1));
-	invWALL->SetSize(64, 64);
-
-
-	Enemy* test = new Enemy("../Resource/Texture/Enemy/Decon/Decon_Walking.png", 1, 12, 100, 0.18, 0, glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f));
-	test->SetSize(128.0, -128.0f);
-	test->SetPosition(glm::vec3(300.0f, 0.0f, 0.0f));
+	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(300.0f, 0.0f, 0.0f), glm::vec3(128, -128,1), glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f));
 	test->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test);
 	objectsList.push_back(test);
 
+	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(128.0, -128.0f, 1),glm::vec3(2000,0,1), glm::vec3(1101, -280, 0.0f), glm::vec3(2026, -280, 0.0f));
+	test2->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(test2);
+	objectsList.push_back(test2);
+#pragma endregion
+	respawner = new ReSpawner();
+
+
 	#pragma region GUI 
-	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1);
-	SangeImage->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
-	SangeImage->SetSize(1668 / 11, 2224 / 11 * -1);
+	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0),glm::vec3(1668 / 11, 2224 / 11 * -1,1));
+ 
 	objectsList.push_back(SangeImage);
 
-	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 165, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
-	hpbar->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 150, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
-	//hpbar->SetSize(238 , 448  * -1);	
+	//HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 165, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 150, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(238, 448 * -1,1));
+	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1),glm::vec3(0,0,0));
+	
 	objectsList.push_back(hpbar);
 	#pragma endregion
 
+
+	 
+
 	//cout << "Init Level" << endl;
+
 }
 
 void Level::LevelUpdate()

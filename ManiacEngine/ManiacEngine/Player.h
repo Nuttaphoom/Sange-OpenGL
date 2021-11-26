@@ -22,18 +22,18 @@ class Player : public Entity, public Subject
 	enum StateMachine PlayerState;
  	
 	public :
-	Player(string fileName, int row, int column, float HP, float IFrame);
+	Player(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size);
 	StateMachine GetState();
 	void Update(int deltatime);
 	void UpdateStateMachine(float deltatime);
  	void ChangeState(StateMachine NextState);
 	void Translate(glm::vec3 moveDistance);
 	void HandleKey(char key);
-	void HandleMouse(glm::vec3 mouseRealPos); 
+	void HandleMouse(glm::vec3 mouseRealPos);  
 	virtual void Attack(Entity* target);
-
+	 
 	static Player* GetInstance();
-	static Player* GetInstance(string fileName, int row, int column, float HP, float IFrame);
+	static Player* GetInstance(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size);
 
 	void OnDamaged(int damage);
 

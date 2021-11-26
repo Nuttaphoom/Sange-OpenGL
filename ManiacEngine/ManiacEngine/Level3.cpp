@@ -69,7 +69,7 @@ void Level3::LevelLoad()
 }
 
 void Level3::LevelInit()
-{
+{/*
 	#pragma region ground_test
 	for (int i = 0 ; i < 12 ; i++)
 	{ 
@@ -108,7 +108,7 @@ void Level3::LevelInit()
 	test->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test);
 	objectsList.push_back(test);
-	enemy = test;
+	enemy = test;*/
 }
 
 void Level3::LevelUpdate()

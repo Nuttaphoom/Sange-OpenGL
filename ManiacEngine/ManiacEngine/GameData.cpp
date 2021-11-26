@@ -3,6 +3,8 @@
 GameData* GameData::instance = nullptr;
 PlayerData* PlayerData::instance = nullptr;
 
+
+ 
 GameData * GameData::GetInstance()
 {
 	if (instance == nullptr) {

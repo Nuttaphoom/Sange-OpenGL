@@ -16,7 +16,7 @@ class Enemy : public Entity
 	vector <glm::vec3> PatrolPos;
  
 	public:
-	Enemy(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2);
+	Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2);
 	EnemyStateMachine GetState();
 	void Update(int deltatime);
 	void AddPatrolPos(glm::vec3 pos);

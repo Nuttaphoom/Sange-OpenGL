@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Raycast.h"
-Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, float IFrame, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2 ) : Entity(fileName, row, column, HP, MoveSpeed, IFrame)
+Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size,glm::vec3 PatrolPos1, glm::vec3 PatrolPos2 ): Entity(fileName, row, column, HP, MoveSpeed, Pos, Size)
 {
 	EnemyState = EnemyStateMachine::WALKING;
  	AddPatrolPos(PatrolPos1);
@@ -39,6 +39,7 @@ void Enemy::UpdateStateMachine(float deltatime)
 		}
 		else
 		{
+			cout << "con patrol" << endl; 
 			Patrol();
 		}
 
@@ -139,12 +140,14 @@ void Enemy::Patrol()
 
 void Enemy::PlayerChase(Entity* p)
 {
- 	if (p->GetPos().x - GetPos().x < 0)
+ 	if (p->GetPos().x - GetPos().x < -50)
 	{
+		SetDirection(-1);
 		TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0));
 	}
-	if (p->GetPos().x - GetPos().x > 0)
+	if (p->GetPos().x - GetPos().x > 50)
 	{
+		SetDirection(1); 
 		TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0));
 	}
 }

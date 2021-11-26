@@ -56,7 +56,7 @@ void LevelTest::LevelLoad()
 
 void LevelTest::LevelInit()
 {
- 
+ /*
 	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 1, 3);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
@@ -85,7 +85,7 @@ void LevelTest::LevelInit()
 	obj3->SetColor(0.0, 0.0, 1.0);
 	obj3->SetPosition(glm::vec3(-2.0f, -2.0f, 0.0f));
 	objectsList.push_back(obj3);
-
+	*/
 
 
 	//cout << "Init Level" << endl;

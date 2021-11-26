@@ -7,6 +7,7 @@ glm::vec3 RayCast(glm::vec3 p1, glm::vec3 p2) {
 	glm::vec3 curPoint = p1;
 	float curDependentValue = 0;
 	bool finding = true;
+
 	if (abs(m) <= 1) { //X is independent 
 		curDependentValue = curPoint.y;
 		while (collidedObjs.size() == 0) { //Until collide with some entity (it will collide with p2 in the end)
@@ -19,6 +20,8 @@ glm::vec3 RayCast(glm::vec3 p1, glm::vec3 p2) {
 			else   /*Round down*/ {
 				curPoint.y = curDependentValue - decision;
 			}
+
+			if (p1.y - p2.y == 0) curPoint.y = p1.y; 
  
 			for (int c = 0 ; c < GameStateController::GetInstance()->currentLevel->GetEntityList().size()  ; c++) {
 				if (Collide(curPoint, GameStateController::GetInstance()->currentLevel->GetEntityList()[c])) {
@@ -28,13 +31,13 @@ glm::vec3 RayCast(glm::vec3 p1, glm::vec3 p2) {
 			}				 
 
  			for (int c = 0 ; c < GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().size(); c++) {
-				if (Collide(curPoint, GameStateController::GetInstance()->currentLevel->GetInvisibleWallList()[c])) {
-					collidedObjs.push_back(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList()[c]);
+ 				if (Collide(curPoint, GameStateController::GetInstance()->currentLevel->GetInvisibleWallList()[c])) {
+ 					collidedObjs.push_back(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList()[c]);
 					break;
 				}
-			}
+ 			}
 
-			if (p1.x > p2.x && curPoint.x <= p2.x) 
+  			if (p1.x > p2.x && curPoint.x <= p2.x) 
 				return glm::vec3(abs(p1.x - p2.x), abs(p1.y - p2.y), 1);
 			
 			else if (p1.x < p2.x && curPoint.x >= p2.x) 

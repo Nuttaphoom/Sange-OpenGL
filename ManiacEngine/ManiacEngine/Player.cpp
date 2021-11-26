@@ -38,19 +38,16 @@ void Player::HandleKey(char Key)
  	}
 }
 
-Player::Player(string fileName, int row, int column,float HP, float IFrame) : Entity(fileName, row, column, HP, 0.29, IFrame)
+Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 0.29, Pos,Size)
 {	
 	PlayerState = StateMachine::FALLING;
 }
 
-StateMachine Player::GetState()
-{
-	return PlayerState;
-}
-
 void Player::Update(int deltatime)
 {
+	cout << "PLAYER LOCAITON : " << GetPos().x << "," << GetPos().y << endl; 
 	Entity::Update(deltatime);
+
 	UpdateStateMachine(deltatime);
 }
 
@@ -172,9 +169,9 @@ Player* Player::GetInstance() {
 	return instance;
 }
 
-Player* Player::GetInstance(string fileName, int row, int column, float HP, float IFrame) 
+Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::vec3 Pos,glm::vec3 Size) 
 {
-	instance = new Player(fileName, row, column, HP, IFrame);
+	instance = new Player(fileName, row, column, HP, Pos,Size);
 	CheckPoint::GetInstance()->LoadCheckPoint();
 	return instance;
 
@@ -183,6 +180,10 @@ Player* Player::GetInstance(string fileName, int row, int column, float HP, floa
 void Player::OnDamaged(int damage) {
 	this->HP -= damage;
 	notify(0); //Notify HP Observer 
+
+	if (this->HP <= 0) {
+		notify(1);  //Notify Dead Observer
+	}
 }
 
 void Player::Attack(Entity* target) {
@@ -200,4 +201,9 @@ void Player::Attack(Entity* target) {
 			}
 		}
 	}
+}
+
+StateMachine Player::GetState()
+{
+	return PlayerState;
 }

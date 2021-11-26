@@ -15,9 +15,9 @@
 #include "HPBar.h"
 #include "CheckPoint.h"
 #include "Raycast.h"
-#include "Enemy.h"
+#include "Decon.h"
 #include <fstream>
-
+#include "ReSpawner.h"
 
 class Level
 {
@@ -40,6 +40,7 @@ private:
 	int** sColMapdata;
 	int** sFrontMapData;
 	int** sBackGroundMapData;
+	ReSpawner* respawner; 
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();

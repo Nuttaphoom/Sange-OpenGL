@@ -1,11 +1,10 @@
 #include "HPBar.h"
 #include "Player.h"
-HPBar::HPBar(string fileName, int row, int column,glm::vec3 pos) : GUI(fileName,row,column){
+HPBar::HPBar(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size,glm::vec3 pos) : GUI(fileName,row,column,Pos,Size) {
 	float offsetX = 32; 
-	for (int i = 0; i < Player::GetInstance()->GetHP() ; i++) {
- 		GUI* newP = new GUI(fileName, row, column); 
-		newP->SetPosition(glm::vec3(pos.x + offsetX * i, pos.y, this->GetPos().z));
-		newP->SetSize(238/10, -448/10);
+  	for (int i = 0; i < Player::GetInstance()->GetHP() ; i++) {
+ 		GUI* newP = new GUI(fileName, row, column, glm::vec3(pos.x + offsetX * i, pos.y, this->GetPos().z),glm::vec3(238/10,-448/10,1));
+ 
 		HPPoints.push_back(newP); 
 	}
 
