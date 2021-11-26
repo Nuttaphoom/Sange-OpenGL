@@ -39,5 +39,7 @@ void GUI::Render(glm::mat4 globalModelTransform)
 
  
 
- 
+void GUI::RespawnThisObject(){
+
+}
 

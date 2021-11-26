@@ -25,7 +25,7 @@ private:
 	vector<DrawableObject*> objectsList;
 	vector< DrawableObject*> invisibleObjectsList;
 	vector < DrawableObject*> EntityObjectsList;
-
+	vector <DrawableObject*> GUIObjectsList;
 	Player* player;
 
 	CameraController* cameraController;
@@ -57,6 +57,6 @@ public:
 	#pragma region getter 
 	virtual vector<DrawableObject*> GetInvisibleWallList() { return this->invisibleObjectsList; }
 	virtual vector<DrawableObject*> GetEntityList() { return this->EntityObjectsList; }
-
+	virtual vector<DrawableObject*> GetGUIObjectsList() { return this->GUIObjectsList;  }
 	#pragma endregion 
 };
