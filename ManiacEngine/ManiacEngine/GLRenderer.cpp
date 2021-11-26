@@ -145,7 +145,7 @@ void GLRenderer::Render(vector <DrawableObject*> & objList)
 
 	for (DrawableObject *obj : objList) {
 		if (Entity * en = dynamic_cast<Entity*>(obj)) 
-			if (en->isDead()) break;
+			if (en->isDead()) continue ;
 		
 		if ( dynamic_cast<GUI*>(obj) ||  Camera::GetInstance()->IsInCamera(obj->GetPos(),obj->GetSize()))
 		obj->Render(camera);

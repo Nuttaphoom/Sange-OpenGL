@@ -2,8 +2,7 @@
 #include "GameStateController.h" 
 
 ReSpawner::ReSpawner() {
-	cout << "ReSpawner" << endl;
-	Player::GetInstance()->attach(this,1); 
+ 	Player::GetInstance()->attach(this,1); 
 } 
 
 void ReSpawner::ReSpawn() {

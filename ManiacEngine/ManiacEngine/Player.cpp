@@ -28,7 +28,7 @@ void Player::HandleKey(char Key)
  	switch (Key)
 	{
 	case 'w': if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
-				TranslateVelocity(glm::vec3(0, 15, 0)); 
+				TranslateVelocity(glm::vec3(0, 25, 0)); 
 				Entity::OnGround = false;
 				ChangeState(StateMachine::JUMPPING);
 				cout << "jump" << endl;
@@ -42,12 +42,14 @@ void Player::HandleKey(char Key)
 
 Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 0.29, Pos,Size)
 {	
+	cout << "After change : " << GetPos().x << "," << GetPos().y << endl;
+	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
 	PlayerState = StateMachine::FALLING;
 }
 
 void Player::Update(int deltatime)
 {
-	//cout << "PLAYER LOCAITON : " << GetPos().x << "," << GetPos().y << endl; 
+ 	cout << "PLAYER LOCAITON : " << GetPos().x << "," << GetPos().y << endl; 
 	Entity::Update(deltatime);
 
 	UpdateStateMachine(deltatime);
@@ -208,4 +210,10 @@ void Player::Attack(Entity* target) {
 StateMachine Player::GetState()
 {
 	return PlayerState;
+}
+void Player::RespawnThisObject() {
+	HP = Default_HP;
+	MoveSpeed = Default_MoveSpeed;
+	CheckPoint::GetInstance()->LoadCheckPoint();
+
 }

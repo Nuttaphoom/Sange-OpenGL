@@ -106,7 +106,7 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region interactableObject 
-	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(glm::vec3(-64 * 2, -64 * 9 + 15, 0)), glm::vec3(64,-64,1));
+	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(glm::vec3(64 * 3, -1280+64, 0)), glm::vec3(64,-64,1));
  
 	interactableManager.addInteractableObjects(flower_1);
 	objectsList.push_back(flower_1);
@@ -116,29 +116,29 @@ void Level::LevelInit()
 
 
 	#pragma region ground_test
-	for (int i = 0; i < 12; i++)
-	{
-		InvisibleObject* ivo = new InvisibleObject();
-		ivo->SetRender(true);
-		ivo->SetPosition(glm::vec3(64, -256 - 64 * i, 0));
-		ivo->SetSize(64, 64);
-		invisibleObjectsList.push_back(ivo);
-		objectsList.push_back(ivo);
-	}
+	//for (int i = 0; i < 12; i++)
+	//{
+	//	InvisibleObject* ivo = new InvisibleObject();
+	//	ivo->SetRender(true);
+	//	ivo->SetPosition(glm::vec3(64, -256 - 64 * i, 0));
+	//	ivo->SetSize(64, 64);
+	//	invisibleObjectsList.push_back(ivo);
+	//	objectsList.push_back(ivo);
+	//}
 	#pragma endregion 
 #pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_Re.png", 3, 10, 3, glm::vec3(-50.0f, 0.0f, 0.0f),glm::vec3(128,-128,0));
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_Re.png", 3, 10, 3, glm::vec3(125, -1176.0f, 0.0f),glm::vec3(128,-128,0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
 
-	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(300.0f, 0.0f, 0.0f), glm::vec3(128, -128,1), glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f));
+	/*Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(300.0f, 0.0f, 0.0f), glm::vec3(128, -128,1), glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f));
 	test->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test);
-	objectsList.push_back(test);
+	objectsList.push_back(test);*/
 
-	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(128.0, -128.0f, 1),glm::vec3(2000,0,1), glm::vec3(1101, -280, 0.0f), glm::vec3(2026, -280, 0.0f));
+	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1100, -1176.0f, 1),glm::vec3(128,-128,1), glm::vec3(1101, -280, 0.0f), glm::vec3(2026, -280, 0.0f));
 	test2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test2);
 	objectsList.push_back(test2);
@@ -150,11 +150,15 @@ void Level::LevelInit()
 	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0),glm::vec3(1668 / 11, 2224 / 11 * -1,1));
  
 	objectsList.push_back(SangeImage);
+	GUIObjectsList.push_back(SangeImage); 
 
 	//HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 165, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 150, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(238, 448 * -1,1));
-	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1),glm::vec3(0,0,0));
+	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
 	
 	objectsList.push_back(hpbar);
+	
+	GUIObjectsList.push_back(hpbar);
+
 	#pragma endregion
 
 
@@ -275,14 +279,14 @@ void Level::HandleKey(char key)
 	switch (key)
 	{
 	case 'w': player->HandleKey(key); break;
-	case 's': player->HandleKey(key); break;
+	//case 's': player->HandleKey(key); break;
 	case 'a': player->HandleKey(key); break;
 	case 'd': player->HandleKey(key); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
-	case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
+	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': interactableManager.notify(player); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2;   break;
+	//case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2;   break;
 	case 'g':  player->OnDamaged(1); break;
 	case 'f':
 	case 't':

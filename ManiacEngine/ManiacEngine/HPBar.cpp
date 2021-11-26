@@ -1,13 +1,13 @@
 #include "HPBar.h"
 #include "Player.h"
-HPBar::HPBar(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size,glm::vec3 pos) : GUI(fileName,row,column,Pos,Size) {
+HPBar::HPBar(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size) : GUI(fileName,row,column,Pos,Size) {
 	float offsetX = 32; 
 	temp_fileName = fileName; 
 	temp_row = row; 
 	temp_column = column; 
   	for (int i = 0; i < Player::GetInstance()->GetHP() ; i++) {
 		cout << "c" << endl;
- 		GUI* newP = new GUI(fileName, row, column, glm::vec3(pos.x + offsetX * i, pos.y, this->GetPos().z),glm::vec3(238/10,-448/10,1));
+ 		GUI* newP = new GUI(fileName, row, column, glm::vec3(Pos.x + offsetX * i, Pos.y, this->GetPos().z),glm::vec3(238/10,-448/10,1));
  
 		HPPoints.push_back(newP); 
 	}
@@ -32,8 +32,10 @@ void HPBar::Render(glm::mat4 globalModelTransform)
 
 void HPBar::RespawnThisObject() {
 	float offsetX = 32;
+	cout << "HPBAR IS BEING RESPAWNER" << endl;
+
 	for (int i = 0; i < Player::GetInstance()->GetHP(); i++) {
-		GUI* newP = new GUI(temp_fileName, temp_row, temp_column, glm::vec3(pos.x + offsetX * i, pos.y, this->GetPos().z), glm::vec3(238 / 10, -448 / 10, 1));
+ 		GUI* newP = new GUI(temp_fileName, temp_row, temp_column, glm::vec3(GetPos().x + offsetX * i, GetPos().y, this->GetPos().z), glm::vec3(238 / 10, -448 / 10, 1));
 
 		HPPoints.push_back(newP);
 	}

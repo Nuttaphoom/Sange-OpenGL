@@ -31,6 +31,8 @@ class Player : public Entity, public Subject
 	void HandleKey(char key);
 	void HandleMouse(glm::vec3 mouseRealPos);  
 	virtual void Attack(Entity* target);
+	virtual void RespawnThisObject();
+
 	 
 	static Player* GetInstance();
 	static Player* GetInstance(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size);

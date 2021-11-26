@@ -8,12 +8,12 @@ class Decon : public Enemy {
 		vector<glm::vec3> PatrolPos;
 		int CurrentPatrolPos = 0; 
 		//counter ; 
-		float attack_delay = 0;
-		float chasing_delay = 0;
-		float attack_cooldown_counter = 0;
+		int attack_delay = 0;
+		int chasing_delay = 0;
+		int attack_cooldown_counter = 0;
 
 	public :
-		Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2);
+	Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2);
 
 	virtual void Attack(Entity* target);
 	virtual void EnterAttackZone(Entity* target); 

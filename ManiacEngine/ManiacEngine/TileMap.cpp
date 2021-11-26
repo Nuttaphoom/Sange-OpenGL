@@ -90,7 +90,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 		}
 	}
 	/// Create tile in Front Layer
-	for (int i = 0; i <  width + 1   ; i++) {
+	/*for (int i = 0; i <  width + 1   ; i++) {
 		tiles.push_back(vector<SpriteObject*>());
 		for (int j = 0; j < height + 1; j++) {
 			/// Create every tile
@@ -112,7 +112,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 				Mapdata_Front_Layer, uvs);
 			tiles[i + width + width + 1][j]->SetUV(uvs);
 		}
-	}
+	}*/
 
 	/// Create all collision object for every tiles. 
 	for (int i = 0; i < width + 1; i++) {
