@@ -2,26 +2,19 @@
 #include "Entity.h"
 #include <vector>
 
-enum class EnemyStateMachine {
-	IDLE,
-	WALKING,
-	ATTACKING,
-	CHASING,
-};
+ 
 
 class Enemy : public Entity
 {
 	private:
-	enum EnemyStateMachine EnemyState;
-	vector <glm::vec3> PatrolPos;
+ 	vector <glm::vec3> PatrolPos;
  
 	public:
-	Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2);
-	EnemyStateMachine GetState();
-	void Update(int deltatime);
+	Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size);
+ 	void Update(int deltatime);
 	void AddPatrolPos(glm::vec3 pos);
 	void UpdateStateMachine(float deltatime);
-	void ChangeState(EnemyStateMachine NextState);
+	void ChangeState(StateMachine NextState);
 	void Translate(glm::vec3 moveDistance);
 	bool PlayerDetect(Entity* p);
 	void PlayerChase(Entity* p);

@@ -20,7 +20,6 @@ glm::vec3 CheckPoint::LoadCheckPoint() {
 
 void CheckPoint::SetCheckPoint(glm::vec3 newPoint){
 	printf("s");
-	newPoint.y += 32; 
 	curCheckPoint = newPoint;
 	
 }

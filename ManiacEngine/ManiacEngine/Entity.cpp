@@ -3,9 +3,32 @@
 #include "SquareMeshVbo.h" 
 #include "InvisibleObject.h"
 
+
+void Entity::VelocityControl() {
+	velocity += applyingVelocity;
+	if ((collisionNumber >> 2) % 2 != 0) //Can't walk left
+		if (velocity.x < 0) {
+			velocity.x = 0;
+		}
+	if ((collisionNumber >> 3) % 2 != 0)  //Can't walk right
+		if (velocity.x > 0) {
+			velocity.x = 0;
+		}
+	this->Translate(velocity);
+	applyingVelocity = glm::vec3(0, 0, 0);
+
+	if (velocity.x != 0)
+	{
+		velocity.x = velocity.x / 1.05;
+		if (velocity.x < 0.02 && velocity.x > -0.02)
+		{
+			velocity.x = 0;
+		}
+	}
+}
  Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName, row, column,Pos,Size), HP(HP), MoveSpeed(MoveSpeed) {
 	this->velocity = glm::vec3(0, 0, 0);
-
+	this->collisionSize = Size; 
 	Default_pos = GetPos() ;
 	Default_HP = HP ;
 	Default_MoveSpeed = MoveSpeed ;
@@ -17,11 +40,11 @@ int Entity::Collides(Entity e)
 	int CollideDetection = 0; //Check where it collide with Entity (In Other Entity POV) 
 						  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
 	
-	float LeftX_Inv_Obj = (float)this->GetPos().x - this->GetSize().x / 2;
-	float RightX_Inv_Obj = (float)this->GetPos().x + this->GetSize().x / 2;
+	float LeftX_Inv_Obj = (float)this->GetPos().x - this->collisionSize.x / 2;
+	float RightX_Inv_Obj = (float)this->GetPos().x + this->collisionSize.x / 2;
 
-	float TOPY_Inv_Obj = (float)this->GetPos().y + this->GetSize().y * -1 / 2;
-	float BOTTOMY_Inv_Obj = (float)this->GetPos().y - this->GetSize().y * -1 / 2;
+	float TOPY_Inv_Obj = (float)this->GetPos().y + this->collisionSize.y * -1 / 2;
+	float BOTTOMY_Inv_Obj = (float)this->GetPos().y - this->collisionSize.y * -1 / 2;
 
 	float TOP_BOTTOM_X = (float)e.GetPos().x - e.GetSize().x / 4;
 	float TOP_Y = (float)e.GetPos().y + e.GetSize().y / 2 * -1;
@@ -121,18 +144,9 @@ void Entity::Update(int deltatime)
  	}	
 
 	 
+	VelocityControl(); 
 
-	velocity += applyingVelocity;
-	this->Translate(velocity);
-	applyingVelocity = glm::vec3(0, 0, 0);
-	if (velocity.x != 0)
-	{
-		velocity.x = velocity.x / 1.05;
-		if (velocity.x < 0.02 && velocity.x > -0.02)
-		{
-			velocity.x = 0;
-		}
-	}
+	
 }
 
 void Entity::Translate(glm::vec3 moveDistance)
@@ -169,17 +183,18 @@ void Entity::Collides_W_Inv_Wall(int CollisionDetection, glm::vec3 ivbObj[4][2])
 	}
 
 	if ((CollisionDetection >> 2) % 2 != 0) { //COLLIDE LEFT
-		this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0,0));
-		this->SetPosition(glm::vec3(ivbObj[2][0].x + ivbObj[2][1].x + ivbObj[2][1].x / 2 + 1 , GetPos().y, GetPos().z));
+		//this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0,0));
+		//this->SetPosition(glm::vec3(ivbObj[2][0].x + ivbObj[2][1].x + ivbObj[2][1].x / 2 + 1 , GetPos().y, GetPos().z));
 
 	}
 
 	if ((CollisionDetection >> 3) % 2 != 0) { //COLLIDE RIGHT
-		this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0, 0));
-		this->SetPosition(glm::vec3(ivbObj[3][0].x - ivbObj[3][1].x - ivbObj[3][1].x / 2 - 1,GetPos().y, GetPos().z));
+		//this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0, 0));
+		//this->SetPosition(glm::vec3(ivbObj[3][0].x - ivbObj[3][1].x - ivbObj[3][1].x / 2 - 1,GetPos().y, GetPos().z));
 	}
 
-
+	collisionNumber = CollisionDetection;
+	
 }
 
 float Entity::GetMoveSpeed()
@@ -218,6 +233,10 @@ void Entity::Attack(Entity* target) {
 	if (invWALL.Collide_W_Entity(*target)) {
 		target->OnDamaged(1);
 	}
+}
+
+StateMachine Entity::GetState() {
+	return stateMachine; 
 }
 
  

@@ -106,11 +106,20 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region interactableObject 
-	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(glm::vec3(64 * 3, -1280+64, 0)), glm::vec3(64,-64,1));
+	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(125 + 64*3, -1176.0f -32, 0.0f) , glm::vec3(64,-64,1),glm::vec3(128,-128,1));
  
 	interactableManager.addInteractableObjects(flower_1);
 	objectsList.push_back(flower_1);
 
+	Flower* flower_2 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(2216, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+
+	interactableManager.addInteractableObjects(flower_2);
+	objectsList.push_back(flower_2);
+
+	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(7422, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+
+	interactableManager.addInteractableObjects(flower_3);
+	objectsList.push_back(flower_3);
 	#pragma endregion 
 
 
@@ -133,15 +142,34 @@ void Level::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
-	/*Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(300.0f, 0.0f, 0.0f), glm::vec3(128, -128,1), glm::vec3(700.0f, 0.0f, 0.0f), glm::vec3(200.0f, 0.0f, 0.0f));
+	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
+	test->AddPatrolPos(glm::vec3(4886, -920, 0.0f)); 
+	test->AddPatrolPos(glm::vec3(5416, -920, 0.0f));
 	test->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test);
-	objectsList.push_back(test);*/
+	objectsList.push_back(test);
 
-	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1100, -1176.0f, 1),glm::vec3(128,-128,1), glm::vec3(1101, -280, 0.0f), glm::vec3(2026, -280, 0.0f));
-	test2->SetAnimationLoop(0, 0, 12, 100);
+	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5203, -1176, 1),glm::vec3(128,-128,1));
+	test2->AddPatrolPos(glm::vec3(5203, -1176, 1));
+	test2->AddPatrolPos(glm::vec3(3010, -1176, 1));
+ 	test2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test2);
 	objectsList.push_back(test2);
+
+	Decon* test3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7669, -1176, 0.0f), glm::vec3(128, -128, 1));
+	test3->AddPatrolPos(glm::vec3(7669, -1176, 0.0f));
+	test3->AddPatrolPos(glm::vec3(9045, -920, 0.0f));
+	test3->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(test3);
+	objectsList.push_back(test3);
+
+	Decon* test4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(8400, -1176, 0.0f), glm::vec3(128, -128, 1));
+	test4->AddPatrolPos(glm::vec3(8400, -1176, 0.0f));
+	test4->AddPatrolPos(glm::vec3(9641, -920, 0.0f));
+	test4->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(test4);
+	objectsList.push_back(test4);
+
 #pragma endregion
 	respawner = new ReSpawner();
 
@@ -152,8 +180,7 @@ void Level::LevelInit()
 	objectsList.push_back(SangeImage);
 	GUIObjectsList.push_back(SangeImage); 
 
-	//HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 165, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 150, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(238, 448 * -1,1));
-	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
+	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
 	
 	objectsList.push_back(hpbar);
 	

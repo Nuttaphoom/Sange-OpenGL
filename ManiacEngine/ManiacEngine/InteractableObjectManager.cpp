@@ -21,6 +21,6 @@ void InteractableObjectManager::DelInteractableObjects(InteractableObject* io) {
 
 void InteractableObjectManager::notify(Entity* e) {
 
-	for (int i = 0; i < interactableObjects.size(); i++)
+ 	for (int i = 0; i < interactableObjects.size(); i++)
 		interactableObjects[i]->isCalled(e);
 }

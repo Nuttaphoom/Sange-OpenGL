@@ -23,6 +23,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
+    <ClCompile Include="CO-AnimatorPlayer.h" />
     <ClCompile Include="Decon.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -50,11 +51,13 @@
     <ClCompile Include="ReSpawner.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Skill.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileMap.h" />
+    <ClCompile Include="Trap.h" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
   </ItemGroup>
   <ItemGroup>

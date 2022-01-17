@@ -28,7 +28,7 @@ void Player::HandleKey(char Key)
  	switch (Key)
 	{
 	case 'w': if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
-				TranslateVelocity(glm::vec3(0, 25, 0)); 
+				TranslateVelocity(glm::vec3(0, 18, 0)); 
 				Entity::OnGround = false;
 				ChangeState(StateMachine::JUMPPING);
 				cout << "jump" << endl;
@@ -40,26 +40,26 @@ void Player::HandleKey(char Key)
  	}
 }
 
-Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 0.29, Pos,Size)
+Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 0.2f, Pos,Size)
 {	
-	cout << "After change : " << GetPos().x << "," << GetPos().y << endl;
-	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
-	PlayerState = StateMachine::FALLING;
+	this->collisionSize = glm::vec3(76, -128, 1);
+ 	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
+	stateMachine = StateMachine::FALLING;
 }
 
 void Player::Update(int deltatime)
 {
- 	cout << "PLAYER LOCAITON : " << GetPos().x << "," << GetPos().y << endl; 
-	Entity::Update(deltatime);
-
+ 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
+	UpdateCollision();
+
 }
 
 void Player::UpdateStateMachine(float deltatime)
 {
 	if (GetState() == StateMachine::RUNNING)
 	{
-		if (GetVelocity().x < 2 && GetVelocity().x > -2 && OnGround == true)
+		if (GetVelocity().x < 1 && GetVelocity().x > -1 && OnGround == true)
 		{
 			ChangeState(StateMachine::IDLE);
 		}
@@ -90,7 +90,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::FALLING)
 	{
-		if (GetVelocity().x >= 2 || GetVelocity().x <= -2)
+		if (GetVelocity().x >= 1 || GetVelocity().x <= -1)
 		{
 			if (OnGround == true)
 			{
@@ -106,7 +106,7 @@ void Player::UpdateStateMachine(float deltatime)
 			ChangeState(StateMachine::JUMPPING);
 		}
 	}
-	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::JUMPPING)
+	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::JUMPPING  )
 	{
 		if (GetVelocity().y == 0 && OnGround == false)
 		{
@@ -125,11 +125,14 @@ void Player::UpdateStateMachine(float deltatime)
 		//ChangeState(StateMachine::FALLING);
 	}
 }
-
+ 
+void Player::UpdateCollision() {
+	 
+}
 
 void Player::ChangeState(StateMachine NextState)
 {
-	PlayerState = NextState;
+	stateMachine = NextState;
 
 	if (this->GetState() == StateMachine::IDLE)
 	{
@@ -207,13 +210,12 @@ void Player::Attack(Entity* target) {
 	}
 }
 
-StateMachine Player::GetState()
-{
-	return PlayerState;
-}
+
 void Player::RespawnThisObject() {
 	HP = Default_HP;
 	MoveSpeed = Default_MoveSpeed;
 	CheckPoint::GetInstance()->LoadCheckPoint();
-
 }
+
+
+ 

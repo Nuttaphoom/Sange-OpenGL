@@ -70,6 +70,9 @@
     <Filter Include="Source Files\Objects\Enemy Types">
       <UniqueIdentifier>{723d16bd-d7c3-472f-bdeb-ffa1e6c61793}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects\Player Stuffs">
+      <UniqueIdentifier>{1ce2eecb-8357-4efe-ac5a-a7e694448bd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameData.cpp">
@@ -183,6 +186,15 @@
     <ClCompile Include="ReSpawner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Header Files\Objects\Player Stuffs</Filter>
+    </ClCompile>
+    <ClCompile Include="CO-AnimatorPlayer.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -245,9 +257,6 @@
     <ClInclude Include="InvisibleObject.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
@@ -283,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="ReSpawner.h">
       <Filter>Header Files\GameDesign Stuffs</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Objects\Player Stuffs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

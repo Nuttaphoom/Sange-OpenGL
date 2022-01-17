@@ -37,7 +37,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 		tiles.push_back(vector<SpriteObject*>());
 		for (int j = 0; j < height + 1; j++) {
 			/// Create every tile 
-			tiles[i].push_back(new SpriteObject(texture, rowMax, columnMax, glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32), GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0)
+			tiles[i].push_back(new SpriteObject(texture, rowMax, columnMax, glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33), GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 0)
 				,glm::vec3(64,-64,1)));
 
 			tiles[i][j]->SetAnimationLoop(0, 0, 0, 0, false);
@@ -67,7 +67,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 		tiles.push_back(vector<SpriteObject*>());
 		for (int j = 0; j < height + 1; j++) {
 			/// Create every tile
-			tiles[i + width + 1].push_back(new SpriteObject(texture, rowMax, columnMax, glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32), GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0)
+			tiles[i + width + 1].push_back(new SpriteObject(texture, rowMax, columnMax, glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33), GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 0)
 				, glm::vec3(64, -64, 1)));
 
 			tiles[i + width + 1][j]->SetAnimationLoop(0, 0, 0, 0, false);
@@ -119,7 +119,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 		for (int j = 0; j < height + 1; j++) {
 			if (ColMapdata[i][j] == 1) {
 				InvisibleObject* newInv = new InvisibleObject();
-				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 1));
+				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 1));
 				//newInv->SetPosition(glm::vec3(0, -256, 0));
 				newInv->SetSize(64, 64);
 				newInv->SetRender(true);

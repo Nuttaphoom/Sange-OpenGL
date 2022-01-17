@@ -1,6 +1,17 @@
 #pragma once
 #include "SpriteObject.h"
- 
+enum class StateMachine {
+	IDLE,
+	RUNNING,
+	JUMPPING,
+	HOPPING,
+	MIDJUMP,
+	FALLING,
+	LANDING,
+	ATTACKING,
+	CHASING
+};
+
 class Entity : public SpriteObject
 {
 	protected:
@@ -9,6 +20,8 @@ class Entity : public SpriteObject
 		glm::vec3 velocity; 
 		glm::vec3 applyingVelocity; 
 		float IFrame;
+		enum StateMachine stateMachine ;
+		int collisionNumber; //1 = TOP, 2 = BOTTOM , 3 = LEFT , 4 = RIGHT  
 
 	/*Default Value that will be used when we respawn this obj*/ 
 		glm::vec3 Default_pos; 
@@ -18,6 +31,9 @@ class Entity : public SpriteObject
 	public:
 		bool OnGround = false;
 		int DirectionSet = 1;
+
+		//Will be changed when StateMachine is changed 
+		glm::vec3 collisionSize;
 
 		Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos,glm::vec3 Size);
 		virtual bool Death();
@@ -36,6 +52,7 @@ class Entity : public SpriteObject
 		virtual bool isDead();
 		virtual glm::vec3 GetVelocity();
 		virtual void RespawnThisObject(); 
- 
+		virtual void VelocityControl();
+		StateMachine  GetState();
 		float GetHP(); 
 };

@@ -5,29 +5,27 @@
 #include "GameData.h"
 
 
-Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 PatrolPos1, glm::vec3 PatrolPos2) :Enemy(fileName, row, column,100, 0.18f,Pos,Size,PatrolPos1,PatrolPos2)
+Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 0.21f,Pos,Size)
 {
- 	DeconState = EnemyStateMachine::WALKING; 
-	PatrolPos.push_back(PatrolPos1); 
-	PatrolPos.push_back(PatrolPos2); 
+ 	DeconState = StateMachine::RUNNING;
+ 
 } 
 
 void Decon::Attack(Entity* target) {
 
-	InvisibleObject invWALLs[2];
+ 	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
-		invWALLs[i].SetPosition(glm::vec3(this->GetPos().x + (8 * this->DirectionSet * i), this->GetPos().y + this->GetSize().y * -1 / 2, 1));
+		invWALLs[i].SetPosition(glm::vec3(this->GetPos().x + (16 * this->DirectionSet * i), this->GetPos().y + this->GetSize().y * -1 / 2, 1));
 		invWALLs[i].SetSize(64, 64);
 	}
 	for (int i = 0; i < 2; i++) {
 		if (invWALLs[i].Collide_W_Entity(*target)) {
-			cout << "ATTACK!" << endl;
-			target->OnDamaged(1);
+ 			target->OnDamaged(1);
 			return; 
 		}
 	}	
 
-	ChangeState(EnemyStateMachine::CHASING); 
+	ChangeState(StateMachine::CHASING); 
 }
 
 void Decon::Update(int deltatime) {
@@ -37,7 +35,7 @@ void Decon::Update(int deltatime) {
 }
 
 void Decon::EnterAttackZone(Entity* target) {
-	if (GetState() == EnemyStateMachine::ATTACKING) return; 
+	if (GetState() == StateMachine::ATTACKING) return; 
 
 	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
@@ -56,16 +54,16 @@ void Decon::EnterAttackZone(Entity* target) {
 }
 
 void Decon::StartAttack() {
-	ChangeState(EnemyStateMachine::ATTACKING) ; 
+	ChangeState(StateMachine::ATTACKING) ; 
 }
 
 void Decon::UpdateStateMachine(float deltatime)
 {
-	if (GetState() == EnemyStateMachine::WALKING)
+	if (GetState() == StateMachine::RUNNING)
 	{
 		if (PlayerDetect(Player::GetInstance()) == true)
 		{
-			ChangeState(EnemyStateMachine::CHASING);
+			ChangeState(StateMachine::CHASING);
 		}
 		else
 		{
@@ -75,22 +73,22 @@ void Decon::UpdateStateMachine(float deltatime)
 
 	}
 	
-	if (GetState() == EnemyStateMachine::IDLE)
+	if (GetState() == StateMachine::IDLE)
 	{
 		if (GetVelocity().x != 0)
 		{
-			ChangeState(EnemyStateMachine::WALKING);
+			ChangeState(StateMachine::RUNNING);
 			//cout << "WALKING" << endl;
 		}
 	}
 	
-	if (GetState() == EnemyStateMachine::CHASING) {
+	if (GetState() == StateMachine::CHASING) {
 		if (PlayerDetect(Player::GetInstance()) == false)
 		{
 			chasing_delay += deltatime;
 			if (chasing_delay > 2000) {
 				chasing_delay = 0; 
-				ChangeState(EnemyStateMachine::WALKING);
+				ChangeState(StateMachine::RUNNING);
 			}
 			PlayerChase(Player::GetInstance());
 		}
@@ -100,7 +98,7 @@ void Decon::UpdateStateMachine(float deltatime)
 		}
 	}
 
-	if (GetState() == EnemyStateMachine::ATTACKING) {
+	if (GetState() == StateMachine::ATTACKING) {
 		cout << "attacking" << endl; 
 		attack_delay += deltatime ;  
 		if (attack_delay > 75*8) {
@@ -113,29 +111,29 @@ void Decon::UpdateStateMachine(float deltatime)
 	}
 }
 
-void Decon::ChangeState(EnemyStateMachine nextState)
+void Decon::ChangeState(StateMachine nextState)
 {
 	DeconState = nextState;
 	this->velocity = glm::vec3(0, 0, 0);
 
-	if (GetState() == EnemyStateMachine::IDLE)
+	if (GetState() == StateMachine::IDLE)
 	{
 		SetAnimationLoop(0, 0, 1, 100);
 	}
-	else if (GetState() == EnemyStateMachine::WALKING)
+	else if (GetState() == StateMachine::RUNNING)
 	{
 		SetAnimationLoop(0, 0, 12, 100);
 	}
-	else if (GetState() == EnemyStateMachine::CHASING)
+	else if (GetState() == StateMachine::CHASING)
 	{
 		SetAnimationLoop(0, 0, 12, 100);
 	}
-	else if (GetState() == EnemyStateMachine::ATTACKING) {
+	else if (GetState() == StateMachine::ATTACKING) {
  		SetAnimationLoop(1, 0, 9, 75);
 	}
 }
  
-EnemyStateMachine Decon::GetState() {
+StateMachine Decon::GetState() {
 	return this->DeconState ; 
 }
 
@@ -190,6 +188,8 @@ void Decon::AddPatrolPos(glm::vec3 pos)
 
 void Decon::Patrol()
 {
+	if (PatrolPos.size() == 0) return; 
+
 	glm::vec3 dest = PatrolPos.at(CurrentPatrolPos); 
 
 	if (abs(dest.x - GetPos().x) < 2) CurrentPatrolPos = (CurrentPatrolPos + 1) % PatrolPos.size(); 

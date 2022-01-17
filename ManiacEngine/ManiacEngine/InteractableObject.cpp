@@ -1,29 +1,27 @@
 #include "InteractableObject.h"
 
-int InCollideRadius(InteractableObject* in, Entity* e);
-
-InteractableObject::InteractableObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName,row,column,Pos,Size){}
+ 
+InteractableObject::InteractableObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 ColliderSize) : SpriteObject(fileName,row,column,Pos,Size) , ColliderSize(ColliderSize){}
 
 
 void InteractableObject::isCalled(Entity* e) {
-
-	if (InCollideRadius(this,e) > 0) {
+ 	if (InCollideRadius(this,e) > 0) {
 		Called();
 	}
 }
 
-int InCollideRadius(InteractableObject* in,Entity *e) {
+int InteractableObject::InCollideRadius(InteractableObject* in,Entity *e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 						  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
 
 	if (e->GetPos().x - in->GetPos().x > 64 || e->GetPos().x - in->GetPos().x < -64)
 		return 0 ;
 
-	float LeftX_Inv_Obj = (float)in->GetPos().x - in->GetSize().x / 2;
-	float RightX_Inv_Obj = (float)in->GetPos().x + in->GetSize().x / 2;
+	float LeftX_Inv_Obj = (float)in->GetPos().x - ColliderSize.x / 2;
+	float RightX_Inv_Obj = (float)in->GetPos().x + ColliderSize.x / 2;
 
-	float TOPY_Inv_Obj = (float)in->GetPos().y + in->GetSize().y  / 2;
-	float BOTTOMY_Inv_Obj = (float)in->GetPos().y - in->GetSize().y  / 2;
+	float TOPY_Inv_Obj = (float)in->GetPos().y + ColliderSize.y  / 2;
+	float BOTTOMY_Inv_Obj = (float)in->GetPos().y - ColliderSize.y  / 2;
 
 	float TOP_BOTTOM_X = (float)e->GetPos().x - e->GetSize().x / 4;
 	float TOP_Y = (float)e->GetPos().y + e->GetSize().y / 2 * -1;
@@ -53,10 +51,10 @@ int InCollideRadius(InteractableObject* in,Entity *e) {
 
 	//MIDDLE_RIGHT
 	Middle_1_2_X += e->GetSize().x;
-	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
-		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
+	if ((Middle_1_2_X < RightX_Inv_Obj  )) {
+  		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
 			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)) {
-			CollideDetection += 8;
+ 			CollideDetection += 8;
 		}
 	}
 
@@ -68,6 +66,6 @@ int InCollideRadius(InteractableObject* in,Entity *e) {
 		}
 	}
 
-	printf("%d\n", CollideDetection);
+	printf("In Interactable Object : Collide : %d\n", CollideDetection);
 	return CollideDetection; 
 }

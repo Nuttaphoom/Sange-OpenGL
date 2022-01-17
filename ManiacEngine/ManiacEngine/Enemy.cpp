@@ -1,17 +1,12 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Raycast.h"
-Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size,glm::vec3 PatrolPos1, glm::vec3 PatrolPos2 ): Entity(fileName, row, column, HP, MoveSpeed, Pos, Size)
+Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size ): Entity(fileName, row, column, HP, MoveSpeed, Pos, Size)
 {
-	EnemyState = EnemyStateMachine::WALKING;
- 	AddPatrolPos(PatrolPos1);
-	AddPatrolPos(PatrolPos2);
+	stateMachine = StateMachine::RUNNING;
 }
 
-EnemyStateMachine Enemy::GetState()
-{
-	return EnemyState;
-}
+ 
 
 void Enemy::Attack(Entity* target) {
 
@@ -31,32 +26,31 @@ void Enemy::Update(int deltatime)
 
 void Enemy::UpdateStateMachine(float deltatime)
 {
-	if (GetState() == EnemyStateMachine::WALKING)
+	if (GetState() == StateMachine::RUNNING)
 	{
 		if (PlayerDetect(Player::GetInstance()) == true)
 		{
-			ChangeState(EnemyStateMachine::CHASING);
+			ChangeState(StateMachine::CHASING);
 		}
 		else
 		{
-			cout << "con patrol" << endl; 
-			Patrol();
+ 			Patrol();
 		}
 
 
 	}
-	else if (GetState() == EnemyStateMachine::IDLE)
+	else if (GetState() == StateMachine::IDLE)
 	{
 		if (GetVelocity().x != 0)
 		{
-			ChangeState(EnemyStateMachine::WALKING);
+			ChangeState(StateMachine::RUNNING);
 			//cout << "WALKING" << endl;
 		}
 	}
-	else if (GetState() == EnemyStateMachine::CHASING) {
+	else if (GetState() == StateMachine::CHASING) {
 		if (PlayerDetect(Player::GetInstance()) == false)
 		{
-			ChangeState(EnemyStateMachine::WALKING);
+			ChangeState(StateMachine::RUNNING);
 		}
 		else {
 			PlayerChase(Player::GetInstance());
@@ -64,16 +58,16 @@ void Enemy::UpdateStateMachine(float deltatime)
 	}
 }
 
-void Enemy::ChangeState(EnemyStateMachine nextState)
+void Enemy::ChangeState(StateMachine nextState)
 {
-	EnemyState = nextState;
+	stateMachine = nextState;
 	this->velocity = glm::vec3(0, 0, 0); 
 
-	if (GetState() == EnemyStateMachine::IDLE)
+	if (GetState() == StateMachine::IDLE)
 	{
 		SetAnimationLoop(0, 0, 1, 100);
 	}
-	else if (GetState() == EnemyStateMachine::WALKING)
+	else if (GetState() == StateMachine::RUNNING)
 	{
 		SetAnimationLoop(0, 0, 12, 100);
 	}
