@@ -73,20 +73,6 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-	#pragma region RAYCAST_TSET 
-	glm::vec3 P1 = glm::vec3(-5, 0, 1);
-
-	glm::vec3 P2 = glm::vec3(-50, -100, 1);
-
-	InvisibleObject* ivo = new InvisibleObject();
-	ivo->SetPosition(glm::vec3(-25, -50, 0));
-	ivo->SetSize(64, 64);
-	invisibleObjectsList.push_back(ivo);
-	objectsList.push_back(ivo);
-
-	glm::vec3 outputvec = RayCast(P1, P2);
-	cout << "Lenght" << outputvec.x << "," << outputvec.y << endl;
-	#pragma endregion 
 	checkPoint = CheckPoint::GetInstance();
 
 
@@ -117,9 +103,13 @@ void Level::LevelInit()
 	objectsList.push_back(flower_2);
 
 	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(7422, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
-
 	interactableManager.addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
+
+	Hiding* hiding_1 = new Hiding("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(125 + 64 * 3, -1176.0f - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+		
+	interactableManager.addInteractableObjects(hiding_1);
+	objectsList.push_back(hiding_1);
 	#pragma endregion 
 
 

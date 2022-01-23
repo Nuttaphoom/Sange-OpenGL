@@ -2,6 +2,9 @@
 #include "InteractableObject.h"
 #include <vector>
 #include "Entity.h"
+#include "Flower.h"
+#include "Trap.h"
+#include "Hiding.h" 
 using namespace std;
 
 class InteractableObjectManager {

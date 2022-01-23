@@ -102,28 +102,30 @@ bool Entity::Death()
 
 void Entity::Render(glm::mat4 globalModelTransform)
 {
-	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+	if (GetState() != StateMachine::HIDING) {
+		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
-	GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
-	GLuint modeId = GameEngine::GetInstance()->GetRenderer()->GetModeUniformId();
+		GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
+		GLuint modeId = GameEngine::GetInstance()->GetRenderer()->GetModeUniformId();
 
-	glBindTexture(GL_TEXTURE_2D, GetTexture());
-	if (modelMatixId == -1) {
-		cout << "Error: Can't perform transformation " << endl;
-		return;
-	}
+		glBindTexture(GL_TEXTURE_2D, GetTexture());
+		if (modelMatixId == -1) {
+			cout << "Error: Can't perform transformation " << endl;
+			return;
+		}
 
-	glm::mat4 currentMatrix = this->getTransform(); 
-	/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
-	currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1));
+		glm::mat4 currentMatrix = this->getTransform();
+		/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
+		currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1));
 
-	if (squareMesh != nullptr) {
-		currentMatrix = globalModelTransform * currentMatrix;
-		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-		glUniform1i(modeId, 1);
-		squareMesh->AdjustTexcoord(GetUV());
-		squareMesh->Render();
-		glBindTexture(GL_TEXTURE_2D, 0);
+		if (squareMesh != nullptr) {
+			currentMatrix = globalModelTransform * currentMatrix;
+			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
+			glUniform1i(modeId, 1);
+			squareMesh->AdjustTexcoord(GetUV());
+			squareMesh->Render();
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 	}
 }
 

@@ -9,7 +9,8 @@ enum class StateMachine {
 	FALLING,
 	LANDING,
 	ATTACKING,
-	CHASING
+	CHASING,
+	HIDING,
 };
 
 class Entity : public SpriteObject

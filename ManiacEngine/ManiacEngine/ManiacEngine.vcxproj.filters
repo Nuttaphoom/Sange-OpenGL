@@ -195,6 +195,12 @@
     <ClCompile Include="Trap.h">
       <Filter>Header Files\Objects\InteractableObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Hiding.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Hiding.cpp">
+      <Filter>Source Files\Objects\Interactable Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
