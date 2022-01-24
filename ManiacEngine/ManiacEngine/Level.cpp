@@ -92,10 +92,10 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region interactableObject 
-	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(125 + 64*3, -1176.0f -32, 0.0f) , glm::vec3(64,-64,1),glm::vec3(128,-128,1));
+	//Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(125 + 64*3, -1176.0f -32, 0.0f) , glm::vec3(64,-64,1),glm::vec3(128,-128,1));
  
-	interactableManager.addInteractableObjects(flower_1);
-	objectsList.push_back(flower_1);
+	//interactableManager.addInteractableObjects(flower_1);
+	//objectsList.push_back(flower_1);
 
 	Flower* flower_2 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(2216, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 
@@ -106,7 +106,7 @@ void Level::LevelInit()
 	interactableManager.addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
-	Hiding* hiding_1 = new Hiding("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(125 + 64 * 3, -1176.0f - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding_1 = new Hiding("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(125 + 64 * 3, -1112.0f -32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 		
 	interactableManager.addInteractableObjects(hiding_1);
 	objectsList.push_back(hiding_1);

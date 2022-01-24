@@ -7,7 +7,6 @@
 #include "Skill.cpp"
 
 
-
 class Player : public Entity, public Subject
 {
 	private :

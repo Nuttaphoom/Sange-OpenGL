@@ -88,18 +88,17 @@ void Player::UpdateStateMachine(float deltatime)
 			ChangeState(StateMachine::LANDING);
 		}
 	}
-	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::FALLING)
+	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::FALLING || GetState() == StateMachine::HIDING)
 	{
-		if (GetVelocity().x >= 1 || GetVelocity().x <= -1)
+		if (GetVelocity().x >= 0.5f || GetVelocity().x <= -0.5f)
 		{
 			if (OnGround == true)
 			{
 				ChangeState(StateMachine::RUNNING);
 			}
-			//ChangeState(StateMachine::RUNNING);
-		}
+ 		}
 	}
-	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING)
+	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING || GetState() == StateMachine::HIDING)
 	{
 		if (GetVelocity().y > 0)
 		{
@@ -122,8 +121,8 @@ void Player::UpdateStateMachine(float deltatime)
 			delay = 0;
 			ChangeState(StateMachine::FALLING);
 		}
-		//ChangeState(StateMachine::FALLING);
 	}
+	 
 }
  
 void Player::UpdateCollision() {
