@@ -30,7 +30,7 @@ void Enemy::UpdateStateMachine(float deltatime)
 	{
 		if (PlayerDetect(Player::GetInstance()) == true)
 		{
-			ChangeState(StateMachine::CHASING);
+ 			ChangeState(StateMachine::CHASING);
 		}
 		else
 		{
@@ -75,6 +75,9 @@ void Enemy::ChangeState(StateMachine nextState)
 
 bool Enemy::PlayerDetect(Entity* p)
 {
+	if (p->GetState() == StateMachine::HIDING)
+		return false; 
+
 	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
 
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;

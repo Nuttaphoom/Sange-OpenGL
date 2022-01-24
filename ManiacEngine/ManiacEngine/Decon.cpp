@@ -35,7 +35,8 @@ void Decon::Update(int deltatime) {
 }
 
 void Decon::EnterAttackZone(Entity* target) {
-	if (GetState() == StateMachine::ATTACKING) return; 
+	if (GetState() == StateMachine::ATTACKING || target->GetState() == StateMachine::HIDING) return; 
+	
 
 	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
@@ -139,6 +140,9 @@ StateMachine Decon::GetState() {
 
 bool Decon::PlayerDetect(Entity* p)
 {
+	if (p->GetState() == StateMachine::HIDING)
+		return false;
+
 	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
 
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
