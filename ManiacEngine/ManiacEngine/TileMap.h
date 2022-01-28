@@ -1,5 +1,4 @@
-#ifndef TILEMAP
-#define TILEMAP
+#pragma once
 #include "SpriteObject.h"
 #include "GameEngine.h"
 #include "InvisibleObject.h"
@@ -20,4 +19,3 @@ class TileMap  {
 
   };
 
-#endif 

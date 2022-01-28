@@ -201,6 +201,9 @@
     <ClCompile Include="Hiding.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Objects\Player Stuffs</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
