@@ -47,8 +47,7 @@ void Decon::EnterAttackZone(Entity* target) {
  
  	for (int i = 0; i < 2; i++) {
 		if (invWALLs[i].Collide_W_Entity(*target)) {
-			cout << "start attacking" << endl;
-			StartAttack();
+ 			StartAttack();
 		}
 		
 	}
@@ -157,13 +156,13 @@ bool Decon::PlayerDetect(Entity* p)
 
 		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
 			//	cout << "SEE PLAYER" << endl; 
+			Player::GetInstance()->AddDetectingEntity(this);
 			return true;
 		}
 	}
 
-
-	//cout << "DON'T SEE PLAYER" << endl;
-	return false;
+	Player::GetInstance()->RemoveDetectingEntity(this); 
+ 	return false;
 
 	/*
 	glm::vec3 Distance = glm::vec3(GetPos().x - p->GetPos().x, GetPos().y - p->GetPos().y, 0);

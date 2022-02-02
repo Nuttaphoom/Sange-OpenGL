@@ -1,5 +1,4 @@
-#ifndef INVISIBLEOBJECT
-#define INVISIBLEOBJECT
+#pragma once
 #include "GameObject.h" 
 #include "SquareMeshVbo.h" 
 #include "Entity.h"
@@ -19,5 +18,5 @@ class InvisibleObject : public DrawableObject {
 		int Collide_W_Entity(Entity e); 
 };
 
-#endif 
+ 
 

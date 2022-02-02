@@ -1,8 +1,6 @@
 #pragma once
 
 #include "GameEngine.h"
-#ifndef GameStateControllerHEADER 
-#define GameStateControllerHEADER
 #include "GameStateList.h"
 #include "GameData.h"
 #include "Level.h"
@@ -24,4 +22,4 @@ public:
 	void Update();
 };
 
-#endif 
+ 

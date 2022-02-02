@@ -78,7 +78,10 @@ bool Enemy::PlayerDetect(Entity* p)
 	if (p->GetState() == StateMachine::HIDING)
 		return false; 
 
+	
+
 	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
+	Player::GetInstance()->AddDetectingEntity(this);
 
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
 	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false; 
@@ -88,7 +91,7 @@ bool Enemy::PlayerDetect(Entity* p)
 	if (Distance.x < 300 && Distance.y < 100) {
 		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos());
 		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
-		//	cout << "SEE PLAYER" << endl; 
+			Player::GetInstance()->AddDetectingEntity(this); 
 			return true;
 		}
 	}

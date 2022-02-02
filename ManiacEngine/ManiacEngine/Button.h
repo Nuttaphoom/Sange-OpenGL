@@ -1,5 +1,4 @@
-#ifndef BUTTONH
-#define BUTTONH
+#pragma once
 #include "GUI.h"
 
 typedef void (*FuncPtr_ButtonType)();
@@ -19,4 +18,4 @@ public :
 		 
 };
 
-#endif 
+ 

@@ -60,6 +60,7 @@
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileMap.h" />
+    <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Trap.h" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
   </ItemGroup>

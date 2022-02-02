@@ -1,5 +1,8 @@
 #include "TileMap.h"
 
+extern "C" void SetUV(float widthEachCell, float heightEachCell, int columnMax, int rowMax, int i, int j, int** Mapdata, float uvs[8]); 
+
+
 void SetUV(float widthEachCell , float heightEachCell, int columnMax, int rowMax,int i,int j,int** Mapdata,
 	float uvs[8]) {
 	int data = Mapdata[i][j]; 

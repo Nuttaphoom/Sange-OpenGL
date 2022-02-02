@@ -40,7 +40,7 @@ void Player::HandleKey(char Key)
  	}
 }
 
-Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 0.2f, Pos,Size)
+Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 1.0f, Pos,Size)
 {	
 	this->collisionSize = glm::vec3(76, -128, 1);
  	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
@@ -52,7 +52,8 @@ void Player::Update(int deltatime)
  	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	UpdateCollision();
-
+	cout << "DetecctingEntity Size : " << detectingEntity.size() << endl; 
+ 
 }
 
 void Player::UpdateStateMachine(float deltatime)
@@ -209,12 +210,35 @@ void Player::Attack(Entity* target) {
 	}
 }
 
-
 void Player::RespawnThisObject() {
 	HP = Default_HP;
 	MoveSpeed = Default_MoveSpeed;
 	CheckPoint::GetInstance()->LoadCheckPoint();
 }
+
+void Player::AddDetectingEntity(Entity* ePtr) {
+	for (int i = 0; i < detectingEntity.size(); i++) {
+		if (ePtr == detectingEntity[i]) {
+			return; 
+		}
+	} 	
+	this->detectingEntity.push_back(ePtr);
+}
+void Player::RemoveDetectingEntity(Entity* ePtr) {
+	for (int i = 0; i < detectingEntity.size() ; i++) {
+		if (ePtr == detectingEntity[i]) {
+			detectingEntity.erase(detectingEntity.begin() + i);
+		}
+	}
+}
+
+bool Player::isSeen() {
+	if (detectingEntity.size() > 0)
+		return true;
+	else
+		return false;
+}
+
 
 
  

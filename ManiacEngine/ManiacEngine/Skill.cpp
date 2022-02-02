@@ -1,8 +1,7 @@
-#ifndef SKILLH
-#define SKILLH
+#pragma once
 
 #include "Player.h"
-
+/*
 class Skill {
 	private :
 		bool unlocked = false ; 
@@ -18,8 +17,8 @@ class Skill {
 		virtual void UnlockAbility() {
 			unlocked = true; 
 		}
-};
+};*/
 
  
 
-#endif 
+ 

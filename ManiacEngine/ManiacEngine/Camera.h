@@ -1,5 +1,4 @@
-#ifndef CAMMERACLASS
-#define CAMMERACLASS
+#pragma once
 
 #include "GLRenderer.h"
 using namespace std;
@@ -19,4 +18,4 @@ public:
 	bool IsInCamera(glm::vec3 pos, glm::vec3 size);
 	void SetPosition(glm::vec3 newPos);
 };
-#endif 
+ 

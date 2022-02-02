@@ -1,5 +1,4 @@
-#ifndef COANIMATORPLAYER
-#define COANIMATORPLAYER 
+#pragma once
 #include "Entity.h"
 
 class CoAnimatorPlayer {
@@ -28,5 +27,4 @@ class CoAnimatorPlayer {
 
 
 };
-
-#endif ; 
+ 

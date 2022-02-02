@@ -9,4 +9,6 @@ class InteractableObject : public SpriteObject {
 		int InCollideRadius(InteractableObject* in, Entity* e); 
 		virtual void isCalled(Entity* e);
 		virtual void Called() = 0;
+		virtual void Update(int deltaTime);
+
 };

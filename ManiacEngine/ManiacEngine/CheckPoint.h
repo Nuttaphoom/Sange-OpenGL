@@ -1,5 +1,4 @@
-#ifndef CHECKPOINTHEADER
-#define CHECKPOINTHEADER
+#pragma once
 #include "GameData.h"
 #include "Player.h"
  
@@ -13,4 +12,4 @@ class CheckPoint {
 };
 
  
-#endif 
+ 
