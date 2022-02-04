@@ -149,7 +149,7 @@ bool Decon::PlayerDetect(Entity* p)
 
 
 	if (Distance.x < 300 && Distance.y < 100) {
-		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()); 
+		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast(); 
 
 		//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
 		//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 

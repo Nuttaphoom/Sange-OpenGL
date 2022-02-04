@@ -10,7 +10,7 @@ private:
 	vector < DrawableObject*> EntityObjectsList;
 	Player* player;
 	CameraController* cameraController;
-	TileMap* tilemaps;
+	//TileMap* tilemaps;
 	int MapHeight;
 	int MapWidth;
 	int**sBackGroundMapData; 

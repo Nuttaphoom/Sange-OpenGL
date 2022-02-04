@@ -7,7 +7,6 @@ void InteractableObject::Update(int deltaTime) {
 	cout << "INTERACTABLROBJECT UPDATE" << endl; 
 }
 
-
 void InteractableObject::isCalled(Entity* e) {
  	if (InCollideRadius(this,e) > 0) {
 		Called();

@@ -7,8 +7,7 @@
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
  
 Player* Player::instance = nullptr; 
-int delay = 0;
-int delay1 = 0;
+
 
 
 void Player::HandleMouse(glm::vec3 mouseRealPos) {

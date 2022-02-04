@@ -13,8 +13,7 @@ private:
 	Player* player;
 	Enemy* enemy;
 	CameraController* cameraController;
-	TileMap* tilemaps;
-	int MapHeight;
+ 	int MapHeight;
 	int MapWidth;
 	int** sBackGroundMapData ;
 	int** sMiddleMapdata;

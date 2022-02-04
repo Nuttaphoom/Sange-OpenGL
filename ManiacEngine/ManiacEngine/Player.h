@@ -11,7 +11,8 @@ class Player : public Entity, public Subject
 	private :
 		static Player* instance;
 		vector<Entity*> detectingEntity ;  
- 
+		int delay = 0;
+		int delay1 = 0;
 	public :
 		Player(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size);
  		void Update(int deltatime);

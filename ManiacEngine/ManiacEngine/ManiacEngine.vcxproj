@@ -36,7 +36,7 @@
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Hiding.cpp" />
-    <ClCompile Include="Hiding.h" />
+    <ClInclude Include="Hiding.h" />
     <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="ImageObject.cpp" />
     <ClCompile Include="InteractableObject.cpp" />
@@ -59,9 +59,9 @@
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TileMap.cpp" />
-    <ClCompile Include="TileMap.h" />
+    <ClInclude Include="TileMap.h" />
     <ClCompile Include="Trap.cpp" />
-    <ClCompile Include="Trap.h" />
+    <ClInclude Include="Trap.h" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +180,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\Resource\glew\include;..\Resource\glm;..\Resource\SDL2-2.0.5\include;..\Resource\sdl_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

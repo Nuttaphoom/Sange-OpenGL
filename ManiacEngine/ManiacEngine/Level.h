@@ -6,7 +6,6 @@
 #include "ImageObject.h"
 #include "SpriteObject.h"
 #include "Button.h" 
-#include "TileMap.h"
 #include "InvisibleObject.h" 
 #include "Player.h" 
 #include "CameraController.h"
@@ -33,7 +32,6 @@ private:
 	InteractableObjectManager interactableManager;
 	CheckPoint* checkPoint;
 
-	TileMap* tilemaps;
 	int MapHeight;
 	int MapWidth;
 	int** sMiddleMapdata;

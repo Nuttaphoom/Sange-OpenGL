@@ -135,12 +135,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="TileMap.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InvisibleObject.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
@@ -192,12 +186,6 @@
     <ClCompile Include="CO-AnimatorPlayer.h">
       <Filter>Header Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Trap.h">
-      <Filter>Header Files\Objects\InteractableObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Hiding.h">
-      <Filter>Header Files\Objects\InteractableObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Hiding.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
     </ClCompile>
@@ -206,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="Trap.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +301,15 @@
     </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Hiding.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

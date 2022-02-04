@@ -110,4 +110,5 @@ InvisibleObject::InvisibleObject() {
 	this->color = glm::vec3(0, 1, 0); 
 	this->size = glm::vec3(1, 1, 1);
 	this->pos = glm::vec3(0,0,0);
+	this->render = false; 
 }

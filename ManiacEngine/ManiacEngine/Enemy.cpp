@@ -89,7 +89,7 @@ bool Enemy::PlayerDetect(Entity* p)
 	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
 
 	if (Distance.x < 300 && Distance.y < 100) {
-		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos());
+		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast() ;
 		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
 			Player::GetInstance()->AddDetectingEntity(this); 
 			return true;

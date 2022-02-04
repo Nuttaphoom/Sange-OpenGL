@@ -5,7 +5,7 @@
 
 class InvisibleObject : public DrawableObject {
 	private:
-		bool render; 
+		bool render = false ; 
 		glm::vec3 color;
  
 	public : 

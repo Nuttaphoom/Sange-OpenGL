@@ -112,7 +112,7 @@ void LevelTest::LevelFree()
 
 	delete player;
 	delete cameraController;
-	delete tilemaps;
+	//delete tilemaps;
 }
 
 void LevelTest::LevelUnload()

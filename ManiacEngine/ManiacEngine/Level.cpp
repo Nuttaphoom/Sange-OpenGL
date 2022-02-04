@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "TileMap.h"
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT;
 
@@ -75,9 +76,8 @@ void Level::LevelInit()
 {
 	checkPoint = CheckPoint::GetInstance();
 
-
-	#pragma region tilemaps
-	tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 21, 40);
+	#pragma region tilemapss
+	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 21, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
@@ -122,7 +122,7 @@ void Level::LevelInit()
 	//	objectsList.push_back(ivo);
 	//}
 	#pragma endregion 
-#pragma region Entities 
+	#pragma region Entities 
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_Re.png", 3, 10, 3, glm::vec3(125, -1176.0f, 0.0f),glm::vec3(128,-128,0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);

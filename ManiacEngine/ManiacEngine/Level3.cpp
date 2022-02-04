@@ -189,9 +189,9 @@ void Level3::LevelFree()
 		delete objectsList[i];
 	}*/
 	
-	delete player;
+	/*delete player;
 	delete cameraController;
-	delete tilemaps;
+	delete tilemaps;*/
 }
 
 void Level3::LevelUnload()
