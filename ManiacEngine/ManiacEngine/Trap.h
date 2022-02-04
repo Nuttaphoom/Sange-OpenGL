@@ -4,9 +4,12 @@
 
 class Trap: public InteractableObject {
 private : 
-	float trapSizeOffset = 0;
+	float trapSizeOffset = 64;
+	bool refused = false;
+	float coolDown = 0; 
 public:
 	Trap(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 collisionSize /*Defuse zone*/) ;
 	void getTrap(); 
 	void Called();
+ 	void Update(int deltaTime); 
 };

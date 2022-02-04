@@ -147,9 +147,6 @@
     <ClCompile Include="Flower.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Observer.h">
-      <Filter>Header Files\DesignPattern</Filter>
-    </ClCompile>
     <ClCompile Include="InteractableObject.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
     </ClCompile>
@@ -310,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="Trap.h">
       <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\DesignPattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

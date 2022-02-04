@@ -48,7 +48,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="Observer.cpp" />
-    <ClCompile Include="Observer.h" />
+    <ClInclude Include="Observer.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="ReSpawner.cpp" />

@@ -51,8 +51,7 @@ void Player::Update(int deltatime)
  	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	UpdateCollision();
-	cout << "DetecctingEntity Size : " << detectingEntity.size() << endl; 
- 
+  
 }
 
 void Player::UpdateStateMachine(float deltatime)

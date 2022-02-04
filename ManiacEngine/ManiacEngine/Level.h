@@ -29,7 +29,7 @@ private:
 
 	CameraController* cameraController;
 
-	InteractableObjectManager interactableManager;
+	InteractableObjectManager* interactableObjectManager = new InteractableObjectManager() ;
 	CheckPoint* checkPoint;
 
 	int MapHeight;

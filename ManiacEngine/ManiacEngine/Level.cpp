@@ -96,16 +96,16 @@ void Level::LevelInit()
 
 	Flower* flower_2 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(2216, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 
-	interactableManager.addInteractableObjects(flower_2);
+	interactableObjectManager->addInteractableObjects(flower_2);
 	objectsList.push_back(flower_2);
 
 	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(7422, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
-	interactableManager.addInteractableObjects(flower_3);
+	interactableObjectManager->addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
-	Hiding* hiding_1 = new Hiding("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(125 + 64 * 58, -1112.0f -32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	Trap* hiding_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(125 + 64 * 58, -1112.0f -32, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, -128, 1));
 		
-	interactableManager.addInteractableObjects(hiding_1);
+	interactableObjectManager->addInteractableObjects(hiding_1);
 	objectsList.push_back(hiding_1);
 	#pragma endregion 
 
@@ -189,8 +189,7 @@ void Level::LevelUpdate()
 	cameraController->Update();
 
 	/// Collision Check 
-	// Check with Invisible Walls
-	for (DrawableObject* en : EntityObjectsList) {
+ 	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
 			if (eptr->isDead())
 				continue;
@@ -244,11 +243,15 @@ void Level::LevelUpdate()
 					}
 				}
 			}
-		}
-
-
-
+		}		 
 	}
+
+	
+
+
+
+	//Update InteractableObject 
+	interactableObjectManager->Update(deltaTime);
 
 	// Update Game Objs
 	for (DrawableObject* obj : EntityObjectsList) {
@@ -256,7 +259,6 @@ void Level::LevelUpdate()
 		if (Entity* eptr = dynamic_cast<Entity*>(obj))
 			if (eptr->isDead())
 				continue;
-
 		obj->Update(deltaTime);
 	}
 
@@ -298,7 +300,7 @@ void Level::HandleKey(char key)
 	case 'd': player->HandleKey(key); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-	case 'e': interactableManager.notify(player); break;
+	case 'e': interactableObjectManager->notify(player); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
 	//case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2;   break;
 	case 'g':  player->OnDamaged(1); break;

@@ -13,4 +13,5 @@ class InteractableObjectManager {
 		void addInteractableObjects(InteractableObject* io);
 		void DelInteractableObjects(InteractableObject* io);
 		void notify(Entity* e); 
-};
+		void Update(int deltaTime);
+ };

@@ -19,8 +19,16 @@ void InteractableObjectManager::DelInteractableObjects(InteractableObject* io) {
 	cout << "See more in InteractableObjectManager.cpp";
 }
 
-void InteractableObjectManager::notify(Entity* e) {
 
+
+void InteractableObjectManager::notify(Entity* e) {
  	for (int i = 0; i < interactableObjects.size(); i++)
 		interactableObjects[i]->isCalled(e);
 }
+
+  
+
+ void InteractableObjectManager::Update(int deltaTime) {
+	 for (int i = 0; i < interactableObjects.size(); i++)
+		 interactableObjects[i]->Update(deltaTime);
+ }
