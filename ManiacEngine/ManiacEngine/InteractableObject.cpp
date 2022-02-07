@@ -14,7 +14,7 @@ void InteractableObject::Called() {
 
 void InteractableObject::isCalled(Entity* e) {
  	if (InCollideRadius(this,e) > 0) {
-		Called();
+ 		Called();
 	}
 }
 
@@ -22,7 +22,7 @@ int InteractableObject::InCollideRadius(InteractableObject* in,Entity *e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 						  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
 
-	if (e->GetPos().x - in->GetPos().x > 64 || e->GetPos().x - in->GetPos().x < -64)
+	if (e->GetPos().x - in->GetPos().x > 128 || e->GetPos().x - in->GetPos().x < -128)
 		return 0 ;
 
 	float LeftX_Inv_Obj = (float)in->GetPos().x - ColliderSize.x / 2;

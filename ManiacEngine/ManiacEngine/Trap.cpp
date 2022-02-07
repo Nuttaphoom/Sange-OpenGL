@@ -5,7 +5,7 @@ int CollideWithInsideCollision(InteractableObject* in,Entity* e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 						  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
 
-	if (e->GetPos().x - in->GetPos().x > 64 || e->GetPos().x - in->GetPos().x < -64)
+	if (e->GetPos().x - in->GetPos().x > 2000 || e->GetPos().x - in->GetPos().x < -2000)
 		return 0;
 
 	float LeftX_Inv_Obj = (float)in->GetPos().x - in->ColliderSize.x / 2;
@@ -57,7 +57,6 @@ int CollideWithInsideCollision(InteractableObject* in,Entity* e) {
 		}
 	}
 
-	printf("In Interactable Object : Collide : %d\n", CollideDetection);
 	return CollideDetection;
 }
 
@@ -70,6 +69,7 @@ void Trap::getTrap() {
 }
 void Trap::Called() {
 	//Refuse trap
+	cout << "Refused" << endl; 
 	refused = true; 
 
 }
@@ -80,19 +80,19 @@ void Trap::Update(int deltaTime) {
 	if (refused) return;
 
 	Player* player = Player::GetInstance();
-	glm::vec3 insideColliderSize = ColliderSize - trapSizeOffset;
-	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("test", 0, 0, pos, size, insideColliderSize));
+	glm::vec3 insideColliderSize = glm::vec3(ColliderSize.x - trapSizeOffset ,ColliderSize.y  , 1);
+	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, pos, size, insideColliderSize));
 	
-	if (CollideWithInsideCollision(testObj, player) && coolDown <= 0) {
-		cout << "Cooldown : " << coolDown << endl; 
- 		coolDown = 3; 
-		refused = true; 
-		player->OnDamaged(1);
+	
+
+	if (testObj->InCollideRadius(testObj, player)) {
+		cout << "hurt player" << endl;
+		//coolDown = 3; 
+		//refused = true; 
+		//player->OnDamaged(1);
 	} 
 
-	if (coolDown > 0) {
- 		coolDown -= 1 * deltaTime; 
-	}
+	 
 	delete testObj;
 }
  
