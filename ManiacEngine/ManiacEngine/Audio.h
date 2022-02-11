@@ -27,12 +27,22 @@ private:
 
 class AudioEngine {
 	public:
+		float masterVolume = 1.0f;
+		float sfxVolume = 1.0f;
+		float musicVolume = 1.0f;
+
+		static AudioEngine* instance;
 		AudioEngine();
 		~AudioEngine();
 
 		void init();
 		void destroy();
 
+		void setMastervolume(float masterVol);
+		void setsfxVolume(float sfxVol);
+		void setMusicVolume(float musicVol);
+
+		static AudioEngine* GetInstance();
 		SoundEffect loadSoundEffect(const std::string& filePath);
 		Music loadMusic(const std::string& filePath);
 

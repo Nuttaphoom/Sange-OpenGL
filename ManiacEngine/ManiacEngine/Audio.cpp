@@ -1,6 +1,16 @@
 #include "Audio.h"
 #include <iostream>
 
+AudioEngine* AudioEngine::instance = nullptr;
+
+AudioEngine* AudioEngine::GetInstance()
+{
+	if (instance == nullptr) {
+		instance = new AudioEngine();
+	}
+	return instance;
+}
+
 void SoundEffect::play(int loop)
 {
 	if (Mix_PlayChannel(-1, m_chunk, loop) == -1)
@@ -9,6 +19,22 @@ void SoundEffect::play(int loop)
 	}
 }
 
+void AudioEngine::setMusicVolume(float setmusicVol) {
+	musicVolume = setmusicVol;
+	Mix_VolumeMusic(musicVolume * MIX_MAX_VOLUME);
+}
+
+void AudioEngine::setsfxVolume(float sfxVol) {
+	sfxVolume = sfxVol;
+	Mix_Volume(-1, sfxVolume * MIX_MAX_VOLUME);
+}
+
+void AudioEngine::setMastervolume(float masterVol) {
+	masterVolume = masterVol;
+	Mix_VolumeMusic(masterVolume * MIX_MAX_VOLUME);
+	Mix_Volume(-1, masterVolume * MIX_MAX_VOLUME);
+	
+}
 void Music::play(int loop)
 {
 	Mix_PlayMusic(m_music, loop);
