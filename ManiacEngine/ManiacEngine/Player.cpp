@@ -3,6 +3,7 @@
 #include "GameEngine.h"
 #include "InvisibleObject.h"
 #include "GameStateController.h"
+#include "Level.h"
 
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
  
@@ -26,16 +27,29 @@ void Player::HandleKey(char Key)
 {
  	switch (Key)
 	{
-	case 'w': if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
+		case 'w': if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
 				TranslateVelocity(glm::vec3(0, 18, 0)); 
 				Entity::OnGround = false;
 				ChangeState(StateMachine::JUMPPING);
-				cout << "jump" << endl;
 		} 
+				if (GetState() == StateMachine::CLIMBING)
+				{
+					TranslateVelocity(glm::vec3(0, this->GetClimbSpeed(), 0));
+				}
 		break;
-		case 's': TranslateVelocity(glm::vec3(0, -3, 0)); break;
+		case 's': if (GetState() != StateMachine::CLIMBING) {TranslateVelocity(glm::vec3(0, -3, 0));}
+				else { TranslateVelocity(glm::vec3(0, this->GetClimbSpeed() * -1, 0));}
+				break;
 		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
 		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;
+		case 'e': if (GetState() != StateMachine::CLIMBING){
+				//for (int i = 0; i < GetInvisibleWallList(); i++)
+				ChangeState(StateMachine::CLIMBING);
+		}
+				else {
+				ChangeState(StateMachine::FALLING);
+		}
+	
  	}
 }
 
@@ -120,6 +134,11 @@ void Player::UpdateStateMachine(float deltatime)
 			delay = 0;
 			ChangeState(StateMachine::FALLING);
 		}
+	}
+
+	if (GetState() == StateMachine::CLIMBING)
+	{
+		
 	}
 	 
 }
@@ -235,6 +254,11 @@ bool Player::isSeen() {
 		return true;
 	else
 		return false;
+}
+
+float Player::GetClimbSpeed()
+{
+	return _climbSpeed;
 }
 
 
