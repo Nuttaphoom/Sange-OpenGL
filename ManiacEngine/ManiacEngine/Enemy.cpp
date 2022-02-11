@@ -8,10 +8,6 @@ Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, gl
 
  
 
-void Enemy::Attack(Entity* target) {
-
-}
-
 void Enemy::Translate(glm::vec3 moveDistance)
 {
 	pos = pos + moveDistance;
@@ -24,39 +20,7 @@ void Enemy::Update(int deltatime)
   
 }
 
-void Enemy::UpdateStateMachine(float deltatime)
-{
-	if (GetState() == StateMachine::RUNNING)
-	{
-		if (PlayerDetect(Player::GetInstance()) == true)
-		{
- 			ChangeState(StateMachine::CHASING);
-		}
-		else
-		{
- 			Patrol();
-		}
-
-
-	}
-	else if (GetState() == StateMachine::IDLE)
-	{
-		if (GetVelocity().x != 0)
-		{
-			ChangeState(StateMachine::RUNNING);
-			//cout << "WALKING" << endl;
-		}
-	}
-	else if (GetState() == StateMachine::CHASING) {
-		if (PlayerDetect(Player::GetInstance()) == false)
-		{
-			ChangeState(StateMachine::RUNNING);
-		}
-		else {
-			PlayerChase(Player::GetInstance());
-		}
-	}
-}
+ 
 
 void Enemy::ChangeState(StateMachine nextState)
 {
@@ -125,29 +89,6 @@ void Enemy::AddPatrolPos(glm::vec3 pos)
 	PatrolPos.push_back(pos);
 }
 
-void Enemy::Patrol()
-{
-	TranslateVelocity(glm::vec3(this->GetMoveSpeed() * DirectionSet, 0, 0));
-	if (GetPos().x >= PatrolPos.at(0).x)
-	{
-		SetDirection(-1);
-	}
-	if (GetPos().x <= PatrolPos.at(1).x)
-	{
-		SetDirection(1);
-	}
-}
+ 
 
-void Enemy::PlayerChase(Entity* p)
-{
- 	if (p->GetPos().x - GetPos().x < -50)
-	{
-		SetDirection(-1);
-		TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0));
-	}
-	if (p->GetPos().x - GetPos().x > 50)
-	{
-		SetDirection(1); 
-		TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0));
-	}
-}
+ 
