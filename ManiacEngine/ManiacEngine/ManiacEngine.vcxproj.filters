@@ -141,9 +141,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Flower.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
     </ClCompile>
@@ -194,6 +191,12 @@
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Bishop.cpp">
+      <Filter>Source Files\Objects\Enemy Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Objects\Enemy Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Header Files\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Bishop.h">
+      <Filter>Header Files\Objects\Enemy Types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

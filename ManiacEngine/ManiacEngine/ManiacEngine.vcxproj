@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraController.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Hiding.cpp" />
+    <ClInclude Include="Bishop.h" />
     <ClInclude Include="Hiding.h" />
     <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="ImageObject.cpp" />

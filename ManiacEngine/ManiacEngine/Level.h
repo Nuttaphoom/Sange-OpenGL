@@ -16,7 +16,7 @@
 #include "Decon.h"
 #include <fstream>
 #include "ReSpawner.h"
-
+#include "Bishop.h"
 class Level
 {
 private:

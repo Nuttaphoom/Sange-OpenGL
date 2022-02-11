@@ -35,6 +35,7 @@ void Decon::Update(int deltatime) {
 }
 
 void Decon::EnterAttackZone(Entity* target) {
+	////////////
 	if (GetState() == StateMachine::ATTACKING || target->GetState() == StateMachine::HIDING) return; 
 	
 
@@ -99,8 +100,7 @@ void Decon::UpdateStateMachine(float deltatime)
 	}
 
 	if (GetState() == StateMachine::ATTACKING) {
-		cout << "attacking" << endl; 
-		attack_delay += deltatime ;  
+ 		attack_delay += deltatime ;  
 		if (attack_delay > 75*8) {
  			Attack(Player::GetInstance()); 
 			attack_delay = 0;
@@ -136,53 +136,7 @@ void Decon::ChangeState(StateMachine nextState)
 StateMachine Decon::GetState() {
 	return this->DeconState ; 
 }
-
-bool Decon::PlayerDetect(Entity* p)
-{
-	if (p->GetState() == StateMachine::HIDING)
-		return false;
-
-	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
-
-	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
-	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false;
-
-
-	if (Distance.x < 300 && Distance.y < 100) {
-		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast(); 
-
-		//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
-		//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
-
-		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
-			//	cout << "SEE PLAYER" << endl; 
-			Player::GetInstance()->AddDetectingEntity(this);
-			return true;
-		}
-	}
-
-	Player::GetInstance()->RemoveDetectingEntity(this); 
- 	return false;
-
-	/*
-	glm::vec3 Distance = glm::vec3(GetPos().x - p->GetPos().x, GetPos().y - p->GetPos().y, 0);
-	if (Distance.x < 300 && Distance.y < 100)
-	{
-		if (p->GetPos().x <= GetPos().x && DirectionSet == -1)
-		{
-			return true;
-		}
-		if (p->GetPos().x >= GetPos().x && DirectionSet == 1)
-		{
-			return true;
-		}
-		return false;
-	}
-	else
-	{
-		return false;
-	}*/
-}
+ 
 
 void Decon::AddPatrolPos(glm::vec3 pos)
 {
@@ -201,7 +155,17 @@ void Decon::Patrol()
 	else SetDirection(-1); 
 
 	TranslateVelocity(glm::vec3(this->GetMoveSpeed() * DirectionSet, 0, 0));
+}
 
-
- 
+void Decon::PlayerChase(Entity* p) {
+	if (p->GetPos().x - GetPos().x < -50)
+	{
+		SetDirection(-1);
+		TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0));
+	}
+	if (p->GetPos().x - GetPos().x > 50)
+	{
+		SetDirection(1);
+		TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0));
+	}
 }

@@ -5,8 +5,7 @@
 class Decon : public Enemy {
 	private :
 		StateMachine DeconState;
-		vector<glm::vec3> PatrolPos;
-		int CurrentPatrolPos = 0; 
+
 		//counter ; 
 		int attack_delay = 0;
 		int chasing_delay = 0;
@@ -23,6 +22,6 @@ class Decon : public Enemy {
 	virtual void ChangeState(StateMachine nextState); 
 	virtual StateMachine GetState();
 	virtual void AddPatrolPos(glm::vec3 pos);
-	virtual bool PlayerDetect(Entity* p);
 	virtual void Patrol();
-};
+	virtual void  PlayerChase(Entity* p)  ;
+ };
