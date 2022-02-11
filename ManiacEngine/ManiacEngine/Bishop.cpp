@@ -3,6 +3,9 @@
 
 Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 0.21f, Pos, Size) {
 	_bishopState = StateMachine::IDLE;
+	DetectedDistanceX = 1000.0f;
+	DetectedDistanceY = 100.0f;
+
 } 
 
 void Bishop::Update(int deltatime) {
@@ -14,18 +17,29 @@ void Bishop::Update(int deltatime) {
 void Bishop::UpdateStateMachine(float deltatime) {
 	if (_bishopState == StateMachine::IDLE) {
 		//Count Time until Attack time 
-		_countDownTime += 1 * deltatime;
-		if (_countDownTime >= 3) {
+		_countDownTime += 1 * 1 / deltatime;
+		cout << _countDownTime << endl; 
+ 		if (_countDownTime >= 3) {
 			_countDownTime = 0;
-			ChangeState(StateMachine::RUNNING); 
+ 			ChangeState(StateMachine::RUNNING); 
 		}
 	}
 	else if (_bishopState == StateMachine::ATTACKING) {
 		//CountDelayTime , when delay == 0, turn around and get back to Idle 
 		//if in Attack state, do damage to player if they see the player. check every single frame 
 		Player* p = Player::GetInstance() ; 
-		if (p->GetState() != StateMachine::HIDING)
-			Attack(p);
+		if (p->GetState() != StateMachine::HIDING) {
+			if (PlayerDetect(p)) {
+				Attack(p);
+			}
+		}
+
+		_countDownTime += 1 * 1 / deltatime;
+		cout << _countDownTime << endl;
+		if (_countDownTime >= 3) {
+			_countDownTime = 0;
+			ChangeState(StateMachine::RUNNING);
+		}
 	}
 	else if (_bishopState == StateMachine::RUNNING) {
 		Patrol(); 
@@ -41,7 +55,7 @@ void Bishop::Patrol() {
 	glm::vec3 dest = PatrolPos.at(CurrentPatrolPos);
 
 	if (abs(dest.x - GetPos().x) < 2) {
-		if (CurrentPatrolPos == 0) { // Get back to right side 
+ 		if (CurrentPatrolPos == 0) { // Get back to right side 
 			ChangeState(StateMachine::IDLE);
 		}
 		else if (CurrentPatrolPos == 1) { //Get to casting skill position  
@@ -49,6 +63,8 @@ void Bishop::Patrol() {
 		}
 
 		CurrentPatrolPos = (CurrentPatrolPos + 1) % PatrolPos.size();
+
+		return;
 
 	}
 	if (dest.x > GetPos().x) SetDirection(1);
@@ -60,8 +76,10 @@ void Bishop::Patrol() {
 void Bishop::Attack(Entity* target) {
 	if (target->GetState() == StateMachine::HIDING)
 		return;  
+ 
+	if (beam == nullptr) 
+		beam = new SpriteObject("../Resource\Texture\Enemy\Pope_Dummy.png", 1, 1, Player::GetInstance()->GetPos() , glm::vec3(128, -1280, 1));
 
-	target->OnDamaged(10);  
 }
 void Bishop::ChangeState(StateMachine NextState) {
 	if (_bishopState == StateMachine::IDLE) {
@@ -75,5 +93,33 @@ void Bishop::ChangeState(StateMachine NextState) {
 	else if (_bishopState == StateMachine::RUNNING) {
 		_bishopState = NextState;
 
+	}
+}
+
+void Bishop::Render(glm::mat4 globalModelTransform) {
+	if (GetState() != StateMachine::HIDING) {
+		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+
+		GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
+		GLuint modeId = GameEngine::GetInstance()->GetRenderer()->GetModeUniformId();
+
+		glBindTexture(GL_TEXTURE_2D, GetTexture());
+		if (modelMatixId == -1) {
+			cout << "Error: Can't perform transformation " << endl;
+			return;
+		}
+
+		glm::mat4 currentMatrix = this->getTransform();
+		/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
+		currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1));
+
+		if (squareMesh != nullptr) {
+			currentMatrix = globalModelTransform * currentMatrix;
+			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
+			glUniform1i(modeId, 1);
+			squareMesh->AdjustTexcoord(GetUV());
+			squareMesh->Render();
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 	}
 }

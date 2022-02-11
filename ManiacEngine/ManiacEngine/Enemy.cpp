@@ -48,11 +48,9 @@ bool Enemy::PlayerDetect(Entity* p)
 	Player::GetInstance()->AddDetectingEntity(this);
 
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
-	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false; 
-	//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
-	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
+	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false;  
 
-	if (Distance.x < 300 && Distance.y < 100) {
+	if (Distance.x < DetectedDistanceX && Distance.y < DetectedDistanceY) {
 		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast() ;
 		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
 			Player::GetInstance()->AddDetectingEntity(this); 
