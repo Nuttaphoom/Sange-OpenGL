@@ -120,6 +120,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 			if (ColMapdata[i][j] == 1) {
 				InvisibleObject* newInv = new InvisibleObject();
 				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 1));
+				//newInv->SetPosition(glm::vec3(0, -256, 0));
 				newInv->SetSize(64, 64);
 				newInv->SetRender(true);
 				tiles_collision.push_back(newInv);

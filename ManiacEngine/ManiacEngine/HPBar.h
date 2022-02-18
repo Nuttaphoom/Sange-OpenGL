@@ -1,6 +1,7 @@
 
 #include "GUI.h"
 #include "Observer.h"
+
 class HPBar : public GUI , public Observer {
 	private :
 		vector<GUI*> HPPoints; 

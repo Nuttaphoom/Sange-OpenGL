@@ -184,13 +184,13 @@ void Entity::Collides_W_Inv_Wall(int CollisionDetection, glm::vec3 ivbObj[4][2])
  		OnGround = false; 
 	}
 
- 	if ((CollisionDetection >> 2) % 2 != 0) { //COLLIDE RIGHT
+	if ((CollisionDetection >> 2) % 2 != 0) { //COLLIDE LEFT
 		//this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0,0));
 		//this->SetPosition(glm::vec3(ivbObj[2][0].x + ivbObj[2][1].x + ivbObj[2][1].x / 2 + 1 , GetPos().y, GetPos().z));
 
 	}
 
-	if ((CollisionDetection >> 3) % 2 != 0) { //COLLIDE LEFT
+	if ((CollisionDetection >> 3) % 2 != 0) { //COLLIDE RIGHT
 		//this->TranslateVelocity(glm::vec3(this->GetVelocity().x * -1, 0, 0));
 		//this->SetPosition(glm::vec3(ivbObj[3][0].x - ivbObj[3][1].x - ivbObj[3][1].x / 2 - 1,GetPos().y, GetPos().z));
 	}

@@ -1,7 +1,5 @@
 #include "HPBar.h"
 #include "Player.h"
-#include "Raycast.h"
-
 HPBar::HPBar(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size) : GUI(fileName,row,column,Pos,Size) {
 	float offsetX = 32; 
 	temp_fileName = fileName; 
@@ -14,8 +12,6 @@ HPBar::HPBar(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size)
 		HPPoints.push_back(newP); 
 	}
 
-	RayCast s = RayCast(Player::GetInstance(), Player::GetInstance()) ;
-	glm::vec3 vec = s.GetOutPutRayCast(); 
 	Player::GetInstance()->attach(this,0);
 }
  
