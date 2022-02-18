@@ -49,6 +49,7 @@ class Entity : public SpriteObject
 		virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
  		virtual float GetMoveSpeed();
 		virtual void SetDirection(int x);
+		virtual int GetDirection();
 		virtual void OnDamaged(int damage); 
 		virtual void Attack(Entity* target) ;
 		virtual bool isDead();

@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "TileMap.h"
+#include "Audio.h"
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT;
 
@@ -10,7 +11,7 @@ void Level::LevelLoad()
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
-	ifstream mapFile("../Resource/Map/Level_1/Example_Middle_Mapdata.txt");
+	ifstream mapFile("../Resource/Map/Level_1/Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -25,7 +26,7 @@ void Level::LevelLoad()
 	}
 
 
-	ifstream FrontMapFile("../Resource/Map/Level_1/Example_Front_Mapdata.txt");
+	ifstream FrontMapFile("../Resource/Map/Level_1/Front_Mapdata.txt");
 	if (FrontMapFile.is_open()) {
 		FrontMapFile >> MapHeight;
 		FrontMapFile >> MapWidth;
@@ -53,7 +54,7 @@ void Level::LevelLoad()
 		cMapFile.close();
 	}
 
-	ifstream BackGroundMapFile("../Resource/Map/Level_1/Example_Background_Mapdata.txt");
+	ifstream BackGroundMapFile("../Resource/Map/Level_1/Background_Mapdata.txt");
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
@@ -74,10 +75,16 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
+	AudioEngine audio;
+	audio.init();
+
+	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
+	sound1.play();
+
 	checkPoint = CheckPoint::GetInstance();
 
 	#pragma region tilemapss
-	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Example_Glass_Dirt_Tile.png", 21, 40);
+	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/Tiles_1.1.png", 21, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
@@ -94,19 +101,19 @@ void Level::LevelInit()
 	#pragma region interactableObject 
  
 
-	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(2216, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(125 + 64 * 58, -1135.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
-	interactableObjectManager->addInteractableObjects(hiding);
+	interactableObjectManager->addInteractableObjects(hiding); 
 	objectsList.push_back(hiding);
 
 	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(7422, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
-	Trap* hiding_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(125 + 64 * 58, -1112.0f -32, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, -128, 1));
+	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(256, -256, 1));
 		
-	interactableObjectManager->addInteractableObjects(hiding_1);
-	objectsList.push_back(hiding_1);
+	interactableObjectManager->addInteractableObjects(trap_1);
+	objectsList.push_back(trap_1);
 	#pragma endregion 
 
 
@@ -123,7 +130,7 @@ void Level::LevelInit()
 	//}
 	#pragma endregion 
 	#pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_Re.png", 3, 10, 3, glm::vec3(125, -1176.0f, 0.0f),glm::vec3(128,-128,0));
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_V2.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f),glm::vec3(128,-128,0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
@@ -302,12 +309,12 @@ void Level::HandleKey(char key)
 	switch (key)
 	{
 	case 'w': player->HandleKey(key); break;
-	//case 's': player->HandleKey(key); break;
+	case 's': player->HandleKey(key); break;
 	case 'a': player->HandleKey(key); break;
 	case 'd': player->HandleKey(key); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-	case 'e': interactableObjectManager->notify(player); break;
+	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
 	//case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2;   break;
 	case 'g':  player->OnDamaged(1); break;

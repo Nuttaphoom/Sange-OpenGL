@@ -11,7 +11,6 @@ Player* Player::instance = nullptr;
 
 
 
-
 void Player::HandleMouse(glm::vec3 mouseRealPos) {
 	
 	cout << "here1" << endl;
@@ -26,35 +25,54 @@ void Player::HandleMouse(glm::vec3 mouseRealPos) {
 
 void Player::HandleKey(char Key)
 {
- 	switch (Key)
+	switch (Key)
 	{
-		case 'w': if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
-				TranslateVelocity(glm::vec3(0, 18, 0)); 
+		case 'w':
+			if (GetState() == StateMachine::CLIMBING) {
+				TranslateVelocity(glm::vec3(0, GetClimbSpeed(), 0));
+			}
+			else if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
+				TranslateVelocity(glm::vec3(0, 18, 0));
 				Entity::OnGround = false;
 				ChangeState(StateMachine::JUMPPING);
-		} 
-				if (GetState() == StateMachine::CLIMBING)
-				{
-					TranslateVelocity(glm::vec3(0, this->GetClimbSpeed(), 0));
+			}
+			break;
+		case 's':
+			if (GetState() == StateMachine::CLIMBING) {
+				TranslateVelocity(glm::vec3(0, GetClimbSpeed() * -1, 0));
+			}
+			else {
+				//TranslateVelocity(glm::vec3(0, -3, 0));
+			}
+			break;
+		case 'a':
+			if (GetState() == StateMachine::CLIMBING) {
+				if (GetDirection() == 1) {
+					ChangeState(StateMachine::FALLING);
 				}
-		break;
-		case 's': if (GetState() != StateMachine::CLIMBING) {TranslateVelocity(glm::vec3(0, -3, 0));}
-				else { TranslateVelocity(glm::vec3(0, this->GetClimbSpeed() * -1, 0));}
-				break;
-		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
-		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;
-		case 'e': if (GetState() != StateMachine::CLIMBING){
-				//GamecurrentLevel
-				ChangeState(StateMachine::CLIMBING);
-		}
-				else {
-				ChangeState(StateMachine::FALLING);
-		}
-	
- 	}
+			}
+			else {
+				TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);
+			}
+			break;
+		case 'd':
+			if (GetState() == StateMachine::CLIMBING) {
+				if (GetDirection() == -1) {
+					ChangeState(StateMachine::FALLING);
+				}
+			}
+			else {
+				TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1);
+			}
+			break;
+		case 'e': 
+			if (GetState() != StateMachine::CLIMBING) {
+				SetClimbing();
+			}
+	}
 }
 
-Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 1.0f, Pos,Size)
+Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 0.5f, Pos,Size)
 {	
 	this->collisionSize = glm::vec3(76, -128, 1);
  	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
@@ -177,6 +195,17 @@ void Player::ChangeState(StateMachine NextState)
 	{
 		SetAnimationLoop(1, 8, 2, 300);
 	}
+	else if (this->GetState() == StateMachine::CLIMBING)
+	{
+		if (velocity.y != 0)
+		{
+			SetAnimationLoop(3, 0, 1, 100);
+		}
+		else
+		{
+			SetAnimationLoop(3, 0, 8, 100);
+		}
+	}
 }
 
 void Player::Translate(glm::vec3 moveDistance)
@@ -260,6 +289,19 @@ bool Player::isSeen() {
 float Player::GetClimbSpeed()
 {
 	return _climbSpeed;
+}
+
+void Player::SetClimbing()
+{
+	int l = GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().size();
+	for (int k = 0; k < l; k++){
+		if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 72.0f &&
+			abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 32.0f)
+		{
+			cout << "climb" << endl;
+			ChangeState(StateMachine::CLIMBING);
+		}
+	}
 }
 
 

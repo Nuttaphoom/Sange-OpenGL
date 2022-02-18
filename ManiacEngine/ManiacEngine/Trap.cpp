@@ -80,8 +80,8 @@ void Trap::Update(int deltaTime) {
 	if (refused) return;
 
 	Player* player = Player::GetInstance();
-	glm::vec3 insideColliderSize = glm::vec3(ColliderSize.x - trapSizeOffset ,ColliderSize.y  , 1);
-	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, pos, size, insideColliderSize));
+	glm::vec3 insideColliderSize = glm::vec3(/*ColliderSize.x - trapSizeOffset*/ 0, ColliderSize.y, 1);
+	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, pos, insideColliderSize, insideColliderSize));
 	
 	
 
@@ -89,7 +89,7 @@ void Trap::Update(int deltaTime) {
 		cout << "hurt player" << endl;
 		//coolDown = 3; 
 		//refused = true; 
-		//player->OnDamaged(1);
+		player->OnDamaged(10);
 	} 
 
 	 

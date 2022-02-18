@@ -90,16 +90,16 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 		}
 	}
 	/// Create tile in Front Layer
-	/*for (int i = 0; i <  width + 1   ; i++) {
+	for (int i = 0; i <  width + 1   ; i++) {
 		tiles.push_back(vector<SpriteObject*>());
 		for (int j = 0; j < height + 1; j++) {
 			/// Create every tile
-			tiles[i + width + 1 + width].push_back(new SpriteObject(texture, rowMax, columnMax, glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 64 + 32), GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 64 - 32, 0)
+			tiles[i + width + 1 + width + 1].push_back(new SpriteObject(texture, rowMax, columnMax, glm::vec3((-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33), GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 0)
 				, glm::vec3(64, -64, 1)));
-			tiles[i + width + 1 + width ][j]->SetAnimationLoop(0, 0, 0, 0,false);
+			tiles[i + width + 1 + width + 1 ][j]->SetAnimationLoop(0, 0, 0, 0,false);
 
 			/// Set position of each tile
- 			if (Mapdata_Front_Layer[i][j] == -1)tiles[i + width  + width + 1][j]->SetPosition(glm::vec3(width * 10000, height * 10000, 0));
+ 			if (Mapdata_Front_Layer[i][j] == -1)tiles[i + width + 1 + width + 1][j]->SetPosition(glm::vec3(width * 10000, height * 10000, 0));
 
 			/// Calculate UV
 			float uvs[8];
@@ -112,7 +112,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 				Mapdata_Front_Layer, uvs);
 			tiles[i + width + width + 1][j]->SetUV(uvs);
 		}
-	}*/
+	}
 
 	/// Create all collision object for every tiles. 
 	for (int i = 0; i < width + 1; i++) {

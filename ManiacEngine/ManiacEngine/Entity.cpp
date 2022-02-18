@@ -25,6 +25,18 @@ void Entity::VelocityControl() {
 			velocity.x = 0;
 		}
 	}
+	
+	if (GetState() == StateMachine::CLIMBING)
+	{
+		if (velocity.y != 0)
+		{
+			velocity.y = velocity.y / 200;
+			if (velocity.y < 0.02 && velocity.y > -0.02)
+			{
+				velocity.y = 0;
+			}
+		}
+	}
 }
  Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName, row, column,Pos,Size), HP(HP), MoveSpeed(MoveSpeed) {
 	this->velocity = glm::vec3(0, 0, 0);
@@ -141,9 +153,12 @@ void Entity::Update(int deltatime)
 {
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround) { //Apply velocity 
+	if (!OnGround && GetState() != StateMachine::CLIMBING) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -0.5f, 0));
  	}	
+	else if (GetState() == StateMachine::CLIMBING) {
+		TranslateVelocity(glm::vec3(0, 0, 0));
+	}
 
 	 
 	VelocityControl(); 
@@ -248,4 +263,9 @@ void Entity::RespawnThisObject() {
 	SetPosition(Default_pos); 
 	this->HP = Default_HP;  
 	this->MoveSpeed = Default_MoveSpeed; 
+}
+
+int Entity::GetDirection()
+{
+	return DirectionSet;
 }
