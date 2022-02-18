@@ -39,13 +39,13 @@ void Enemy::ChangeState(StateMachine nextState)
 
 bool Enemy::PlayerDetect(Entity* p)
 {
+	Player::GetInstance()->RemoveDetectingEntity(this);
 	if (p->GetState() == StateMachine::HIDING)
 		return false; 
 
 	
 
 	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
-	Player::GetInstance()->AddDetectingEntity(this);
 
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
 	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false; 

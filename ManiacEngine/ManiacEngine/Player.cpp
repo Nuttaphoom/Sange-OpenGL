@@ -11,6 +11,7 @@ Player* Player::instance = nullptr;
 
 
 
+
 void Player::HandleMouse(glm::vec3 mouseRealPos) {
 	
 	cout << "here1" << endl;
@@ -43,7 +44,7 @@ void Player::HandleKey(char Key)
 		case 'a': TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);  break;
 		case 'd': TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1); break;
 		case 'e': if (GetState() != StateMachine::CLIMBING){
-				//for (int i = 0; i < GetInvisibleWallList(); i++)
+				//GamecurrentLevel
 				ChangeState(StateMachine::CLIMBING);
 		}
 				else {

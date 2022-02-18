@@ -94,10 +94,10 @@ void Level::LevelInit()
 	#pragma region interactableObject 
  
 
-	Flower* flower_2 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(2216, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(2216, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 
-	interactableObjectManager->addInteractableObjects(flower_2);
-	objectsList.push_back(flower_2);
+	interactableObjectManager->addInteractableObjects(hiding);
+	objectsList.push_back(hiding);
 
 	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(7422, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(flower_3);
@@ -157,13 +157,13 @@ void Level::LevelInit()
 	EntityObjectsList.push_back(test4);
 	objectsList.push_back(test4);
 
-	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Pope_Dummy.png", 1, 1, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
+	/*Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Pope_Dummy.png", 1, 1, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
 	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
 	_bishopTest->AddPatrolPos(glm::vec3(189 + 4 * 64, -1176.0f, 0.0f));
 	_bishopTest->AddPatrolPos(glm::vec3(189 , -1176.0f, 0.0f));
 
 	EntityObjectsList.push_back(_bishopTest);
-	objectsList.push_back(_bishopTest);
+	objectsList.push_back(_bishopTest);*/
 	#pragma endregion
 	respawner = new ReSpawner();
 
