@@ -19,8 +19,8 @@ void Entity::VelocityControl() {
 
 	if (velocity.x != 0)
 	{
-		velocity.x = velocity.x / 1.05;
-		if (velocity.x < 0.02 && velocity.x > -0.02)
+		velocity.x = velocity.x / 5;
+		if (velocity.x < 0.001 && velocity.x > -0.001)
 		{
 			velocity.x = 0;
 		}

@@ -72,7 +72,7 @@ void Player::HandleKey(char Key)
 	}
 }
 
-Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 0.5f, Pos,Size)
+Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 5.0f, Pos,Size)
 {	
 	this->collisionSize = glm::vec3(76, -128, 1);
  	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
@@ -197,14 +197,7 @@ void Player::ChangeState(StateMachine NextState)
 	}
 	else if (this->GetState() == StateMachine::CLIMBING)
 	{
-		if (velocity.y != 0)
-		{
-			SetAnimationLoop(3, 0, 1, 100);
-		}
-		else
-		{
-			SetAnimationLoop(3, 0, 8, 100);
-		}
+		SetAnimationLoop(3, 0, 8, 100);
 	}
 }
 
