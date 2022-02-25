@@ -45,7 +45,7 @@ void GameStateController::Update()
 			currentLevel = new Level();
 			break;
 		case GameState::GS_LEVEL2:
-			currentLevel = new LevelTest();
+			currentLevel = new Level2();
 			break;
 		case GameState::GS_LEVEL3: 
 			currentLevel = new Level3();

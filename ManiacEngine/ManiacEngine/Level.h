@@ -19,7 +19,7 @@
 #include "Bishop.h"
 class Level
 {
-private:
+protected:
 	vector<DrawableObject*> objectsList;
 	vector< DrawableObject*> invisibleObjectsList;
 	vector < DrawableObject*> EntityObjectsList;

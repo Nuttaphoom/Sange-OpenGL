@@ -1,17 +1,19 @@
+#include "Level2.h" 
+
 #include "Level.h"
 #include "TileMap.h"
 #include "Audio.h"
 static int SCREEN_WIDTH;
-static int SCREEN_HEIGHT;	
+static int SCREEN_HEIGHT;
 
 
 
-void Level::LevelLoad()
+void Level2::LevelLoad()
 {
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
-	ifstream mapFile("../Resource/Map/Level_1.1/Middle_Mapdata.txt");
+	ifstream mapFile("../Resource/Map/Level_1.2/Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -26,7 +28,7 @@ void Level::LevelLoad()
 	}
 
 
-	ifstream FrontMapFile("../Resource/Map/Level_1.1/Front_Mapdata.txt");
+	ifstream FrontMapFile("../Resource/Map/Level_1.2/Front_Mapdata.txt");
 	if (FrontMapFile.is_open()) {
 		FrontMapFile >> MapHeight;
 		FrontMapFile >> MapWidth;
@@ -40,7 +42,7 @@ void Level::LevelLoad()
 		FrontMapFile.close();
 	}
 
-	ifstream cMapFile("../Resource/Map/Level_1.1/Col_Mapdata.txt");
+	ifstream cMapFile("../Resource/Map/Level_1.2/Col_Mapdata.txt");
 	if (cMapFile.is_open()) {
 		cMapFile >> MapHeight;
 		cMapFile >> MapWidth;
@@ -54,7 +56,7 @@ void Level::LevelLoad()
 		cMapFile.close();
 	}
 
-	ifstream BackGroundMapFile("../Resource/Map/Level_1.1/Background_Mapdata.txt");
+	ifstream BackGroundMapFile("../Resource/Map/Level_1.2/Background_Mapdata.txt");
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
@@ -73,7 +75,7 @@ void Level::LevelLoad()
 	//cout << "Load Level" << endl;
 }
 
-void Level::LevelInit()
+void Level2::LevelInit()
 {
 	AudioEngine audio;
 	audio.init();
@@ -83,10 +85,10 @@ void Level::LevelInit()
 
 	checkPoint = CheckPoint::GetInstance();
 
-	#pragma region tilemapss
+#pragma region tilemapss
 	//TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
 
-	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.1 SpriteSheet.png", 33, 40);
+	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
@@ -98,101 +100,54 @@ void Level::LevelInit()
 		objectsList.push_back(tilemaps->GetColTiles()[i]);
 	}
 
-	#pragma endregion 
+#pragma endregion 
 
-	#pragma region interactableObject 
+#pragma region interactableObject 
+
  
+#pragma endregion 
 
-	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(125 + 64 * 58, -1135.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
-	interactableObjectManager->addInteractableObjects(hiding); 
-	objectsList.push_back(hiding);
-
-	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(7422, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
-	interactableObjectManager->addInteractableObjects(flower_3);
-	objectsList.push_back(flower_3);
-
-	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(256, -256, 1));
-		
-	interactableObjectManager->addInteractableObjects(trap_1);
-	objectsList.push_back(trap_1);
-	#pragma endregion 
-
-	#pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_V2.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f),glm::vec3(128,-128,0));
+#pragma region Entities 
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_V2.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
- 	EntityObjectsList.push_back(obj);
+	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
-
-	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
-	test->AddPatrolPos(glm::vec3(4886, -920, 0.0f)); 
-	test->AddPatrolPos(glm::vec3(5416, -920, 0.0f));
-	test->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(test);
-	objectsList.push_back(test);
-
-	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5203, -1176, 1),glm::vec3(128,-128,1));
-	test2->AddPatrolPos(glm::vec3(5203, -1176, 1));
-	test2->AddPatrolPos(glm::vec3(3010, -1176, 1));
- 	test2->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(test2);
-	objectsList.push_back(test2);
-
-	Decon* test3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7669, -1176, 0.0f), glm::vec3(128, -128, 1));
-	test3->AddPatrolPos(glm::vec3(7669, -1176, 0.0f));
-	test3->AddPatrolPos(glm::vec3(9045, -920, 0.0f));
-	test3->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(test3);
-	objectsList.push_back(test3);
-
-	Decon* test4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(8400, -1176, 0.0f), glm::vec3(128, -128, 1));
-	test4->AddPatrolPos(glm::vec3(8400, -1176, 0.0f));
-	test4->AddPatrolPos(glm::vec3(9641, -920, 0.0f));
-	test4->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(test4);
-	objectsList.push_back(test4);
-
-	/*Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Pope_Dummy.png", 1, 1, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
-	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
-	_bishopTest->AddPatrolPos(glm::vec3(189 + 4 * 64, -1176.0f, 0.0f));
-	_bishopTest->AddPatrolPos(glm::vec3(189 , -1176.0f, 0.0f));
-
-	EntityObjectsList.push_back(_bishopTest);
-	objectsList.push_back(_bishopTest);*/
-	#pragma endregion
+	 
+#pragma endregion
 	respawner = new ReSpawner();
 
 
-	#pragma region GUI 
-	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0),glm::vec3(1668 / 11, 2224 / 11 * -1,1));
- 
-	objectsList.push_back(SangeImage);
-	GUIObjectsList.push_back(SangeImage); 
+#pragma region GUI 
+	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
 
-	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
-	
+	objectsList.push_back(SangeImage);
+	GUIObjectsList.push_back(SangeImage);
+
+	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+
 	objectsList.push_back(hpbar);
-	
+
 	GUIObjectsList.push_back(hpbar);
 
-	#pragma endregion
+#pragma endregion
 
 
-	 
+
 
 	//cout << "Init Level" << endl;
 
 }
 
-void Level::LevelUpdate()
+void Level2::LevelUpdate()
 {
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();
 
 	/// Collision Check 
- 	for (DrawableObject* en : EntityObjectsList) {
+	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
 			if (eptr->isDead())
 				continue;
@@ -246,10 +201,10 @@ void Level::LevelUpdate()
 					}
 				}
 			}
-		}		 
+		}
 	}
 
-	
+
 
 
 
@@ -267,14 +222,14 @@ void Level::LevelUpdate()
 
 }
 
-void Level::LevelDraw()
+void Level2::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
 	//cout << "Draw Level" << endl;
 }
 
-void Level::LevelFree()
+void Level2::LevelFree()
 {
 	/*for (int i = objectsList.size() - 1; i >= 0 ; i--) {
 		delete objectsList[i];
@@ -287,13 +242,13 @@ void Level::LevelFree()
 	//cout << "Free Level" << endl;*/
 }
 
-void Level::LevelUnload()
+void Level2::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
 	//cout << "Unload Level" << endl;
 }
 
-void Level::HandleKey(char key)
+void Level2::HandleKey(char key)
 {
 	switch (key)
 	{
@@ -302,10 +257,10 @@ void Level::HandleKey(char key)
 	case 'a': player->HandleKey(key); break;
 	case 'd': player->HandleKey(key); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
-	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
+		//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2;   break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1;   break;
 	case 'g':  player->OnDamaged(1); break;
 	case 'f':
 	case 't':
@@ -315,18 +270,18 @@ void Level::HandleKey(char key)
 	}
 }
 
-void Level::HandleMouse(int type, int x, int y)
+void Level2::HandleMouse(int type, int x, int y)
 {
 	float realX = x, realY = y;
 	glm::vec3 mouseVec3;
 	// Calculate Real X Y 
-	Level::WorldToCam(realX, realY);
+	Level2::WorldToCam(realX, realY);
 	mouseVec3 = glm::vec3(realX, realY, 1);
 
 	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
 	//Player HandleMouse 
-	this->player->HandleMouse(mouseVec3); 
+	this->player->HandleMouse(mouseVec3);
 	//Detecting Button 
 	for (int i = 0; i < objectsList.size(); i++) {
 		if (Button* bptr = dynamic_cast<Button*>(objectsList[i])) {
@@ -344,7 +299,7 @@ void Level::HandleMouse(int type, int x, int y)
 	player->SetPosition(MoveObjectToMuseVec3);*/
 }
 
-void Level::WorldToCam(float& realX, float& realY) {
+void Level2::WorldToCam(float& realX, float& realY) {
 	int x, y;
 	x = realX; y = realY;
 

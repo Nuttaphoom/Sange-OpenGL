@@ -45,11 +45,13 @@
     <ClCompile Include="InteractableObjectManager.cpp" />
     <ClCompile Include="InvisibleObject.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="Observer.cpp" />
+    <ClInclude Include="Level2.h" />
     <ClInclude Include="Observer.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Raycast.cpp" />

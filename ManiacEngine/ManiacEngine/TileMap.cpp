@@ -31,7 +31,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 	height -= 1;
 
 	unsigned int texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(texture_path);
-
+	
 	/// Create Background Layer 
 	for (int i = 0; i < width + 1; i++) {
 		tiles.push_back(vector<SpriteObject*>());
@@ -61,7 +61,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 
 		}
 	}
-
+	
 	/// Create tile in Middle Layer 
 	for (int i = 0; i < width + 1; i++) {
 		tiles.push_back(vector<SpriteObject*>());
@@ -113,11 +113,11 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 			tiles[i + width + width + 1][j]->SetUV(uvs);
 		}
 	}
-
+	
 	/// Create all collision object for every tiles. 
 	for (int i = 0; i < width + 1; i++) {
 		for (int j = 0; j < height + 1; j++) {
-			if (ColMapdata[i][j] == 1) {
+			if (ColMapdata[i][j] != -1) {
 				InvisibleObject* newInv = new InvisibleObject();
 				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 1));
 				//newInv->SetPosition(glm::vec3(0, -256, 0));

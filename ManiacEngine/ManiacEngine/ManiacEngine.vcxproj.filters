@@ -198,6 +198,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Objects\Enemy Types</Filter>
     </ClCompile>
+    <ClCompile Include="Level2.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="Bishop.h">
       <Filter>Header Files\Objects\Enemy Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2.h">
+      <Filter>Header Files\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

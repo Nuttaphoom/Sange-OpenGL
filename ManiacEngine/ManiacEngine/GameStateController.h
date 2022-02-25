@@ -5,6 +5,7 @@
 #include "GameData.h"
 #include "Level.h"
 #include "LevelTest.h"
+#include "Level2.h"
 #include "Level3.h"
 
 using namespace std;
