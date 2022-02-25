@@ -86,7 +86,7 @@ void Level::LevelInit()
 	#pragma region tilemapss
 	//TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
 
-	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.1 SpriteSheet.png", 33, 40);
+	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.1 SpriteSheet.png", 21, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
@@ -153,13 +153,13 @@ void Level::LevelInit()
 	EntityObjectsList.push_back(test4);
 	objectsList.push_back(test4);
 
-	/*Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Pope_Dummy.png", 1, 1, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
+	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Pope_Dummy.png", 1, 1, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
 	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
-	_bishopTest->AddPatrolPos(glm::vec3(189 + 4 * 64, -1176.0f, 0.0f));
+	_bishopTest->AddPatrolPos(glm::vec3(189 + 1 * 64, -1176.0f, 0.0f));
 	_bishopTest->AddPatrolPos(glm::vec3(189 , -1176.0f, 0.0f));
 
 	EntityObjectsList.push_back(_bishopTest);
-	objectsList.push_back(_bishopTest);*/
+	objectsList.push_back(_bishopTest);
 	#pragma endregion
 	respawner = new ReSpawner();
 

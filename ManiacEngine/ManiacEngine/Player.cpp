@@ -12,11 +12,7 @@ Player* Player::instance = nullptr;
 
 
 void Player::HandleMouse(glm::vec3 mouseRealPos) {
-	
-	cout << "here1" << endl;
 	for (int i = 0 ; i < ENTITYLIST.size() ; i++) {
-		cout << "here2" << endl;
-
 		if (Enemy* eptr = dynamic_cast<Enemy*>(ENTITYLIST[i])) {
  			Attack(eptr);
 		}

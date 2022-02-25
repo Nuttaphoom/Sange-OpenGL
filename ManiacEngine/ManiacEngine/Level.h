@@ -51,6 +51,9 @@ public:
 	virtual void HandleMouse(int type, int x, int y);
 
 	void WorldToCam(float& x, float& y);
+	#pragma region adder
+	//virtual void Add
+	#pragma endregion 
 
 	#pragma region getter 
 	virtual vector<DrawableObject*> GetInvisibleWallList() { return this->invisibleObjectsList; }
