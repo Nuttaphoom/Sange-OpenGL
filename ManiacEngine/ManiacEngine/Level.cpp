@@ -76,6 +76,7 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
+
 	AudioEngine audio;
 	audio.init();
 
