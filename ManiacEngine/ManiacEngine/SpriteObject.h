@@ -20,11 +20,17 @@ private:
 	int animationTime;
 	int timeCount;
 	bool playAnim; 
+	bool Pause  ;
+
 
 public:
 	SpriteObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) ;
 	SpriteObject(unsigned int texture , int row, int column,glm::vec3 Pos, glm::vec3 Size);
 	~SpriteObject();
+
+	bool IsPause();
+	void SetPause(bool b);
+
 	virtual void Render(glm::mat4 globalModelTransform);
 	virtual void Update(int deltaTime);
 	virtual void GenUV();
@@ -34,6 +40,7 @@ public:
 	virtual unsigned int GetTexture();
 	virtual void SetUV(float uvs[8]); 
 	virtual float* GetUV(); 
+
 
 };
 

@@ -14,8 +14,9 @@ void Bishop::Update(int deltatime) {
 void Bishop::UpdateStateMachine(float deltatime) {
 	if (_bishopState == StateMachine::IDLE) {
 		//Count Time until Attack time 
-		_countDownTime += 1 * deltatime;
-		if (_countDownTime >= 3) {
+		_countDownTime += 1 *  deltatime;
+		std::cout << _countDownTime << endl; 
+		if (_countDownTime >= 30) {
 			_countDownTime = 0;
 			ChangeState(StateMachine::RUNNING); 
 		}

@@ -114,7 +114,7 @@ bool Entity::Death()
 
 void Entity::Render(glm::mat4 globalModelTransform)
 {
-	if (GetState() != StateMachine::HIDING) {
+	if (GetState() != StateMachine::HIDING && IsPause() == false) {
 		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 		GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();

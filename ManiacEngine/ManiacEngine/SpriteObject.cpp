@@ -26,6 +26,8 @@ SpriteObject::SpriteObject(string fileName, int row, int column,glm::vec3 Pos, g
 	this->loopCount = 0;
 	this->animationTime = 0;
 	this->timeCount = 0;
+
+	this->Pause = false;
 } 
 
 SpriteObject::SpriteObject(unsigned int texture,int row, int column, glm::vec3 Pos, glm::vec3 Size)
@@ -55,6 +57,7 @@ SpriteObject::~SpriteObject()
 
 void SpriteObject::Render(glm::mat4 globalModelTransform)
 {
+	
 	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 	GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
@@ -161,4 +164,12 @@ void SpriteObject::SetUV(float uvs[8]) {
 
 float* SpriteObject::GetUV() {
 	return uv;
+}
+
+bool SpriteObject::IsPause() {
+	return this->Pause;
+}
+
+void SpriteObject::SetPause(bool b) {
+	this->Pause = b ;
 }

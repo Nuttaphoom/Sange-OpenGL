@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "TileMap.h"
 #include "Audio.h"
+
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT;	
 
@@ -178,8 +179,15 @@ void Level::LevelInit()
 
 	#pragma endregion
 
-
+	AnimatorManager* animatorManager = new AnimatorManager(); 
+	managersList.push_back(animatorManager);
 	 
+	vector<SpriteObject*> stest;
+	stest.push_back(_bishopTest);
+	stest.push_back(obj);
+ 
+	animatorManager->CreateAnimationFactory(stest,Player::GetInstance()->GetPos() , Player::GetInstance()->GetSize(), 2, "../Resource/Texture/TestNumber.png"
+	,4,4,16,1);
 
 	//cout << "Init Level" << endl;
 
@@ -265,6 +273,10 @@ void Level::LevelUpdate()
 		obj->Update(deltaTime);
 	}
 
+	//Update Manager 
+	for (Manager* m : managersList) {
+		m->Update(deltaTime);
+	}
 }
 
 void Level::LevelDraw()

@@ -17,6 +17,8 @@
 #include <fstream>
 #include "ReSpawner.h"
 #include "Bishop.h"
+#include "AnimatorManager.h"
+
 class Level
 {
 protected:
@@ -24,7 +26,7 @@ protected:
 	vector< DrawableObject*> invisibleObjectsList;
 	vector < DrawableObject*> EntityObjectsList;
 	vector <DrawableObject*>   GUIObjectsList;
-
+	vector <Manager*> managersList;
 	Player* player;
 
 	CameraController* cameraController;
