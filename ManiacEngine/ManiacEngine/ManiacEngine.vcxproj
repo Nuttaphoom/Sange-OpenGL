@@ -36,6 +36,7 @@
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Hiding.cpp" />
+    <ClInclude Include="MenuHolder.h" />
     <ClInclude Include="AnimatorManager.h" />
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Hiding.h" />
@@ -49,6 +50,7 @@
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuHolder.cpp" />
     <ClCompile Include="MeshVbo.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClInclude Include="Level2.h" />

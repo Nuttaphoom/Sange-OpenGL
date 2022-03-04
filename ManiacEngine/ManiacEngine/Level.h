@@ -18,7 +18,7 @@
 #include "ReSpawner.h"
 #include "Bishop.h"
 #include "AnimatorManager.h"
-
+#include "MenuHolder.h"
 class Level
 {
 protected:
@@ -28,6 +28,7 @@ protected:
 	vector <DrawableObject*>   GUIObjectsList;
 	vector <Manager*> managersList;
 	Player* player;
+	MenuHolder* _menuHolder;
 
 	CameraController* cameraController;
 

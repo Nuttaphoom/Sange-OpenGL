@@ -80,6 +80,7 @@ void Level::LevelInit()
 	AudioEngine audio;
 	audio.init();
 
+	
 	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
 	//sound1.play();
 
@@ -167,17 +168,28 @@ void Level::LevelInit()
 
 
 	#pragma region GUI 
-	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0),glm::vec3(1668 / 11, 2224 / 11 * -1,1));
+	//GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0),glm::vec3(1668 / 11, 2224 / 11 * -1,1));
  
-	objectsList.push_back(SangeImage);
-	GUIObjectsList.push_back(SangeImage); 
+	//objectsList.push_back(SangeImage);
+	//GUIObjectsList.push_back(SangeImage); 
 
-	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
+	//HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
 	
-	objectsList.push_back(hpbar);
+	//objectsList.push_back(hpbar);
 	
-	GUIObjectsList.push_back(hpbar);
+	//GUIObjectsList.push_back(hpbar);
+	_menuHolder = new MenuHolder();
+	Button* b1 = new Button(ButtonName::NEXT_LEVEL_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	_menuHolder->addButton(b1);
+	objectsList.push_back(b1);
+	GUIObjectsList.push_back(b1);
 
+	Button* b2 = new Button(ButtonName::NEXT_LEVEL_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight()* -1 / 2 + 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	_menuHolder->addButton(b2);
+	objectsList.push_back(b2);
+	GUIObjectsList.push_back(b2);
+	_menuHolder->disableButton();
+	_menuHolder->enableButton();
 	#pragma endregion
 
 	AnimatorManager* animatorManager = new AnimatorManager(); 
