@@ -77,6 +77,8 @@ void Level::LevelLoad()
 void Level::LevelInit()
 {
 
+	
+
 	AudioEngine audio;
 	audio.init();
 
@@ -198,9 +200,12 @@ void Level::LevelInit()
 	vector<SpriteObject*> stest;
 	stest.push_back(_bishopTest);
 	stest.push_back(obj);
+
  
 	animatorManager->CreateAnimationFactory(stest,Player::GetInstance()->GetPos() , Player::GetInstance()->GetSize(), 2, "../Resource/Texture/TestNumber.png"
 	,4,4,16,1);
+
+	objectsList.push_back(animatorManager);
 
 	//cout << "Init Level" << endl;
 

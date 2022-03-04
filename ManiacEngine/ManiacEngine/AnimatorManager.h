@@ -17,10 +17,10 @@ private:
 	vector<AnimatorObj*> spriteObjectDict;
 
 public:
-	AnimatorManager() {
+ 
+	AnimatorManager() :Manager("TEST", 0, 0, glm::vec3(0, 0, 0), glm::vec3(0,0,0)) {
 
 	}
-
 
 	//Responsible to "hide" (not replace) object(s) and spawn animationObj in their position with some given adjustment 
 	void CreateAnimationFactory(vector<SpriteObject*> objToHide, glm::vec3 pos, glm::vec3 size, float _lifespan, string fileName,
@@ -60,8 +60,10 @@ public:
 		}
 	}
 
-	void Render(glm::mat4 globalModelTransform) {
-		
+	virtual void Render(glm::mat4 globalModelTransform) {
+		for (int i = 0; i < spriteObjectDict.size(); i++) { 
+			spriteObjectDict[i]->AnimationObject->Render(globalModelTransform) ;  
+		}
 	}
 
 };

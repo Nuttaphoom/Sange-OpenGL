@@ -4,7 +4,7 @@
 #include "Button.h"
 
 
-class MenuHolder{
+class MenuHolder : DrawableObject {
 	private :
 		vector<Button*> buttonHolder =  vector<Button*>();
 	public :
