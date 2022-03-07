@@ -256,7 +256,11 @@ StateMachine Entity::GetState() {
 	return stateMachine; 
 }
 
- 
+
+void Entity::SetHP(float data)
+{
+	HP = data;
+}
 
 
 void Entity::RespawnThisObject() {

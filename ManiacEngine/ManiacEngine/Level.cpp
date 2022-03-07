@@ -72,6 +72,7 @@ void Level::LevelLoad()
 	}
 
 	//cout << "Load Level" << endl;
+
 }
 
 void Level::LevelInit()

@@ -57,5 +57,6 @@ class Entity : public SpriteObject
 		virtual void RespawnThisObject(); 
 		virtual void VelocityControl();
 		StateMachine  GetState();
-		float GetHP(); 
+		virtual float GetHP();
+		virtual void SetHP(float data);
 };
