@@ -5,7 +5,8 @@ typedef void (*FuncPtr_ButtonType)();
 
 enum class ButtonName {
 	NEXT_LEVEL_BUTTON = 0,
-	RESTART_BUTTON = 0
+	RESTART_BUTTON = 0,
+	START_GAME_BUTTON = 0
 };
 
  

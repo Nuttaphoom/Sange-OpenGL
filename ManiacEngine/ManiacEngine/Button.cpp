@@ -1,7 +1,13 @@
 #include "Button.h"
+
+void NextLevelButton_Func();
+
  Button::Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) : buttonName(buttonName), GUI(fileName, row, column, Pos, Size)
 {
-	//buttonTypesFunc.push_back(NextLevel_Button);  // NEXT_LEVEL_BUTTON
+	 if (buttonName == ButtonName::NEXT_LEVEL_BUTTON) {
+		 buttonTypesFunc.push_back(NextLevelButton_Func);
+	 }
+	 
 }
 
 
@@ -22,6 +28,9 @@ void Button::OnClick(glm::vec3 CamSpace_MousePosition) {
 
 }
 
- 
+void NextLevelButton_Func() {
+	cout << "AAA" << endl; 
+}
+  
 
  
