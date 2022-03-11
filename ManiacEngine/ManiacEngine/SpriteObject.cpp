@@ -85,6 +85,9 @@ void SpriteObject::Render(glm::mat4 globalModelTransform)
 
 void SpriteObject::Update(int deltaTime)
 {
+	if (IsPause())
+		return;
+
 	timeCount += deltaTime;
 	if (timeCount > animationTime && playAnim)
 	{
@@ -93,6 +96,7 @@ void SpriteObject::Update(int deltaTime)
 		timeCount = 0;
 	}
 }
+
 
 void SpriteObject::GenUV()
 {

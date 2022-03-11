@@ -151,6 +151,9 @@ void Entity::InvincibleFrame(int deltatime)
 
 void Entity::Update(int deltatime)
 {
+	if (IsPause())
+		return; 
+
 	SpriteObject::Update(deltatime);
 
 	if (!OnGround && GetState() != StateMachine::CLIMBING) { //Apply velocity 

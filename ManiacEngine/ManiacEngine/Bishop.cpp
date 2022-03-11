@@ -6,6 +6,9 @@ Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Si
 } 
 
 void Bishop::Update(int deltatime) {
+	if (IsPause())
+		return;
+
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	 

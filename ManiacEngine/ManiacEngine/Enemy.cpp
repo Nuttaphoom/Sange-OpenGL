@@ -15,6 +15,9 @@ void Enemy::Translate(glm::vec3 moveDistance)
 
 void Enemy::Update(int deltatime)
 {
+	if (IsPause())
+		return;
+
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
   

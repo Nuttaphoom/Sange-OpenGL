@@ -191,7 +191,6 @@ void Level::LevelInit()
 	objectsList.push_back(b2);
 	GUIObjectsList.push_back(b2);
 	_menuHolder->disableButton();
-	_menuHolder->enableButton();
 	#pragma endregion
 
 	AnimatorManager* animatorManager = new AnimatorManager(); 
@@ -342,6 +341,8 @@ void Level::HandleKey(char key)
 	case 'h':
 	case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 	case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
+	case 'E': _menuHolder->enableButton(); break;
+
 	}
 }
 
