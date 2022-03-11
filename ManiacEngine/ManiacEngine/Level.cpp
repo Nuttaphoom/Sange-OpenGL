@@ -87,7 +87,7 @@ void Level::LevelInit()
 	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
 	//sound1.play();
 
-	checkPoint = CheckPoint::GetInstance();
+	 
 
 	#pragma region tilemapss
 	//TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
@@ -108,13 +108,12 @@ void Level::LevelInit()
 
 	#pragma region interactableObject 
  
-
 	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(125 + 64 * 58, -1135.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding); 
 	objectsList.push_back(hiding);
 
-	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(7422, -920 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(1800, -850 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
@@ -122,10 +121,11 @@ void Level::LevelInit()
 		
 	interactableObjectManager->addInteractableObjects(trap_1);
 	objectsList.push_back(trap_1);
+
 	#pragma endregion 
 
 	#pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_V2.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f),glm::vec3(128,-128,0));
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_V2.png", 4, 10, 3, glm::vec3(164, -1176.0f, 0.0f),glm::vec3(128,-128,0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
@@ -181,6 +181,7 @@ void Level::LevelInit()
 	//objectsList.push_back(hpbar);
 	
 	//GUIObjectsList.push_back(hpbar);
+
 	_menuHolder = new MenuHolder();
 	Button* b1 = new Button(ButtonName::NEXT_LEVEL_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
 	_menuHolder->addButton(b1);
@@ -194,16 +195,12 @@ void Level::LevelInit()
 	_menuHolder->disableButton();
 	#pragma endregion
 
-	AnimatorManager* animatorManager = new AnimatorManager(); 
+	#pragma region 
+	AnimatorManager* animatorManager = AnimatorManager::GetInstance() ; 
 	managersList.push_back(animatorManager);
-	 
-	vector<SpriteObject*> stest;
-	stest.push_back(_bishopTest);
-	stest.push_back(obj);
 
- 
-	animatorManager->CreateAnimationFactory(stest,Player::GetInstance()->GetPos() , Player::GetInstance()->GetSize(), 2, "../Resource/Texture/TestNumber.png"
-	,4,4,16,1);
+	#pragma endregion  
+	
 
 	objectsList.push_back(animatorManager);
 

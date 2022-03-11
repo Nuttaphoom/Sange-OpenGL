@@ -204,6 +204,9 @@
     <ClCompile Include="EntityData.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="AnimatorManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">

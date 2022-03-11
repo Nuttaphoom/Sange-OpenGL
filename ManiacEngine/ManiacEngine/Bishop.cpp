@@ -1,5 +1,8 @@
 #include "Bishop.h" 
 #include "Player.h"
+#include "AnimatorManager.h"
+void CastingThunder(glm::vec3 posToCast);
+
 
 Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 0.21f, Pos, Size) {
 	_bishopState = StateMachine::IDLE;
@@ -15,24 +18,46 @@ void Bishop::Update(int deltatime) {
 
 }
 void Bishop::UpdateStateMachine(float deltatime) {
+	Player* p = Player::GetInstance();
+
 	if (_bishopState == StateMachine::IDLE) {
 		//Count Time until Attack time 
-		_countDownTime += 1 *  deltatime;
-		std::cout << _countDownTime << endl; 
-		if (_countDownTime >= 30) {
+		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
+ 
+		if (PlayerDetect(p)) {
+			Attack(p);
+ 		}
+
+		else if (_countDownTime >= 1.5f) {
 			_countDownTime = 0;
-			ChangeState(StateMachine::RUNNING); 
+			ChangeState(StateMachine::RUNNING);
 		}
 	}
 	else if (_bishopState == StateMachine::ATTACKING) {
-		//CountDelayTime , when delay == 0, turn around and get back to Idle 
-		//if in Attack state, do damage to player if they see the player. check every single frame 
-		Player* p = Player::GetInstance() ; 
-		if (p->GetState() != StateMachine::HIDING)
-			Attack(p);
+		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
+		if (_countDownTime >= 3) {
+			ChangeState(StateMachine::RUNNING);
+			_countDownTime = 0;
+		}
+		
 	}
 	else if (_bishopState == StateMachine::RUNNING) {
 		Patrol(); 
+		if (PlayerDetect(p)) {
+			Attack(p);
+ 		}
+	}
+	else if (_bishopState == StateMachine::CASTING) {
+		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
+		
+		if (PlayerDetect(p)) {
+			Attack(p);
+		}
+
+		if (_countDownTime >= 5) {
+			ChangeState(StateMachine::RUNNING);
+			_countDownTime = 0; 
+		}
 	}
 }
 
@@ -48,8 +73,8 @@ void Bishop::Patrol() {
 		if (CurrentPatrolPos == 0) { // Get back to right side 
 			ChangeState(StateMachine::IDLE);
 		}
-		else if (CurrentPatrolPos == 1) { //Get to casting skill position  
-			ChangeState(StateMachine::ATTACKING);  
+		else if (CurrentPatrolPos == 1) { //Get to left skill position  
+			ChangeState(StateMachine::CASTING);  
 		}
 
 		CurrentPatrolPos = (CurrentPatrolPos + 1) % PatrolPos.size();
@@ -62,10 +87,10 @@ void Bishop::Patrol() {
 }
 
 void Bishop::Attack(Entity* target) {
-	if (target->GetState() == StateMachine::HIDING)
-		return;  
-
-	target->OnDamaged(10);  
+ 
+	CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x, Player::GetInstance()->GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
+	ChangeState(StateMachine::ATTACKING); 
+ 	//target->OnDamaged(10);  
 }
 void Bishop::ChangeState(StateMachine NextState) {
 	if (_bishopState == StateMachine::IDLE) {
@@ -80,4 +105,17 @@ void Bishop::ChangeState(StateMachine NextState) {
 		_bishopState = NextState;
 
 	}
+	else if (_bishopState == StateMachine::CASTING) {
+		int randomXPos;
+		do {
+			randomXPos = rand() % 4 - rand() % 4;
+		} while (randomXPos == 0);
+		CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x + 64 * randomXPos, Player::GetInstance()->GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
+		_bishopState = NextState;
+	}
+}
+
+void CastingThunder(glm::vec3 posToCast) {
+	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128, 256 * -2, 1), 1, "../Resource/Texture/VisualEffect/Thunder.png"
+		, 1, 8, 8, 50);
 }

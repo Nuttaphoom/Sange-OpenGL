@@ -7,6 +7,7 @@ Hiding::Hiding(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Si
 
 void Hiding::Called() {
 	Player* p = Player::GetInstance();
+	
 	if (! p->GetInstance()->isSeen()) {
 		p->SetPosition(this->GetPos());
 		p->TranslateVelocity(-p->GetVelocity());

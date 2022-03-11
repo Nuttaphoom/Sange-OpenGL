@@ -19,8 +19,8 @@ void Entity::VelocityControl() {
 
 	if (velocity.x != 0)
 	{
-		velocity.x = velocity.x / 5;
-		if (velocity.x < 0.001 && velocity.x > -0.001)
+		TranslateVelocity(glm::vec3(-velocity.x * 10    , 0, 0));
+  		if (velocity.x < 0.001 && velocity.x > -0.001)
 		{
 			velocity.x = 0;
 		}
@@ -157,7 +157,7 @@ void Entity::Update(int deltatime)
 	SpriteObject::Update(deltatime);
 
 	if (!OnGround && GetState() != StateMachine::CLIMBING) { //Apply velocity 
-		TranslateVelocity(glm::vec3(0, -0.5f, 0));
+		TranslateVelocity(glm::vec3(0, -12.81f, 0));
  	}	
 	else if (GetState() == StateMachine::CLIMBING) {
 		TranslateVelocity(glm::vec3(0, 0, 0));
@@ -175,7 +175,10 @@ void Entity::Translate(glm::vec3 moveDistance)
 }
 
 void Entity::TranslateVelocity(glm::vec3 velocity) {
-	this->applyingVelocity +=  + velocity;
+	this->applyingVelocity.x +=   velocity.x / 1000.0f * GameEngine::GetInstance()->GetDeltaTime() ;
+	this->applyingVelocity.y += velocity.y / 1000.0f * GameEngine::GetInstance()->GetDeltaTime();
+	this->applyingVelocity.z +=   velocity.z / 1000.0f * GameEngine::GetInstance()->GetDeltaTime() ;
+
 }
 
 void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame)

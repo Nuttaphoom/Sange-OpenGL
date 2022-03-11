@@ -13,13 +13,20 @@ CheckPoint* CheckPoint::GetInstance() {
 
 
 glm::vec3 CheckPoint::LoadCheckPoint() {
-	printf("l");
 	Player::GetInstance()->SetPosition(curCheckPoint);
 	return curCheckPoint; 
 }
 
 void CheckPoint::SetCheckPoint(glm::vec3 newPoint){
-	printf("s");
+	cout << "Set Check Point" << endl;
 	curCheckPoint = newPoint;
 	
+}
+
+void CheckPoint::Update(int deltaTime) {
+
+}
+
+void CheckPoint::Render(glm::mat4 globalModelTransform) {
+
 }

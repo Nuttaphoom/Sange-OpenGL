@@ -5,6 +5,7 @@
 #include "GameStateController.h"
 #include "Level.h"
 #include "EntityData.h"
+#include <ostream>
 
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
  
@@ -70,14 +71,23 @@ void Player::HandleKey(char Key)
 Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size)
 {	
 	this->collisionSize = glm::vec3(76, -128, 1);
- 	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
+
 	stateMachine = StateMachine::FALLING;
 	EntityData ED;
 	ED.Read();
 	_moveSpeed = ED.GetPlayerMoveSpeed();
 	_jump = ED.GetPlayerJumpHeight();
-	_hp = ED.GetPlayerHP();
+	_hp = 3 ;
+
+	Default_HP = _hp;
+	Default_MoveSpeed = _moveSpeed;
+	Default_pos = Pos;
+
+	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
 	SetHP(_hp);
+
+
+	 
 }
 
 void Player::Update(int deltatime)
@@ -90,15 +100,20 @@ void Player::Update(int deltatime)
 
 void Player::UpdateStateMachine(float deltatime)
 {
-	if (GetState() == StateMachine::RUNNING)
+ 
+ 	if (GetState() == StateMachine::RUNNING)
 	{
+		cout << "RUNNING" << endl; 
 		if (GetVelocity().x < 1 && GetVelocity().x > -1 && OnGround == true)
 		{
 			ChangeState(StateMachine::IDLE);
 		}
+
 	}
 	if (GetState() == StateMachine::LANDING)
 	{
+		cout << "LANDING" << endl;
+
 		if (GetVelocity().x < 2 && GetVelocity().x > -2)
 		{
 			int deltatime = GameEngine::GetInstance()->GetDeltaTime();
@@ -116,16 +131,16 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::FALLING)
 	{
+		cout << "FALLING" << endl;
+
 		if (GetVelocity().y == 0 && OnGround == true)
 		{
-			if (GetVelocity().x == 0)
-				ChangeState(StateMachine::LANDING);
-			else
-				ChangeState(StateMachine::LANDING);
+			ChangeState(StateMachine::LANDING);
 		}
 	}
 	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::FALLING || GetState() == StateMachine::HIDING)
 	{
+ 
 		if (GetVelocity().x >= 0.5f || GetVelocity().x <= -0.5f)
 		{
 			if (OnGround == true)
@@ -136,6 +151,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING || GetState() == StateMachine::HIDING)
 	{
+ 
 		if (GetVelocity().y > 0)
 		{
 			ChangeState(StateMachine::JUMPPING);
@@ -148,8 +164,9 @@ void Player::UpdateStateMachine(float deltatime)
 			ChangeState(StateMachine::MIDJUMP);
 		}
 	}
-	if (GetState() == StateMachine::MIDJUMP && OnGround == false /*&& GetVelocity().y < 0*/)
+	if (GetState() == StateMachine::MIDJUMP  )
 	{
+		cout << "MIDJUMPING" << endl; 
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
 		if (delay > 1)
@@ -161,7 +178,8 @@ void Player::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::CLIMBING)
 	{
-		
+		cout << "CLIMBING" << endl;
+
 	}
 	 
 }

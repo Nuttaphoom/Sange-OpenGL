@@ -12,6 +12,7 @@ enum class StateMachine {
 	CHASING,
 	HIDING,
 	CLIMBING,
+	CASTING,
 };
 
 class Entity : public SpriteObject

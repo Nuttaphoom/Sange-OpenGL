@@ -83,8 +83,6 @@ void Level2::LevelInit()
 	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
 	//sound1.play();
 
-	checkPoint = CheckPoint::GetInstance();
-
 #pragma region tilemapss
 	//TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
 

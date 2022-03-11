@@ -33,8 +33,7 @@ protected:
 	CameraController* cameraController;
 
 	InteractableObjectManager* interactableObjectManager = new InteractableObjectManager() ;
-	CheckPoint* checkPoint;
-
+ 
 	int MapHeight;
 	int MapWidth;
 	int** sMiddleMapdata;
