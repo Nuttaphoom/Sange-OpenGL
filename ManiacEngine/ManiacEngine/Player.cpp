@@ -4,12 +4,11 @@
 #include "InvisibleObject.h"
 #include "GameStateController.h"
 #include "Level.h"
+#include "EntityData.h"
 
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
  
 Player* Player::instance = nullptr; 
-
-
 
 void Player::HandleMouse(glm::vec3 mouseRealPos) {
 	for (int i = 0 ; i < ENTITYLIST.size() ; i++) {
@@ -28,7 +27,7 @@ void Player::HandleKey(char Key)
 				TranslateVelocity(glm::vec3(0, GetClimbSpeed(), 0));
 			}
 			else if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
-				TranslateVelocity(glm::vec3(0, 18, 0));
+				TranslateVelocity(glm::vec3(0, _jump, 0));
 				Entity::OnGround = false;
 				ChangeState(StateMachine::JUMPPING);
 			}
@@ -48,7 +47,7 @@ void Player::HandleKey(char Key)
 				}
 			}
 			else {
-				TranslateVelocity(glm::vec3(this->GetMoveSpeed() * -1, 0, 0)); SetDirection(-1);
+				TranslateVelocity(glm::vec3(_moveSpeed * -1, 0, 0)); SetDirection(-1);
 			}
 			break;
 		case 'd':
@@ -58,7 +57,7 @@ void Player::HandleKey(char Key)
 				}
 			}
 			else {
-				TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0)); SetDirection(1);
+				TranslateVelocity(glm::vec3(_moveSpeed, 0, 0)); SetDirection(1);
 			}
 			break;
 		case 'e': 
@@ -68,11 +67,17 @@ void Player::HandleKey(char Key)
 	}
 }
 
-Player::Player(string fileName, int row, int column,float HP, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, HP, 5.0f, Pos,Size)
+Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size)
 {	
 	this->collisionSize = glm::vec3(76, -128, 1);
  	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
 	stateMachine = StateMachine::FALLING;
+	EntityData ED;
+	ED.Read();
+	_moveSpeed = ED.GetPlayerMoveSpeed();
+	_jump = ED.GetPlayerJumpHeight();
+	_hp = ED.GetPlayerHP();
+	SetHP(_hp);
 }
 
 void Player::Update(int deltatime)
@@ -98,7 +103,7 @@ void Player::UpdateStateMachine(float deltatime)
 		{
 			int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 			delay1 += deltatime;
-			if (delay1 >= 500)
+			if (delay1 >= 200)
 			{
 				delay1 = 0;
 				ChangeState(StateMachine::IDLE);
@@ -113,7 +118,10 @@ void Player::UpdateStateMachine(float deltatime)
 	{
 		if (GetVelocity().y == 0 && OnGround == true)
 		{
-			ChangeState(StateMachine::LANDING);
+			if (GetVelocity().x == 0)
+				ChangeState(StateMachine::LANDING);
+			else
+				ChangeState(StateMachine::LANDING);
 		}
 	}
 	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::FALLING || GetState() == StateMachine::HIDING)
@@ -189,11 +197,12 @@ void Player::ChangeState(StateMachine NextState)
 	}
 	else if (this->GetState() == StateMachine::LANDING)
 	{
-		SetAnimationLoop(1, 8, 2, 300);
+		SetAnimationLoop(1, 8, 2, 100);
 	}
 	else if (this->GetState() == StateMachine::CLIMBING)
 	{
 		SetAnimationLoop(3, 0, 8, 100);
+		//if ()
 	}
 }
 
@@ -214,7 +223,7 @@ Player* Player::GetInstance() {
 
 Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::vec3 Pos,glm::vec3 Size) 
 {
-	instance = new Player(fileName, row, column, HP, Pos,Size);
+	instance = new Player(fileName, row, column, Pos,Size);
 	CheckPoint::GetInstance()->LoadCheckPoint();
 	return instance;
 

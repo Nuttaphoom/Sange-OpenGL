@@ -201,6 +201,9 @@
     <ClCompile Include="MenuHolder.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="EntityData.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -331,6 +334,9 @@
     </ClInclude>
     <ClInclude Include="MenuHolder.h">
       <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityData.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

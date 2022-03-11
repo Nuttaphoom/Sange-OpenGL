@@ -14,8 +14,11 @@ class Player : public Entity, public Subject
 		int delay = 0;
 		int delay1 = 0;
 		float _climbSpeed = 5.0f;
+		float _jump;
+		float _moveSpeed;
+		float _hp;
 	public :
-		Player(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size);
+		Player(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
  		void Update(int deltatime);
 		void UpdateStateMachine(float deltatime);
 		void UpdateCollision(); 

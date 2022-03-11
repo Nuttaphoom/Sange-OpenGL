@@ -36,6 +36,7 @@
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Hiding.cpp" />
+    <ClInclude Include="EntityData.h" />
     <ClInclude Include="MenuHolder.h" />
     <ClInclude Include="AnimatorManager.h" />
     <ClInclude Include="Bishop.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="EntityData.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="Subject.cpp" />
