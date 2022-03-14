@@ -92,10 +92,9 @@ Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Siz
 
 void Player::Update(int deltatime)
 {
- 	Entity::Update(deltatime);
+	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	UpdateCollision();
-  
 }
 
 void Player::UpdateStateMachine(float deltatime)
@@ -151,15 +150,15 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::FALLING || GetState() == StateMachine::HIDING)
 	{
- 
 		if (GetVelocity().y > 0)
 		{
 			ChangeState(StateMachine::JUMPPING);
 		}
 	}
+
 	if (GetState() == StateMachine::IDLE || GetState() == StateMachine::RUNNING || GetState() == StateMachine::JUMPPING  )
 	{
-		if (GetVelocity().y == 0 && OnGround == false)
+		if (GetVelocity().y < 0.01 && OnGround == false)
 		{
 			ChangeState(StateMachine::MIDJUMP);
 		}
