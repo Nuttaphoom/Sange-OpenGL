@@ -182,17 +182,45 @@ void Level::LevelInit()
 	
 	//GUIObjectsList.push_back(hpbar);
 
-	_menuHolder = new MenuHolder();
-	Button* b1 = new Button(ButtonName::NEXT_LEVEL_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
-	_menuHolder->addButton(b1);
+	/*MenuHolder* pauseMenuHolder = new MenuHolder();
+	Button* b1 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	pauseMenuHolder->addButton(b1);
 	objectsList.push_back(b1);
 	GUIObjectsList.push_back(b1);
 
-	Button* b2 = new Button(ButtonName::NEXT_LEVEL_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight()* -1 / 2 + 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
-	_menuHolder->addButton(b2);
+	Button* b2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight()* -1 / 2 + 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	pauseMenuHolder->addButton(b2);
 	objectsList.push_back(b2);
 	GUIObjectsList.push_back(b2);
-	_menuHolder->disableButton();
+	pauseMenuHolder->disableButton();*/
+
+	MenuHolder* gameoverHolder = new MenuHolder();
+	/*Button* g1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 60, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	gameoverHolder->addButton(g1);
+	objectsList.push_back(g1);
+	GUIObjectsList.push_back(g1);*/
+
+	Button* g2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 500, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1)); //BASE VALUE FOR POS
+	gameoverHolder->addButton(g2);
+	objectsList.push_back(g2);
+	GUIObjectsList.push_back(g2);
+	gameoverHolder->disableButton();
+
+	/*MenuHolder* mainMenuHolder = new MenuHolder();
+	Button* m1 = new Button(ButtonName::START_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 30, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	gameoverHolder->addButton(m1);
+	objectsList.push_back(m1);
+	GUIObjectsList.push_back(m1);
+
+	Button* m2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 20, GameEngine::GetInstance()->GetWindowHeight() * -1 / 2 + 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	mainMenuHolder->addButton(b2);
+	objectsList.push_back(b2);
+	GUIObjectsList.push_back(b2);
+	mainMenuHolder->disableButton();*/
+
+	//_menuHolderList.push_back(pauseMenuHolder);
+	_menuHolderList.push_back(gameoverHolder);
+	//_menuHolderList.push_back(mainMenuHolder);
 	#pragma endregion
 
 	#pragma region 
@@ -339,7 +367,7 @@ void Level::HandleKey(char key)
 	case 'h':
 	case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 	case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
-	case 'E': _menuHolder->enableButton(); break;
+	case 'E': _menuHolderList[0]->enableButton(); break;
 
 	}
 }

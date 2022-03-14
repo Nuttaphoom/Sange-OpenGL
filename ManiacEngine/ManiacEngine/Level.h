@@ -28,7 +28,7 @@ protected:
 	vector <DrawableObject*>   GUIObjectsList;
 	vector <Manager*> managersList;
 	Player* player;
-	MenuHolder* _menuHolder;
+	vector<MenuHolder*> _menuHolderList;
 
 	CameraController* cameraController;
 
