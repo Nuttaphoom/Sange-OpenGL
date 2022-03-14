@@ -13,7 +13,7 @@ class Player : public Entity, public Subject
 		vector<Entity*> detectingEntity ;  
 		int delay = 0;
 		int delay1 = 0;
-		float _climbSpeed = 5.0f;
+		float _climbSpeed = 500.0f;
 		float _jump;
 		float _moveSpeed;
 		float _hp;
