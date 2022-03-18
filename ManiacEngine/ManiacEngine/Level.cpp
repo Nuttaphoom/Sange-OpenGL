@@ -122,6 +122,12 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(trap_1);
 	objectsList.push_back(trap_1);
 
+	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(1800, -850 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1)); 
+
+	interactableObjectManager->addInteractableObjects(gate_1); 
+	objectsList.push_back(gate_1);
+
+
 	#pragma endregion 
 
 	#pragma region Entities 
@@ -366,11 +372,11 @@ void Level::HandleKey(char key)
 	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2;   break;
+	case 'n':   break;
 	case 'g':  player->OnDamaged(1); break;
-	case 'f':
-	case 't':
-	case 'h':
+	case 'f': break;
+	case 't': break;
+	case 'h': break;
 	case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 	case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
 	case 'E': _menuHolderList[0]->enableButton(); break;

@@ -207,6 +207,9 @@
     <ClCompile Include="AnimatorManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Gate.cpp">
+      <Filter>Source Files\Objects\Interactable Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -340,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="EntityData.h">
       <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Gate.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

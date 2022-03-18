@@ -19,6 +19,7 @@
 #include "Bishop.h"
 #include "AnimatorManager.h"
 #include "MenuHolder.h"
+#include "Gate.h"
 class Level
 {
 protected:

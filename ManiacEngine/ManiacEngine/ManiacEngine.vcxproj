@@ -34,10 +34,12 @@
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateController.cpp" />
+    <ClCompile Include="Gate.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Hiding.cpp" />
     <ClInclude Include="EntityData.h" />
+    <ClInclude Include="Gate.h" />
     <ClInclude Include="MenuHolder.h" />
     <ClInclude Include="AnimatorManager.h" />
     <ClInclude Include="Bishop.h" />
