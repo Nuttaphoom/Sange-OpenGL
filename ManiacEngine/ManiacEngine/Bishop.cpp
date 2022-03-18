@@ -5,8 +5,9 @@ void CastingThunder(glm::vec3 posToCast);
 
 
 Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 0.21f, Pos, Size) {
-	MoveSpeed = 100;
+	MoveSpeed = 25;
 	_bishopState = StateMachine::IDLE;
+	SetAnimationLoop(1, 8, 8, 100.0f);
 } 
 
 void Bishop::Update(int deltatime) {
@@ -24,41 +25,44 @@ void Bishop::UpdateStateMachine(float deltatime) {
 	if (_bishopState == StateMachine::IDLE) {
 		//Count Time until Attack time 
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
- 
-		if (PlayerDetect(p)) {
-			Attack(p);
- 		}
+		cout << "Bishop is in idle" << endl;
 
-		else if (_countDownTime >= 1.5f) {
+
+		if (_countDownTime >= 3.0f) {
 			_countDownTime = 0;
 			ChangeState(StateMachine::RUNNING);
 		}
 	}
 	else if (_bishopState == StateMachine::ATTACKING) {
+		cout << "Bishop is in Attacking" << endl;
+
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
-		if (_countDownTime >= 3) {
+		if (_countDownTime >= 1.0f) {
 			ChangeState(StateMachine::RUNNING);
 			_countDownTime = 0;
 		}
 		
 	}
 	else if (_bishopState == StateMachine::RUNNING) {
+		cout << "Bishop is in Running" << endl;
+
 		Patrol(); 
-		if (PlayerDetect(p)) {
-			Attack(p);
- 		}
+ 
 	}
 	else if (_bishopState == StateMachine::CASTING) {
+		cout << "Bishop is in Casting" << endl;
+
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
 		
-		if (PlayerDetect(p)) {
-			Attack(p);
-		}
 
 		if (_countDownTime >= 5) {
 			ChangeState(StateMachine::RUNNING);
 			_countDownTime = 0; 
 		}
+	}
+
+	if (PlayerDetect(p) && _bishopState != StateMachine::ATTACKING) {
+		Attack(p);
 	}
 }
 
@@ -70,20 +74,22 @@ void Bishop::Patrol() {
 
 	glm::vec3 dest = PatrolPos.at(CurrentPatrolPos);
 
-	if (abs(dest.x - GetPos().x) < 2) {
-		if (CurrentPatrolPos == 0) { // Get back to right side 
-			ChangeState(StateMachine::IDLE);
-		}
-		else if (CurrentPatrolPos == 1) { //Get to left skill position  
-			ChangeState(StateMachine::CASTING);  
-		}
 
-		CurrentPatrolPos = (CurrentPatrolPos + 1) % PatrolPos.size();
-
-	}
 	if (dest.x > GetPos().x) SetDirection(1);
 	else SetDirection(-1);
 
+	if (abs(dest.x - GetPos().x) < 2.0f) {
+		if (CurrentPatrolPos == 0) { // Get back to right side 
+			SetDirection(1);
+			ChangeState(StateMachine::IDLE);
+		}
+		else if (CurrentPatrolPos == 1) { //Get to left skill position 
+			SetDirection(-1);
+			ChangeState(StateMachine::CASTING);
+		}
+
+		CurrentPatrolPos = (CurrentPatrolPos + 1) % PatrolPos.size();
+	}
 	TranslateVelocity(glm::vec3(this->GetMoveSpeed() * DirectionSet, 0, 0));
 }
 
@@ -94,6 +100,16 @@ void Bishop::Attack(Entity* target) {
  	//target->OnDamaged(10);  
 }
 void Bishop::ChangeState(StateMachine NextState) {
+	if (NextState == StateMachine::IDLE) 
+		SetAnimationLoop(0, 0, 1, 100.0f);
+	else if (NextState == StateMachine::ATTACKING) {
+		SetAnimationLoop(1, 0, 6, 150.0f);
+	}
+	else if (NextState == StateMachine::CASTING)
+	{
+		SetAnimationLoop(0, 3, 6, 150.0f);
+	}
+
 	if (_bishopState == StateMachine::IDLE) {
 		_bishopState = NextState;
 

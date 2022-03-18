@@ -125,7 +125,7 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_V2.png", 4, 10, 3, glm::vec3(164, -1176.0f, 0.0f),glm::vec3(128,-128,0));
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 4, 10, 3, glm::vec3(164, -1176.0f, 0.0f),glm::vec3(128,-128,0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
@@ -159,9 +159,9 @@ void Level::LevelInit()
 	EntityObjectsList.push_back(test4);
 	objectsList.push_back(test4);
 
-	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Pope_Dummy.png", 1, 1, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
+	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Bishop Sprite Sheet.png", 2, 9, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
 	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
-	_bishopTest->AddPatrolPos(glm::vec3(189 + 1 * 64, -1176.0f, 0.0f));
+	_bishopTest->AddPatrolPos(glm::vec3(189 + 16, -1176.0f, 0.0f));
 	_bishopTest->AddPatrolPos(glm::vec3(189 , -1176.0f, 0.0f));
 
 	EntityObjectsList.push_back(_bishopTest);
