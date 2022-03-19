@@ -25,7 +25,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 	if (_bishopState == StateMachine::IDLE) {
 		//Count Time until Attack time 
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
-		cout << "Bishop is in idle" << endl;
+		//cout << "Bishop is in idle" << endl;
 
 
 		if (_countDownTime >= 3.0f) {
@@ -34,7 +34,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 		}
 	}
 	else if (_bishopState == StateMachine::ATTACKING) {
-		cout << "Bishop is in Attacking" << endl;
+		//cout << "Bishop is in Attacking" << endl;
 
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
 		if (_countDownTime >= 1.0f) {
@@ -44,13 +44,13 @@ void Bishop::UpdateStateMachine(float deltatime) {
 		
 	}
 	else if (_bishopState == StateMachine::RUNNING) {
-		cout << "Bishop is in Running" << endl;
+		//cout << "Bishop is in Running" << endl;
 
 		Patrol(); 
  
 	}
 	else if (_bishopState == StateMachine::CASTING) {
-		cout << "Bishop is in Casting" << endl;
+		//cout << "Bishop is in Casting" << endl;
 
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
 		
@@ -94,12 +94,13 @@ void Bishop::Patrol() {
 }
 
 void Bishop::Attack(Entity* target) {
- 
+	ChangeState(StateMachine::ATTACKING);
 	CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x, Player::GetInstance()->GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
-	ChangeState(StateMachine::ATTACKING); 
  	//target->OnDamaged(10);  
 }
 void Bishop::ChangeState(StateMachine NextState) {
+	_countDownTime = 0;
+
 	if (NextState == StateMachine::IDLE) 
 		SetAnimationLoop(0, 0, 1, 100.0f);
 	else if (NextState == StateMachine::ATTACKING) {
@@ -133,6 +134,7 @@ void Bishop::ChangeState(StateMachine NextState) {
 }
 
 void CastingThunder(glm::vec3 posToCast) {
-	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128, 256 * -2, 1), 1, "../Resource/Texture/VisualEffect/Thunder.png"
+	cout << "THUNDER WAS CASTED" << endl;
+	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128, 256 * -2, 1), 0.5f, "../Resource/Texture/VisualEffect/Thunder.png"
 		, 1, 8, 8, 50);
 }

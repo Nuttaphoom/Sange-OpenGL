@@ -286,6 +286,7 @@ void Player::AddDetectingEntity(Entity* ePtr) {
 	} 	
 	this->detectingEntity.push_back(ePtr);
 }
+
 void Player::RemoveDetectingEntity(Entity* ePtr) {
 	for (int i = 0; i < detectingEntity.size() ; i++) {
 		if (ePtr == detectingEntity[i]) {
@@ -311,11 +312,13 @@ void Player::SetClimbing()
 	int l = GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().size();
 	for (int k = 0; k < l; k++){
 		if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 72.0f &&
-			abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 32.0f)
+			abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 32.0fou)
 		{
 			cout << "climb" << endl;
 			ChangeState(StateMachine::CLIMBING);
 		}
+		 
+		
 	}
 }
 

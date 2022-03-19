@@ -77,9 +77,6 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-
-	
-
 	AudioEngine audio;
 	audio.init();
 
@@ -122,11 +119,10 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(trap_1);
 	objectsList.push_back(trap_1);
 
-	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(1800, -850 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1)); 
+	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(1800 , -850+ 65 - 60, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1)); 
 
 	interactableObjectManager->addInteractableObjects(gate_1); 
 	objectsList.push_back(gate_1);
-
 
 	#pragma endregion 
 
