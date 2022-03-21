@@ -101,17 +101,133 @@ void Level2::LevelInit()
 #pragma endregion 
 
 #pragma region interactableObject 
+	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(591.0f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
+	interactableObjectManager->addInteractableObjects(hiding);
+	objectsList.push_back(hiding);
+
+	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(2359.81f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding2);
+	objectsList.push_back(hiding2);
+
+	Hiding* hiding3 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(3551.13f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding3);
+	objectsList.push_back(hiding3);
+
+	Hiding* hiding4 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7209.93f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding4);
+	objectsList.push_back(hiding4);
+
+	Hiding* hiding5 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7518.9f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding5);
+	objectsList.push_back(hiding5);
+
+	Hiding* hiding6 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7841.48f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding6);
+	objectsList.push_back(hiding6);
+
+	Hiding* hiding7 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8165.86f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding7);
+	objectsList.push_back(hiding7);
+
+	Hiding* hiding8 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8472.94f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding8);
+	objectsList.push_back(hiding8);
+
+	Hiding* hiding9 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8783.97f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding9);
+	objectsList.push_back(hiding9);
+
+
+	Flower* flower_1 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(3173.71, -1152 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	interactableObjectManager->addInteractableObjects(flower_1);
+	objectsList.push_back(flower_1);
+
+	Flower* flower_2 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(6898.54, -1152 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	interactableObjectManager->addInteractableObjects(flower_2);
+	objectsList.push_back(flower_2);
+
+	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(8281, -1152, 0.0f), glm::vec3(128, -168, 1), glm::vec3(256, -256, 1));
+
+	interactableObjectManager->addInteractableObjects(trap_1);
+	objectsList.push_back(trap_1);
  
 #pragma endregion 
 
 
 #pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite_V2.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0));
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
+
+	Decon* d1 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1094.37, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d1->AddPatrolPos(glm::vec3(1094.37, -1152, 0.0f));
+	d1->AddPatrolPos(glm::vec3(1094.37, -1152, 0.0f));
+	d1->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d1);
+	objectsList.push_back(d1);
+
+	Decon* d2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1214.61, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d2->AddPatrolPos(glm::vec3(1214.61, -1152, 0.0f));
+	d2->AddPatrolPos(glm::vec3(1214.61, -1152, 0.0f));
+	d2->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d2);
+	objectsList.push_back(d2);
+
+	Decon* d3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2978.93, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d3->AddPatrolPos(glm::vec3(2978.93, -1152, 0.0f));
+	d3->AddPatrolPos(glm::vec3(2978.93, -1152, 0.0f));
+	d3->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d3);
+	objectsList.push_back(d3);
+
+	Decon* d4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4210, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d4->AddPatrolPos(glm::vec3(4210, -1152, 0.0f));
+	d4->AddPatrolPos(glm::vec3(4210, -1152, 0.0f));
+	d4->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d4);
+	objectsList.push_back(d4);
+
+	Decon* d5 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5042.83, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d5->AddPatrolPos(glm::vec3(5042.83, -1152, 0.0f));
+	d5->AddPatrolPos(glm::vec3(5042.83, -1152, 0.0f));
+	d5->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d5);
+	objectsList.push_back(d5);
+
+	Decon* d6 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5877.93, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d6->AddPatrolPos(glm::vec3(5877.93, -1152, 0.0f));
+	d6->AddPatrolPos(glm::vec3(5877.93, -1152, 0.0f));
+	d6->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d6);
+	objectsList.push_back(d6);
+
+	Decon* d7 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6141.49, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d7->AddPatrolPos(glm::vec3(6141.49, -1152, 0.0f));
+	d7->AddPatrolPos(glm::vec3(6141.49, -1152, 0.0f));
+	d7->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d7);
+	objectsList.push_back(d7);
+
+	Decon* d8 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7708.78, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d8->AddPatrolPos(glm::vec3(7209.93, -1152, 0.0f));
+	d8->AddPatrolPos(glm::vec3(8165.86, -1152, 0.0f));
+	d8->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(d8);
+	objectsList.push_back(d8);
+
+
+	
 	 
 #pragma endregion
 	respawner = new ReSpawner();
@@ -140,6 +256,7 @@ void Level2::LevelInit()
 
 void Level2::LevelUpdate()
 {
+	cout << Player::GetInstance()->GetPos().x << "X" << Player::GetInstance()->GetPos().y << "Y" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();
