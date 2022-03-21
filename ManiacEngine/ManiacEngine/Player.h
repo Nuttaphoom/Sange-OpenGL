@@ -28,6 +28,7 @@ class Player : public Entity, public Subject
 		void HandleMouse(glm::vec3 mouseRealPos); 
 		void SetClimbing();
 		float GetClimbSpeed();
+		void UpdateClimbing();
 
 		void AddDetectingEntity(Entity* entity); 
 		void RemoveDetectingEntity(Entity* entity);

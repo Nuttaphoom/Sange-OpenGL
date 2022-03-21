@@ -1,5 +1,4 @@
 #pragma once
-#include "Player.h"
 #include "Manager.h"
 #include <map>
 //Create a animation object and determine its lifespan

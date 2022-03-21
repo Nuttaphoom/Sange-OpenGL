@@ -5,6 +5,7 @@
 #include "GameStateController.h"
 #include "Level.h"
 #include "EntityData.h"
+#include "AnimatorManager.h"
 #include <ostream>
 
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
@@ -35,7 +36,8 @@ void Player::HandleKey(char Key)
 			break;
 		case 's':
 			if (GetState() == StateMachine::CLIMBING) {
-				TranslateVelocity(glm::vec3(0, GetClimbSpeed() * -1, 0));
+				if (OnGround != true)
+					TranslateVelocity(glm::vec3(0, GetClimbSpeed() * -1, 0));
 			}
 			else {
 				//TranslateVelocity(glm::vec3(0, -3, 0));
@@ -92,9 +94,14 @@ Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Siz
 
 void Player::Update(int deltatime)
 {
+	if (IsPause())
+		return;
+
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	UpdateCollision();
+	if (GetState() == StateMachine::CLIMBING)
+		UpdateClimbing();
 }
 
 void Player::UpdateStateMachine(float deltatime)
@@ -102,7 +109,7 @@ void Player::UpdateStateMachine(float deltatime)
  
  	if (GetState() == StateMachine::RUNNING)
 	{
-		cout << "RUNNING" << endl; 
+		//cout << "RUNNING" << endl; 
 		if (GetVelocity().x < 1 && GetVelocity().x > -1 && OnGround == true)
 		{
 			ChangeState(StateMachine::IDLE);
@@ -111,7 +118,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::LANDING)
 	{
-		cout << "LANDING" << endl;
+		//cout << "LANDING" << endl;
 
 		if (GetVelocity().x < 2 && GetVelocity().x > -2)
 		{
@@ -130,7 +137,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::FALLING)
 	{
-		cout << "FALLING" << endl;
+		//cout << "FALLING" << endl;
 
 		if (GetVelocity().y == 0 && OnGround == true)
 		{
@@ -165,7 +172,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::MIDJUMP  )
 	{
-		cout << "MIDJUMPING" << endl; 
+		//cout << "MIDJUMPING" << endl; 
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
 		if (delay > 1)
@@ -177,10 +184,16 @@ void Player::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::CLIMBING)
 	{
-		cout << "CLIMBING" << endl;
+		//cout << "CLIMBING" << endl;
 
 	}
-	 
+
+	if (GetState() == StateMachine::CLIFFEDGE)
+	{
+		vector<SpriteObject*> _player;
+		_player.push_back(Player::GetInstance());
+		
+	}
 }
  
 void Player::UpdateCollision() {
@@ -312,13 +325,32 @@ void Player::SetClimbing()
 	int l = GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().size();
 	for (int k = 0; k < l; k++){
 		if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 72.0f &&
-			abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 32.0fou)
+			abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 32.0f)
 		{
-			cout << "climb" << endl;
+			//cout << "climb" << endl;
 			ChangeState(StateMachine::CLIMBING);
 		}
 		 
 		
+	}
+}
+
+void Player::UpdateClimbing()
+{
+	if (GetState() == StateMachine::CLIMBING)
+	{
+		int l = GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().size();
+		for (int k = 0; k < l; k++) {
+			if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 75.0f &&
+				abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 106.0f &&
+				GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y > GetPos().y) {
+				cout << "Climb" << endl;
+				break;
+			}
+			else if (k == l - 1) {
+				ChangeState(StateMachine::CLIFFEDGE);
+			}
+		}
 	}
 }
 

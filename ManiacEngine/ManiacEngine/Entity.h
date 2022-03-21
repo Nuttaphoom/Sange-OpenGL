@@ -13,6 +13,7 @@ enum class StateMachine {
 	HIDING,
 	CLIMBING,
 	CASTING,
+	CLIFFEDGE,
 };
 
 class Entity : public SpriteObject
