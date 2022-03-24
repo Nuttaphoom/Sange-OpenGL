@@ -213,6 +213,15 @@
     <ClCompile Include="Level4.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="HandleKey.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerClimbHandleKey.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandleKey.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -352,6 +361,15 @@
     </ClInclude>
     <ClInclude Include="Level4.h">
       <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleKey.h">
+      <Filter>Header Files\Objects\Player Stuffs</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerClimbHandleKey.h">
+      <Filter>Header Files\Objects\Player Stuffs</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandleKey.h">
+      <Filter>Header Files\Objects\Player Stuffs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

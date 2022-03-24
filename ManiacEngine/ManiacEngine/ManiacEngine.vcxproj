@@ -37,9 +37,11 @@
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="HandleKey.cpp" />
     <ClCompile Include="Hiding.cpp" />
     <ClInclude Include="EntityData.h" />
     <ClInclude Include="Gate.h" />
+    <ClInclude Include="HandleKey.h" />
     <ClInclude Include="Level4.h" />
     <ClInclude Include="MenuHolder.h" />
     <ClInclude Include="AnimatorManager.h" />
@@ -63,6 +65,8 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Observer.h" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerClimbHandleKey.cpp" />
+    <ClCompile Include="PlayerHandleKey.cpp" />
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="ReSpawner.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -73,6 +77,8 @@
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClInclude Include="PlayerClimbHandleKey.h" />
+    <ClInclude Include="PlayerHandleKey.h" />
     <ClInclude Include="TileMap.h" />
     <ClCompile Include="Trap.cpp" />
     <ClInclude Include="Trap.h" />

@@ -29,6 +29,8 @@ class Player : public Entity, public Subject
 		void SetClimbing();
 		float GetClimbSpeed();
 		void UpdateClimbing();
+		float GetJump();
+		float GetMoveSpeed();
 
 		void AddDetectingEntity(Entity* entity); 
 		void RemoveDetectingEntity(Entity* entity);

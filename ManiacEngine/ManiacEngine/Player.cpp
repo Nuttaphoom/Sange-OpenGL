@@ -6,6 +6,7 @@
 #include "Level.h"
 #include "EntityData.h"
 #include "AnimatorManager.h"
+#include "HandleKey.h"
 #include <ostream>
 
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
@@ -22,52 +23,8 @@ void Player::HandleMouse(glm::vec3 mouseRealPos) {
 
 void Player::HandleKey(char Key)
 {
-	switch (Key)
-	{
-		case 'w':
-			if (GetState() == StateMachine::CLIMBING) {
-				TranslateVelocity(glm::vec3(0, GetClimbSpeed(), 0));
-			}
-			else if (Entity::OnGround && GetState() != StateMachine::JUMPPING) {
-				TranslateVelocity(glm::vec3(0, _jump, 0));
-				Entity::OnGround = false;
-				ChangeState(StateMachine::JUMPPING);
-			}
-			break;
-		case 's':
-			if (GetState() == StateMachine::CLIMBING) {
-				if (OnGround != true)
-					TranslateVelocity(glm::vec3(0, GetClimbSpeed() * -1, 0));
-			}
-			else {
-				//TranslateVelocity(glm::vec3(0, -3, 0));
-			}
-			break;
-		case 'a':
-			if (GetState() == StateMachine::CLIMBING) {
-				if (GetDirection() == 1) {
-					ChangeState(StateMachine::FALLING);
-				}
-			}
-			else {
-				TranslateVelocity(glm::vec3(_moveSpeed * -1, 0, 0)); SetDirection(-1);
-			}
-			break;
-		case 'd':
-			if (GetState() == StateMachine::CLIMBING) {
-				if (GetDirection() == -1) {
-					ChangeState(StateMachine::FALLING);
-				}
-			}
-			else {
-				TranslateVelocity(glm::vec3(_moveSpeed, 0, 0)); SetDirection(1);
-			}
-			break;
-		case 'e': 
-			if (GetState() != StateMachine::CLIMBING) {
-				SetClimbing();
-			}
-	}
+	class HandleKey k;
+	k.KeyDetect(Key);
 }
 
 Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size)
@@ -137,7 +94,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::FALLING)
 	{
-		//cout << "FALLING" << endl;
+		cout << "FALLING" << endl;
 
 		if (GetVelocity().y == 0 && OnGround == true)
 		{
@@ -190,8 +147,7 @@ void Player::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::CLIFFEDGE)
 	{
-		vector<SpriteObject*> _player;
-		_player.push_back(Player::GetInstance());
+		cout << "CLIFFEDGE" << endl;
 		
 	}
 }
@@ -344,7 +300,7 @@ void Player::UpdateClimbing()
 			if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 75.0f &&
 				abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 106.0f &&
 				GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y > GetPos().y) {
-				cout << "Climb" << endl;
+				//cout << "Climb" << endl;
 				break;
 			}
 			else if (k == l - 1) {
@@ -352,6 +308,14 @@ void Player::UpdateClimbing()
 			}
 		}
 	}
+}
+
+float Player::GetJump() {
+	return _jump;
+}
+
+float Player::GetMoveSpeed() {
+	return _moveSpeed;
 }
 
 
