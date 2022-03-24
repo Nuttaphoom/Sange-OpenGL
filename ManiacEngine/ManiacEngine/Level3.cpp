@@ -12,7 +12,7 @@ void Level3::LevelLoad()
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
-	ifstream mapFile("../Resource/Map/Level_1.2/Middle_Mapdata.txt");
+	ifstream mapFile("../Resource/Map/Level_2.1/Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -27,7 +27,7 @@ void Level3::LevelLoad()
 	}
 
 
-	ifstream FrontMapFile("../Resource/Map/Level_1.2/Front_Mapdata.txt");
+	ifstream FrontMapFile("../Resource/Map/Level_2.1/Front_Mapdata.txt");
 	if (FrontMapFile.is_open()) {
 		FrontMapFile >> MapHeight;
 		FrontMapFile >> MapWidth;
@@ -41,7 +41,7 @@ void Level3::LevelLoad()
 		FrontMapFile.close();
 	}
 
-	ifstream cMapFile("../Resource/Map/Level_1.2/Col_Mapdata.txt");
+	ifstream cMapFile("../Resource/Map/Level_2.1/Col_Mapdata.txt");
 	if (cMapFile.is_open()) {
 		cMapFile >> MapHeight;
 		cMapFile >> MapWidth;
@@ -55,7 +55,7 @@ void Level3::LevelLoad()
 		cMapFile.close();
 	}
 
-	ifstream BackGroundMapFile("../Resource/Map/Level_1.2/Background_Mapdata.txt");
+	ifstream BackGroundMapFile("../Resource/Map/Level_2.1/Background_Mapdata.txt");
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
@@ -84,7 +84,7 @@ void Level3::LevelInit()
 
 #pragma region tilemapss
 
-	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
+	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level2.1 SpriteSheet.png", 21, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
