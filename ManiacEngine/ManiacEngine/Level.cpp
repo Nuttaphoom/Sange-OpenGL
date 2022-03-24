@@ -368,7 +368,7 @@ void Level::HandleKey(char key)
 	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n':   break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3 ; break;
 	case 'g':  player->OnDamaged(1); break;
 	case 'f': break;
 	case 't': break;

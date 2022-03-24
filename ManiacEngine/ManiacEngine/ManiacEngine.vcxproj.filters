@@ -210,6 +210,9 @@
     <ClCompile Include="Gate.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Level4.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="Gate.h">
       <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Level4.h">
+      <Filter>Header Files\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

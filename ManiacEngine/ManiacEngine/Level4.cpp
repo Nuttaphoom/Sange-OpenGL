@@ -1,13 +1,14 @@
-#include "Level3.h" 
+#include "Level4.h" 
 
- #include "TileMap.h"
+#include "Level.h"
+#include "TileMap.h"
 #include "Audio.h"
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT;
 
 
 
-void Level3::LevelLoad()
+void Level4::LevelLoad()
 {
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
@@ -74,7 +75,7 @@ void Level3::LevelLoad()
 	//cout << "Load Level" << endl;
 }
 
-void Level3::LevelInit()
+void Level4::LevelInit()
 {
 	AudioEngine audio;
 	audio.init();
@@ -83,9 +84,9 @@ void Level3::LevelInit()
 	//sound1.play();
 
 #pragma region tilemapss
-
 	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
-	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
+
+ 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
 			objectsList.push_back(tilemaps->GetTiles()[i][j]);
 		}
@@ -105,11 +106,14 @@ void Level3::LevelInit()
 
 
 #pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 5, 10, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0));
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
+
+
+
 
 #pragma endregion
 	respawner = new ReSpawner();
@@ -131,9 +135,12 @@ void Level3::LevelInit()
 
 
 
+
+	//cout << "Init Level" << endl;
+
 }
 
-void Level3::LevelUpdate()
+void Level4::LevelUpdate()
 {
 	cout << Player::GetInstance()->GetPos().x << "X" << Player::GetInstance()->GetPos().y << "Y" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
@@ -216,14 +223,14 @@ void Level3::LevelUpdate()
 
 }
 
-void Level3::LevelDraw()
+void Level4::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
 	//cout << "Draw Level" << endl;
 }
 
-void Level3::LevelFree()
+void Level4::LevelFree()
 {
 	/*for (int i = objectsList.size() - 1; i >= 0 ; i--) {
 		delete objectsList[i];
@@ -236,13 +243,13 @@ void Level3::LevelFree()
 	//cout << "Free Level" << endl;*/
 }
 
-void Level3::LevelUnload()
+void Level4::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
 	//cout << "Unload Level" << endl;
 }
 
-void Level3::HandleKey(char key)
+void Level4::HandleKey(char key)
 {
 	switch (key)
 	{
@@ -264,12 +271,12 @@ void Level3::HandleKey(char key)
 	}
 }
 
-void Level3::HandleMouse(int type, int x, int y)
+void Level4::HandleMouse(int type, int x, int y)
 {
 	float realX = x, realY = y;
 	glm::vec3 mouseVec3;
 	// Calculate Real X Y 
-	Level3::WorldToCam(realX, realY);
+	Level4::WorldToCam(realX, realY);
 	mouseVec3 = glm::vec3(realX, realY, 1);
 
 	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
@@ -293,7 +300,7 @@ void Level3::HandleMouse(int type, int x, int y)
 	player->SetPosition(MoveObjectToMuseVec3);*/
 }
 
-void Level3::WorldToCam(float& realX, float& realY) {
+void Level4::WorldToCam(float& realX, float& realY) {
 	int x, y;
 	x = realX; y = realY;
 

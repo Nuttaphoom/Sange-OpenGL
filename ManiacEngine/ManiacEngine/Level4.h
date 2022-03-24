@@ -1,18 +1,12 @@
 #pragma once
-#include "GameEngine.h"
-#include "SquareMeshVbo.h"
-#include "GameObject.h"
-#include "GameData.h"
-#include "ImageObject.h"
-#include "SpriteObject.h"
-#include "Button.h" 
-#include "InvisibleObject.h" 
-#include "Level.h" 
+#pragma once
+#include "Level.h"
+ 
 
-class Level2 : public Level
+class Level4 : public Level
 {
 private:
- 
+
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();
@@ -26,7 +20,7 @@ public:
 
 	void WorldToCam(float& x, float& y);
 
-	#pragma region getter 
+#pragma region getter 
 	virtual vector<DrawableObject*> GetInvisibleWallList() { return invisibleObjectsList; }
 	virtual vector<DrawableObject*> GetEntityList() { return EntityObjectsList; }
 	virtual vector<DrawableObject*> GetGUIObjectsList() { return GUIObjectsList; }
