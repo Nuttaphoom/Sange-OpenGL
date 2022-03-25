@@ -348,7 +348,8 @@ void Level::LevelFree()
 	//delete tilemaps;
 	//delete checkPoint;
 	//cout << "Free Level" << endl;*/
-}
+
+ }
 
 void Level::LevelUnload()
 {

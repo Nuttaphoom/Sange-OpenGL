@@ -13,6 +13,7 @@ private:
 public:
 	Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
 	void virtual PlayerChase(Entity* p)  ;
+	bool virtual PlayerDetect(Entity* p);
 	void virtual Patrol() ;
 	void virtual Attack(Entity* target) ;
 	void virtual ChangeState(StateMachine NextState)  ;

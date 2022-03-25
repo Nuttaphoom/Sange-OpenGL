@@ -1,6 +1,7 @@
 #include "Bishop.h" 
 #include "Player.h"
 #include "AnimatorManager.h"
+#include "Raycast.h"
 void CastingThunder(glm::vec3 posToCast);
 
 
@@ -67,6 +68,35 @@ void Bishop::UpdateStateMachine(float deltatime) {
 }
 
 void Bishop::PlayerChase(Entity* p) {
+
+}
+
+bool Bishop::PlayerDetect(Entity* p)
+{
+	Player::GetInstance()->RemoveDetectingEntity(this);
+	if (p->GetState() == StateMachine::HIDING)
+		return false;
+
+
+
+	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
+
+	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
+	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false;
+	//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
+	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
+
+	if (Distance.x < 1800 && Distance.y < 100) {
+		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast();
+		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
+			Player::GetInstance()->AddDetectingEntity(this);
+			return true;
+		}
+	}
+
+
+	//cout << "DON'T SEE PLAYER" << endl;
+	return false;
 
 }
 void Bishop::Patrol() {
