@@ -28,7 +28,7 @@ void PlayerHandleKey::PlayerControl(char key) {
 }
 
 void PlayerHandleKey::PlayerStateCheck(char key) {
-	if (Player::GetInstance()->GetState() != StateMachine::CLIMBING && Player::GetInstance()->GetState() != StateMachine::CLIFFEDGE)
+	if (Player::GetInstance()->GetState() != StateMachine::CLIMBING && Player::GetInstance()->GetState() != StateMachine::CLIFFEDGE && Player::GetInstance()->GetState() != StateMachine::CLIFFEDGEDOWN)
 	{
 		PlayerControl(key);
 	}

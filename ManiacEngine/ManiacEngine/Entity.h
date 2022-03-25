@@ -14,6 +14,7 @@ enum class StateMachine {
 	CLIMBING,
 	CASTING,
 	CLIFFEDGE,
+	CLIFFEDGEDOWN,
 };
 
 class Entity : public SpriteObject

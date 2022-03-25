@@ -94,7 +94,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::FALLING)
 	{
-		cout << "FALLING" << endl;
+		//cout << "FALLING" << endl;
 
 		if (GetVelocity().y == 0 && OnGround == true)
 		{
@@ -139,16 +139,36 @@ void Player::UpdateStateMachine(float deltatime)
 		}
 	}
 
-	if (GetState() == StateMachine::CLIMBING)
+	if (GetState() == StateMachine::IDLE)
 	{
-		//cout << "CLIMBING" << endl;
+		//cout << "IDLE" << endl;
 
 	}
 
 	if (GetState() == StateMachine::CLIFFEDGE)
 	{
-		cout << "CLIFFEDGE" << endl;
-		
+		//cout << "CLIFFEDGE" << endl;
+		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		delay += deltatime;
+		if (delay > 200)
+		{
+			delay = 0;
+			ChangeState(StateMachine::CLIFFEDGEDOWN);
+		}
+		TranslateVelocity(glm::vec3 (0, 43, 0));
+	}
+
+	if (GetState() == StateMachine::CLIFFEDGEDOWN)
+	{
+		//cout << "CLIFFEDGEDOWN" << endl;
+		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		delay += deltatime;
+		if (delay > 700)
+		{
+			delay = 0;
+			ChangeState(StateMachine::FALLING);
+		}
+		TranslateVelocity(glm::vec3(30, 0, 0));
 	}
 }
  
@@ -189,6 +209,14 @@ void Player::ChangeState(StateMachine NextState)
 	{
 		SetAnimationLoop(3, 0, 8, 100);
 		//if ()
+	}
+	else if (this->GetState() == StateMachine::CLIFFEDGE)
+	{
+		SetAnimationLoop(4, 0, 1, 100);
+	}
+	else if (this->GetState() == StateMachine::CLIFFEDGEDOWN)
+	{
+		SetAnimationLoop(4, 1, 1, 100);
 	}
 }
 
