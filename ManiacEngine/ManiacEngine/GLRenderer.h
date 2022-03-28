@@ -25,10 +25,12 @@ protected:
 	GLuint pMatrixId = -1;
 	GLuint colorUniformId = -1;
 	GLuint renderModeUniformId = -1;
+	GLuint alphaOffset = -1;
 
 	GLuint gProgramId;
 	int gPos2DLocation;
 	int gTex2DLocation;
+	int gAlphaOffset;
 	void PrintProgramLog(GLuint program);
 	bool Initialize(string vertexShaderFile, string fragmentShaderFile);
 	Shader *vertexShader;

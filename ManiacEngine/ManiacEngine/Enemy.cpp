@@ -8,10 +8,7 @@ Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, gl
 
  
 
-void Enemy::Translate(glm::vec3 moveDistance)
-{
-	pos = pos + moveDistance;
-}
+ 
 
 void Enemy::Update(int deltatime)
 {
@@ -46,8 +43,6 @@ bool Enemy::PlayerDetect(Entity* p)
 	if (p->GetState() == StateMachine::HIDING)
 		return false; 
 
-	
-
 	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
 
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
@@ -55,7 +50,7 @@ bool Enemy::PlayerDetect(Entity* p)
 	//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
 	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
 
-	if (Distance.x < 100 && Distance.y < 100) {
+	if (Distance.x < 200 && Distance.y < 100) {
 		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast() ;
 		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
 			Player::GetInstance()->AddDetectingEntity(this); 

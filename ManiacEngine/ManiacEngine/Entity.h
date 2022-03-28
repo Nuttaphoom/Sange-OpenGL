@@ -28,11 +28,10 @@ class Entity : public SpriteObject
 		enum StateMachine stateMachine ;
 		int collisionNumber; //1 = TOP, 2 = BOTTOM , 3 = LEFT , 4 = RIGHT  
 
-	/*Default Value that will be used when we respawn this obj*/ 
+		/*Default Value that will be used when we respawn this obj*/ 
 		glm::vec3 Default_pos; 
 		float Default_HP;  
 		float Default_MoveSpeed;
-
 	public:
 		bool OnGround = false;
 		int DirectionSet = 1;
@@ -41,6 +40,7 @@ class Entity : public SpriteObject
 		glm::vec3 collisionSize;
 
 		Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos,glm::vec3 Size);
+
 		virtual bool Death();
 		virtual void Render(glm::mat4 globalModelTransform);
 		virtual int Collides(Entity e);
@@ -50,6 +50,7 @@ class Entity : public SpriteObject
 		virtual void Translate(glm::vec3 moveDistance);
 		virtual void TranslateVelocity(glm::vec3 velocity);
 		virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
+		virtual void SetVelocity(glm::vec3 velocity); 
  		virtual float GetMoveSpeed();
 		virtual void SetDirection(int x);
 		virtual int GetDirection();

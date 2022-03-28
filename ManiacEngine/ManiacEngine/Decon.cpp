@@ -5,7 +5,7 @@
 #include "GameData.h"
 
 
-Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 0.21f,Pos,Size)
+Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size)
 {
  	DeconState = StateMachine::RUNNING;
  

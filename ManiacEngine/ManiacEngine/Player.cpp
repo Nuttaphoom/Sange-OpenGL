@@ -55,6 +55,7 @@ void Player::Update(int deltatime)
 		return;
 
 	Entity::Update(deltatime);
+
 	UpdateStateMachine(deltatime);
 	UpdateCollision();
 	if (GetState() == StateMachine::CLIMBING)
@@ -220,10 +221,7 @@ void Player::ChangeState(StateMachine NextState)
 	}
 }
 
-void Player::Translate(glm::vec3 moveDistance)
-{
-	pos = pos + moveDistance;
-}
+ 
 
 Player* Player::GetInstance() {
 	if (instance == nullptr) {
