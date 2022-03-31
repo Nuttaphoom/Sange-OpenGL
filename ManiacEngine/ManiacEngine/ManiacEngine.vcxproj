@@ -58,6 +58,7 @@
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="Level4.cpp" />
     <ClCompile Include="LevelTest.cpp" />
+    <ClCompile Include="Level_Menu.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuHolder.cpp" />
     <ClCompile Include="MeshVbo.cpp" />

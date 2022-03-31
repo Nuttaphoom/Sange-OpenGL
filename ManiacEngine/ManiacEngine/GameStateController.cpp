@@ -1,5 +1,5 @@
 #include "GameStateController.h"
-
+#include "Level_Menu.h"
 GameStateController* GameStateController::instance = nullptr; 
 
 GameStateController* GameStateController::GetInstance() {
@@ -50,6 +50,9 @@ void GameStateController::Update()
 		case GameState::GS_LEVEL3: 
 			currentLevel = new Level3();
 			break; 
+		case GameState::GS_MAINMENU:
+			currentLevel = new Level_Menu();
+			break;
 		default:
 			cout << "gGameStateCurr : invalid state!!" << endl;
 			exit(1);
