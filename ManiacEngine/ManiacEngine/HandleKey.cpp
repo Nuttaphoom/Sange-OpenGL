@@ -3,6 +3,22 @@
 
 void HandleKey::KeyDetect(char key) {
 	PlayerHandleKey i;
-
-	i.PlayerStateCheck(key);
+	switch (key)
+	{
+		case 'w':
+			i.PlayerStateCheck(key);
+			break;
+		case 's':
+			i.PlayerStateCheck(key);
+			break;
+		case 'a':
+			i.PlayerStateCheck(key);
+			break;
+		case 'd':
+			i.PlayerStateCheck(key);
+			break;
+		case 'e':
+			i.PlayerStateCheck(key);
+			break;
+	}
 }

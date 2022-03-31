@@ -114,12 +114,12 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
-	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(128, -128, 1));
+	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(256, -256, 1));
 		
 	interactableObjectManager->addInteractableObjects(trap_1);
 	objectsList.push_back(trap_1);
 
-	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(9680 , -1176 + 65 - 60 + 64, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1)); 
+	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(1800 , -850+ 65 - 60, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1)); 
 
 	interactableObjectManager->addInteractableObjects(gate_1); 
 	objectsList.push_back(gate_1);
@@ -133,7 +133,7 @@ void Level::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
-	/*Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
+	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
 	test->AddPatrolPos(glm::vec3(4886, -920, 0.0f)); 
 	test->AddPatrolPos(glm::vec3(5416, -920, 0.0f));
 	test->SetAnimationLoop(0, 0, 12, 100);
@@ -167,22 +167,22 @@ void Level::LevelInit()
 	_bishopTest->AddPatrolPos(glm::vec3(189 , -1176.0f, 0.0f));
 
 	EntityObjectsList.push_back(_bishopTest);
-	objectsList.push_back(_bishopTest);*/
+	objectsList.push_back(_bishopTest);
 	#pragma endregion
 	respawner = new ReSpawner();
 
 
 	#pragma region GUI 
-	GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0),glm::vec3(1668 / 11, 2224 / 11 * -1,1));
+	//GUI* SangeImage = new GUI("../Resource/Texture/GUI/Sange.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0),glm::vec3(1668 / 11, 2224 / 11 * -1,1));
  
-	objectsList.push_back(SangeImage);
-	GUIObjectsList.push_back(SangeImage); 
+	//objectsList.push_back(SangeImage);
+	//GUIObjectsList.push_back(SangeImage); 
 
-	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
+	//HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1) );
 	
-	objectsList.push_back(hpbar);
+	//objectsList.push_back(hpbar);
 	
-	GUIObjectsList.push_back(hpbar);
+	//GUIObjectsList.push_back(hpbar);
 
 	MenuHolder* pauseMenuHolder = new MenuHolder();
 	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
@@ -231,22 +231,21 @@ void Level::LevelInit()
 	//_menuHolderList.push_back(mainMenuHolder);
 	#pragma endregion
 
-	#pragma  Manager
+	#pragma region 
 	AnimatorManager* animatorManager = AnimatorManager::GetInstance() ; 
 	managersList.push_back(animatorManager);
-	objectsList.push_back(animatorManager);
 
 	#pragma endregion  
 	
 
+	objectsList.push_back(animatorManager);
 
 	//cout << "Init Level" << endl;
 
 }
- 
+
 void Level::LevelUpdate()
 {
-
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();
@@ -379,9 +378,6 @@ void Level::HandleKey(char key)
 	case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
 	case 'E': _menuHolderList[0]->enableButton(); break;
 
-	//Just release
-	case 'A': player->HandleKey(key); break; 
-	case 'D': player->HandleKey(key); break; 
 	}
 }
 

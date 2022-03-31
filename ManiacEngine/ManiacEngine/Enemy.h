@@ -14,6 +14,7 @@ class Enemy : public Entity
 	Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size);
  	void Update(int deltatime);
 	void AddPatrolPos(glm::vec3 pos);
+	void Translate(glm::vec3 moveDistance);
 	bool PlayerDetect(Entity* p);
 
 	void virtual UpdateStateMachine(float deltatime) = 0 ;

@@ -23,7 +23,8 @@ class Player : public Entity, public Subject
 		void UpdateStateMachine(float deltatime);
 		void UpdateCollision(); 
   		void ChangeState(StateMachine NextState);
- 		void HandleKey(char key);
+		void Translate(glm::vec3 moveDistance);
+		void HandleKey(char key);
 		void HandleMouse(glm::vec3 mouseRealPos); 
 		void SetClimbing();
 		float GetClimbSpeed();

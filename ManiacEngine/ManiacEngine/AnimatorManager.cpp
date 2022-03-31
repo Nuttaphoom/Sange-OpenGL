@@ -42,7 +42,8 @@ void AnimatorManager::Update(int deltaTime) {
 		spriteObject->AnimationObject->Update(deltaTime);
 
 		spriteObject->lifespan -= 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
- 		if (spriteObject->lifespan <= 0) {
+		cout << spriteObject->lifespan << endl;
+		if (spriteObject->lifespan <= 0) {
 			delete spriteObject->AnimationObject;
 
 			for (int k = 0; k < spriteObject->PausedObj.size(); k++) {

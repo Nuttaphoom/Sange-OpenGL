@@ -1,37 +1,29 @@
 #include "PlayerHandleKey.h"
 #include "Player.h"
 #include "PlayerClimbHandleKey.h"
-#include "GameEngine.h"
 
 void PlayerHandleKey::PlayerControl(char key) {
-
-	Player* player = Player::GetInstance(); 
 	switch (key)
 	{
 		case 'w':
-			if (player->OnGround == true && player->GetState() != StateMachine::JUMPPING) {
-				cout << "apply jump force : " << GameEngine::GetInstance()->GetDeltaTime() << endl ;
-				player->OnGround = false;
-				player->TranslateVelocity(glm::vec3(0, player->GetJump(), 0));
-				player->ChangeState(StateMachine::JUMPPING);
+			if (Player::GetInstance()->OnGround == true && Player::GetInstance()->GetState() != StateMachine::JUMPPING) {
+				cout << "here" << endl;
+				Player::GetInstance()->TranslateVelocity(glm::vec3(0, Player::GetInstance()->GetJump(), 0));
+				Player::GetInstance()->OnGround = false;
+				Player::GetInstance()->ChangeState(StateMachine::JUMPPING);
 			}
 			break;
 		case 's':
 			break;
 		case 'a':
-			player->TranslateVelocity(glm::vec3(player->GetMoveSpeed() * -1, 0, 0)); player->SetDirection(-1);
+			Player::GetInstance()->TranslateVelocity(glm::vec3(Player::GetInstance()->GetMoveSpeed() * -1, 0, 0)); Player::GetInstance()->SetDirection(-1);
 			break;
 		case 'd':
-			player->TranslateVelocity(glm::vec3(player->GetMoveSpeed(), 0, 0)); player->SetDirection(1);
+			Player::GetInstance()->TranslateVelocity(glm::vec3(Player::GetInstance()->GetMoveSpeed(), 0, 0)); Player::GetInstance()->SetDirection(1);
 			break;
 		case 'e' :
-			player->SetClimbing();
+			Player::GetInstance()->SetClimbing();
 			break;
-
-		case 'A' :
-			player->SetVelocity(glm::vec3(0, Player::GetInstance()->GetVelocity().y, 0));
-		case 'D' :
-			player->SetVelocity(glm::vec3(0, Player::GetInstance()->GetVelocity().y, 0));
 	}
 }
 

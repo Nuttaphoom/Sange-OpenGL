@@ -6,13 +6,6 @@
 
 void Entity::VelocityControl() {
 	velocity += applyingVelocity;
-
-	if (abs(velocity.x) > GetMoveSpeed() )
-	{
- 		velocity.x = GetMoveSpeed() * (velocity.x > 0 ? 1 : -1) ;
-	}
-
-
 	if ((collisionNumber >> 2) % 2 != 0) //Can't walk left
 		if (velocity.x < 0) {
 			velocity.x = 0;
@@ -21,11 +14,18 @@ void Entity::VelocityControl() {
 		if (velocity.x > 0) {
 			velocity.x = 0;
 		}
-
 	this->Translate(velocity);
 	applyingVelocity = glm::vec3(0, 0, 0);
 
-
+	if (velocity.x != 0)
+	{
+		TranslateVelocity(glm::vec3(-velocity.x * 10    , 0, 0));
+  		if (velocity.x < 0.001 && velocity.x > -0.001)
+		{
+			velocity.x = 0;
+		}
+	}
+	
 	if (GetState() == StateMachine::CLIMBING)
 	{
 		if (velocity.y != 0)
@@ -119,7 +119,7 @@ void Entity::Render(glm::mat4 globalModelTransform)
 
 		GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
 		GLuint modeId = GameEngine::GetInstance()->GetRenderer()->GetModeUniformId();
- 
+
 		glBindTexture(GL_TEXTURE_2D, GetTexture());
 		if (modelMatixId == -1) {
 			cout << "Error: Can't perform transformation " << endl;
@@ -133,8 +133,8 @@ void Entity::Render(glm::mat4 globalModelTransform)
 		if (squareMesh != nullptr) {
 			currentMatrix = globalModelTransform * currentMatrix;
 			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-			glUniform1i(modeId, 2);
- 			squareMesh->AdjustTexcoord(GetUV());
+			glUniform1i(modeId, 1);
+			squareMesh->AdjustTexcoord(GetUV());
 			squareMesh->Render();
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
@@ -157,9 +157,11 @@ void Entity::Update(int deltatime)
 	SpriteObject::Update(deltatime);
 
 	if (!OnGround && GetState() != StateMachine::CLIMBING) { //Apply velocity 
-		TranslateVelocity(glm::vec3(0, -10.0f, 0));
+		TranslateVelocity(glm::vec3(0, -12.81f, 0));
  	}	
- 
+	else if (GetState() == StateMachine::CLIMBING) {
+		TranslateVelocity(glm::vec3(0, 0, 0));
+	}
 
 	 
 	VelocityControl(); 
@@ -169,19 +171,14 @@ void Entity::Update(int deltatime)
 
 void Entity::Translate(glm::vec3 moveDistance)
 {
- 	pos.x = pos.x +( moveDistance.x / 1000 * GameEngine::GetInstance()->GetDeltaTime()) ;
-	pos.y = pos.y + (moveDistance.y / 1000 * GameEngine::GetInstance()->GetDeltaTime());
-
+ 	pos = pos  + moveDistance   ;
 }
 
 void Entity::TranslateVelocity(glm::vec3 velocity) {
-	this->applyingVelocity.x += velocity.x    ;
-	this->applyingVelocity.y += velocity.y     ;
-	this->applyingVelocity.z += velocity.z      ;
-}
+	this->applyingVelocity.x +=   velocity.x / 1000.0f * GameEngine::GetInstance()->GetDeltaTime() ;
+	this->applyingVelocity.y += velocity.y / 1000.0f * GameEngine::GetInstance()->GetDeltaTime();
+	this->applyingVelocity.z +=   velocity.z / 1000.0f * GameEngine::GetInstance()->GetDeltaTime() ;
 
-void Entity::SetVelocity(glm::vec3 velocity) {
-	this->velocity = velocity;
 }
 
 void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame)

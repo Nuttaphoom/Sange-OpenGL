@@ -111,12 +111,6 @@ bool GLRenderer::Initialize(string vertexShaderFile, string fragmentShaderFile)
 		return false;
 	}
 
-	/*alphaOffset = glGetUniformLocation(gProgramId, "alphaOffset");
-	if (alphaOffset == -1) {
-		cout << "alphaOffset is not a valid glsl univorm variable" << endl; 
-		return false; 
-	}*/
-
 
 	glEnableVertexAttribArray(gPos2DLocation);
 	glEnableVertexAttribArray(gTex2DLocation);

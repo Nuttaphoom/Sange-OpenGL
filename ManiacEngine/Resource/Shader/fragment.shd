@@ -2,7 +2,6 @@
 
 uniform sampler2D ourTexture;
 uniform int renderMode = 0; 
-uniform float alphaOffset = 0 ;
 
 in vec3 OutColor;
 in vec2 TexCoord;
@@ -15,11 +14,9 @@ void main()
 	{
 		finalColor = vec4( OutColor, 0.5 ); 
  	} 
-    else if (renderMode == 1)
+    else
     {
+            
         finalColor = texture(ourTexture, TexCoord) ; 
-    }else if (renderMode == 2) {
-        finalColor = texture(ourTexture,TexCoord) ; 
-        finalColor.a *= 0.45f;
-    }
+     }
 }

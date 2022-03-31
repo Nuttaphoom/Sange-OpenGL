@@ -164,6 +164,7 @@ void Bishop::ChangeState(StateMachine NextState) {
 }
 
 void CastingThunder(glm::vec3 posToCast) {
+	cout << "THUNDER WAS CASTED" << endl;
 	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128, 256 * -2, 1), 0.5f, "../Resource/Texture/VisualEffect/Thunder.png"
 		, 1, 8, 8, 50);
 }
