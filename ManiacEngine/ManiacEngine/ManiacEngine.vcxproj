@@ -43,6 +43,7 @@
     <ClInclude Include="Gate.h" />
     <ClInclude Include="HandleKey.h" />
     <ClInclude Include="Level4.h" />
+    <ClInclude Include="Level_Menu.h" />
     <ClInclude Include="MenuHolder.h" />
     <ClInclude Include="AnimatorManager.h" />
     <ClInclude Include="Bishop.h" />

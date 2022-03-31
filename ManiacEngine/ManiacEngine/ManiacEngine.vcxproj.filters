@@ -371,6 +371,9 @@
     <ClInclude Include="PlayerHandleKey.h">
       <Filter>Header Files\Objects\Player Stuffs</Filter>
     </ClInclude>
+    <ClInclude Include="Level_Menu.h">
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\Shader\fragment.shd">
