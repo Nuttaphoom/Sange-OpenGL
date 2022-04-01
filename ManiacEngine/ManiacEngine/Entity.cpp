@@ -37,6 +37,14 @@ void Entity::VelocityControl() {
 			}
 		}
 	}
+	if (velocity.x != 0)
+	{
+		velocity.x = velocity.x / 200;
+		if (velocity.x < 0.02 && velocity.x > -0.02)
+		{
+			velocity.x = 0;
+		}
+	}
 }
  Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName, row, column,Pos,Size), HP(HP), MoveSpeed(MoveSpeed) {
 	this->velocity = glm::vec3(0, 0, 0);
@@ -156,7 +164,7 @@ void Entity::Update(int deltatime)
 
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround && GetState() != StateMachine::CLIMBING) { //Apply velocity 
+	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -10.0f, 0));
  	}	
  
@@ -281,4 +289,10 @@ void Entity::RespawnThisObject() {
 int Entity::GetDirection()
 {
 	return DirectionSet;
+}
+
+void Entity::Stop()
+{
+	velocity.x = 0;
+	velocity.y = 0;
 }

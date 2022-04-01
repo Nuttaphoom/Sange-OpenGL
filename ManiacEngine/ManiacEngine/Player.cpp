@@ -64,7 +64,6 @@ void Player::Update(int deltatime)
 
 void Player::UpdateStateMachine(float deltatime)
 {
- 
  	if (GetState() == StateMachine::RUNNING)
 	{
 		//cout << "RUNNING" << endl; 
@@ -151,12 +150,12 @@ void Player::UpdateStateMachine(float deltatime)
 		//cout << "CLIFFEDGE" << endl;
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
-		if (delay > 200)
+		if (delay > 400)
 		{
 			delay = 0;
 			ChangeState(StateMachine::CLIFFEDGEDOWN);
 		}
-		TranslateVelocity(glm::vec3 (0, 43, 0));
+		TranslateVelocity(glm::vec3 (0, 24, 0));
 	}
 
 	if (GetState() == StateMachine::CLIFFEDGEDOWN)
@@ -164,12 +163,34 @@ void Player::UpdateStateMachine(float deltatime)
 		//cout << "CLIFFEDGEDOWN" << endl;
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
+		if (OnGround != false && delay > 400)
+		{
+			delay = 0;
+			ChangeState(StateMachine::IDLE);
+		}
+		TranslateVelocity(glm::vec3(60, 0, 0));
+	}
+
+	if (GetState() == StateMachine::BAT)
+	{
+		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		delay += deltatime;
+		if (delay > 5000)
+		{
+			delay = 0;
+			bat = false;
+			ChangeState(StateMachine::FALLING);
+		}
+	}
+
+	if (GetState() == StateMachine::TRANSFORM) {
+		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		delay += deltatime;
 		if (delay > 700)
 		{
 			delay = 0;
-			ChangeState(StateMachine::FALLING);
+			ChangeState(StateMachine::BAT);
 		}
-		TranslateVelocity(glm::vec3(30, 0, 0));
 	}
 }
  
@@ -218,6 +239,14 @@ void Player::ChangeState(StateMachine NextState)
 	else if (this->GetState() == StateMachine::CLIFFEDGEDOWN)
 	{
 		SetAnimationLoop(4, 1, 1, 100);
+	}
+	else if (this->GetState() == StateMachine::TRANSFORM)
+	{
+		SetAnimationLoop(6, 0, 7, 100);
+	}
+	else if (this->GetState() == StateMachine::BAT)
+	{
+		SetAnimationLoop(7, 0, 6, 100);
 	}
 }
 
@@ -336,12 +365,29 @@ void Player::UpdateClimbing()
 	}
 }
 
+void Player::SetBat() {
+	if (GetState() == StateMachine::IDLE ||
+		GetState() == StateMachine::RUNNING ||
+		GetState() == StateMachine::JUMPPING ||
+		GetState() == StateMachine::MIDJUMP ||
+		GetState() == StateMachine::CLIMBING ||
+		GetState() == StateMachine::FALLING ||
+		GetState() == StateMachine::LANDING) {
+		if (bat == true)
+			ChangeState(StateMachine::TRANSFORM);
+	}
+}
+
 float Player::GetJump() {
 	return _jump;
 }
 
 float Player::GetMoveSpeed() {
 	return _moveSpeed;
+}
+
+void Player::BatChange(bool x) {
+	bat = x;
 }
 
 

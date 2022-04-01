@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatorManager.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="BatHandleKey.cpp" />
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="HandleKey.cpp" />
     <ClCompile Include="Hiding.cpp" />
+    <ClInclude Include="BatHandleKey.h" />
     <ClInclude Include="CrossMiniGame.h" />
     <ClInclude Include="EntityData.h" />
     <ClInclude Include="Gate.h" />

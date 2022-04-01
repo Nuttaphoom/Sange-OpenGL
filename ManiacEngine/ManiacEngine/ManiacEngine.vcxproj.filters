@@ -237,6 +237,9 @@
     <ClCompile Include="MiniGameManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="BatHandleKey.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -397,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="MiniGameManager.h">
       <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BatHandleKey.h">
+      <Filter>Header Files\Objects\Player Stuffs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

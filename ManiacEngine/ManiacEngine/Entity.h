@@ -15,6 +15,8 @@ enum class StateMachine {
 	CASTING,
 	CLIFFEDGE,
 	CLIFFEDGEDOWN,
+	BAT,
+	TRANSFORM,
 };
 
 class Entity : public SpriteObject
@@ -63,4 +65,5 @@ class Entity : public SpriteObject
 		StateMachine  GetState();
 		virtual float GetHP();
 		virtual void SetHP(float data);
+		virtual void Stop();
 };

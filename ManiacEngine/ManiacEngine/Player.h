@@ -17,6 +17,7 @@ class Player : public Entity, public Subject
 		float _jump;
 		float _moveSpeed;
 		float _hp;
+		bool bat = false;
 	public :
 		Player(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
  		void Update(int deltatime);
@@ -28,8 +29,10 @@ class Player : public Entity, public Subject
 		void SetClimbing();
 		float GetClimbSpeed();
 		void UpdateClimbing();
+		void SetBat();
 		float GetJump();
 		float GetMoveSpeed();
+		void BatChange(bool);
 
 		void AddDetectingEntity(Entity* entity); 
 		void RemoveDetectingEntity(Entity* entity);
