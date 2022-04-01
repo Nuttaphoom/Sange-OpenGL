@@ -70,22 +70,24 @@ void Trap::getTrap() {
 void Trap::Called() {
 	//Refuse trap
 	cout << "Refused" << endl; 
+	if (_crossMiniGamePtr == nullptr)
+		_crossMiniGamePtr = new CrossMiniGame("null", 1, 1, glm::vec3(0, 0, 0), glm::vec3(256, 128, 1), 100, 0);
+
 	refused = true; 
 
 }
 
 void Trap::Update(int deltaTime) {
-	//If collide with inside collision, get trap 
-//If it has been refused, nothing happen 
-	//
-	//if (refused) return;
+	if (_crossMiniGamePtr != nullptr) {
+		_crossMiniGamePtr->Update(deltaTime); 
+	 }
 
 	Player* player = Player::GetInstance();
 	glm::vec3 insideColliderSize = glm::vec3( 0 , ColliderSize.y, 1);
-	float offsetX = 32;
-	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, glm::vec3(GetPos().x + offsetX, GetPos().y, GetPos().z), glm::vec3(0,0,0) , glm::vec3(16, -128, 0)));
+	float offsetX = 30 + 26 + 128 / 8 ;
+	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, glm::vec3(GetPos().x + offsetX, GetPos().y, GetPos().z), GetSize() , glm::vec3(128 / 4 - 30,-128, 1)));
 	
-	if (testObj->InCollideRadius(testObj, player)) {
+	if (testObj->InCollideRadius(testObj, player) > 0) {
 		cout << "hurt player" << endl;
 		//coolDown = 3; 
 		//refused = true; 
@@ -96,6 +98,10 @@ void Trap::Update(int deltaTime) {
 	delete testObj;
 }
  
-
+void Trap::Render(glm::mat4 globalModelTransform) {
+	SpriteObject::Render(globalModelTransform); 
+	if (_crossMiniGamePtr != nullptr) 
+		_crossMiniGamePtr->Render(globalModelTransform);
+}
  
  

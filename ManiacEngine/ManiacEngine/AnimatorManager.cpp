@@ -2,6 +2,9 @@
 
 AnimatorManager* AnimatorManager::instance = nullptr;
 
+void AnimatorManager::HandleKey(char key) {
+
+}
 
  AnimatorManager* AnimatorManager::GetInstance() {
 	if (instance == nullptr) {

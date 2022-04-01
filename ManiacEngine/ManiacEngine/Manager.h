@@ -12,6 +12,7 @@ public:
 	virtual void Render(glm::mat4 globalModelTransform) {
 
 	}
+	virtual void HandleKey(char s) = 0; 
 };
 
 

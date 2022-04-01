@@ -27,7 +27,7 @@ public:
 
 
 	void Update(int deltaTime);
-
+	virtual void HandleKey(char key);
 	virtual void Render(glm::mat4 globalModelTransform);
 
 };

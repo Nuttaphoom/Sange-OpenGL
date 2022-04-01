@@ -73,6 +73,12 @@
     <Filter Include="Header Files\Objects\Player Stuffs">
       <UniqueIdentifier>{1ce2eecb-8357-4efe-ac5a-a7e694448bd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects\MiniGame">
+      <UniqueIdentifier>{ff310e74-0243-420c-bb41-a99bd87954f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\MiniGame">
+      <UniqueIdentifier>{84a03fec-e166-4c88-87b4-42eddb973989}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameData.cpp">
@@ -225,6 +231,12 @@
     <ClCompile Include="Level_Menu.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="CrossMiniGame.cpp">
+      <Filter>Source Files\Objects\MiniGame</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniGameManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -376,6 +388,15 @@
     </ClInclude>
     <ClInclude Include="Level_Menu.h">
       <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniGame.h">
+      <Filter>Header Files\Objects\MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossMiniGame.h">
+      <Filter>Header Files\Objects\MiniGame</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniGameManager.h">
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
