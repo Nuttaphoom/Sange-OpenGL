@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "TileMap.h"
 #include "Audio.h"
+#include "GameStateController.h"
 
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT;	
@@ -133,7 +134,7 @@ void Level::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
-	/*Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
+	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
 	test->AddPatrolPos(glm::vec3(4886, -920, 0.0f)); 
 	test->AddPatrolPos(glm::vec3(5416, -920, 0.0f));
 	test->SetAnimationLoop(0, 0, 12, 100);
@@ -160,7 +161,7 @@ void Level::LevelInit()
 	test4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test4);
 	objectsList.push_back(test4);
-
+	/*
 	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Bishop Sprite Sheet.png", 2, 9, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
 	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
 	_bishopTest->AddPatrolPos(glm::vec3(189 + 16, -1176.0f, 0.0f));
@@ -311,7 +312,8 @@ void Level::LevelUpdate()
 
 	
 
-
+	if (isPause)
+		return; 
 
 	//Update InteractableObject 
 	interactableObjectManager->Update(deltaTime);
@@ -377,7 +379,7 @@ void Level::HandleKey(char key)
 	case 'h': break;
 	case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 	case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
-	case 'E': _menuHolderList[0]->enableButton(); break;
+	case 'E': _menuHolderList[0]->enableButton(); GameStateController::GetInstance()->currentLevel->SetPause(true);  break;
 	case '1': player->HandleKey(key); break;
 
 	//Just release

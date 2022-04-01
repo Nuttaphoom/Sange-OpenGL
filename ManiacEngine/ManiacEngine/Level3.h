@@ -25,10 +25,5 @@ public:
 	virtual void HandleMouse(int type, int x, int y);
 
 	void WorldToCam(float& x, float& y);
-
-#pragma region getter 
-	virtual vector<DrawableObject*> GetInvisibleWallList() { return invisibleObjectsList; }
-	virtual vector<DrawableObject*> GetEntityList() { return EntityObjectsList; }
-	virtual vector<DrawableObject*> GetGUIObjectsList() { return GUIObjectsList; }
-#pragma endregion 
+ 
 };

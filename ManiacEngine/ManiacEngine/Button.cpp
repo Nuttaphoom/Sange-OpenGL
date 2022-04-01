@@ -1,4 +1,6 @@
 #include "Button.h"
+#include "GameStateList.h"
+#include "GameStateController.h" 
 
 void NextLevelButton_Func();
 void ContinueButton_Func();
@@ -45,7 +47,8 @@ void NextLevelButton_Func() {
 }
   
 void ContinueButton_Func() {
-	cout << "Continue" << endl;
+	GameStateController::GetInstance()->currentLevel->SetPause(false); 
+	GameStateController::GetInstance()->currentLevel->GetMenuHolder()[0]->disableButton();
 }
  
 
@@ -58,7 +61,7 @@ void RestartButton_Func() {
 }
 
 void StartgameButton_Func() {
-	cout << "Start" << endl;
+	GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1 ;
 }
 
 void SettingButton_Func() {

@@ -42,6 +42,8 @@ protected:
 	int** sFrontMapData;
 	int** sBackGroundMapData;
 	ReSpawner* respawner; 
+
+	bool isPause ; 
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();
@@ -62,5 +64,11 @@ public:
 	virtual vector<DrawableObject*> GetInvisibleWallList() { return this->invisibleObjectsList; }
 	virtual vector<DrawableObject*> GetEntityList() { return this->EntityObjectsList; }
 	virtual vector<DrawableObject*> GetGUIObjectsList() { return this->GUIObjectsList; }
+
+	vector<MenuHolder*> GetMenuHolder() { return this->_menuHolderList; }
 	#pragma endregion 
+
+	virtual void SetPause(bool b) {
+		isPause = b; 
+	}
 };
