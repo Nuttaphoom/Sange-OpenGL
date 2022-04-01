@@ -4,7 +4,7 @@
 
 class Trap: public InteractableObject {
 private : 
-	float trapSizeOffset = 150 ; //Plus or minus from normal collision
+	float trapSizeOffset = 64; //Plus or minus from normal collision
 	bool refused = false;
 	float coolDown = 0 ; 
 public:

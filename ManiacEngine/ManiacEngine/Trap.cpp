@@ -77,19 +77,19 @@ void Trap::Called() {
 void Trap::Update(int deltaTime) {
 	//If collide with inside collision, get trap 
 //If it has been refused, nothing happen 
-	if (refused) return;
+	//
+	//if (refused) return;
 
 	Player* player = Player::GetInstance();
-	glm::vec3 insideColliderSize = glm::vec3(/*ColliderSize.x - trapSizeOffset*/ 0, ColliderSize.y, 1);
-	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, pos, insideColliderSize, insideColliderSize));
+	glm::vec3 insideColliderSize = glm::vec3( 0 , ColliderSize.y, 1);
+	float offsetX = 32;
+	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, glm::vec3(GetPos().x + offsetX, GetPos().y, GetPos().z), glm::vec3(0,0,0) , glm::vec3(16, -128, 0)));
 	
-	
-
 	if (testObj->InCollideRadius(testObj, player)) {
 		cout << "hurt player" << endl;
 		//coolDown = 3; 
 		//refused = true; 
-		player->OnDamaged(10);
+		//player->OnDamaged(10);
 	} 
 
 	 
