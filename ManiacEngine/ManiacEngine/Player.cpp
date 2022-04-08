@@ -168,7 +168,12 @@ void Player::UpdateStateMachine(float deltatime)
 			delay = 0;
 			ChangeState(StateMachine::IDLE);
 		}
-		TranslateVelocity(glm::vec3(60, 0, 0));
+		if (GetDirection() == 1) {
+			TranslateVelocity(glm::vec3(60, 0, 0));
+		}
+		if (GetDirection() == -1) {
+			TranslateVelocity(glm::vec3(-60, 0, 0));
+		}
 	}
 
 	if (GetState() == StateMachine::BAT)
