@@ -134,6 +134,13 @@ void Level::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
+	Decon* t = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(164 + 64 , -1176.0f, 0.0f), glm::vec3(128, -128, 1));
+	t->AddPatrolPos(glm::vec3(164 + 64 , -1176.0f, 0.0f));
+	t->AddPatrolPos(glm::vec3(164 + 64 * 5, -1176.0f, 0.0f));
+ 	t->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(t);
+	objectsList.push_back(t);
+
 	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
 	test->AddPatrolPos(glm::vec3(4886, -920, 0.0f)); 
 	test->AddPatrolPos(glm::vec3(5416, -920, 0.0f));
@@ -400,6 +407,7 @@ void Level::HandleMouse(int type, int x, int y)
 
 	//Player HandleMouse 
 	this->player->HandleMouse(mouseVec3); 
+
 	//Detecting Button 
 	for (int i = 0; i < objectsList.size(); i++) {
 		if (Button* bptr = dynamic_cast<Button*>(objectsList[i])) {

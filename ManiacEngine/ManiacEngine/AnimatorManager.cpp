@@ -14,6 +14,7 @@ void AnimatorManager::HandleKey(char key) {
 }
 
 
+
 AnimatorManager::AnimatorManager() :Manager("TEST", 0, 0, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0)) {
 
 }

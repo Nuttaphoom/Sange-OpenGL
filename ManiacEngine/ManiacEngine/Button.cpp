@@ -53,7 +53,7 @@ void ContinueButton_Func() {
  
 
 void ExitButton_Func() {
-	cout << "Out" << endl;
+	GameData::GetInstance()->gGameStateNext = GameState::GS_MAINMENU ;
 }
 
 void RestartButton_Func() {

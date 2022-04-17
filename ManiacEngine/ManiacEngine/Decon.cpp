@@ -3,7 +3,32 @@
 #include "Player.h"
 #include "Raycast.h"
 #include "GameData.h"
+#include "AnimatorManager.h"
 
+void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFrame, int delayBetweenFrame,int lifespan) {
+	vector<SpriteObject*> entities;
+	entities.push_back(en);
+	entities.push_back(Player::GetInstance());
+
+
+	glm::vec3 size = Player::GetInstance()->GetSize();
+	size.x *= 1.15 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1) ;
+	size.y *= 1.15 ;
+
+	glm::vec3 animationPos ;
+	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
+	animationPos.y = Player::GetInstance()->GetPos().y;
+	 
+	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame);
+ 	glm::vec3 movePos; 
+	movePos.x = Player::GetInstance()->GetPos().x + 64 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1); 
+	movePos.y = Player::GetInstance()->GetPos().y; 
+	movePos.z = Player::GetInstance()->GetPos().z;
+
+ 	Player::GetInstance()->SetPosition(movePos);
+	Player::GetInstance()->ChangeState(StateMachine::IDLE);
+
+}
 
 Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size)
 {
@@ -131,8 +156,13 @@ void Decon::ChangeState(StateMachine nextState)
 	else if (GetState() == StateMachine::ATTACKING) {
  		SetAnimationLoop(1, 0, 9, 75);
 	}
+	else if (GetState() == StateMachine::Die) {
+		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.3f);
+	}
 }
  
+
+
 StateMachine Decon::GetState() {
 	return this->DeconState ; 
 }

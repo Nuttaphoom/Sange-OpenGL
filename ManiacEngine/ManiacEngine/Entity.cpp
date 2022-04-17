@@ -141,7 +141,7 @@ void Entity::Render(glm::mat4 globalModelTransform)
 		if (squareMesh != nullptr) {
 			currentMatrix = globalModelTransform * currentMatrix;
 			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-			glUniform1i(modeId, 2);
+			glUniform1i(modeId, 1);
  			squareMesh->AdjustTexcoord(GetUV());
 			squareMesh->Render();
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -247,8 +247,16 @@ glm::vec3 Entity::GetVelocity()
 }
 
 void Entity::OnDamaged(int damage) {
-	HP -= damage; 
+	HP -= damage;
+	if (HP < 0) {
+		ChangeState(StateMachine::Die);
+	}
 }
+
+void Entity::ChangeState(StateMachine s) {
+
+}
+
 
 float Entity::GetHP() {
 	return HP; 

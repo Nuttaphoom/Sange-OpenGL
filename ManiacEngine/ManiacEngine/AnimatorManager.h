@@ -14,6 +14,7 @@ class AnimatorManager : public Manager {
 	};
 private:
 	vector<AnimatorObj*> spriteObjectDict;
+	vector<SpriteObject*> spriteObj; 
 	static AnimatorManager* instance;
 public:
 	static AnimatorManager* GetInstance();
