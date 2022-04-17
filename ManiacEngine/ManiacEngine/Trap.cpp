@@ -80,7 +80,7 @@ void Trap::Called() {
 void Trap::Update(int deltaTime) {
 	if (_crossMiniGamePtr != nullptr) {
 		_crossMiniGamePtr->Update(deltaTime); 
-	 }
+	}
 
 	Player* player = Player::GetInstance();
 	glm::vec3 insideColliderSize = glm::vec3( 0 , ColliderSize.y, 1);

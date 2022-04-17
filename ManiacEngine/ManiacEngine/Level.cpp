@@ -377,7 +377,7 @@ void Level::HandleKey(char key)
 	case 'd': player->HandleKey(key); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
+	case 'e': player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
 	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3 ; break;
 	case 'g':  player->OnDamaged(1); break;
@@ -393,6 +393,8 @@ void Level::HandleKey(char key)
 	case 'A': player->HandleKey(key); break; 
 	case 'D': player->HandleKey(key); break; 
 	}
+
+	interactableObjectManager->HandleKey(key);
 }
 
 void Level::HandleMouse(int type, int x, int y)

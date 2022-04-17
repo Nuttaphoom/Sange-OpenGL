@@ -1,7 +1,6 @@
 #pragma once
 #include "InteractableObjectManager.h"
-
-
+#include "Player.h"
 
 
 void InteractableObjectManager::addInteractableObjects(InteractableObject* io) {
@@ -19,7 +18,12 @@ void InteractableObjectManager::DelInteractableObjects(InteractableObject* io) {
 	cout << "See more in InteractableObjectManager.cpp";
 }
 
+void InteractableObjectManager::HandleKey(char key) {
+	switch (key) {
+	case 'e': 	notify(Player::GetInstance()); break;
+	}
 
+}
 
 void InteractableObjectManager::notify(Entity* e) {
  	for (int i = 0; i < interactableObjects.size(); i++)

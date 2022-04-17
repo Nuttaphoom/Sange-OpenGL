@@ -3,6 +3,10 @@
  
 InteractableObject::InteractableObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 ColliderSize) : SpriteObject(fileName,row,column,Pos,Size) , ColliderSize(ColliderSize){}
 
+void InteractableObject::HandleKey(char k) {
+
+}
+
 void InteractableObject::Update(int deltaTime) {
  
 }

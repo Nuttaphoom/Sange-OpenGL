@@ -7,6 +7,7 @@ class InteractableObject : public SpriteObject {
 		glm::vec3 ColliderSize; ;
 		InteractableObject(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size, glm::vec3 ColliderSize);
 		int InCollideRadius(InteractableObject* in, Entity* e); 
+		virtual void HandleKey(char key);
 		virtual void isCalled(Entity* e);
  		virtual void Called();
 		virtual void Update(int deltaTime);
