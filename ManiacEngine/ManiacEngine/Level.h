@@ -64,6 +64,7 @@ public:
 	virtual vector<DrawableObject*> GetInvisibleWallList() { return this->invisibleObjectsList; }
 	virtual vector<DrawableObject*> GetEntityList() { return this->EntityObjectsList; }
 	virtual vector<DrawableObject*> GetGUIObjectsList() { return this->GUIObjectsList; }
+	virtual InteractableObjectManager* GetInteractableObjectManager() { return this->interactableObjectManager ;  }
 
 	vector<MenuHolder*> GetMenuHolder() { return this->_menuHolderList; }
 	#pragma endregion 

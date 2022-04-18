@@ -15,4 +15,5 @@ class InteractableObjectManager {
 		void DelInteractableObjects(InteractableObject* io);
 		void notify(Entity* e); 
 		void Update(int deltaTime);
+		void RespawnThisObject();
  };

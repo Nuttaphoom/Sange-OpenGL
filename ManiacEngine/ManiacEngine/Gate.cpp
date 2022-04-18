@@ -7,3 +7,7 @@ Gate::Gate(GameState gameState,string fileName, int row, int column, glm::vec3 P
 void Gate::Called() {
 	GameData::GetInstance()->gGameStateNext = this->_gameState ;
 }
+
+void Gate::HandleKey(char key) {
+
+}

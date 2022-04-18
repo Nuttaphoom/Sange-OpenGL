@@ -4,12 +4,15 @@ void CrossMiniGame::StartTheBar() {
 
 }
 void CrossMiniGame::StopTheBar() {
-	if (_keyBar->GetPos().x - _movingBar->GetPos().x) {
+	if (abs(_keyBar->GetPos().x - _movingBar->GetPos().x) < 2.0f) {
 		cout << "PASS" << endl;
+		_done = true;
+
 	}
 	else {
 		cout << "NOT PASS" << endl; 
 	}
+
 }
 
 CrossMiniGame::CrossMiniGame(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size,float MaxValue,float MinValue):MiniGame(fileName,row,column,Pos,Size) {
@@ -36,20 +39,21 @@ void CrossMiniGame::HandleKey(char s) {
 }
 
 void CrossMiniGame::Update(int deltaTime) {
-	if (_currentValue <= _maxValue && _currentValue >= _minValue) {
-		_currentValue += speed * indicate / 1000.0f * deltaTime;
-	}
-	else {
-		indicate *= -1;
-		if (_currentValue < _minValue) 
-			_currentValue = _minValue;
-		else if (_currentValue > _maxValue)
-			_currentValue = _maxValue;
-	}
-	glm::vec3 gotoPos = glm::vec3(_currentValue,_movingBar->GetPos().y,0);
-	this->_movingBar->SetPosition(gotoPos);
+	if (!_done) {
 
-	cout << "keybar pos of CrossMiniGame : " << _keyBar->GetPos().x << endl;
+		if (_currentValue <= _maxValue && _currentValue >= _minValue) {
+			_currentValue += speed * indicate / 1000.0f * deltaTime;
+		}
+		else {
+			indicate *= -1;
+			if (_currentValue < _minValue)
+				_currentValue = _minValue;
+			else if (_currentValue > _maxValue)
+				_currentValue = _maxValue;
+		}
+		glm::vec3 gotoPos = glm::vec3(_currentValue, _movingBar->GetPos().y, 0);
+		this->_movingBar->SetPosition(gotoPos);
+	}
 }
 
 

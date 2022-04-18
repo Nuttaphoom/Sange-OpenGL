@@ -12,6 +12,7 @@ private :
 	float _currentValue = 0;
 	float _minValue = 0;
 	float speed = 2;
+	bool _done = false;
 
 public :
 	CrossMiniGame(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, float MaxValue, float MinValue); 
@@ -23,4 +24,8 @@ public :
 	
 	void StartTheBar();
 	void StopTheBar();
+
+	bool IsDone() {
+		return _done;
+	}
 };

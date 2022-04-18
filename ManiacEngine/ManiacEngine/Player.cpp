@@ -280,7 +280,7 @@ void Player::OnDamaged(int damage) {
 	notify(0); //Notify HP Observer 
 
 	if (this->HP <= 0) {
-		notify(1);  //Notify Dead Observer
+		notify(1);  //Notify Dead Observer , In Respawner.h
 	}
 }
 

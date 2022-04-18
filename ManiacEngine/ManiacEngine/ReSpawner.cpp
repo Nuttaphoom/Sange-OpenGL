@@ -14,6 +14,8 @@ void ReSpawner::ReSpawn() {
 		dynamic_cast<GUI*>(GameStateController::GetInstance()->currentLevel->GetGUIObjectsList()[i])->RespawnThisObject();
 	}
 
+	GameStateController::GetInstance()->currentLevel->GetInteractableObjectManager()->RespawnThisObject();
+
 }
 
 void ReSpawner::OnNotify() {

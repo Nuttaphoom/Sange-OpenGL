@@ -2,6 +2,7 @@
 #include "InteractableObjectManager.h"
 #include "Player.h"
 
+ 
 
 void InteractableObjectManager::addInteractableObjects(InteractableObject* io) {
 	interactableObjects.push_back(io);
@@ -20,8 +21,11 @@ void InteractableObjectManager::DelInteractableObjects(InteractableObject* io) {
 
 void InteractableObjectManager::HandleKey(char key) {
 	switch (key) {
-	case 'e': 	notify(Player::GetInstance()); break;
+		case 'e': 	notify(Player::GetInstance()); break;	
 	}
+
+	for (int i = 0; i < interactableObjects.size(); i++)
+		interactableObjects[i]->HandleKey(key);
 
 }
 
@@ -36,3 +40,9 @@ void InteractableObjectManager::notify(Entity* e) {
 	 for (int i = 0; i < interactableObjects.size(); i++)
 		 interactableObjects[i]->Update(deltaTime);
  }
+
+ void InteractableObjectManager::RespawnThisObject() {
+	 for (int i = 0; i < interactableObjects.size(); i++)
+		 interactableObjects[i]->RespawnThisObject(); 
+ }
+
