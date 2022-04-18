@@ -29,18 +29,18 @@ CrossMiniGame::CrossMiniGame(string fileName, int row, int column, glm::vec3 Pos
 	this->_keyBar->SetPosition(glm::vec3((rand() % (int) _maxValue )+ this->_minValue,0,0)); 
 	
 }
-void CrossMiniGame::HandleKey(char s) {
-	if (s == 'e') {
+void CrossMiniGame::HandleKey(char key) {
+	if (key == 'e') {
 		StopTheBar(); 
 	}
-	else if (s == 'E') {
+	else if (key == 'E') {
 		ExitMiniGame();
 	}
+
 }
 
 void CrossMiniGame::Update(int deltaTime) {
 	if (!_done) {
-
 		if (_currentValue <= _maxValue && _currentValue >= _minValue) {
 			_currentValue += speed * indicate / 1000.0f * deltaTime;
 		}

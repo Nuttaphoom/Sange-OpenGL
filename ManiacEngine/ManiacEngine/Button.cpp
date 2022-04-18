@@ -35,6 +35,9 @@ bool Button::isClick(glm::vec3 CamSpace_MousePosition ) {
 
  }
 void Button::OnClick(glm::vec3 CamSpace_MousePosition) {
+	if (IsPause())
+		return;
+
 	if (!isClick(CamSpace_MousePosition))
 		return; 
 

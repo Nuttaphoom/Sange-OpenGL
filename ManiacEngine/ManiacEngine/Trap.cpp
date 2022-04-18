@@ -98,7 +98,6 @@ void Trap::Update(int deltaTime) {
 	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, glm::vec3(GetPos().x + offsetX, GetPos().y, GetPos().z), GetSize() , glm::vec3(128 / 4 - 30,-128, 1)));
 	
 	if (testObj->InCollideRadius(testObj, player) > 0    ) {
-		cout << "hurt player" << endl;
 		coolDown = 3; 
 		refused = true; 
 		player->OnDamaged(10);
@@ -111,6 +110,12 @@ void Trap::HandleKey(char key) {
 	if (key == 'e') {
 		if (_crossMiniGamePtr != nullptr) {
 			_crossMiniGamePtr->HandleKey(key);
+		}
+	}
+	else if (key == 'a' || key == 's' || key == 'd' || key == 'w') {
+		if (_crossMiniGamePtr != nullptr) {
+			delete _crossMiniGamePtr;
+			_crossMiniGamePtr = nullptr; 
 		}
 	}
 }

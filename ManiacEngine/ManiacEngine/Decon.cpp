@@ -6,6 +6,8 @@
 #include "AnimatorManager.h"
 
 void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFrame, int delayBetweenFrame,int lifespan) {
+
+	cout << "creating dead anim" << endl; 
 	vector<SpriteObject*> entities;
 	entities.push_back(en);
 	entities.push_back(Player::GetInstance());
