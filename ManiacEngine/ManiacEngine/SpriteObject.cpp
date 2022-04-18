@@ -6,13 +6,12 @@
 #include "gtc/type_ptr.hpp"
 
 
-SpriteObject::SpriteObject(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size)
+SpriteObject::SpriteObject(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size )
 {
  	SetSize(Size.x, Size.y); 
 	SetPosition(Pos); 
 
-	 
-	texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(fileName);
+	texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(fileName)  ;
 
 	this->rowMax = row;
 	this->columnMax = column;
@@ -34,8 +33,8 @@ SpriteObject::SpriteObject(unsigned int texture,int row, int column, glm::vec3 P
 {
 	SetSize(Size.x, Size.y);
 	SetPosition(Pos);
-	this->texture = texture; 
 
+	this->texture = texture; 
 	this->rowMax = row;
 	this->columnMax = column;
 	this->currentRow = 0;
@@ -48,6 +47,8 @@ SpriteObject::SpriteObject(unsigned int texture,int row, int column, glm::vec3 P
 	this->loopCount = 0;
 	this->animationTime = 0;
 	this->timeCount = 0;
+
+	this->Pause = false; 
 }
 
 

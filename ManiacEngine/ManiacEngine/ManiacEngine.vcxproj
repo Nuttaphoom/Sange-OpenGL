@@ -87,9 +87,11 @@
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="TextObject.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClInclude Include="PlayerClimbHandleKey.h" />
     <ClInclude Include="PlayerHandleKey.h" />
+    <ClInclude Include="TextObject.h" />
     <ClInclude Include="TileMap.h" />
     <ClCompile Include="Trap.cpp" />
     <ClInclude Include="Trap.h" />
@@ -210,14 +212,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Resource\glew\include;..\Resource\glm;..\Resource\SDL2-2.0.5\include;..\Resource\sdl_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Resource\glew\include;..\Resource\glm;..\Resource\SDL2-2.0.5\include;..\Resource\sdl_mixer\include;..\Resource\SDL2_ttf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Resource\glew\lib\Release\Win32;..\Resource\SDL2-2.0.5\lib\x86;..\Resource\sdl_mixer\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Resource\glew\lib\Release\Win32;..\Resource\SDL2-2.0.5\lib\x86;..\Resource\sdl_mixer\lib\x86;..\Resource\SDL2_ttf\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -240,6 +240,9 @@
     <ClCompile Include="BatHandleKey.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="TextObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -403,6 +406,9 @@
     </ClInclude>
     <ClInclude Include="BatHandleKey.h">
       <Filter>Header Files\Objects\Player Stuffs</Filter>
+    </ClInclude>
+    <ClInclude Include="TextObject.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

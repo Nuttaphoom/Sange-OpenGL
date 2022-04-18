@@ -16,7 +16,7 @@ Player* Player::instance = nullptr;
 void Player::HandleMouse(glm::vec3 mouseRealPos) {
 	for (int i = 0 ; i < ENTITYLIST.size() ; i++) {
 		if (Enemy* eptr = dynamic_cast<Enemy*>(ENTITYLIST[i])) {
- 			Attack(eptr);
+ 			if (eptr->GetState() != StateMachine::Die ) Attack(eptr);
 		}
 	};
 }

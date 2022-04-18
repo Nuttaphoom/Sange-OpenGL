@@ -7,6 +7,10 @@
 
 
 class AnimatorManager : public Manager {
+	enum class ETextureName {
+		DeconDeadAnimationTexture
+	};
+
 	struct AnimatorObj {
 		SpriteObject* AnimationObject;
 		vector<SpriteObject*> PausedObj;
@@ -16,6 +20,8 @@ private:
 	vector<AnimatorObj*> spriteObjectDict;
 	vector<SpriteObject*> spriteObj; 
 	static AnimatorManager* instance;
+	map<ETextureName, unsigned int> textures;
+
 public:
 	static AnimatorManager* GetInstance();
  

@@ -14,17 +14,20 @@ void AnimatorManager::HandleKey(char key) {
 }
 
 
-
 AnimatorManager::AnimatorManager() :Manager("TEST", 0, 0, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0)) {
-
-}
+	textures[ETextureName::DeconDeadAnimationTexture] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png");
+ }
 
 //Responsible to "hide" (not replace) object(s) and spawn animationObj in their position with some given adjustment 
 void AnimatorManager::CreateAnimationFactory(vector<SpriteObject*> objToHide, glm::vec3 pos, glm::vec3 size, float _lifespan, string fileName,
 	int row, int column, int howManyFrame, int delayBetaweenFrame) {
  	AnimatorObj* anim = new AnimatorObj();
 	anim->lifespan = _lifespan;
-	anim->AnimationObject = new SpriteObject(fileName, row, column, pos, size);
+
+	unsigned int tex = textures[ETextureName::DeconDeadAnimationTexture] ;
+
+	cout << "texture : " << tex << endl; 
+	anim->AnimationObject = new SpriteObject(tex, row, column, pos, size);
 	anim->AnimationObject->SetAnimationLoop(0, 0, howManyFrame, delayBetaweenFrame, true);
 
 	for (SpriteObject* s : objToHide) {

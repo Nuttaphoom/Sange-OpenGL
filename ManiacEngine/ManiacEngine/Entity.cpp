@@ -49,7 +49,7 @@ void Entity::VelocityControl() {
  Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName, row, column,Pos,Size), HP(HP), MoveSpeed(MoveSpeed) {
 	this->velocity = glm::vec3(0, 0, 0);
 	this->collisionSize = Size; 
-	Default_pos = GetPos() ;
+	Default_pos = Pos ;
 	Default_HP = HP ;
 	Default_MoveSpeed = MoveSpeed ;
 }

@@ -2,6 +2,7 @@
 #include "TileMap.h"
 #include "Audio.h"
 #include "GameStateController.h"
+#include "TextObject.h" 
 
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT;	
@@ -246,7 +247,15 @@ void Level::LevelInit()
 
 	#pragma endregion  
 	
+#pragma Text 
+	TextObject* to = new TextObject()   ; 
+	SDL_Color colors; 
+	to->SetPosition(glm::vec3(164, -1176.0f, 0.0f));
+	colors.r = 255; colors.b = 0; colors.g = 0;
+	to->LoadText("TEST TEST",colors , 200);
 
+	objectsList.push_back(to);
+#pragma endregion 
 
 	//cout << "Init Level" << endl;
 
