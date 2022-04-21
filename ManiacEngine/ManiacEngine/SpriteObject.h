@@ -26,7 +26,10 @@ private:
 public:
 	SpriteObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) ;
 	SpriteObject(unsigned int texture , int row, int column,glm::vec3 Pos, glm::vec3 Size);
-	~SpriteObject();
+	SpriteObject() {
+
+	}
+ 	~SpriteObject();
 
 	bool IsPause();
 	void SetPause(bool b);

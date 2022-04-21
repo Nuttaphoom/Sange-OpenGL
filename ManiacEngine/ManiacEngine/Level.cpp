@@ -250,9 +250,9 @@ void Level::LevelInit()
 #pragma Text 
 	TextObject* to = new TextObject()   ; 
 	SDL_Color colors; 
-	to->SetPosition(glm::vec3(164, -1176.0f, 0.0f));
+	to->SetPosition(glm::vec3(0, 0, 0));
 	colors.r = 255; colors.b = 0; colors.g = 0;
-	to->LoadText("TEST TEST",colors , 200);
+	to->LoadText("TEST TEST",colors , 25 );
 
 	objectsList.push_back(to);
 #pragma endregion 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "DrawableObject.h"
+#include "GUI.h"
 #include <SDL_ttf.h>
 
-class TextObject :public DrawableObject
+class TextObject :public GUI
 {
 private:
 	unsigned int texture;
@@ -13,6 +13,6 @@ public:
 	~TextObject();
 	void Render(glm::mat4 globalModelTransform);
 	void Update(float deltaTime);
-	void LoadText(string text, SDL_Color textColor, int fontSize);
+	void LoadText(string text, SDL_Color textColor, int fontSize );
 	
 };

@@ -1,5 +1,5 @@
 #pragma once
-#include "GUI.h"
+#include "TextObject.h"
 #include <map>
 typedef void (*FuncPtr_ButtonType)();
 
@@ -20,7 +20,7 @@ private :
 	ButtonName buttonName ; 
 	vector<FuncPtr_ButtonType> buttonTypesFunc; 
 public : 
-		Button(ButtonName buttonName, string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size);
+		Button(ButtonName buttonName, string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Sizez);
 		bool isClick(glm::vec3 CamSpace_MousePosition);
 		void OnClick(glm::vec3 CamSpace_MousePosition); 
 };

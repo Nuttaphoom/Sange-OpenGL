@@ -39,10 +39,13 @@ void TextObject::Render(glm::mat4 globalModelTransform)
 		return;
 	}
 
-	glm::mat4 currentMatrix = this->getTransform();
+	glm::mat4 currentMatrix = glm::mat4(1);
+	currentMatrix = glm::translate(currentMatrix, Camera::GetInstance()->GetCamOffset());
+	currentMatrix = glm::scale(currentMatrix, GetSize() / Camera::GetInstance()->GetZoomOffset());
+	currentMatrix = glm::translate(currentMatrix, glm::vec3(GetPos().x / GetSize().x, GetPos().y / GetSize().y, 0));
 
 	if (squareMesh != nullptr) {
-
+		cout << "rendering text" << endl; 
 		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 		glUniform1i(modeId, 1);
@@ -56,11 +59,13 @@ void TextObject::Update(float deltaTime)
 {
 }
 
-void TextObject::LoadText(string text, SDL_Color textColor, int fontSize)
+void TextObject::LoadText(string text, SDL_Color textColor, int fontSize )
 {
 	glBindTexture( GL_TEXTURE_2D, texture);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+ 
 	TTF_Font * font = TTF_OpenFont("font.ttf", fontSize);
 	if (font)
 	{
