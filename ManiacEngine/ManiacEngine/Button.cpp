@@ -8,9 +8,34 @@ void ExitButton_Func();
 void RestartButton_Func();
 void StartgameButton_Func();
 void SettingButton_Func();
- Button::Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) : buttonName(buttonName), GUI(fileName, row, column, Pos, Size)
+
+Button::Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size ):GUI(fileName,row,column,Pos,Size)
 {
-	
+ 
+
+	buttonTypesFunc.push_back(NextLevelButton_Func);
+	buttonTypesFunc.push_back(RestartButton_Func);
+	buttonTypesFunc.push_back(StartgameButton_Func);
+
+	buttonTypesFunc.push_back(ContinueButton_Func);
+	cout << "BB1" << endl;
+
+
+	buttonTypesFunc.push_back(ExitButton_Func);
+	cout << "BB2" << endl;
+	buttonTypesFunc.push_back(SettingButton_Func);
+}
+
+Button::Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, string textString , SDL_Color textColor  , int frontSize ) :GUI(fileName, row, column, Pos, Size)
+{
+
+	_textObject = new TextObject();
+
+	if (frontSize != 0) {
+		_textObject->SetPosition(Pos);
+		_textObject->LoadText(textString, textColor, frontSize);
+	}
+
 		buttonTypesFunc.push_back(NextLevelButton_Func);
 		buttonTypesFunc.push_back(RestartButton_Func);
 		buttonTypesFunc.push_back(StartgameButton_Func);
@@ -24,6 +49,11 @@ void SettingButton_Func();
 		buttonTypesFunc.push_back(SettingButton_Func);
 }
 
+void Button::Render(glm::mat4 globalModelTransform) {
+	GUI::Render(globalModelTransform); 
+	if (_textObject != nullptr)
+		_textObject->Render(globalModelTransform); 
+}
 
 bool Button::isClick(glm::vec3 CamSpace_MousePosition ) {
 	bool CollideX;
@@ -44,6 +74,8 @@ void Button::OnClick(glm::vec3 CamSpace_MousePosition) {
 	buttonTypesFunc[(int) this->buttonName](); 
 
 }
+ 
+
 
 void NextLevelButton_Func() {
 	cout << "AAA" << endl; 

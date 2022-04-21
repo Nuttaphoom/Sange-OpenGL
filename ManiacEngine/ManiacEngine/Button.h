@@ -19,9 +19,14 @@ private :
 	map<string, bool> a;
 	ButtonName buttonName ; 
 	vector<FuncPtr_ButtonType> buttonTypesFunc; 
+	TextObject* _textObject ; 
 public : 
-		Button(ButtonName buttonName, string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Sizez);
+		Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
+		Button(ButtonName buttonName, string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Sizez, string textString  , SDL_Color textColor  , int frontSize   );
 		bool isClick(glm::vec3 CamSpace_MousePosition);
 		void OnClick(glm::vec3 CamSpace_MousePosition); 
-};
+
+		virtual void Render(glm::mat4 globalModelTransform);
+
+ };
  
