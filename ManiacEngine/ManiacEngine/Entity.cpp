@@ -247,10 +247,15 @@ glm::vec3 Entity::GetVelocity()
 }
 
 void Entity::OnDamaged(int damage) {
+ 	if (IsPause())
+		true;
+
 	HP -= damage;
-	if (HP < 0) {
+	if (HP <= 0) {
 		ChangeState(StateMachine::Die);
 	}
+
+ 
 }
 
 void Entity::ChangeState(StateMachine s) {

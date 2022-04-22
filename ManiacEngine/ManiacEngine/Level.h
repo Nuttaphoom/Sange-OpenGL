@@ -57,7 +57,10 @@ public:
 
 	void WorldToCam(float& x, float& y);
 	#pragma region adder
-	//virtual void Add
+	virtual void AddObjectList(DrawableObject* obj) { objectsList.push_back(obj);  } 
+	virtual void AddEntityObject(DrawableObject* obj) { EntityObjectsList.push_back(obj);  }
+	virtual void AddGUIObject(DrawableObject* obj) { GUIObjectsList.push_back(obj); } 
+	virtual void AddMenuHolder(MenuHolder* menuholder) { _menuHolderList.push_back(menuholder); }
 	#pragma endregion 
 
 	#pragma region getter 
@@ -65,7 +68,7 @@ public:
 	virtual vector<DrawableObject*> GetEntityList() { return this->EntityObjectsList; }
 	virtual vector<DrawableObject*> GetGUIObjectsList() { return this->GUIObjectsList; }
 	virtual InteractableObjectManager* GetInteractableObjectManager() { return this->interactableObjectManager ;  }
-
+	virtual ReSpawner* GetRespawner(){ return this->respawner; }
 	vector<MenuHolder*> GetMenuHolder() { return this->_menuHolderList; }
 	#pragma endregion 
 

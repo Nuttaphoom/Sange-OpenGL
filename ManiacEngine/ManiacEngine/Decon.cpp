@@ -39,7 +39,6 @@ Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size
 } 
 
 void Decon::Attack(Entity* target) {
-
  	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
 		invWALLs[i].SetPosition(glm::vec3(this->GetPos().x + (16 * this->DirectionSet * i), this->GetPos().y + this->GetSize().y * -1 / 2, 1));
@@ -56,6 +55,9 @@ void Decon::Attack(Entity* target) {
 }
 
 void Decon::Update(int deltatime) {
+	if (IsPause())
+		return; 
+
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	//cout << "Decon is " << GetPos().x << "," << GetPos().y << endl; 
@@ -87,6 +89,8 @@ void Decon::StartAttack() {
 
 void Decon::UpdateStateMachine(float deltatime)
 {
+ 
+
 	if (GetState() == StateMachine::RUNNING)
 	{
 		if (PlayerDetect(Player::GetInstance()) == true)
@@ -159,7 +163,8 @@ void Decon::ChangeState(StateMachine nextState)
  		SetAnimationLoop(1, 0, 9, 75);
 	}
 	else if (GetState() == StateMachine::Die) {
-		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.3f);
+		SetPause(true); 
+  		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.3f);
 	}
 }
  
