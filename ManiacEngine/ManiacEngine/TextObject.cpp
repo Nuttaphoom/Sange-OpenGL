@@ -4,8 +4,6 @@
 
 TextObject::TextObject()
 {
-	SetPause(false); 
-
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -20,9 +18,6 @@ TextObject::~TextObject()
 
 void TextObject::Render(glm::mat4 globalModelTransform)
 {
-	if (IsPause())
-		return;
-
 	SquareMeshVbo *squareMesh = dynamic_cast<SquareMeshVbo *> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 	GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
@@ -50,7 +45,8 @@ void TextObject::Render(glm::mat4 globalModelTransform)
 	currentMatrix = glm::translate(currentMatrix, glm::vec3(GetPos().x / GetSize().x, GetPos().y / GetSize().y, 0));
 
 	if (squareMesh != nullptr) {
- 		currentMatrix = globalModelTransform * currentMatrix;
+		cout << "rendering text" << endl; 
+		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 		glUniform1i(modeId, 1);
 		squareMesh->ResetTexcoord();

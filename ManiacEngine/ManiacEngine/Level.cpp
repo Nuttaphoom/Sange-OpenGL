@@ -193,7 +193,7 @@ void Level::LevelInit()
 	
 	GUIObjectsList.push_back(hpbar);
 
-	MenuHolder* pauseMenuHolder = new MenuHolder("PauseMenu");
+	MenuHolder* pauseMenuHolder = new MenuHolder();
 	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
 	pauseMenuHolder->addButton(b1);
 	objectsList.push_back(b1);

@@ -1,13 +1,5 @@
 #include "MenuHolder.h"
 
-MenuHolder::MenuHolder(string menuName):_menuName(menuName) {
-	
-}
-
-bool MenuHolder::isMenu(string name) {
-	return name == _menuName; 
-}
-
 void MenuHolder::addButton(Button* add) {
 	cout << "Before Push" << endl;
 	buttonHolder.push_back(add);

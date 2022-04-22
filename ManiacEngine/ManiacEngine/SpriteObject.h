@@ -32,7 +32,7 @@ public:
  	~SpriteObject();
 
 	bool IsPause();
-	virtual void SetPause(bool b);
+	void SetPause(bool b);
 
 	virtual void Render(glm::mat4 globalModelTransform);
 	virtual void Update(int deltaTime);

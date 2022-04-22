@@ -14,21 +14,15 @@
 Player* Player::instance = nullptr; 
 
 void Player::HandleMouse(glm::vec3 mouseRealPos) {
-	if (IsPause())
-		return;
-
 	for (int i = 0 ; i < ENTITYLIST.size() ; i++) {
 		if (Enemy* eptr = dynamic_cast<Enemy*>(ENTITYLIST[i])) {
-			if (eptr->GetState() != StateMachine::Die && !  eptr->IsPause()) {    Attack(eptr); }
+ 			if (eptr->GetState() != StateMachine::Die ) Attack(eptr);
 		}
 	};
 }
 
 void Player::HandleKey(char Key)
 {
-	if (IsPause())
-		return;
-
 	class HandleKey k;
 	k.KeyDetect(Key);
 }
@@ -211,9 +205,6 @@ void Player::UpdateCollision() {
 
 void Player::ChangeState(StateMachine NextState)
 {
-	if (NextState == stateMachine)
-		return; 
-
 	stateMachine = NextState;
 
 	if (this->GetState() == StateMachine::IDLE)
@@ -285,9 +276,6 @@ Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::
 }
  
 void Player::OnDamaged(int damage) {
-	if (IsPause())
-		true; 
-
 	this->HP -= damage;
 	notify(0); //Notify HP Observer 
 
@@ -297,8 +285,6 @@ void Player::OnDamaged(int damage) {
 }
 
 void Player::Attack(Entity* target) {
-
-
 	InvisibleObject invWALLs[2] ;
 	 
 	for (int i = 0; i < 2; i++) {
@@ -308,7 +294,7 @@ void Player::Attack(Entity* target) {
 	if (target->DirectionSet == this->DirectionSet) {
 		for (int i = 0; i < 2; i++) {
 			if (invWALLs[i].Collide_W_Entity(*target)) {
- 				target->OnDamaged(999999);
+				target->OnDamaged(999999);
 
 			}
 		}
