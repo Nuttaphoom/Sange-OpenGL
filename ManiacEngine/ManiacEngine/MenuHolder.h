@@ -7,11 +7,13 @@
 class MenuHolder : DrawableObject {
 	private :
 		vector<Button*> buttonHolder =  vector<Button*>();
+		string _menuName; 
 	public :
-			void addButton(Button* add);
-			void deleteButton(Button* del);
-			void disableButton();
-			void enableButton();
-			MenuHolder(){}
-			virtual void Render(glm::mat4 globalModelTransform);
+		MenuHolder(string menuName);
+		void addButton(Button* add);
+		void deleteButton(Button* del);
+		void disableButton();
+		void enableButton();
+		bool isMenu(string name);
+		virtual void Render(glm::mat4 globalModelTransform);
 };

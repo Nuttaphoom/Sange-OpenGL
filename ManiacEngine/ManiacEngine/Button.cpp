@@ -11,7 +11,9 @@ void SettingButton_Func();
 
 Button::Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size ):GUI(fileName,row,column,Pos,Size)
 {
- 
+	_textObject = new TextObject();
+	this->buttonName = buttonName;
+
 
 	buttonTypesFunc.push_back(NextLevelButton_Func);
 	buttonTypesFunc.push_back(RestartButton_Func);
@@ -35,6 +37,8 @@ Button::Button(ButtonName buttonName, string fileName, int row, int column, glm:
 		_textObject->SetPosition(Pos);
 		_textObject->LoadText(textString, textColor, frontSize);
 	}
+
+	this->buttonName = buttonName;
 
 		buttonTypesFunc.push_back(NextLevelButton_Func);
 		buttonTypesFunc.push_back(RestartButton_Func);
@@ -65,6 +69,7 @@ bool Button::isClick(glm::vec3 CamSpace_MousePosition ) {
 
  }
 void Button::OnClick(glm::vec3 CamSpace_MousePosition) {
+	cout << "button on click" << endl; 
 	if (IsPause())
 		return;
 
@@ -92,7 +97,7 @@ void ExitButton_Func() {
 }
 
 void RestartButton_Func() {
-	cout << "Restart" << endl;
+	GameStateController::GetInstance()->currentLevel->GetRespawner()->ReSpawn(); 
 }
 
 void StartgameButton_Func() {
@@ -101,4 +106,10 @@ void StartgameButton_Func() {
 
 void SettingButton_Func() {
 	cout << "Option" << endl;
+}
+
+void Button::SetPause(bool b) {
+	SpriteObject::SetPause(b); 
+	if (_textObject != nullptr)
+		_textObject->SetPause(b); 
 }

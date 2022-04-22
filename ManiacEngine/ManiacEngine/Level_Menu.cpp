@@ -89,7 +89,7 @@ void Level_Menu::LevelInit()
 	objectsList.push_back(Sangeimage);
 	
 
-	MenuHolder* mainMenuHolder = new MenuHolder();
+	MenuHolder* mainMenuHolder = new MenuHolder("MainMenu");
 	SDL_Color SDL_WhiteColor = SDL_Color(); 
 	SDL_WhiteColor.r = 255; SDL_WhiteColor.g = 255; SDL_WhiteColor.b = 255; 
 	Button* m1 = new Button(ButtonName::START_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 -650, GameEngine::GetInstance()->GetWindowHeight() / 2 -200, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1),"Play",SDL_WhiteColor,20);
