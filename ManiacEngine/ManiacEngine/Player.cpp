@@ -19,7 +19,7 @@ void Player::HandleMouse(glm::vec3 mouseRealPos) {
 
 	for (int i = 0 ; i < ENTITYLIST.size() ; i++) {
 		if (Enemy* eptr = dynamic_cast<Enemy*>(ENTITYLIST[i])) {
-			if (eptr->GetState() != StateMachine::Die && !  eptr->IsPause()) {    Attack(eptr); }
+			if (eptr->GetState() != StateMachine::Die && !  eptr->IsPause() && ! eptr->Death() ) {    Attack(eptr); }
 		}
 	};
 }
@@ -221,7 +221,7 @@ void Player::ChangeState(StateMachine NextState)
 		SetAnimationLoop(0, 0, 1, 100);
 	}
 	else if (this->GetState() == StateMachine::RUNNING)
-	{
+	{ 
 		SetAnimationLoop(2, 0, 8, 100);
 	}
 	else if (this->GetState() == StateMachine::JUMPPING)

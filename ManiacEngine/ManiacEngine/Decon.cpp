@@ -5,7 +5,7 @@
 #include "GameData.h"
 #include "AnimatorManager.h"
 
-void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFrame, int delayBetweenFrame,int lifespan) {
+void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFrame, int delayBetweenFrame,float lifespan) {
 
 	cout << "creating dead anim" << endl; 
 	vector<SpriteObject*> entities;
@@ -15,7 +15,7 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 
 	glm::vec3 size = Player::GetInstance()->GetSize();
 	size.x *= 1.15 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1) ;
-	size.y *= 1.15 ;
+	size.y *= 1  ;
 
 	glm::vec3 animationPos ;
 	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
@@ -23,12 +23,21 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 	 
 	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame);
  	glm::vec3 movePos; 
-	movePos.x = Player::GetInstance()->GetPos().x + 64 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1); 
+	movePos.x = Player::GetInstance()->GetPos().x + 44 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1); 
 	movePos.y = Player::GetInstance()->GetPos().y; 
 	movePos.z = Player::GetInstance()->GetPos().z;
 
+	if (en->GetPos().x < Player::GetInstance()->GetPos().x) {
+		Player::GetInstance()->SetDirection(1);
+	}
+	else if (en->GetPos().x > Player::GetInstance()->GetPos().x)  {
+		Player::GetInstance()->SetDirection(-1);
+	}
+
+	Player::GetInstance()->ResetVelocity();
  	Player::GetInstance()->SetPosition(movePos);
 	Player::GetInstance()->ChangeState(StateMachine::IDLE);
+
 
 }
 
@@ -144,6 +153,9 @@ void Decon::UpdateStateMachine(float deltatime)
 
 void Decon::ChangeState(StateMachine nextState)
 {
+	if (nextState == DeconState)
+		return; 
+
 	DeconState = nextState;
 	this->velocity = glm::vec3(0, 0, 0);
 
@@ -163,11 +175,10 @@ void Decon::ChangeState(StateMachine nextState)
  		SetAnimationLoop(1, 0, 9, 75);
 	}
 	else if (GetState() == StateMachine::Die) {
-		SetPause(true); 
-  		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.3f);
+		SetPause(true) ; 
+  		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.12f);
 	}
 }
- 
 
 
 StateMachine Decon::GetState() {

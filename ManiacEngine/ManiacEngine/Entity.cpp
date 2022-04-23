@@ -3,6 +3,11 @@
 #include "SquareMeshVbo.h" 
 #include "InvisibleObject.h"
 
+void Entity::ResetVelocity() {
+	this->applyingVelocity.x = 0 ;
+	this->applyingVelocity.y = 0;
+	this->applyingVelocity.z = 0;
+}
 
 void Entity::VelocityControl() {
 	velocity += applyingVelocity;

@@ -8,12 +8,13 @@ class InvisibleObject : public DrawableObject {
 		bool render = false ; 
 		glm::vec3 color;
  
+ 
 	public : 
 		InvisibleObject();  
 
 		virtual void Render(glm::mat4 globalModelTransform)  ;
 		virtual void Update(float deltaTime);
-
+		 
 		void SetRender(bool b); 
 		int Collide_W_Entity(Entity e); 
 };

@@ -60,6 +60,7 @@ class Entity : public SpriteObject
 		virtual glm::vec3 GetVelocity();
 		virtual void RespawnThisObject(); 
 		virtual void VelocityControl();
+		virtual void ResetVelocity(); 
 
 		virtual void Stop();
 
