@@ -23,7 +23,7 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 	 
 	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame);
  	glm::vec3 movePos; 
-	movePos.x = Player::GetInstance()->GetPos().x + 44 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1); 
+	movePos.x = Player::GetInstance()->GetPos().x + 47 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1); 
 	movePos.y = Player::GetInstance()->GetPos().y; 
 	movePos.z = Player::GetInstance()->GetPos().z;
 
@@ -74,7 +74,9 @@ void Decon::Update(int deltatime) {
 
 void Decon::EnterAttackZone(Entity* target) {
 	////////////
-	if (GetState() == StateMachine::ATTACKING || target->GetState() == StateMachine::HIDING) return; 
+ 
+	if (GetState() == StateMachine::ATTACKING || GetState() == StateMachine::Die|| target->GetState() == StateMachine::HIDING) 
+		return; 
 	
 
 	InvisibleObject invWALLs[2];
@@ -98,7 +100,8 @@ void Decon::StartAttack() {
 
 void Decon::UpdateStateMachine(float deltatime)
 {
- 
+	if (IsPause())
+		return;
 
 	if (GetState() == StateMachine::RUNNING)
 	{
@@ -116,11 +119,7 @@ void Decon::UpdateStateMachine(float deltatime)
 	
 	if (GetState() == StateMachine::IDLE)
 	{
-		if (GetVelocity().x != 0)
-		{
-			ChangeState(StateMachine::RUNNING);
-			//cout << "WALKING" << endl;
-		}
+		ChangeState(StateMachine::RUNNING);
 	}
 	
 	if (GetState() == StateMachine::CHASING) {
@@ -143,7 +142,7 @@ void Decon::UpdateStateMachine(float deltatime)
  		attack_delay += deltatime ;  
 		if (attack_delay > 75*8) {
  			Attack(Player::GetInstance()); 
-			attack_delay = 0;
+ 			attack_delay = 0;
 		}
 	}
 	else {
@@ -153,8 +152,12 @@ void Decon::UpdateStateMachine(float deltatime)
 
 void Decon::ChangeState(StateMachine nextState)
 {
-	if (nextState == DeconState)
+	if (GetState() == nextState)
 		return; 
+
+	if (DeconState == StateMachine::Die ) {
+		cout << "come back from dead" << endl;
+	 }
 
 	DeconState = nextState;
 	this->velocity = glm::vec3(0, 0, 0);

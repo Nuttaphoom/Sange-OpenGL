@@ -78,6 +78,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerClimbHandleKey.cpp" />
     <ClCompile Include="PlayerHandleKey.cpp" />
+    <ClCompile Include="Priest.cpp" />
     <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="ReSpawner.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="TileMap.cpp" />
     <ClInclude Include="PlayerClimbHandleKey.h" />
     <ClInclude Include="PlayerHandleKey.h" />
+    <ClInclude Include="Priest.h" />
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="TileMap.h" />
     <ClCompile Include="Trap.cpp" />

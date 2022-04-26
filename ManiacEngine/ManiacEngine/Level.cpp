@@ -112,7 +112,7 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(hiding); 
 	objectsList.push_back(hiding);
 
-	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(1800, -850 - 32, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
+	Flower* flower_3 = new Flower("../Resource/Texture/Interactable/Flower.png", 1, 1, glm::vec3(1800, -850 - 64 - 16, 0.0f), glm::vec3(64, -64, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
@@ -129,13 +129,13 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 8, 16, 3, glm::vec3(164, -1176.0f, 0.0f),glm::vec3(128,-128,0));
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 8, 16, 3, glm::vec3(164, -1152.0f, 0.0f),glm::vec3(128,-128,0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
 
-	Decon* t = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(164 + 64 , -1176.0f, 0.0f), glm::vec3(128, -128, 1));
+	Decon* t = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(164 + 64 , -1152.0f, 0.0f), glm::vec3(128, -128, 1));
 	t->AddPatrolPos(glm::vec3(164 + 64 , -1176.0f, 0.0f));
 	t->AddPatrolPos(glm::vec3(164 + 64 * 5, -1176.0f, 0.0f));
  	t->SetAnimationLoop(0, 0, 12, 100);
@@ -149,21 +149,21 @@ void Level::LevelInit()
 	EntityObjectsList.push_back(test);
 	objectsList.push_back(test);
 
-	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5203, -1176, 1),glm::vec3(128,-128,1));
+	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5203, -1152.0f, 1),glm::vec3(128,-128,1));
 	test2->AddPatrolPos(glm::vec3(5203, -1176, 1));
 	test2->AddPatrolPos(glm::vec3(3010, -1176, 1));
  	test2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test2);
 	objectsList.push_back(test2);
 
-	Decon* test3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7669, -1176, 0.0f), glm::vec3(128, -128, 1));
+	Decon* test3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7669, -1152.0f, 0.0f), glm::vec3(128, -128, 1));
 	test3->AddPatrolPos(glm::vec3(7669, -1176, 0.0f));
 	test3->AddPatrolPos(glm::vec3(9045, -920, 0.0f));
 	test3->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test3);
 	objectsList.push_back(test3);
 
-	Decon* test4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(8400, -1176, 0.0f), glm::vec3(128, -128, 1));
+	Decon* test4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(8400, -1152.0f, 0.0f), glm::vec3(128, -128, 1));
 	test4->AddPatrolPos(glm::vec3(8400, -1176, 0.0f));
 	test4->AddPatrolPos(glm::vec3(9641, -920, 0.0f));
 	test4->SetAnimationLoop(0, 0, 12, 100);
@@ -257,6 +257,8 @@ void Level::LevelInit()
 	objectsList.push_back(to);
 #pragma endregion 
 
+	PriestLightBall* testBall = new PriestLightBall(".. / Resource / Texture / Red_Texture.png",1,1, glm::vec3(164, -1152.0f+300, 0.0f),glm::vec3(64,-64,1), glm::vec3(164, -1152.0f, 0.0f));
+	objectsList.push_back(testBall);
 	//cout << "Init Level" << endl;
 
 }
@@ -331,8 +333,12 @@ void Level::LevelUpdate()
 	if (isPause)
 		return; 
 
+	//Update every objects 
+	for (DrawableObject* obj : objectsList) {
+		obj->Update(deltaTime); 
+	}
 	//Update InteractableObject 
-	interactableObjectManager->Update(deltaTime);
+	/*interactableObjectManager->Update(deltaTime);
 
 	// Update Game Objs
 	for (DrawableObject* obj : EntityObjectsList) {
@@ -346,7 +352,7 @@ void Level::LevelUpdate()
 	//Update Manager 
 	for (Manager* m : managersList) {
 		m->Update(deltaTime);
-	}
+	}*/
 }
 
 void Level::LevelDraw()

@@ -43,7 +43,7 @@ class Entity : public SpriteObject
 		glm::vec3 collisionSize;
 
 		Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos,glm::vec3 Size);
-
+		Entity() {} 
 		virtual bool Death();
 		virtual void Render(glm::mat4 globalModelTransform);
 		virtual int Collides(Entity e);

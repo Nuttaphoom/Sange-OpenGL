@@ -19,7 +19,7 @@ void Player::HandleMouse(glm::vec3 mouseRealPos) {
 
 	for (int i = 0 ; i < ENTITYLIST.size() ; i++) {
 		if (Enemy* eptr = dynamic_cast<Enemy*>(ENTITYLIST[i])) {
-			if (eptr->GetState() != StateMachine::Die && !  eptr->IsPause() && ! eptr->Death() ) {    Attack(eptr); }
+			if (eptr->GetState() != StateMachine::Die &&  ! eptr->Death() ) {    Attack(eptr); }
 		}
 	};
 }
@@ -48,6 +48,8 @@ Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Siz
 	Default_MoveSpeed = _moveSpeed;
 	Default_pos = Pos;
 
+	cout << "Default_Pos : " << Default_pos.x << "," << Default_pos.y << endl; 
+
 	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
 	SetHP(_hp);
 
@@ -60,6 +62,7 @@ void Player::Update(int deltatime)
 	if (IsPause())
 		return;
 
+ 
 	Entity::Update(deltatime);
 
 	UpdateStateMachine(deltatime);
@@ -297,8 +300,6 @@ void Player::OnDamaged(int damage) {
 }
 
 void Player::Attack(Entity* target) {
-
-
 	InvisibleObject invWALLs[2] ;
 	 
 	for (int i = 0; i < 2; i++) {
@@ -308,7 +309,8 @@ void Player::Attack(Entity* target) {
 	if (target->DirectionSet == this->DirectionSet) {
 		for (int i = 0; i < 2; i++) {
 			if (invWALLs[i].Collide_W_Entity(*target)) {
- 				target->OnDamaged(999999);
+				cout << "player attack!!  " << endl; 
+  				target->OnDamaged(999999);
 
 			}
 		}

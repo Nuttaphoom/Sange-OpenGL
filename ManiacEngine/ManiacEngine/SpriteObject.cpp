@@ -10,8 +10,8 @@
 
 SpriteObject::SpriteObject(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size )
 {
+	SetPosition(Pos);
  	SetSize(Size.x, Size.y); 
-	SetPosition(Pos); 
 
 	texture = GameEngine::GetInstance()->GetRenderer()->LoadTexture(fileName)  ;
 
