@@ -107,8 +107,21 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 }
 
 InvisibleObject::InvisibleObject() {
+	climbable = true ; 
+	this->color = glm::vec3(0, 1, 0);
+	this->size = glm::vec3(1, 1, 1);
+	this->pos = glm::vec3(0, 0, 0);
+	this->render = false;
+}
+
+InvisibleObject::InvisibleObject(bool c) {
+	climbable = c; 
 	this->color = glm::vec3(0, 1, 0); 
 	this->size = glm::vec3(1, 1, 1);
 	this->pos = glm::vec3(0,0,0);
 	this->render = false; 
+}
+
+bool InvisibleObject::IsClimbable() {
+	return climbable; 
 }
