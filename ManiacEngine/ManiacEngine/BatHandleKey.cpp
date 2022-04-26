@@ -22,7 +22,6 @@ void BatHandleKey::BatControl(char key)
 			player->SetDirection(1);
 			break;
 		case 'W':
-			
 			break;
 		case 'S':
 			break;

@@ -36,7 +36,6 @@ void PlayerHandleKey::PlayerControl(char key) {
 			player->SetVelocity(glm::vec3(0, Player::GetInstance()->GetVelocity().y, 0));
 			break;
 		case '1':
-			cout << "here" << endl;
 			player->BatChange(true);
 			player->SetBat();
 			break;

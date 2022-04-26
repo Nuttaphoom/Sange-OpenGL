@@ -159,29 +159,35 @@ void Player::UpdateStateMachine(float deltatime)
 		//cout << "CLIFFEDGE" << endl;
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
-		if (delay > 400)
+		if (delay > 100)
 		{
 			delay = 0;
 			ChangeState(StateMachine::CLIFFEDGEDOWN);
 		}
-		TranslateVelocity(glm::vec3 (0, 24, 0));
+		TranslateVelocity(glm::vec3 (0, 160, 0));
 	}
 
 	if (GetState() == StateMachine::CLIFFEDGEDOWN)
 	{
 		//cout << "CLIFFEDGEDOWN" << endl;
+		ResetVelocity();
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
-		if (OnGround != false && delay > 400)
+		if (OnGround == false) {
+			TranslateVelocity(glm::vec3(0, -50, 0));
+			cout << "here" << endl;
+		}
+		if (OnGround != false && delay > 100)
 		{
 			delay = 0;
+			TranslateVelocity(glm::vec3(0, 50, 0));
 			ChangeState(StateMachine::IDLE);
 		}
 		if (GetDirection() == 1) {
-			TranslateVelocity(glm::vec3(60, 0, 0));
+			TranslateVelocity(glm::vec3(150, 0, 0));
 		}
 		if (GetDirection() == -1) {
-			TranslateVelocity(glm::vec3(-60, 0, 0));
+			TranslateVelocity(glm::vec3(-150, 0, 0));
 		}
 	}
 
@@ -394,8 +400,11 @@ void Player::SetBat() {
 		GetState() == StateMachine::CLIMBING ||
 		GetState() == StateMachine::FALLING ||
 		GetState() == StateMachine::LANDING) {
-		if (bat == true)
+		if (bat == true && GetHP() > 1) {
+			GetInstance()->HP--;
+			ResetVelocity();
 			ChangeState(StateMachine::TRANSFORM);
+		}
 	}
 }
 
