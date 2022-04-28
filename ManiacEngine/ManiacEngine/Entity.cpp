@@ -169,7 +169,7 @@ void Entity::Update(int deltatime)
 
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM) { //Apply velocity 
+	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM  && GetState() != StateMachine::CLIMBINGIDLE) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -10.0f, 0));
  	}	
  
