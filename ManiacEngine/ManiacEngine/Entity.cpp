@@ -42,7 +42,7 @@ void Entity::VelocityControl() {
 			}
 		}
 	}
-	if (velocity.x != 0)
+	if (velocity.x != 0 && GetState() != StateMachine::TRANSFORM)
 	{
 		velocity.x = velocity.x / 200;
 		if (velocity.x < 0.02 && velocity.x > -0.02)
@@ -169,7 +169,7 @@ void Entity::Update(int deltatime)
 
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM  && GetState() != StateMachine::CLIMBINGIDLE) { //Apply velocity 
+	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -10.0f, 0));
  	}	
  

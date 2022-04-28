@@ -61,6 +61,7 @@ void Level::LevelLoad()
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
+		cout << MapWidth << "::" << MapHeight << endl; 
 		sBackGroundMapData = new int* [MapHeight];
 		for (int y = 0; y < MapHeight; y++) {
 			sBackGroundMapData[y] = new int[MapWidth];
@@ -89,8 +90,7 @@ void Level::LevelInit()
 	 
 
 	#pragma region tilemapss
-	//TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
-
+ 
 	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.1 SpriteSheet.png", 21, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
@@ -134,13 +134,7 @@ void Level::LevelInit()
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
-
-	Decon* t = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(164 + 64 , -1152.0f, 0.0f), glm::vec3(128, -128, 1));
-	t->AddPatrolPos(glm::vec3(164 + 64 , -1176.0f, 0.0f));
-	t->AddPatrolPos(glm::vec3(164 + 64 * 5, -1176.0f, 0.0f));
- 	t->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(t);
-	objectsList.push_back(t);
+ 
 
 	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
 	test->AddPatrolPos(glm::vec3(4886, -920, 0.0f)); 
@@ -246,18 +240,8 @@ void Level::LevelInit()
 	objectsList.push_back(animatorManager);
 
 	#pragma endregion  
-	
-#pragma Text 
-	TextObject* to = new TextObject()   ; 
-	SDL_Color colors; 
-	to->SetPosition(glm::vec3(0, 0, 0));
-	colors.r = 255; colors.b = 0; colors.g = 0;
-	to->LoadText("TEST TEST",colors , 25 );
 
-	objectsList.push_back(to);
-#pragma endregion 
-
-	PriestLightBall* testBall = new PriestLightBall(".. / Resource / Texture / Red_Texture.png",1,1, glm::vec3(164, -1152.0f+300, 0.0f),glm::vec3(64,-64,1), glm::vec3(164, -1152.0f, 0.0f));
+	PriestLightBall* testBall = new PriestLightBall(".. / Resource / Texture / Red_Texture.png",1,1, glm::vec3(164 + 300, -1152.0f+300, 0.0f),glm::vec3(64,-64,0), glm::vec3(164, -1152.0f, 0.0f));
 	objectsList.push_back(testBall);
 	//cout << "Init Level" << endl;
 

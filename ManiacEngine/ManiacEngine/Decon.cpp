@@ -19,9 +19,9 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 
 	glm::vec3 animationPos ;
 	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
-	animationPos.y = Player::GetInstance()->GetPos().y;
+	animationPos.y = Player::GetInstance()->GetPos().y - 10 ;
 	 
-	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame);
+	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame,ETextureName::DeconDeadAnimationTexture);
  	glm::vec3 movePos; 
 	movePos.x = Player::GetInstance()->GetPos().x + 47 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1); 
 	movePos.y = Player::GetInstance()->GetPos().y; 
@@ -179,7 +179,7 @@ void Decon::ChangeState(StateMachine nextState)
 	}
 	else if (GetState() == StateMachine::Die) {
 		SetPause(true) ; 
-  		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.12f);
+  		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.0f);
 	}
 }
 

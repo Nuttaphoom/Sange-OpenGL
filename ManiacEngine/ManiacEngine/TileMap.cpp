@@ -117,14 +117,22 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 	/// Create all collision object for every tiles. 
 	for (int i = 0; i < width + 1; i++) {
 		for (int j = 0; j < height + 1; j++) {
-			if (ColMapdata[i][j] != -1) {
+			if (ColMapdata[i][j] == 0) {
+				InvisibleObject* newInv = new InvisibleObject(false);
+				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 1));
+				//newInv->SetPosition(glm::vec3(0, -256, 0));
+				newInv->SetSize(64, 64);
+				newInv->SetRender(false);
+				tiles_collision.push_back(newInv);
+				 
+			}else if   (ColMapdata[i][j] != -1) {
 				InvisibleObject* newInv = new InvisibleObject();
 				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 1));
 				//newInv->SetPosition(glm::vec3(0, -256, 0));
 				newInv->SetSize(64, 64);
 				newInv->SetRender(true);
 				tiles_collision.push_back(newInv);
-				 
+
 			}
 		}
 	}

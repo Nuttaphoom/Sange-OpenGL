@@ -26,7 +26,7 @@ void Player::HandleMouse(glm::vec3 mouseRealPos) {
 
 void Player::HandleKey(char Key)
 {
-	if (IsPause())
+	if (IsPause() || GetState() == StateMachine::Die)
 		return;
 
 	class HandleKey k;
@@ -315,9 +315,10 @@ void Player::OnDamaged(int damage) {
 
 	this->HP -= damage;
 	notify(0); //Notify HP Observer 
-
+		
 	if (this->HP <= 0) {
 		notify(1);  //Notify Dead Observer , In Respawner.h
+		ChangeState(StateMachine::Die); 
 	}
 }
 

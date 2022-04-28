@@ -3,13 +3,14 @@
 #include <map>
 //Create a animation object and determine its lifespan
 
-
+enum class ETextureName {
+	BishopThunder,
+	DeconDeadAnimationTexture
+};
 
 
 class AnimatorManager : public Manager {
-	enum class ETextureName {
-		DeconDeadAnimationTexture
-	};
+	
 
 	struct AnimatorObj {
 		SpriteObject* AnimationObject;
@@ -32,6 +33,8 @@ public:
 	void CreateAnimationFactory(vector<SpriteObject*> objToHide, glm::vec3 pos, glm::vec3 size, float _lifespan, string fileName,
 		int row, int column, int howManyFrame, int delayBetaweenFrame);
 
+	void CreateAnimationFactory(vector<SpriteObject*> objToHide, glm::vec3 pos, glm::vec3 size, float _lifespan, string fileName,
+		int row, int column, int howManyFrame, int delayBetaweenFrame,ETextureName texture);
 
 	void Update(int deltaTime);
 	virtual void HandleKey(char key);
