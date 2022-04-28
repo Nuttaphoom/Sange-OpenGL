@@ -47,11 +47,13 @@ void PlayerHandleKey::PlayerStateCheck(char key) {
 		Player::GetInstance()->GetState() != StateMachine::CLIFFEDGE && 
 		Player::GetInstance()->GetState() != StateMachine::CLIFFEDGEDOWN && 
 		Player::GetInstance()->GetState() != StateMachine::BAT &&
-		Player::GetInstance()->GetState() != StateMachine::TRANSFORM)
+		Player::GetInstance()->GetState() != StateMachine::TRANSFORM&&
+		Player::GetInstance()->GetState() != StateMachine::CLIMBINGIDLE)
 	{
 		PlayerControl(key);
 	}
-	else if (Player::GetInstance()->GetState() == StateMachine::CLIMBING) {
+	else if (Player::GetInstance()->GetState() == StateMachine::CLIMBING ||
+			 Player::GetInstance()->GetState() == StateMachine::CLIMBINGIDLE){
 		PlayerClimbHandleKey i;
 		i.PlayerClimbControl(key);
 	}

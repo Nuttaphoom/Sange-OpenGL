@@ -212,6 +212,18 @@ void Player::UpdateStateMachine(float deltatime)
 			ChangeState(StateMachine::BAT);
 		}
 	}
+
+	if (GetState() == StateMachine::CLIMBING) {
+		if (GetVelocity().y == 0) {
+			ChangeState(StateMachine::CLIMBINGIDLE);
+		}
+	}
+
+	if (GetState() == StateMachine::CLIMBINGIDLE) {
+		if (GetVelocity().y != 0) {
+			ChangeState(StateMachine::CLIMBING);
+		}
+	}
 }
  
 void Player::UpdateCollision() {
@@ -270,6 +282,10 @@ void Player::ChangeState(StateMachine NextState)
 	else if (this->GetState() == StateMachine::BAT)
 	{
 		SetAnimationLoop(7, 0, 6, 100);
+	}
+	else if (this->GetState() == StateMachine::CLIMBINGIDLE)
+	{
+		SetAnimationLoop(3, 1, 1, 100);
 	}
 }
 
