@@ -1,6 +1,7 @@
 #include "Button.h"
 #include "GameStateList.h"
 #include "GameStateController.h" 
+#include "Audio.h"
 
 void NextLevelButton_Func();
 void ContinueButton_Func();
@@ -8,6 +9,12 @@ void ExitButton_Func();
 void RestartButton_Func();
 void StartgameButton_Func();
 void SettingButton_Func();
+void MasterVolumeDown();
+void MasterVolumeUp();
+void MusicVolumeUp();
+void MusicVolumeDown();
+void SFXVolumeUp();
+void SFXVolumeDown();
 
 Button::Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size ):GUI(fileName,row,column,Pos,Size)
 {
@@ -51,6 +58,12 @@ Button::Button(ButtonName buttonName, string fileName, int row, int column, glm:
 		buttonTypesFunc.push_back(ExitButton_Func);
 		cout << "BB2" << endl;
 		buttonTypesFunc.push_back(SettingButton_Func);
+		buttonTypesFunc.push_back(MasterVolumeUp);
+		buttonTypesFunc.push_back(SFXVolumeUp);
+		buttonTypesFunc.push_back(MusicVolumeUp);
+		buttonTypesFunc.push_back(MasterVolumeDown);
+		buttonTypesFunc.push_back(MusicVolumeDown);
+		buttonTypesFunc.push_back(SFXVolumeDown);
 }
 
 void Button::Render(glm::mat4 globalModelTransform) {
@@ -112,4 +125,58 @@ void Button::SetPause(bool b) {
 	SpriteObject::SetPause(b); 
 	if (_textObject != nullptr)
 		_textObject->SetPause(b); 
+}
+
+
+void MasterVolumeDown() {
+	AudioEngine* master;
+	master = AudioEngine::GetInstance();
+	if (master->masterVolume > 0) {
+		master->masterVolume = master->masterVolume - 0.1f;
+	}
+	master->setMastervolume(master->masterVolume);
+}
+
+void MasterVolumeUp() {
+	AudioEngine* master;
+	master = AudioEngine::GetInstance();
+	if (master->masterVolume < 1) {
+		master->masterVolume = master->masterVolume + 0.1f;
+	}
+	master->setMastervolume(master->masterVolume);
+}
+
+void MusicVolumeUp() {
+	AudioEngine* music;
+	music = AudioEngine::GetInstance();
+	if (music->musicVolume < 1) {
+		music->musicVolume = music->musicVolume + 0.1f;
+	}
+	music->setMusicVolume(music->musicVolume);
+}
+
+void MusicVolumeDown() {
+	AudioEngine* music;
+	music = AudioEngine::GetInstance();
+	if (music->musicVolume > 0 ) {
+		music->musicVolume = music->musicVolume - 0.1f;
+	}
+	music->setMusicVolume(music->musicVolume);
+}
+
+void SFXVolumeUp() {
+	AudioEngine* sfx;
+	sfx = AudioEngine::GetInstance();
+	if (sfx->sfxVolume < 1) {
+		sfx->sfxVolume = sfx->sfxVolume + 0.1f;
+	}
+	sfx->setsfxVolume(sfx->sfxVolume);
+}
+void SFXVolumeDown() {
+	AudioEngine* sfx;
+	sfx = AudioEngine::GetInstance();
+	if (sfx->sfxVolume > 0) {
+		sfx->sfxVolume = sfx->sfxVolume - 0.1f;
+	}
+	sfx->setsfxVolume(sfx->sfxVolume);
 }

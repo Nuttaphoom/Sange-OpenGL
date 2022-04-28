@@ -77,6 +77,12 @@ void Level_Menu::LevelLoad()
 
 void Level_Menu::LevelInit()
 {
+	AudioEngine audio;
+	audio.init();
+
+
+	Music sound1 = audio.loadMusic("../Resource/Sound/Starry.mp3");
+	sound1.play();
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 5, 10, 3, glm::vec3(7000, -1176.0f, 0.0f), glm::vec3(128, -128, 0));
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
@@ -108,6 +114,16 @@ void Level_Menu::LevelInit()
 	objectsList.push_back(m3);
 	GUIObjectsList.push_back(m3);
 	//mainMenuHolder->disableButton();
+
+	Button* s1masterup = new Button(ButtonName::MUSIC_SOUND_VOLUME_UP, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 350, GameEngine::GetInstance()->GetWindowHeight() / 2 - 350, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), ">", SDL_WhiteColor, 20);
+	mainMenuHolder->addButton(s1masterup);
+	objectsList.push_back(s1masterup);
+	GUIObjectsList.push_back(s1masterup);
+
+	Button* s1masterdown = new Button(ButtonName::MUSIC_SOUND_VOLUME_DOWN, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 950, GameEngine::GetInstance()->GetWindowHeight() / 2 - 350, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "<", SDL_WhiteColor, 20);
+	mainMenuHolder->addButton(s1masterdown);
+	objectsList.push_back(s1masterdown);
+	GUIObjectsList.push_back(s1masterdown);
 
 
 	_menuHolderList.push_back(mainMenuHolder);
