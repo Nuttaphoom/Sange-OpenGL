@@ -12,6 +12,7 @@ protected:
 	float scPausetimeCount;
 	int count = 0;
 	bool ScPausetime = false;
+	GameState _levelToLoad; 
 public :
 	Director(vector<DrawableObject*> scenes, float offsetX,GameState levelLoad,float lifespan,float scPausetime);
 	void Update(int deltatime);

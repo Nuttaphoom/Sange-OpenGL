@@ -1,6 +1,5 @@
 #include "Director.h"
-
-
+#include "GameStateController.h"
 
 Director::Director(vector<DrawableObject*> scenes, float offsetX, GameState levelLoad,float lifespan,float scPausetime) {
 	for (int i = 0;i < scenes.size();i++) {
@@ -13,6 +12,8 @@ Director::Director(vector<DrawableObject*> scenes, float offsetX, GameState leve
 	this->scPausetimeMax = scPausetime;
 	this->scPausetimeCount = 0;
 	this->lifespan = lifespan;
+
+	_levelToLoad = levelLoad; 
 }
 
 
@@ -49,6 +50,7 @@ void Director::Update(int deltatime) {
 	cout << lifespan << endl;
 	if (lifespan <= 0) {
 		SetPause(true);
+		GameData::GetInstance()->gGameStateNext = this->_levelToLoad ;
 	}
 
 }

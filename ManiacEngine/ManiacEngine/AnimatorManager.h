@@ -4,8 +4,8 @@
 //Create a animation object and determine its lifespan
 
 enum class ETextureName {
-	BishopThunder,
-	DeconDeadAnimationTexture
+	DeconDeadAnimationTexture,
+	BishopThunder
 };
 
 

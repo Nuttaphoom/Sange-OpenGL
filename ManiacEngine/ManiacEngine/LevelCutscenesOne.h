@@ -4,7 +4,7 @@
 
 class LevelCutscenesOne : public Level {
 private:
-
+ 
 public:
 	virtual void LevelLoad();
 	virtual void LevelInit();
@@ -17,6 +17,7 @@ public:
 	virtual void HandleMouse(int type, int x, int y);
 
 	void WorldToCam(float& x, float& y);
+
 
 #pragma region getter 
 	virtual vector<DrawableObject*> GetInvisibleWallList() { return invisibleObjectsList; }
