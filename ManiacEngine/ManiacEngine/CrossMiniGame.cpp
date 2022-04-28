@@ -1,5 +1,7 @@
 #include "CrossMiniGame.h"
 #include <math.h>
+#include <time.h>
+
 void CrossMiniGame::StartTheBar() {
 
 }

@@ -246,6 +246,12 @@
     <ClCompile Include="Priest.cpp">
       <Filter>Source Files\Objects\Enemy Types</Filter>
     </ClCompile>
+    <ClCompile Include="Director.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelCutscenesOne.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -415,6 +421,12 @@
     </ClInclude>
     <ClInclude Include="Priest.h">
       <Filter>Header Files\Objects\Enemy Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Director.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelCutscenesOne.h">
+      <Filter>Header Files\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

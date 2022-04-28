@@ -29,6 +29,7 @@
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CrossMiniGame.cpp" />
     <ClCompile Include="Decon.cpp" />
+    <ClCompile Include="Director.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Flower.cpp" />
@@ -43,10 +44,12 @@
     <ClCompile Include="Hiding.cpp" />
     <ClInclude Include="BatHandleKey.h" />
     <ClInclude Include="CrossMiniGame.h" />
+    <ClInclude Include="Director.h" />
     <ClInclude Include="EntityData.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="HandleKey.h" />
     <ClInclude Include="Level4.h" />
+    <ClInclude Include="LevelCutscenesOne.h" />
     <ClInclude Include="Level_Menu.h" />
     <ClInclude Include="MenuHolder.h" />
     <ClInclude Include="AnimatorManager.h" />
@@ -61,6 +64,7 @@
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="Level4.cpp" />
+    <ClCompile Include="LevelCutscenesOne.cpp" />
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Level_Menu.cpp" />
     <ClCompile Include="Main.cpp" />

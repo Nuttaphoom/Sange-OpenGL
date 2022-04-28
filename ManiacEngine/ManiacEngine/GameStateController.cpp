@@ -53,6 +53,9 @@ void GameStateController::Update()
 		case GameState::GS_MAINMENU:
 			currentLevel = new Level_Menu();
 			break;
+		case GameState::GS_CUTSCENES1:
+			currentLevel = new LevelCutscenesOne();
+			break;
 		default:
 			cout << "gGameStateCurr : invalid state!!" << endl;
 			exit(1);
