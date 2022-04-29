@@ -16,17 +16,22 @@ HPBar::HPBar(string fileName, int row, int column,glm::vec3 Pos, glm::vec3 Size)
 }
  
 void HPBar::OnNotify() {
-	if (HPPoints.size() > 0) {
-		delete HPPoints[HPPoints.size() - 1]; 
-		HPPoints.pop_back(); 
-	}
+ 
 }
 
 void HPBar::Render(glm::mat4 globalModelTransform)
 {
 	//GUI::Render(globalModelTransform); 
-	for (int i = 0; i < HPPoints.size(); i++) {
+	for (int i = 0; i < HPPoints.size() - 1; i++) {
 		HPPoints[i]->Render(globalModelTransform);
+	}
+}
+
+void HPBar::Update(int deltaTime) {
+	for (int i = 0; i < HPPoints.size(); i++) {
+		HPPoints[i]->SetPause(false);
+		if (Player::GetInstance()->GetHP() < i)
+			HPPoints[i]->SetPause(true);
 	}
 }
 

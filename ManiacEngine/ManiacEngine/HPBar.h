@@ -11,6 +11,7 @@ class HPBar : public GUI , public Observer {
 		 HPBar(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
 		virtual void RespawnThisObject();
 		virtual void OnNotify();  
+		virtual void Update(int deltatime); 
 		virtual void Render(glm::mat4 globalModelTransform);
 
 };
