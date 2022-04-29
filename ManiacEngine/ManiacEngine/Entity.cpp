@@ -154,7 +154,7 @@ void Entity::Render(glm::mat4 globalModelTransform)
 		if (squareMesh != nullptr) {
 			currentMatrix = globalModelTransform * currentMatrix;
 			glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-			glUniform1i(modeId, 1);
+			glUniform1i(modeId, _renderType);
  			squareMesh->AdjustTexcoord(GetUV());
 			squareMesh->Render();
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -177,7 +177,7 @@ void Entity::Update(int deltatime)
 
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM) { //Apply velocity 
+	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM && GetState() != StateMachine::CLIMBINGIDLE) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -10.0f, 0));
  	}	
  
@@ -323,4 +323,14 @@ void Entity::Stop()
 {
 	velocity.x = 0;
 	velocity.y = 0;
+}
+
+void Entity::Heal(int heal) {
+	if (HP < 3) {
+		HP += heal;
+	}
+}
+
+void Entity::SetRenderType(int x) {
+	_renderType = x;
 }

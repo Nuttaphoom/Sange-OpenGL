@@ -33,7 +33,7 @@ void Player::HandleKey(char Key)
 	k.KeyDetect(Key);
 }
 
-Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size)
+Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size, bool _res1, bool _res2) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size)
 {	
 	this->collisionSize = glm::vec3(76, -128, 1);
 
@@ -43,6 +43,8 @@ Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Siz
 	_moveSpeed = ED.GetPlayerMoveSpeed();
 	_jump = ED.GetPlayerJumpHeight();
 	_hp = 3 ;
+	_skill1 = _res1;
+	_skill2 = _res2;
 
 	Default_HP = _hp;
 	Default_MoveSpeed = _moveSpeed;
@@ -67,6 +69,7 @@ void Player::Update(int deltatime)
 
 	UpdateStateMachine(deltatime);
 	UpdateCollision();
+	UpdateInv();
 	if (GetState() == StateMachine::CLIMBING)
 		UpdateClimbing();
 }
@@ -301,9 +304,9 @@ Player* Player::GetInstance() {
 	return instance;
 }
 
-Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::vec3 Pos,glm::vec3 Size) 
+Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::vec3 Pos,glm::vec3 Size, bool _res1, bool _res2) 
 {
-	instance = new Player(fileName, row, column, Pos,Size);
+	instance = new Player(fileName, row, column, Pos,Size, _res1, _res2);
 	CheckPoint::GetInstance()->LoadCheckPoint();
 	return instance;
 
@@ -334,7 +337,7 @@ void Player::Attack(Entity* target) {
 			if (invWALLs[i].Collide_W_Entity(*target)) {
 				cout << "player attack!!  " << endl; 
   				target->OnDamaged(999999);
-
+				Heal(1);
 			}
 		}
 	}
@@ -382,11 +385,12 @@ void Player::SetClimbing()
 		if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 72.0f &&
 			abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 32.0f)
 		{
-			//cout << "climb" << endl;
-			ChangeState(StateMachine::CLIMBING);
+			InvisibleObject* o = dynamic_cast<InvisibleObject*>(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k));
+			if (o != nullptr && o->IsClimbable()) {
+				//cout << "climb" << endl;
+				ChangeState(StateMachine::CLIMBING);
+			}
 		}
-		 
-		
 	}
 }
 
@@ -407,20 +411,23 @@ void Player::UpdateClimbing()
 			}
 		}
 	}
-}
+}        
 
 void Player::SetBat() {
-	if (GetState() == StateMachine::IDLE ||
-		GetState() == StateMachine::RUNNING ||
-		GetState() == StateMachine::JUMPPING ||
-		GetState() == StateMachine::MIDJUMP ||
-		GetState() == StateMachine::CLIMBING ||
-		GetState() == StateMachine::FALLING ||
-		GetState() == StateMachine::LANDING) {
-		if (bat == true && GetHP() > 1) {
-			GetInstance()->HP--;
-			ResetVelocity();
-			ChangeState(StateMachine::TRANSFORM);
+	if (_inv == false) {
+		if (GetState() == StateMachine::IDLE ||
+			GetState() == StateMachine::RUNNING ||
+			GetState() == StateMachine::JUMPPING ||
+			GetState() == StateMachine::MIDJUMP ||
+			GetState() == StateMachine::CLIMBING ||
+			GetState() == StateMachine::FALLING ||
+			GetState() == StateMachine::LANDING) {
+			if (bat == false && GetHP() > 1 && _skill1 != false) {
+				bat == true;
+				OnDamaged(1);
+				ResetVelocity();
+				ChangeState(StateMachine::TRANSFORM);
+			}
 		}
 	}
 }
@@ -435,6 +442,40 @@ float Player::GetMoveSpeed() {
 
 void Player::BatChange(bool x) {
 	bat = x;
+}
+
+void Player::InvChange(bool x) {
+	_inv = x;
+}
+
+void Player::SetInv() {
+	if (bat == false && OnGround != false && _inv == false && _skill2 != false)
+	{
+		if (GetState() == StateMachine::IDLE ||
+			GetState() == StateMachine::RUNNING ||
+			GetState() == StateMachine::LANDING) {
+			OnDamaged(1);
+			InvChange(true);
+		}
+	}
+}
+
+void Player::UpdateInv() {
+	if (_inv == true)
+	{
+		SetRenderType(2);
+		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		delay += deltatime;
+		if (delay > 4000)
+		{
+			if (delay > 5000)
+			{
+				delay = 0;
+				SetRenderType(1);
+				InvChange(false);
+			}
+		}
+	}
 }
 
 

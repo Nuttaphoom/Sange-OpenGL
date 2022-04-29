@@ -39,7 +39,8 @@ class Entity : public SpriteObject
 	public:
 		bool OnGround = false;
 		int DirectionSet = 1;
-
+		bool _inv = false;
+		int _renderType = 1;
 		//Will be changed when StateMachine is changed 
 		glm::vec3 collisionSize;
 
@@ -64,6 +65,7 @@ class Entity : public SpriteObject
 		virtual void RespawnThisObject(); 
 		virtual void VelocityControl();
 		virtual void ResetVelocity(); 
+		virtual void Heal(int heal);
 
 		virtual void Stop();
 
@@ -71,10 +73,10 @@ class Entity : public SpriteObject
 		virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
 		virtual void SetVelocity(glm::vec3 velocity);
 		virtual void SetDirection(int x);
+		virtual void SetRenderType(int x);
 
 		virtual StateMachine  GetState();
 		virtual float GetHP();
 		virtual float GetMoveSpeed();
 		virtual int GetDirection();
-
 };

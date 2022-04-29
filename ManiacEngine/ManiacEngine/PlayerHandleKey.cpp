@@ -36,8 +36,10 @@ void PlayerHandleKey::PlayerControl(char key) {
 			player->SetVelocity(glm::vec3(0, Player::GetInstance()->GetVelocity().y, 0));
 			break;
 		case '1':
-			player->BatChange(true);
 			player->SetBat();
+			break;
+		case '2' :
+			player->SetInv();
 			break;
 	}
 }

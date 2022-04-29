@@ -18,8 +18,10 @@ class Player : public Entity, public Subject
 		float _moveSpeed;
 		float _hp;
 		bool bat = false;
+		bool _skill1 = false;
+		bool _skill2 = false;
 	public :
-		Player(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
+		Player(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, bool _res1, bool _res2);
  		void Update(int deltatime);
 		void UpdateStateMachine(float deltatime);
 		void UpdateCollision(); 
@@ -29,10 +31,13 @@ class Player : public Entity, public Subject
 		void SetClimbing();
 		float GetClimbSpeed();
 		void UpdateClimbing();
+		void UpdateInv();
 		void SetBat();
+		void SetInv();
 		float GetJump();
 		float GetMoveSpeed();
 		void BatChange(bool);
+		void InvChange(bool);
 
 		void AddDetectingEntity(Entity* entity); 
 		void RemoveDetectingEntity(Entity* entity);
@@ -43,10 +48,9 @@ class Player : public Entity, public Subject
 
 	 
 		static Player* GetInstance();
-		static Player* GetInstance(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size);
+		static Player* GetInstance(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size, bool _res1, bool _res2);
 
 		void OnDamaged(int damage);
-
  };
 
 

@@ -74,7 +74,7 @@ void Bishop::PlayerChase(Entity* p) {
 bool Bishop::PlayerDetect(Entity* p)
 {
 	Player::GetInstance()->RemoveDetectingEntity(this);
-	if (p->GetState() == StateMachine::HIDING)
+	if (p->GetState() == StateMachine::HIDING || p->_inv == true)
 		return false;
 
 
