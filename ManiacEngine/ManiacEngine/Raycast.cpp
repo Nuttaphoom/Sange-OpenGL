@@ -73,6 +73,37 @@ glm::vec3 RayCast::GetOutPutRayCast() {
 	return p2 - p1;
  }
 
+glm::vec3 RayCast::GetOutPutPointWithoutBound() {
+	glm::vec3 output = p2;
+	float m = (p1.y - p2.y) / (p1.x - p2.x);
+	glm::vec3 curPoint = p1;
+
+	glm::vec3 normalizeVec = glm::normalize(p2 - p1);  //Vector from point 1 to 2
+	float IncreasedXValue = normalizeVec.x * 32;
+	float IncreasedYValue = normalizeVec.y * 32;
+	int time = 0; 
+	while (time < 100000) { //Until collide with some entity (it will collide with p2 in the end)
+		curPoint.x += IncreasedXValue;
+		curPoint.y += IncreasedYValue;
+
+		Entity* inv = new Entity();
+		inv->SetPosition(curPoint);
+		inv->SetSize(32, 32);
+
+		for (int c = GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().size() - 1; c >= 0; c--) {
+			if (dynamic_cast<InvisibleObject*>(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList()[c])->Collide_W_Entity(*inv)) {
+				return curPoint;
+			}
+		}
+
+		delete inv;
+		 
+		time++; 
+	}
+
+	return p2;
+}
+
 RayCast::RayCast(glm::vec3 p1, glm::vec3 p2) {
 	this->p1 = p1; 
 	this->p2 = p2; 

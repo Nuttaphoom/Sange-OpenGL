@@ -41,15 +41,19 @@ void CreatePriestDeadAnim(Entity* en, string fileName, int row, int col, int how
 }
 
 Priest::Priest(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size):Enemy(fileName, row, column, 100, 80.0f, Pos, Size) {
-	attack_delay = 2.0f;
-	ChangeState(StateMachine::RUNNING);
+	attack_delay = 1.5f;
+	ChangeState(StateMachine::IDLE);
 	lightBallTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/LightBall.png");
 }
 
 void Priest::Attack(Entity* target) {
-	PriestLightBall* newBall = new PriestLightBall(lightBallTexture, 1, 4, GetPos(), glm::vec3(64, -64, 1), target->GetPos());
+	glm::vec3 lightBallSpawnPos; 
+	lightBallSpawnPos.x = GetPos().x - (GetSize().x / 4 );
+	lightBallSpawnPos.y = GetPos().y + (-1 * GetSize().y / 4); 
+	PriestLightBall* newBall = new PriestLightBall(lightBallTexture, 1, 4, lightBallSpawnPos, glm::vec3(64, -64, 1), target->GetPos());
 	_activePriestLightBalls.push_back(newBall);
 	GameStateController::GetInstance()->currentLevel->AddObjectList(newBall);
+	ChangeState(StateMachine::ATTACKING);
 }
 
 void Priest::EnterAttackZone(Entity* target) {
@@ -71,21 +75,30 @@ void Priest::StartAttack() {
 }
 
 void Priest::UpdateStateMachine(float deltatime) {
-	if (GetState() == StateMachine::RUNNING) {
+	if (GetState() == StateMachine::IDLE) {
 		if (PlayerDetect(Player::GetInstance())) {
-			ChangeState(StateMachine::ATTACKING); 
-
+			ChangeState(StateMachine::CASTING);
 		}
-		else {
-			Patrol(); 
+		else if (PatrolPos.size() > 0 ){
+			ChangeState(StateMachine::RUNNING);
 		}
 	}
 
-	if (GetState() == StateMachine::ATTACKING) {
+	if (GetState() == StateMachine::RUNNING) {
 		if (PlayerDetect(Player::GetInstance())) {
-			attack_cooldown_counter += 1.0f / 1000.0f * deltatime;  
+			ChangeState(StateMachine::CASTING);
+
+		}
+		else {
+			Patrol();
+		}
+	}
+
+	if (GetState() == StateMachine::CASTING) {
+		if (PlayerDetect(Player::GetInstance())) {
+			attack_cooldown_counter += 1.0f / 1000.0f * deltatime;
 			if (attack_cooldown_counter > attack_delay) {
-				attack_cooldown_counter = 0; 
+				attack_cooldown_counter = 0;
 				Attack(Player::GetInstance());
 			}
 		}
@@ -93,31 +106,39 @@ void Priest::UpdateStateMachine(float deltatime) {
 			ChangeState(StateMachine::RUNNING);
 		}
 	}
+
+	if (GetState() == StateMachine::ATTACKING) {
+		attack_cooldown_counter += 1.0f / 1000.0f * deltatime;
+		if (attack_cooldown_counter > 1.8f) {
+			attack_cooldown_counter = 0;
+			ChangeState(StateMachine::IDLE);
+		}
+	}
 }
 
 void Priest::ChangeState(StateMachine nextState)
 {
-	 
-
 	_priestState = nextState;
 	this->velocity = glm::vec3(0, 0, 0);
 
-	cout << "priest change state" << endl; 
-	if (GetState() == StateMachine::IDLE)
+ 	if (GetState() == StateMachine::IDLE)
 	{
-		SetAnimationLoop(0, 2, 5, 100);
+		SetAnimationLoop(1, 0, 5, 100);
 	}
 	else if (GetState() == StateMachine::RUNNING)
 	{
-		SetAnimationLoop(0, 2, 5, 100);
+		SetAnimationLoop(2, 0, 12, 100);
 
 	}
 	else if (GetState() == StateMachine::CHASING)
 	{
-		SetAnimationLoop(0, 2, 5, 100);
+		SetAnimationLoop(2, 0, 12, 100);
+	}
+	else if (GetState() == StateMachine::CASTING) {
+		SetAnimationLoop(0, 0, 16, 100);
 	}
 	else if (GetState() == StateMachine::ATTACKING) {
-		SetAnimationLoop(0, 2, 5, 100);
+		SetAnimationLoop(0,12, 30-12, 100);
 	}
 	else if (GetState() == StateMachine::Die) {
 		SetPause(true);
@@ -185,7 +206,7 @@ void Priest::Render(glm::mat4 globalModelTransform)
 
 PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size,glm::vec3 Destination ) :Entity(texture, row, column,100000,500 ,Pos, Size) {
 	RayCast* ray = new RayCast(Pos, Destination);
- 	_destination = ray->GetOutPutPoint();  
+ 	_destination = ray->GetOutPutPointWithoutBound();
  
 	glm::vec3 movingVelocity = _destination - Pos ;
 	stateMachine = StateMachine::TRANSFORM;  

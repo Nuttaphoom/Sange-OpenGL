@@ -10,4 +10,5 @@ public:
 	RayCast(glm::vec3 p1, glm::vec3 p2);
 	glm::vec3 GetOutPutRayCast();
 	glm::vec3 GetOutPutPoint();
+	glm::vec3 GetOutPutPointWithoutBound(); 
 }; 
