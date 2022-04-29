@@ -18,6 +18,8 @@ public:
 	void virtual Attack(Entity* target) ;
 	void virtual ChangeState(StateMachine NextState)  ;
 	void virtual Update(int deltaTime);
+	virtual StateMachine  GetState();
+
 	void UpdateStateMachine(float deltatime);
 
 };

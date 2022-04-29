@@ -143,12 +143,20 @@ void Level::LevelInit()
 	EntityObjectsList.push_back(test);
 	objectsList.push_back(test);
 
-	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5203, -1152.0f, 1),glm::vec3(128,-128,1));
+	Priest* test2 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(1800-220, -850.0f, 1), glm::vec3(128, -128, 1));
+	test2->AddPatrolPos(glm::vec3(1800-220, -800, 1));
+	test2->AddPatrolPos(glm::vec3(1800+200, -800, 1));
+	test2->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(test2);
+	objectsList.push_back(test2); 
+	test2->SetDirection(1); 
+	
+	/*Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5203, -1152.0f, 1), glm::vec3(128, -128, 1));
 	test2->AddPatrolPos(glm::vec3(5203, -1176, 1));
 	test2->AddPatrolPos(glm::vec3(3010, -1176, 1));
- 	test2->SetAnimationLoop(0, 0, 12, 100);
+	test2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test2);
-	objectsList.push_back(test2);
+	objectsList.push_back(test2);*/
 
 	Decon* test3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7669, -1152.0f, 0.0f), glm::vec3(128, -128, 1));
 	test3->AddPatrolPos(glm::vec3(7669, -1176, 0.0f));
@@ -241,8 +249,7 @@ void Level::LevelInit()
 
 	#pragma endregion  
 
-	PriestLightBall* testBall = new PriestLightBall(".. / Resource / Texture / Red_Texture.png",1,1, glm::vec3(164 + 300, -1152.0f+300, 0.0f),glm::vec3(64,-64,0), glm::vec3(164, -1152.0f, 0.0f));
-	objectsList.push_back(testBall);
+	
 	//cout << "Init Level" << endl;
 
 }
@@ -319,7 +326,7 @@ void Level::LevelUpdate()
 
 	//Update every objects 
 	for (DrawableObject* obj : objectsList) {
-		obj->Update(deltaTime); 
+ 		obj->Update(deltaTime); 
 	}
 	//Update InteractableObject 
 	/*interactableObjectManager->Update(deltaTime);

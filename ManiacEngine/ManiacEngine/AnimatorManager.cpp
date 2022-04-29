@@ -17,6 +17,7 @@ void AnimatorManager::HandleKey(char key) {
 AnimatorManager::AnimatorManager() :Manager("TEST", 0, 0, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0)) {
 	textures[ETextureName::DeconDeadAnimationTexture] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png");
 	textures[ETextureName::BishopThunder] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/VisualEffect/Thunder.png");
+	textures[ETextureName:: BishopDeadAnimationTexture] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/Priest_Dead_SpriteSheet.png");
 }
 
 //Responsible to "hide" (not replace) object(s) and spawn animationObj in their position with some given adjustment 

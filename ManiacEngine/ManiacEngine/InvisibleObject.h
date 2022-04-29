@@ -18,6 +18,7 @@ class InvisibleObject : public DrawableObject {
 
 		void SetRender(bool b); 
 		int Collide_W_Entity(Entity e); 
+		int Collide_W_Object(DrawableObject* object); 
 };
 
  

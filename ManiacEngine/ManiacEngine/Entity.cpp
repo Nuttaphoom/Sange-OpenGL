@@ -59,6 +59,14 @@ void Entity::VelocityControl() {
 	Default_MoveSpeed = MoveSpeed ;
 }
 
+ Entity::Entity(unsigned int texture, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(texture, row, column, Pos, Size), HP(HP), MoveSpeed(MoveSpeed) {
+	 this->velocity = glm::vec3(0, 0, 0);
+	 this->collisionSize = Size;
+	 Default_pos = Pos;
+	 Default_HP = HP;
+	 Default_MoveSpeed = MoveSpeed;
+ }
+
 
 int Entity::Collides(Entity e)
 {

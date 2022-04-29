@@ -2,14 +2,20 @@
 #include "Enemy.h"
 
 
+class PriestLightBall  ; 
+
 class Priest : public Enemy {
 private:
 	StateMachine _priestState;
 
 	//counter ; 
-	int attack_delay = 0;
+	float attack_delay = 0;
 	int chasing_delay = 0;
-	int attack_cooldown_counter = 0;
+	float attack_cooldown_counter = 0;
+
+	unsigned int lightBallTexture; 
+
+	vector<PriestLightBall*> _activePriestLightBalls;  
 
 public:
 	Priest(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
@@ -23,15 +29,17 @@ public:
 	virtual StateMachine GetState();
 	virtual void AddPatrolPos(glm::vec3 pos);
 	virtual void Patrol();
+	virtual bool PlayerDetect(Entity* p);
 	virtual void  PlayerChase(Entity* p);
+	virtual void  Render(glm::mat4 globalModelTransform);
 };
 
 class PriestLightBall : public Entity {
-private : 
-	glm::vec3 _destination ;
-	Entity* _followedTarget ;
-	float _speed ;  
-public :
-	PriestLightBall(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 Destination  ); 
-	virtual void Update(int deltaTime) ; 
+private:
+	glm::vec3 _destination;
+	Entity* _followedTarget;
+	float _speed;
+public:
+	PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 Destination);
+	virtual void Update(int deltaTime);
 };

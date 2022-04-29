@@ -23,8 +23,8 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 	 
 	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame,ETextureName::DeconDeadAnimationTexture);
  	glm::vec3 movePos; 
-	movePos.x = Player::GetInstance()->GetPos().x + 47 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1); 
-	movePos.y = Player::GetInstance()->GetPos().y; 
+	movePos.x = animationPos.x + 15 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1);
+	movePos.y = Player::GetInstance()->GetPos().y;
 	movePos.z = Player::GetInstance()->GetPos().z;
 
 	if (en->GetPos().x < Player::GetInstance()->GetPos().x) {
@@ -44,7 +44,7 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size)
 {
  	DeconState = StateMachine::RUNNING;
- 
+	attack_delay = 2.0f; 
 } 
 
 void Decon::Attack(Entity* target) {
@@ -194,6 +194,7 @@ void Decon::AddPatrolPos(glm::vec3 pos)
 	PatrolPos.push_back(pos);
 }
 
+ 
 void Decon::Patrol()
 {
 	if (PatrolPos.size() == 0) return; 

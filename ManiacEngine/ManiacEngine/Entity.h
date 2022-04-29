@@ -44,7 +44,9 @@ class Entity : public SpriteObject
 		glm::vec3 collisionSize;
 
 		Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos,glm::vec3 Size);
-		Entity() {} 
+		Entity(unsigned int texture, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size);
+		Entity(){}
+		
 		virtual bool Death();
 		virtual void Render(glm::mat4 globalModelTransform);
 		virtual int Collides(Entity e);
@@ -70,7 +72,7 @@ class Entity : public SpriteObject
 		virtual void SetVelocity(glm::vec3 velocity);
 		virtual void SetDirection(int x);
 
-		StateMachine  GetState();
+		virtual StateMachine  GetState();
 		virtual float GetHP();
 		virtual float GetMoveSpeed();
 		virtual int GetDirection();

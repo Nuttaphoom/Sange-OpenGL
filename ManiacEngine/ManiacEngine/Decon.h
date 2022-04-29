@@ -7,9 +7,9 @@ class Decon : public Enemy {
 		StateMachine DeconState;
 
 		//counter ; 
-		int attack_delay = 0;
-		int chasing_delay = 0;
-		int attack_cooldown_counter = 0;
+		float attack_delay = 0;
+		float chasing_delay = 0;
+		float attack_cooldown_counter = 0;
 
 	public :
 	Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);

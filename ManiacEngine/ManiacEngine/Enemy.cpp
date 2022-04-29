@@ -37,8 +37,9 @@ void Enemy::ChangeState(StateMachine nextState)
 	}
 }
 
-bool Enemy::PlayerDetect(Entity* p)
+bool Enemy::PlayerDetect(Entity* p )
 {
+	
 	Player::GetInstance()->RemoveDetectingEntity(this);
 	if (p->GetState() == StateMachine::HIDING)
 		return false; 
@@ -58,7 +59,7 @@ bool Enemy::PlayerDetect(Entity* p)
 		}
 	}
 
-	
+
 	//cout << "DON'T SEE PLAYER" << endl;
 	return false;
  

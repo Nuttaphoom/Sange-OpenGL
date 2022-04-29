@@ -5,7 +5,8 @@
 
 enum class ETextureName {
 	DeconDeadAnimationTexture,
-	BishopThunder
+	BishopThunder,
+	BishopDeadAnimationTexture
 };
 
 
