@@ -15,6 +15,7 @@ void MusicVolumeUp();
 void MusicVolumeDown();
 void SFXVolumeUp();
 void SFXVolumeDown();
+void CloseOptionButton_Func();
 
 Button::Button(ButtonName buttonName, string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size ):GUI(fileName,row,column,Pos,Size)
 {
@@ -64,6 +65,7 @@ Button::Button(ButtonName buttonName, string fileName, int row, int column, glm:
 		buttonTypesFunc.push_back(MasterVolumeDown);
 		buttonTypesFunc.push_back(MusicVolumeDown);
 		buttonTypesFunc.push_back(SFXVolumeDown);
+		buttonTypesFunc.push_back(CloseOptionButton_Func);
 }
 
 void Button::Render(glm::mat4 globalModelTransform) {
@@ -118,7 +120,13 @@ void StartgameButton_Func() {
 }
 
 void SettingButton_Func() {
-	cout << "Option" << endl;
+	GameStateController::GetInstance()->currentLevel->GetMenuHolder()[0]->disableButton();
+	GameStateController::GetInstance()->currentLevel->GetMenuHolder()[1]->enableButton();
+}
+
+void CloseOptionButton_Func() {
+	GameStateController::GetInstance()->currentLevel->GetMenuHolder()[0]->enableButton();
+	GameStateController::GetInstance()->currentLevel->GetMenuHolder()[1]->disableButton();
 }
 
 void Button::SetPause(bool b) {

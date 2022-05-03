@@ -61,7 +61,7 @@ void Player::Update(int deltatime)
 
 	Entity::Update(deltatime);
  
-	cout << "hi from update in Player" << endl;
+	//cout << "hi from update in Player" << endl;
 
 	UpdateStateMachine(deltatime);
 	UpdateInv();

@@ -79,7 +79,7 @@ void Level_Menu::LevelInit()
 {
 	AudioEngine audio;
 	audio.init();
-
+	
 
 	Music sound1 = audio.loadMusic("../Resource/Sound/Starry.mp3");
 	sound1.play();
@@ -93,40 +93,72 @@ void Level_Menu::LevelInit()
 	objectsList.push_back(background);
 	GUI* Sangeimage = new GUI("../Resource/Texture/GUI/Sangeideal.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth()/2 - 350, -50, 0), glm::vec3(-300, -600, 1));
 	objectsList.push_back(Sangeimage);
+
+
 	
 
 	MenuHolder* mainMenuHolder = new MenuHolder("MainMenu");
 	SDL_Color SDL_WhiteColor = SDL_Color(); 
 	SDL_WhiteColor.r = 255; SDL_WhiteColor.g = 255; SDL_WhiteColor.b = 255; 
+
 	Button* m1 = new Button(ButtonName::START_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 -650, GameEngine::GetInstance()->GetWindowHeight() / 2 -200, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1),"Play",SDL_WhiteColor,20);
 	mainMenuHolder->addButton(m1);
 	objectsList.push_back(m1);
 	GUIObjectsList.push_back(m1);
 
-	Button* m2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 550, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1),"Option", SDL_WhiteColor,20);
+	Button* m2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 550, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1),"Exit", SDL_WhiteColor,20);
 	mainMenuHolder->addButton(m2);
 	objectsList.push_back(m2);
 	GUIObjectsList.push_back(m2);
 	//mainMenuHolder->disableButton();
 
-	Button* m3 = new Button(ButtonName::SETTING_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 350, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "Exit", SDL_WhiteColor, 20);
+	Button* m3 = new Button(ButtonName::SETTING_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 350, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "Option", SDL_WhiteColor, 20);
 	mainMenuHolder->addButton(m3);
 	objectsList.push_back(m3);
 	GUIObjectsList.push_back(m3);
 	//mainMenuHolder->disableButton();
 
-	Button* s1masterup = new Button(ButtonName::MUSIC_SOUND_VOLUME_UP, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 350, GameEngine::GetInstance()->GetWindowHeight() / 2 - 350, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), ">", SDL_WhiteColor, 20);
-	mainMenuHolder->addButton(s1masterup);
+	MenuHolder* optionHolder = new MenuHolder("Option");
+	Button* s1masterup = new Button(ButtonName::MASTER_SOUND_VOLUME_UP, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 450, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), ">", SDL_WhiteColor, 20);
+	optionHolder->addButton(s1masterup);
 	objectsList.push_back(s1masterup);
 	GUIObjectsList.push_back(s1masterup);
 
-	Button* s1masterdown = new Button(ButtonName::MUSIC_SOUND_VOLUME_DOWN, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 950, GameEngine::GetInstance()->GetWindowHeight() / 2 - 350, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "<", SDL_WhiteColor, 20);
-	mainMenuHolder->addButton(s1masterdown);
+	Button* s1masterdown = new Button(ButtonName::MASTER_SOUND_VOLUME_DOWN, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 800, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "<", SDL_WhiteColor, 20);
+	optionHolder->addButton(s1masterdown);
 	objectsList.push_back(s1masterdown);
 	GUIObjectsList.push_back(s1masterdown);
 
+	Button* s2musicup = new Button(ButtonName::MUSIC_SOUND_VOLUME_UP, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 450, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), ">", SDL_WhiteColor, 20);
+	optionHolder->addButton(s2musicup);
+	objectsList.push_back(s2musicup);
+	GUIObjectsList.push_back(s2musicup);
+
+	Button* s2musicrdown = new Button(ButtonName::MUSIC_SOUND_VOLUME_DOWN, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 800, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "<", SDL_WhiteColor, 20);
+	optionHolder->addButton(s2musicrdown);
+	objectsList.push_back(s2musicrdown);
+	GUIObjectsList.push_back(s2musicrdown);
+
+	Button* closeOption = new Button(ButtonName::CLOSE_OPTION_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 650, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "Close", SDL_WhiteColor, 20);
+	optionHolder->addButton(closeOption);
+	objectsList.push_back(closeOption);
+	GUIObjectsList.push_back(closeOption);
+	
+	
+	Button* master = new Button(ButtonName::NONE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4,4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 1100, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "MasterVolume", SDL_WhiteColor, 20);
+	optionHolder->addButton(master);
+	objectsList.push_back(master);
+	GUIObjectsList.push_back(master);
+
+	Button* music = new Button(ButtonName::NONE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 1100, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1), "MusicVolume", SDL_WhiteColor, 20);
+	optionHolder->addButton(music);
+	objectsList.push_back(music);
+	GUIObjectsList.push_back(music);
+	optionHolder->disableButton();
+
 
 	_menuHolderList.push_back(mainMenuHolder);
+	_menuHolderList.push_back(optionHolder);
 #pragma endregion
 
 #pragma  Manager
