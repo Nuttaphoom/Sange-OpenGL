@@ -14,5 +14,15 @@ public:
 	void Render(glm::mat4 globalModelTransform);
 	void Update(float deltaTime);
 	void LoadText(string text, SDL_Color textColor, int fontSize );
-	
+};
+
+class WorldTextObject : public DrawableObject {
+private:
+	unsigned int texture;
+
+public:
+	WorldTextObject();
+	~WorldTextObject();
+ 	void Update(float deltaTime);
+	void LoadText(string text, SDL_Color textColor, int fontSize);
 };

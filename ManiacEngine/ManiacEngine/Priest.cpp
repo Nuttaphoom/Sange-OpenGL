@@ -50,7 +50,7 @@ void Priest::Attack(Entity* target) {
 	glm::vec3 lightBallSpawnPos; 
 	lightBallSpawnPos.x = GetPos().x - (GetSize().x / 4 );
 	lightBallSpawnPos.y = GetPos().y + (-1 * GetSize().y / 4); 
-	PriestLightBall* newBall = new PriestLightBall(lightBallTexture, 1, 4, lightBallSpawnPos, glm::vec3(64, -64, 1), target->GetPos());
+	PriestLightBall* newBall = new PriestLightBall(lightBallTexture, 1, 4, lightBallSpawnPos, glm::vec3(96, -96, 1), target->GetPos());
 	_activePriestLightBalls.push_back(newBall);
 	GameStateController::GetInstance()->currentLevel->AddObjectList(newBall);
 	ChangeState(StateMachine::ATTACKING);
@@ -118,6 +118,9 @@ void Priest::UpdateStateMachine(float deltatime) {
 
 void Priest::ChangeState(StateMachine nextState)
 {
+	if (nextState == GetState())
+		return; 
+
 	_priestState = nextState;
 	this->velocity = glm::vec3(0, 0, 0);
 
@@ -142,7 +145,7 @@ void Priest::ChangeState(StateMachine nextState)
 	}
 	else if (GetState() == StateMachine::Die) {
 		SetPause(true);
-		CreatePriestDeadAnim(this, "../Resource/Texture/Enemy/Priest/Priest_Dead_SpriteSheet.png", 2, 10, 19, 100, 2.1f);
+		CreatePriestDeadAnim(this, "../Resource/Texture/Enemy/Priest/Priest_Dead_SpriteSheet.png", 2, 10, 19, 100, 2.0f);
 	}
 }
 
@@ -204,10 +207,12 @@ void Priest::Render(glm::mat4 globalModelTransform)
 
 }
 
-PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size,glm::vec3 Destination ) :Entity(texture, row, column,100000,500 ,Pos, Size) {
+PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size,glm::vec3 Destination ) :Entity(texture, row, column,100000,250 ,Pos, Size) {
 	RayCast* ray = new RayCast(Pos, Destination);
  	_destination = ray->GetOutPutPointWithoutBound();
- 
+	
+	collisionSize = Size ;
+ 	
 	glm::vec3 movingVelocity = _destination - Pos ;
 	stateMachine = StateMachine::TRANSFORM;  
 	SetAnimationLoop(1, 1, 4, 500);
@@ -224,13 +229,19 @@ void PriestLightBall::Update(int deltaTime) {
  	
  
 	Entity* player = Player::GetInstance();
+	
 	InvisibleObject* invisibleObject = new InvisibleObject(); 
 	invisibleObject->SetPosition(GetPos()); 
 	invisibleObject->SetSize(GetSize().x / 2.0f,GetSize().y * -1 / 2.0f) ; 
 
- 	if (invisibleObject->Collide_W_Entity(*player)) {
+	int a = invisibleObject->Collide_W_Entity(*player); 
+ 	if (a > 0) {
 		SetPause(true);
-		player->OnDamaged(1);
+		player->OnDamaged(1000);
+	}
+	else if (abs(player->GetPos().x - GetPos().x) < 5 && abs(player->GetPos().y - GetPos().y < 5 )) {
+		SetPause(true);
+		player->OnDamaged(1000);
 	}
 	else if (abs(GetPos() - _destination).x <= 30 && abs(GetPos() - _destination).y <= 30) {
 		SetPause(true);

@@ -82,7 +82,7 @@ glm::vec3 RayCast::GetOutPutPointWithoutBound() {
 	float IncreasedXValue = normalizeVec.x * 32;
 	float IncreasedYValue = normalizeVec.y * 32;
 	int time = 0; 
-	while (time < 100000) { //Until collide with some entity (it will collide with p2 in the end)
+	while (time < 1000) { //Until collide with some entity (it will collide with p2 in the end)
 		curPoint.x += IncreasedXValue;
 		curPoint.y += IncreasedYValue;
 

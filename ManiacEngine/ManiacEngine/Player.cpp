@@ -35,7 +35,7 @@ void Player::HandleKey(char Key)
 
 Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size, bool _res1, bool _res2) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size)
 {	
-	this->collisionSize = glm::vec3(76, -128, 1);
+	this->collisionSize = glm::vec3(64, -128, 0);
 
 	stateMachine = StateMachine::FALLING;
 	EntityData ED;
@@ -50,13 +50,8 @@ Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Siz
 	Default_MoveSpeed = _moveSpeed;
 	Default_pos = Pos;
 
-	cout << "Default_Pos : " << Default_pos.x << "," << Default_pos.y << endl; 
-
 	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
 	SetHP(_hp);
-
-
-	 
 }
 
 void Player::Update(int deltatime)
@@ -64,12 +59,13 @@ void Player::Update(int deltatime)
 	if (IsPause())
 		return;
 
- 
 	Entity::Update(deltatime);
+ 
+	cout << "hi from update in Player" << endl;
 
 	UpdateStateMachine(deltatime);
-	UpdateCollision();
 	UpdateInv();
+	UpdateCollision();
 	if (GetState() == StateMachine::CLIMBING)
 		UpdateClimbing();
 }
@@ -245,7 +241,7 @@ void Player::ChangeState(StateMachine NextState)
 		SetAnimationLoop(0, 0, 1, 100);
 	}
 	else if (this->GetState() == StateMachine::RUNNING)
-	{ 
+	{
 		SetAnimationLoop(2, 0, 8, 100);
 	}
 	else if (this->GetState() == StateMachine::JUMPPING)
@@ -289,6 +285,9 @@ void Player::ChangeState(StateMachine NextState)
 	else if (this->GetState() == StateMachine::CLIMBINGIDLE)
 	{
 		SetAnimationLoop(3, 1, 1, 100);
+	}
+	else if (this->GetState() == StateMachine::Die) {
+		SetPause(true);
 	}
 }
 

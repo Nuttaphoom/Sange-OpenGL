@@ -21,8 +21,7 @@ void HPBar::OnNotify() {
 
 void HPBar::Render(glm::mat4 globalModelTransform)
 {
-	//GUI::Render(globalModelTransform); 
-	for (int i = 0; i < HPPoints.size() - 1; i++) {
+	for (int i = 1 ; i < HPPoints.size()  ; i++) {
 		HPPoints[i]->Render(globalModelTransform);
 	}
 }

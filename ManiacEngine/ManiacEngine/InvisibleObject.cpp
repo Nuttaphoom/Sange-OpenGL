@@ -1,7 +1,7 @@
 #include "InvisibleObject.h"
 #include "GameEngine.h" 
 #include "GameObject.h" 
-
+#include "Player.h"
  void InvisibleObject::Render(glm::mat4 globalModelTransform) {
 	if (this->render) {
 		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
@@ -50,38 +50,52 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 							  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
  
-	if (abs(e.GetPos().x - this->GetPos().x) > 140 || abs(e.GetPos().y - this->GetPos().y) > 140)
+	 
+	if (abs(e.GetPos().x - this->GetPos().x) > 128 || abs(e.GetPos().y - this->GetPos().y) > 128)
 		return 0; 
+
+	float enLeft, enRight, enTop, enBottom; 
+	float invLeft, invRight, invTop, invBottom;
+	
+	enLeft = e.GetPos().x - e.collisionSize.x / 2 ;  
+	enRight = e.GetPos().x + e.collisionSize.x / 2 ; 
+	enTop = e.GetPos().y + abs(e.collisionSize.y) / 2 ; 
+	enBottom = e.GetPos().y - abs(e.collisionSize.y) / 2;   
+
+	invLeft = GetPos().x - GetSize().x / 2;  
+	invRight = GetPos().x + GetSize().x / 2 ; 
+	invTop = GetPos().y + abs(GetSize().y) / 2; 
+	invBottom = GetPos().y - abs(GetSize().y) / 2; 
 
 	float LeftX_Inv_Obj = (float)this->GetPos().x - this->GetSize().x / 2;
 	float RightX_Inv_Obj = (float)this->GetPos().x + this->GetSize().x / 2;
 
-	float TOPY_Inv_Obj = (float) this->GetPos().y + this->GetSize().y * -1 / 2;
-	float BOTTOMY_Inv_Obj = (float) this->GetPos().y - this->GetSize().y * -1 / 2;
+	float TOPY_Inv_Obj = (float) this->GetPos().y + abs(this->GetSize().y)  / 2;
+	float BOTTOMY_Inv_Obj = (float) this->GetPos().y - abs(this->GetSize().y) / 2;
 
 	float TOP_BOTTOM_X = (float)e.GetPos().x - e.collisionSize.x / 4; 
-	float TOP_Y = (float)e.GetPos().y + e.collisionSize.y / 2 * -1; 
+	float TOP_Y = (float)e.GetPos().y + abs(e.collisionSize.y) / 2 ; 
 
 	float Middle_1_2_X = (float)e.GetPos().x - e.collisionSize.x / 2 ; 
  
-	float Middle_1_Y = (float)e.GetPos().y + e.collisionSize.y * -1 / 4; 
+	float Middle_1_Y = (float)e.GetPos().y + abs(e.collisionSize.y) / 4; 
 
- 	float Middle_2_Y = (float)e.GetPos().y - e.collisionSize.y * -1 / 4; 
+ 	float Middle_2_Y = (float)e.GetPos().y - abs(e.collisionSize.y) / 4; 
 
-	float BOTTOM_Y = (float) e.GetPos().y - 1 - e.collisionSize.y  * -1 / 2 ;
+	float BOTTOM_Y = (float) e.GetPos().y - 1 - abs(e.collisionSize.y )  / 2 ;
 
 	//TOP 
 	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X > LeftX_Inv_Obj) ||
 		(TOP_BOTTOM_X + e.collisionSize.x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e.collisionSize.x / 2 > LeftX_Inv_Obj)) {
-		if (TOP_Y > TOPY_Inv_Obj && TOP_Y < BOTTOMY_Inv_Obj) {
+		if (TOP_Y < TOPY_Inv_Obj && TOP_Y > BOTTOMY_Inv_Obj) {
 			CollideDetection += 1;
 		}
 	}
 
 	//MIDDLE_LEFT
 	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
-		if ( (Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) || 
-			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)  ){
+		if ( (Middle_1_Y < TOPY_Inv_Obj && Middle_1_Y > BOTTOMY_Inv_Obj) || 
+			(Middle_2_Y < TOPY_Inv_Obj && Middle_2_Y > BOTTOMY_Inv_Obj)  ){
 			CollideDetection += 4;
 		}
 	}
@@ -90,82 +104,23 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 	Middle_1_2_X = (float)e.GetPos().x + e.collisionSize.x / 2    ;
 	//cout << "MIDDLE RIGHT : " << Middle_1_2_X << " GetPos().x : " << e.GetPos().x << endl;
 	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
-		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
-			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)) {
+		if ((Middle_1_Y < TOPY_Inv_Obj && Middle_1_Y > BOTTOMY_Inv_Obj) ||
+			(Middle_2_Y < TOPY_Inv_Obj && Middle_2_Y > BOTTOMY_Inv_Obj)) {
 			CollideDetection += 8;
  		}
 	}
  	
-	//TOP 
+	//BOT 
 	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X   > LeftX_Inv_Obj) ||
 		(TOP_BOTTOM_X + e.collisionSize.x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e.collisionSize.x / 2 > LeftX_Inv_Obj)) {
-		if (BOTTOM_Y > TOPY_Inv_Obj && BOTTOM_Y < BOTTOMY_Inv_Obj) {
+		if (BOTTOM_Y <= TOPY_Inv_Obj && BOTTOM_Y >= BOTTOMY_Inv_Obj) {
  			CollideDetection += 2;
 		}
 	}
-  	return  CollideDetection;
+
+  	return  CollideDetection; 
 }
-
-int InvisibleObject::Collide_W_Object(DrawableObject* e) {
-	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
-						  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
-
-	if (abs(e->GetPos().x - this->GetPos().x) > 140 || abs(e->GetPos().y - this->GetPos().y) > 140)
-		return 0;
-
-	float LeftX_Inv_Obj = (float)this->GetPos().x - this->GetSize().x / 2;
-	float RightX_Inv_Obj = (float)this->GetPos().x + this->GetSize().x / 2;
-
-	float TOPY_Inv_Obj = (float)this->GetPos().y + this->GetSize().y  / 2;
-	float BOTTOMY_Inv_Obj = (float)this->GetPos().y - this->GetSize().y / 2;
-
-	float TOP_BOTTOM_X = (float)e->GetPos().x - e->GetSize().x / 4;
-	float TOP_Y = (float)e->GetPos().y + e->GetSize().y / 2 ;
-
-	float Middle_1_2_X = (float)e->GetPos().x - e->GetSize().x / 2;
-
-	float Middle_1_Y = (float)e->GetPos().y + e->GetSize().y  / 4;
-
-	float Middle_2_Y = (float)e->GetPos().y - e->GetSize().y  / 4;
-
-	float BOTTOM_Y = (float)e->GetPos().y - 1 - e->GetSize().y  / 2;
-
-	//TOP 
-	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X > LeftX_Inv_Obj) ||
-		(TOP_BOTTOM_X + e->GetSize().x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e->GetSize().x / 2 > LeftX_Inv_Obj)) {
-		if (TOP_Y > TOPY_Inv_Obj && TOP_Y < BOTTOMY_Inv_Obj) {
-			CollideDetection += 1;
-		}
-	}
-
-	//MIDDLE_LEFT
-	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
-		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
-			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)) {
-			CollideDetection += 4;
-		}
-	}
-
-	//MIDDLE_RIGHT
-	Middle_1_2_X = (float)e->GetPos().x + e->GetSize().x / 2;
-	//cout << "MIDDLE RIGHT : " << Middle_1_2_X << " GetPos().x : " << e.GetPos().x << endl;
-	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
-		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
-			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)) {
-			CollideDetection += 8;
-		}
-	}
-
-	//TOP 
-	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X   > LeftX_Inv_Obj) ||
-		(TOP_BOTTOM_X + e->GetSize().x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e->GetSize().x / 2 > LeftX_Inv_Obj)) {
-		if (BOTTOM_Y > TOPY_Inv_Obj && BOTTOM_Y < BOTTOMY_Inv_Obj) {
-			CollideDetection += 2;
-		}
-	}
-
- 	return  CollideDetection;
-}
+ 
 InvisibleObject::InvisibleObject() {
 	climbable = true ; 
 	this->color = glm::vec3(0, 1, 0);

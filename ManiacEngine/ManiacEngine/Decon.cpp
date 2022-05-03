@@ -51,7 +51,7 @@ void Decon::Attack(Entity* target) {
  	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
 		invWALLs[i].SetPosition(glm::vec3(this->GetPos().x + (16 * this->DirectionSet * i), this->GetPos().y + this->GetSize().y * -1 / 2, 1));
-		invWALLs[i].SetSize(64, 64);
+		invWALLs[i].SetSize(80, 80);
 	}
 	for (int i = 0; i < 2; i++) {
 		if (invWALLs[i].Collide_W_Entity(*target)) {
@@ -82,7 +82,7 @@ void Decon::EnterAttackZone(Entity* target) {
 	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
 		invWALLs[i].SetPosition(glm::vec3(this->GetPos().x + (8 * this->DirectionSet * i), this->GetPos().y + this->GetSize().y * -1 / 2, 1));
-		invWALLs[i].SetSize(64, 64);
+		invWALLs[i].SetSize(80, 80);
 	}
 
  
@@ -140,7 +140,7 @@ void Decon::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::ATTACKING) {
  		attack_delay += deltatime ;  
-		if (attack_delay > 75*8) {
+		if (attack_delay > 75*8-(14/100)) {
  			Attack(Player::GetInstance()); 
  			attack_delay = 0;
 		}
@@ -175,7 +175,7 @@ void Decon::ChangeState(StateMachine nextState)
 		SetAnimationLoop(0, 0, 12, 100);
 	}
 	else if (GetState() == StateMachine::ATTACKING) {
- 		SetAnimationLoop(1, 0, 9, 75);
+ 		SetAnimationLoop(1, 0, 9, 60);
 	}
 	else if (GetState() == StateMachine::Die) {
 		SetPause(true) ; 
