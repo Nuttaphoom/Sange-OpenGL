@@ -18,6 +18,36 @@ TextObject::~TextObject()
 
 }
 
+void TextObject::Render(glm::mat4 globalModelTransform) {
+	if (IsPause())
+		return; 
+
+	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
+
+	GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
+	GLuint modeId = GameEngine::GetInstance()->GetRenderer()->GetModeUniformId();
+
+	glBindTexture(GL_TEXTURE_2D, texture);
+ 
+	if (modelMatixId == -1) {
+		cout << "Error: Can't perform transformation " << endl;
+		return;
+	}
+
+	glm::mat4 currentMatrix = glm::mat4(1);
+	currentMatrix = glm::translate(currentMatrix, Camera::GetInstance()->GetCamOffset());
+	currentMatrix = glm::scale(currentMatrix, GetSize() / Camera::GetInstance()->GetZoomOffset());
+	currentMatrix = glm::translate(currentMatrix, glm::vec3(GetPos().x / GetSize().x, GetPos().y / GetSize().y, 0));
+	if (squareMesh != nullptr) {
+
+		currentMatrix = globalModelTransform * currentMatrix;
+		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
+		glUniform1i(modeId, 1);
+		squareMesh->ResetTexcoord();
+		squareMesh->Render();
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+}
 void TextObject::Update(float deltaTime)
 {
 }
