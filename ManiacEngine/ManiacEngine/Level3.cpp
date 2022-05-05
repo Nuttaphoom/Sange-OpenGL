@@ -135,56 +135,56 @@ void Level3::LevelInit()
 	EntityObjectsList.push_back(d3);
 	objectsList.push_back(d3);
 
-	Priest* d4 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(2793.97, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2793.97, -1152, 0.0f), glm::vec3(128, -128, 1));
 	d4->AddPatrolPos(glm::vec3(2793.97, -1152, 0.0f));
 	d4->AddPatrolPos(glm::vec3(2793.97, -1152, 0.0f));
 	d4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d4);
 	objectsList.push_back(d4);
 
-	Priest* d5 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(3103.51, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d5 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3103.51, -1152, 0.0f), glm::vec3(128, -128, 1));
 	d5->AddPatrolPos(glm::vec3(3103.51, -1152, 0.0f));
 	d5->AddPatrolPos(glm::vec3(3103.51, -1152, 0.0f));
 	d5->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d5);
 	objectsList.push_back(d5);
 
-	Priest* d6 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6069.72, -522, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d6 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6069.72, -522, 0.0f), glm::vec3(128, -128, 1));
 	d6->AddPatrolPos(glm::vec3(6330, -522, 0.0f));
 	d6->AddPatrolPos(glm::vec3(5791.45, -522, 0.0f));
 	d6->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d6);
 	objectsList.push_back(d6);
 
-	Priest* d7 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6350.96, -837, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d7 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6350.96, -837, 0.0f), glm::vec3(128, -128, 1));
 	d7->AddPatrolPos(glm::vec3(6350.96, -837, 0.0f));
 	d7->AddPatrolPos(glm::vec3(6350.96, -837, 0.0f));
 	d7->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d7);
 	objectsList.push_back(d7);
 
-	Priest* d8 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6119.69, -837, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d8 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6119.69, -837, 0.0f), glm::vec3(128, -128, 1));
 	d8->AddPatrolPos(glm::vec3(6119.69, -837, 0.0f));
 	d8->AddPatrolPos(glm::vec3(6241.46, -837, 0.0f));
 	d8->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d8);
 	objectsList.push_back(d8);
 
-	Priest* d9 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(7441.46, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d9 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7441.46, -1152, 0.0f), glm::vec3(128, -128, 1));
 	d9->AddPatrolPos(glm::vec3(7441.46, -1152, 0.0f));
 	d9->AddPatrolPos(glm::vec3(7441.46, -1152, 0.0f));
 	d9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d9);
 	objectsList.push_back(d9);
 	
-	Priest* d10 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(8326.04, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d10 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(8326.04, -1152, 0.0f), glm::vec3(128, -128, 1));
 	d10->AddPatrolPos(glm::vec3(8326.04, -1152, 0.0f));
 	d10->AddPatrolPos(glm::vec3(8714.85, -1152, 0.0f));
 	d10->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d10);
 	objectsList.push_back(d10);
 
-	Priest* d11 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(8714.85, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d11 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(8714.85, -1152, 0.0f), glm::vec3(128, -128, 1));
 	d11->AddPatrolPos(glm::vec3(8714.85, -1152, 0.0f));
 	d11->AddPatrolPos(glm::vec3(8326.04, -1152, 0.0f));
 	d11->SetAnimationLoop(0, 0, 12, 100);
