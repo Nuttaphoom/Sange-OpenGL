@@ -126,7 +126,7 @@ void Bishop::Patrol() {
 void Bishop::Attack(Entity* target) {
 	ChangeState(StateMachine::ATTACKING);
 	CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x, Player::GetInstance()->GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
- 	//target->OnDamaged(10);  
+ 	target->OnDamaged(100);  
 }
 void Bishop::ChangeState(StateMachine NextState) {
 	_countDownTime = 0;

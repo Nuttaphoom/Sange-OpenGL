@@ -108,13 +108,15 @@ void Level3::LevelInit()
 
 
 #pragma region Entities 
+	unsigned int priestTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png");
+
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 8, 16, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
 
-	Priest* d1 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(1353.42, -648, 0.0f), glm::vec3(128, -128, 1));
+	Priest* d1 = new Priest(priestTexture, 3, 30, glm::vec3(1353.42, -648, 0.0f), glm::vec3(128, -128, 1));
 	d1->AddPatrolPos(glm::vec3(1353.42, -648, 0.0f));
 	d1->AddPatrolPos(glm::vec3(1158.15, -648, 0.0f));
 	d1->SetAnimationLoop(0, 0, 12, 100);
@@ -209,13 +211,18 @@ void Level3::LevelInit()
 
 #pragma endregion
 
+#pragma  Manager
+	AnimatorManager* animatorManager = AnimatorManager::GetInstance();
+	managersList.push_back(animatorManager);
+	objectsList.push_back(animatorManager);
 
+#pragma endregion  
 
 }
 
 void Level3::LevelUpdate()
 {
-	cout << Player::GetInstance()->GetPos().x << "X" << Player::GetInstance()->GetPos().y << "Y" << endl;
+	//cout << Player::GetInstance()->GetPos().x << "X" << Player::GetInstance()->GetPos().y << "Y" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();

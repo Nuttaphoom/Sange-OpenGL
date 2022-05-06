@@ -46,13 +46,18 @@ Priest::Priest(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Si
 	lightBallTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/LightBall.png");
 }
 
+Priest::Priest(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80.0f, Pos, Size) {
+	attack_delay = 1.5f;
+	ChangeState(StateMachine::IDLE);
+	lightBallTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/LightBall.png");
+}
+
 void Priest::Attack(Entity* target) {
 	glm::vec3 lightBallSpawnPos; 
 	lightBallSpawnPos.x = GetPos().x - (GetSize().x / 4 );
 	lightBallSpawnPos.y = GetPos().y + (-1 * GetSize().y / 4); 
 	PriestLightBall* newBall = new PriestLightBall(lightBallTexture, 1, 4, lightBallSpawnPos, glm::vec3(96, -96, 1), target->GetPos());
 	_activePriestLightBalls.push_back(newBall);
-	GameStateController::GetInstance()->currentLevel->AddObjectList(newBall);
 	ChangeState(StateMachine::ATTACKING);
 }
 
@@ -67,6 +72,9 @@ void Priest::Update(int deltatime) {
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 
+	for (int i = 0; i < _activePriestLightBalls.size(); i++) {
+		_activePriestLightBalls[i]->Update(deltatime); 
+	}
 	 
 }
 
@@ -154,13 +162,10 @@ bool Priest::PlayerDetect(Entity* p) {
 	if (p->GetState() == StateMachine::HIDING || p->_inv == true)
 		return false;
 
-
-
 	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
  	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
 	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false;
-	//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
-	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
+ 
 
 	if (Distance.x < 640 && Distance.y < 320) {
 		glm::vec3 resultPoint = RayCast(this->GetPos(), p->GetPos()).GetOutPutPoint();
@@ -203,13 +208,15 @@ StateMachine Priest::GetState() { return _priestState; }
 void Priest::Render(glm::mat4 globalModelTransform)
 {
 	Entity::Render(globalModelTransform);
- 
+	for (int i = 0; i < _activePriestLightBalls.size(); i++) {
+		_activePriestLightBalls[i]->Render(globalModelTransform);
+	}
 
 }
 
 PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size,glm::vec3 Destination ) :Entity(texture, row, column,100000,250 ,Pos, Size) {
 	RayCast* ray = new RayCast(Pos, Destination);
- 	_destination = ray->GetOutPutPointWithoutBound();
+ 	_destination = ray->GetOutPutPoint();
 	
 	collisionSize = Size ;
  	
@@ -223,7 +230,6 @@ PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm:
 void PriestLightBall::Update(int deltaTime) {
 	if (IsPause())  
 		return; 
-
  
 	Entity::Update(deltaTime) ;
  	
@@ -237,11 +243,11 @@ void PriestLightBall::Update(int deltaTime) {
 	int a = invisibleObject->Collide_W_Entity(*player); 
  	if (a > 0) {
 		SetPause(true);
-		player->OnDamaged(1000);
+		player->OnDamaged(0);
 	}
 	else if (abs(player->GetPos().x - GetPos().x) < 5 && abs(player->GetPos().y - GetPos().y < 5 )) {
 		SetPause(true);
-		player->OnDamaged(1000);
+		player->OnDamaged(0);
 	}
 	else if (abs(GetPos() - _destination).x <= 30 && abs(GetPos() - _destination).y <= 30) {
 		SetPause(true);
