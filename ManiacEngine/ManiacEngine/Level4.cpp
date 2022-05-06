@@ -13,7 +13,7 @@ void Level4::LevelLoad()
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
-	ifstream mapFile("../Resource/Map/Level_1.2/Middle_Mapdata.txt");
+	ifstream mapFile("../Resource/Map/Level_3.1/Middle_Mapdata.txt");
 	if (mapFile.is_open()) {
 		mapFile >> MapHeight;
 		mapFile >> MapWidth;
@@ -28,7 +28,7 @@ void Level4::LevelLoad()
 	}
 
 
-	ifstream FrontMapFile("../Resource/Map/Level_1.2/Front_Mapdata.txt");
+	ifstream FrontMapFile("../Resource/Map/Level_3.1/Front_Mapdata.txt");
 	if (FrontMapFile.is_open()) {
 		FrontMapFile >> MapHeight;
 		FrontMapFile >> MapWidth;
@@ -42,7 +42,7 @@ void Level4::LevelLoad()
 		FrontMapFile.close();
 	}
 
-	ifstream cMapFile("../Resource/Map/Level_1.2/Col_Mapdata.txt");
+	ifstream cMapFile("../Resource/Map/Level_3.1/Col_Mapdata.txt");
 	if (cMapFile.is_open()) {
 		cMapFile >> MapHeight;
 		cMapFile >> MapWidth;
@@ -56,7 +56,7 @@ void Level4::LevelLoad()
 		cMapFile.close();
 	}
 
-	ifstream BackGroundMapFile("../Resource/Map/Level_1.2/Background_Mapdata.txt");
+	ifstream BackGroundMapFile("../Resource/Map/Level_3.1/Background_Mapdata.txt");
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
@@ -84,7 +84,7 @@ void Level4::LevelInit()
 	//sound1.play();
 
 #pragma region tilemapss
-	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
+	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level3.1 SpriteSheet.png", 15, 23);
 
  	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
 		for (int j = 0; j < tilemaps->GetTiles()[i].size(); j++) {
@@ -106,7 +106,7 @@ void Level4::LevelInit()
 
 
 #pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 4, 10, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 8, 16, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);

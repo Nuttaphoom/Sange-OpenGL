@@ -328,22 +328,7 @@ void Level::LevelUpdate()
 	for (DrawableObject* obj : objectsList) {
  		obj->Update(deltaTime); 
 	}
-	//Update InteractableObject 
-	/*interactableObjectManager->Update(deltaTime);
-
-	// Update Game Objs
-	for (DrawableObject* obj : EntityObjectsList) {
-		//Play Update In every game object 
-		if (Entity* eptr = dynamic_cast<Entity*>(obj))
-			if (eptr->isDead())
-				continue;
-		obj->Update(deltaTime);
-	}
-
-	//Update Manager 
-	for (Manager* m : managersList) {
-		m->Update(deltaTime);
-	}*/
+ 
 }
 
 void Level::LevelDraw()

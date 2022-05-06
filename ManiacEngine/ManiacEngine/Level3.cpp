@@ -287,17 +287,11 @@ void Level3::LevelUpdate()
 
 
 
+	if (isPause)
+		return;
 
-
-	//Update InteractableObject 
-	interactableObjectManager->Update(deltaTime);
-
-	// Update Game Objs
-	for (DrawableObject* obj : EntityObjectsList) {
-		//Play Update In every game object 
-		if (Entity* eptr = dynamic_cast<Entity*>(obj))
-			if (eptr->isDead())
-				continue;
+	//Update every objects 
+	for (DrawableObject* obj : objectsList) {
 		obj->Update(deltaTime);
 	}
 

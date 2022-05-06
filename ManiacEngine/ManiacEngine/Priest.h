@@ -19,6 +19,7 @@ private:
 
 public:
 	Priest(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
+	Priest(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size);
 
 	virtual void Attack(Entity* target);
 	virtual void EnterAttackZone(Entity* target);

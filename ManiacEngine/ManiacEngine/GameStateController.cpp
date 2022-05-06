@@ -49,6 +49,9 @@ void GameStateController::Update()
 			break;
 		case GameState::GS_LEVEL3: 
 			currentLevel = new Level3();
+			break;
+		case GameState::GS_LEVEL4 :
+			currentLevel = new Level4(); 
 			break; 
 		case GameState::GS_MAINMENU:
 			currentLevel = new Level_Menu();

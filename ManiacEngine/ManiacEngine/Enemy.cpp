@@ -6,6 +6,12 @@ Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, gl
 	stateMachine = StateMachine::RUNNING;
 }
 
+Enemy::Enemy(unsigned int text, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : Entity(text, row, column, HP, MoveSpeed, Pos, Size)
+{
+	stateMachine = StateMachine::RUNNING;
+}
+
+
  
 
  

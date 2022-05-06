@@ -103,6 +103,12 @@ void Priest::UpdateStateMachine(float deltatime) {
 	}
 
 	if (GetState() == StateMachine::CASTING) {
+		if (Player::GetInstance()->GetPos().x > GetPos().x)
+			DirectionSet = 1;
+		else {
+			DirectionSet = -1;
+		}
+
 		if (PlayerDetect(Player::GetInstance())) {
 			attack_cooldown_counter += 1.0f / 1000.0f * deltatime;
 			if (attack_cooldown_counter > attack_delay) {
