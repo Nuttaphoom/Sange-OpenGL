@@ -264,7 +264,6 @@ void Player::ChangeState(StateMachine NextState)
 	else if (this->GetState() == StateMachine::CLIMBING)
 	{
 		SetAnimationLoop(3, 0, 8, 100);
-		//if ()
 	}
 	else if (this->GetState() == StateMachine::CLIFFEDGE)
 	{

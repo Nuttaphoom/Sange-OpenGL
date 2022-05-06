@@ -71,9 +71,9 @@ void Trap::Called() {
 	if (refused)
 		return;
 	//Creating trap mini game
- 	if (_crossMiniGamePtr == nullptr)
-		_crossMiniGamePtr = new CrossMiniGame("null", 1, 1, glm::vec3(0, 0, 0), glm::vec3(256, 128, 1), 100, 0);
-
+	if (_crossMiniGamePtr == nullptr)
+		_crossMiniGamePtr = new CrossMiniGame("../Resource/Texture/Interactable/MiniGameBoarder.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(256, 128, 1), 100, 0);
+ 
  
 }
 

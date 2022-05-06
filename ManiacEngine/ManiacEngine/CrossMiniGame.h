@@ -24,6 +24,7 @@ public :
 	
 	void StartTheBar();
 	void StopTheBar();
+	void RandomPlaceKeyBar();
 
 	bool IsDone() {
 		return _done;

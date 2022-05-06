@@ -6,30 +6,32 @@ void CrossMiniGame::StartTheBar() {
 
 }
 void CrossMiniGame::StopTheBar() {
-	if (abs(_keyBar->GetPos().x - _movingBar->GetPos().x) < 2.0f) {
+	if (abs(_keyBar->GetPos().x - _movingBar->GetPos().x) < _movingBar->GetSize().x / 2) {
 		cout << "PASS" << endl;
 		_done = true;
 
 	}
 	else {
-		cout << "NOT PASS" << endl; 
+		RandomPlaceKeyBar();
 	}
 
 }
 
 CrossMiniGame::CrossMiniGame(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size,float MaxValue,float MinValue):MiniGame(fileName,row,column,Pos,Size) {
-	this->_movingBar = new GUI("../Resource/Texture/Red_Texture.png", row, column, glm::vec3(0,0,0), glm::vec3(30,100,1));
-	this->_boarder = new GUI(fileName, row, column, Pos, Size);
-	this->_keyBar = new GUI("../Resource/Texture/Red_Texture.png", row, column, Pos, glm::vec3(20, 100, 1));
+	srand(time(NULL));
 
-	this->_maxValue = (_boarder->GetPos().x + _boarder->GetSize().x / 2) - _movingBar->GetSize().x / 2 ;
-	this->_minValue = (_boarder->GetPos().x - _boarder->GetSize().x / 2) + _movingBar->GetSize().x / 2;
+	this->_movingBar = new GUI("../Resource/Texture/Plain/Red Rectangle.png", row, column, glm::vec3(0,0,0), glm::vec3(12,50,1));
+	this->_boarder = new GUI(fileName, row, column, Pos, Size);
+	this->_keyBar = new GUI("../Resource/Texture/Plain/Green Rectangle.png", row, column, Pos, glm::vec3(5, 50, 1));
+
+	this->_maxValue = (_boarder->GetPos().x + _boarder->GetSize().x / 3) - _movingBar->GetSize().x / 2 ;
+	this->_minValue = (_boarder->GetPos().x - _boarder->GetSize().x / 3) + _movingBar->GetSize().x / 2;
 	this->_currentValue = (_maxValue + _minValue) / 2;
 
 	this->speed = _boarder->GetSize().x / 2 - _movingBar->GetSize().x / 2 / 2.5f ; 
-	srand(time(NULL));
-	this->_keyBar->SetPosition(glm::vec3((rand() % (int) _maxValue )+ this->_minValue,0,0)); 
-	
+
+	RandomPlaceKeyBar();
+
 }
 void CrossMiniGame::HandleKey(char key) {
 	if (key == 'e') {
@@ -38,7 +40,10 @@ void CrossMiniGame::HandleKey(char key) {
 	else if (key == 'E') {
 		ExitMiniGame();
 	}
+}
 
+void CrossMiniGame::RandomPlaceKeyBar() {
+	this->_keyBar->SetPosition(glm::vec3((rand() % (int)_maxValue) - (rand() % (int) _minValue) , 0, 0));
 }
 
 void CrossMiniGame::Update(int deltaTime) {

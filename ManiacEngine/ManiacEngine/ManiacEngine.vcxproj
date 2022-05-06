@@ -99,7 +99,9 @@
     <ClInclude Include="Priest.h" />
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="TileMap.h" />
+    <ClCompile Include="ToxicGas.cpp" />
     <ClCompile Include="Trap.cpp" />
+    <ClInclude Include="ToxicGas.h" />
     <ClInclude Include="Trap.h" />
     <ClCompile Include="TriangleMeshVbo.cpp" />
   </ItemGroup>

@@ -252,6 +252,9 @@
     <ClCompile Include="LevelCutscenesOne.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="ToxicGas.cpp">
+      <Filter>Source Files\Objects\Interactable Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -427,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="LevelCutscenesOne.h">
       <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ToxicGas.h">
+      <Filter>Header Files\Objects\InteractableObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

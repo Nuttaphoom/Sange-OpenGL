@@ -12,7 +12,7 @@ void InteractableObject::HandleKey(char k) {
 }
 
 void InteractableObject::Update(int deltaTime) {
- 
+	SpriteObject::Update(deltaTime); 
 }
 
  

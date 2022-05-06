@@ -21,6 +21,7 @@
 #include "AnimatorManager.h"
 #include "MenuHolder.h"
 #include "Gate.h"
+#include "ToxicGas.h"
 class Level
 {
 protected:

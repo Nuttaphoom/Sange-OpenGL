@@ -116,10 +116,14 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
-	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(128, -128, 1));
-		
+	/*Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(128, -128, 1));
+
 	interactableObjectManager->addInteractableObjects(trap_1);
-	objectsList.push_back(trap_1);
+	objectsList.push_back(trap_1);*/
+
+	ToxicGas* toxicGas = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 2, 2, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(64, -128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas);
+	objectsList.push_back(toxicGas);
 
 	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(9680 , -1176 + 65 - 60 + 64, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1)); 
 
@@ -206,36 +210,6 @@ void Level::LevelInit()
 	objectsList.push_back(b2);
 	GUIObjectsList.push_back(b2);
 	pauseMenuHolder->disableButton();
-
-	/*MenuHolder* gameoverHolder = new MenuHolder();
-	Button* g1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2  - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
-	gameoverHolder->addButton(g1);
-	objectsList.push_back(g1);
-	GUIObjectsList.push_back(g1);
-
-	Button* g2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 500, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1)); //BASE VALUE FOR POS
-	gameoverHolder->addButton(g2);
-	objectsList.push_back(g2);
-	GUIObjectsList.push_back(g2);
-	gameoverHolder->disableButton();*/
-
-	/*MenuHolder* mainMenuHolder = new MenuHolder();
-	Button* m1 = new Button(ButtonName::START_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 -650, GameEngine::GetInstance()->GetWindowHeight() / 2 -200, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
-	mainMenuHolder->addButton(m1);
-	objectsList.push_back(m1);
-	GUIObjectsList.push_back(m1);
-
-	Button* m2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 550, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
-	mainMenuHolder->addButton(m2);
-	objectsList.push_back(m2);
-	GUIObjectsList.push_back(m2);
-	mainMenuHolder->disableButton();
-
-	Button* m3 = new Button(ButtonName::SETTING_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 350, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
-	mainMenuHolder->addButton(m3);
-	objectsList.push_back(m3);
-	GUIObjectsList.push_back(m3);
-	mainMenuHolder->disableButton();*/
 
 	_menuHolderList.push_back(pauseMenuHolder);
 	//_menuHolderList.push_back(gameoverHolder);
