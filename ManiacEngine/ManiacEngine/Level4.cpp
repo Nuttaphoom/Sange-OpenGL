@@ -268,6 +268,8 @@ void Level4::HandleKey(char key)
 	case 'h':
 	case 'z': Camera::GetInstance()->Zoom(0.1f);  break;//zoom in the cam 
 	case 'x': Camera::GetInstance()->Zoom(-0.1f);  break;//zoom the cam 
+	case '1': player->HandleKey(key); break;
+	case '2': player->HandleKey(key); break;
 	}
 }
 
