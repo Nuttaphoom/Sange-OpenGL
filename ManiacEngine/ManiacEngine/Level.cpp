@@ -116,14 +116,14 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(flower_3);
 	objectsList.push_back(flower_3);
 
-	/*Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(128, -128, 1));
+	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(trap_1);
-	objectsList.push_back(trap_1);*/
+	objectsList.push_back(trap_1);
 
-	ToxicGas* toxicGas = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 2, 2, glm::vec3(2216, -850 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(64, -128, 1));
+	/*ToxicGas* toxicGas = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(2216, -850-16 - 32, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128,128, 1));
 	interactableObjectManager->addInteractableObjects(toxicGas);
-	objectsList.push_back(toxicGas);
+	objectsList.push_back(toxicGas);*/
 
 	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(9680 , -1176 + 65 - 60 + 64, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1)); 
 

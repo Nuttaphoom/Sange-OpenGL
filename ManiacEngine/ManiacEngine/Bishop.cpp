@@ -5,8 +5,7 @@
 void CastingThunder(glm::vec3 posToCast);
 
 
-Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 0.21f, Pos, Size) {
-	MoveSpeed = 25;
+Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 25, Pos, Size) {
 	_bishopState = StateMachine::IDLE;
 	SetAnimationLoop(1, 8, 8, 100.0f);
 } 
@@ -24,10 +23,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 	Player* p = Player::GetInstance();
 
 	if (_bishopState == StateMachine::IDLE) {
-		//Count Time until Attack time 
-		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
-		//cout << "Bishop is in idle" << endl;
-
+ 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
 
 		if (_countDownTime >= 3.0f) {
 			_countDownTime = 0;
@@ -45,8 +41,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 		
 	}
 	else if (_bishopState == StateMachine::RUNNING) {
-		//cout << "Bishop is in Running" << endl;
-
+ 
 		Patrol(); 
  
 	}
@@ -83,12 +78,12 @@ bool Bishop::PlayerDetect(Entity* p)
 
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
 	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false;
-	//cout << "ResultVec : " << resultVec.x << "," << resultVec.y << endl;
-	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
 
 	if (Distance.x < 1800 && Distance.y < 100) {
-		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast();
-		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
+		RayCast* ray = new RayCast(GetPos()  , p->GetPos()) ;
+		glm::vec3 resultVec = ray->GetOutPutPoint() ;  
+		
+		if (resultVec.x == p->GetPos().x && resultVec.y == p->GetPos().y) {
 			Player::GetInstance()->AddDetectingEntity(this);
 			return true;
 		}
@@ -103,8 +98,7 @@ void Bishop::Patrol() {
 	if (PatrolPos.size() == 0) return;
 
 	glm::vec3 dest = PatrolPos.at(CurrentPatrolPos);
-
-
+	
 	if (dest.x > GetPos().x) SetDirection(1);
 	else SetDirection(-1);
 

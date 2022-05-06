@@ -17,16 +17,14 @@ void ToxicGas::Update(int deltaTime) {
 	InteractableObject::Update(deltaTime);
 
 	Player* player = Player::GetInstance();
-	glm::vec3 insideColliderSize = glm::vec3(0, ColliderSize.y, 1);
-	float offsetX = 30 + 26 + 128 / 8;
-	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, glm::vec3(GetPos().x + offsetX, GetPos().y, GetPos().z), GetSize(), glm::vec3(128 / 4 - 30, -128, 1)));
-
-	if (testObj->InCollideRadius(testObj, player) > 0) {
+	if (InCollideRadius(this, player)) {
+		cout << "Collider size.x : " << ColliderSize.x << endl; 
 		player->OnDamaged(10);
 	}
 
-	delete testObj;
-}
+  
+
+ }
 
 void ToxicGas::HandleKey(char key) {
 	
