@@ -157,13 +157,14 @@ void Player::UpdateStateMachine(float deltatime)
 	{
 		//cout << "CLIFFEDGE" << endl;
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		cout << GetVelocity().y << endl;
 		delay += deltatime;
 		if (delay > 100)
 		{
 			delay = 0;
 			ChangeState(StateMachine::CLIFFEDGEDOWN);
 		}
-		TranslateVelocity(glm::vec3 (0, 160, 0));
+		TranslateVelocity(glm::vec3 (0, 140, 0));
 	}
 
 	if (GetState() == StateMachine::CLIFFEDGEDOWN)
@@ -174,7 +175,6 @@ void Player::UpdateStateMachine(float deltatime)
 		delay += deltatime;
 		if (OnGround == false) {
 			TranslateVelocity(glm::vec3(0, -50, 0));
-			cout << "here" << endl;
 		}
 		if (OnGround != false && delay > 100)
 		{
@@ -464,6 +464,9 @@ void Player::UpdateInv() {
 		SetRenderType(2);
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
+		if (GetVelocity().x > 0 || GetVelocity().y > 0) {
+			InvChange(false);
+		}
 		if (delay > 4000)
 		{
 			if (delay > 5000)
