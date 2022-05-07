@@ -32,8 +32,8 @@ void Director::Update(int deltatime) {
 			}
 		}
 		else {
-			glm::vec3 move = glm::vec3(-1, 0, 0);
-			storagePic[i]->Translate(move);
+			glm::vec3 move = glm::vec3(-80.0f / 1000.0f * (float) deltatime, 0, 0);
+			storagePic[i]->Translate(move ) ;
 			if (storagePic[count]->GetPos().x <= 0) {
 				ScPausetime = true;
 				count += 1;
@@ -41,9 +41,7 @@ void Director::Update(int deltatime) {
 					count = storagePic.size() - 1;
 				}
 			}
-		}
-		cout << lifespan << " " << scPausetimeCount << endl;
-		
+		}		
 	}
 	
 	lifespan -= 1.0f / 1000.0f * (float)deltatime;

@@ -107,7 +107,7 @@ void Bishop::Patrol() {
 			SetDirection(1);
 			ChangeState(StateMachine::IDLE);
 		}
-		else if (CurrentPatrolPos == 1) { //Get to left skill position 
+		else if (CurrentPatrolPos == 1) { //Get to left skill position ddddd
 			SetDirection(-1);
 			ChangeState(StateMachine::CASTING);
 		}

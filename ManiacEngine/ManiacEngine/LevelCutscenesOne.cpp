@@ -90,7 +90,7 @@ void LevelCutscenesOne::LevelInit()
 	objectsList.push_back(background3);
 	storageScenes.push_back(background3);
 
-	Director* director = new Director(storageScenes, GameEngine::GetInstance()->GetWindowWidth(), GameState::GS_LEVEL1,30,2);
+	Director* director = new Director(storageScenes, GameEngine::GetInstance()->GetWindowWidth(), GameState::GS_LEVEL1,34,2);
 	objectsList.push_back(director);
 	
 #pragma endregion

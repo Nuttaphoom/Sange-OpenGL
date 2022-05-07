@@ -4,7 +4,7 @@
  
 
 ToxicGas::ToxicGas(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 collisionSize) : InteractableObject(fileName, row, column, Pos, Size, collisionSize) {
-	SetAnimationLoop(0, 0, 4,500, true);
+	SetAnimationLoop(0, 0, 4,100, true);
 }
 void ToxicGas::getTrap() {
 
