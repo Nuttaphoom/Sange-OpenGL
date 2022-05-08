@@ -53,11 +53,9 @@ Button::Button(ButtonName buttonName, string fileName, int row, int column, glm:
 		buttonTypesFunc.push_back(StartgameButton_Func);
 
 		buttonTypesFunc.push_back(ContinueButton_Func);
-		cout << "BB1" << endl;
 	 
 	 
 		buttonTypesFunc.push_back(ExitButton_Func);
-		cout << "BB2" << endl;
 		buttonTypesFunc.push_back(SettingButton_Func);
 		buttonTypesFunc.push_back(MasterVolumeUp);
 		buttonTypesFunc.push_back(SFXVolumeUp);
@@ -84,7 +82,6 @@ bool Button::isClick(glm::vec3 CamSpace_MousePosition ) {
 
  }
 void Button::OnClick(glm::vec3 CamSpace_MousePosition) {
-	cout << "button on click" << endl; 
 	if (IsPause())
 		return;
 
@@ -116,7 +113,7 @@ void RestartButton_Func() {
 }
 
 void StartgameButton_Func() {
-	GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1 ;
+	GameData::GetInstance()->gGameStateNext = GameState::GS_CUTSCENES1 ;
 }
 
 void SettingButton_Func() {

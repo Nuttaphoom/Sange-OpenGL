@@ -119,7 +119,7 @@ void Bishop::Patrol() {
 
 void Bishop::Attack(Entity* target) {
 	ChangeState(StateMachine::ATTACKING);
-	CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x, Player::GetInstance()->GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
+	CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x, GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
  	target->OnDamaged(100);  
 }
 void Bishop::ChangeState(StateMachine NextState) {
@@ -152,7 +152,7 @@ void Bishop::ChangeState(StateMachine NextState) {
 		do {
 			randomXPos = rand() % 4 - rand() % 4;
 		} while (randomXPos == 0);
-		CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x + 64 * randomXPos, Player::GetInstance()->GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
+		CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x + 64 * randomXPos, GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
 		_bishopState = NextState;
 	}
 }
