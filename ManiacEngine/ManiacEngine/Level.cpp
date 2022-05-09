@@ -133,7 +133,7 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 8, 16, 3, glm::vec3(164, -1152.0f+5, 0.0f),glm::vec3(128,-128,0), false, true);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(164, -1152.0f+5, 0.0f),glm::vec3(128,-128,0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);

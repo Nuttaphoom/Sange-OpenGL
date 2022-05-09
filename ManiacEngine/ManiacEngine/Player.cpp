@@ -286,7 +286,9 @@ void Player::ChangeState(StateMachine NextState)
 		SetAnimationLoop(3, 1, 1, 100);
 	}
 	else if (this->GetState() == StateMachine::Die) {
-		SetPause(true);
+		cout << "before die" << endl;
+		SetAnimationLoop(9, 0, 14, 100);
+		cout << "after die" << endl;
 	}
 }
 
@@ -311,8 +313,8 @@ Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::
 }
  
 void Player::OnDamaged(int damage) {
-	if (IsPause())
-		true; 
+	if (IsPause() || GetState() == StateMachine::ATTACKING)
+		true;
 
 	this->HP -= damage;
 	notify(0); //Notify HP Observer 
