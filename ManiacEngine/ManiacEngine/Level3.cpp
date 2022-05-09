@@ -9,6 +9,7 @@ static int SCREEN_HEIGHT;
 
 void Level3::LevelLoad()
 {
+
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -59,15 +60,14 @@ void Level3::LevelLoad()
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
+		cout << MapWidth << "::" << MapHeight << endl;
 		sBackGroundMapData = new int* [MapHeight];
 		for (int y = 0; y < MapHeight; y++) {
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
-			}
-			//cout << endl; 
-		}
+ 			}
+ 		}
 		BackGroundMapFile.close();
 	}
 
@@ -76,11 +76,7 @@ void Level3::LevelLoad()
 
 void Level3::LevelInit()
 {
-	AudioEngine audio;
-	audio.init();
-
-	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
-	//sound1.play();
+ 
 
 #pragma region tilemapss
 
@@ -140,7 +136,7 @@ void Level3::LevelInit()
 #pragma region Entities 
 	unsigned int priestTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png");
 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 8, 16, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
@@ -307,7 +303,7 @@ void Level3::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							cout << "ENTITY COL" << endl;
+							playerObj->OnDamaged(999);
 						}
 					}
 				}

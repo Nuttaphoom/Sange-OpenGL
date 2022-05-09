@@ -7,6 +7,7 @@ AudioEngine* AudioEngine::GetInstance()
 {
 	if (instance == nullptr) {
 		instance = new AudioEngine();
+		instance->init(); 
 	}
 	return instance;
 }
@@ -33,8 +34,15 @@ void AudioEngine::setMastervolume(float masterVol) {
 	masterVolume = masterVol;
 	Mix_VolumeMusic(masterVolume * MIX_MAX_VOLUME);
 	Mix_Volume(-1, masterVolume * MIX_MAX_VOLUME);
-	
 }
+
+Music::Music() {
+
+}
+Music::Music(string soundTag) {
+	this->soundTag = soundTag;
+}
+
 void Music::play(int loop)
 {
 	Mix_PlayMusic(m_music, loop);
@@ -54,6 +62,11 @@ void Music::resume()
 {
 	Mix_ResumeMusic();
 }
+
+bool Music::isSameTag(string comparedTag) {
+	return strcmp(comparedTag.c_str(), soundTag.c_str() );
+}
+
 
 AudioEngine::AudioEngine()
 {

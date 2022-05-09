@@ -80,15 +80,6 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-	AudioEngine audio;
-	audio.init();
-
-	
-	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
-	//sound1.play();
-
-	 
-
 	#pragma region tilemapss
  
 	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.1 SpriteSheet.png", 21, 40);
@@ -121,10 +112,6 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(trap_1);
 	objectsList.push_back(trap_1);
 
-	/*ToxicGas* toxicGas = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(2216, -850-16 - 32, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128,128, 1));
-	interactableObjectManager->addInteractableObjects(toxicGas);
-	objectsList.push_back(toxicGas);*/
-
 	Gate* gate_1 = new Gate(GameState::GS_LEVEL2,"../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(9680 , -1176 + 65 - 60 + 64, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1)); 
 
 	interactableObjectManager->addInteractableObjects(gate_1); 
@@ -133,7 +120,7 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(164, -1152.0f+5, 0.0f),glm::vec3(128,-128,0), true, true);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 8, 16, 3, glm::vec3(164, -1152.0f+5, 0.0f),glm::vec3(128,-128,0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
@@ -146,14 +133,6 @@ void Level::LevelInit()
 	test->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test);
 	objectsList.push_back(test);
-
-	/*Priest* test2 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(1800-220, -850.0f, 1), glm::vec3(128, -128, 1));
-	test2->AddPatrolPos(glm::vec3(1800-220, -800, 1));
-	test2->AddPatrolPos(glm::vec3(1800+200, -800, 1));
-	test2->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(test2);
-	objectsList.push_back(test2); 
-	test2->SetDirection(1); */
 	
 	Decon* test2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5203, -1152.0f, 1), glm::vec3(128, -128, 1));
 	test2->AddPatrolPos(glm::vec3(5203, -1176, 1));
@@ -175,14 +154,8 @@ void Level::LevelInit()
 	test4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(test4);
 	objectsList.push_back(test4); 
-	/*
-	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Bishop Sprite Sheet.png", 2, 9, glm::vec3(189, -1176.0f, 0.0f), glm::vec3(128, -128, 1));
-	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
-	_bishopTest->AddPatrolPos(glm::vec3(189 + 16, -1176.0f, 0.0f));
-	_bishopTest->AddPatrolPos(glm::vec3(189 , -1176.0f, 0.0f));
-	
-	EntityObjectsList.push_back(_bishopTest);
-	objectsList.push_back(_bishopTest);*/
+
+
 	#pragma endregion
 	respawner = new ReSpawner();
 
@@ -212,8 +185,7 @@ void Level::LevelInit()
 	pauseMenuHolder->disableButton();
 
 	_menuHolderList.push_back(pauseMenuHolder);
-	//_menuHolderList.push_back(gameoverHolder);
-	//_menuHolderList.push_back(mainMenuHolder);
+
 	#pragma endregion
 
 	#pragma  Manager
@@ -222,15 +194,10 @@ void Level::LevelInit()
 	objectsList.push_back(animatorManager);
 
 	#pragma endregion  
-
-	
-	//cout << "Init Level" << endl;
-
 }
  
 void Level::LevelUpdate()
 {
-
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();
@@ -285,7 +252,7 @@ void Level::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							cout << "ENTITY COL" << endl;
+							playerObj->OnDamaged(999);
 						}
 					}
 				}
