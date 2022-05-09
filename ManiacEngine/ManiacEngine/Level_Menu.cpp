@@ -77,7 +77,7 @@ void Level_Menu::LevelLoad()
 
 void Level_Menu::LevelInit()
 {
- 
+	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/BGM/MainMenuOST.mp3");
 
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 5, 10, 3, glm::vec3(7000, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
