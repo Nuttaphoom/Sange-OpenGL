@@ -5,8 +5,7 @@
 #include <SDL_mixer.h>
 #include <string>
 #include <map>
-#include <string>
-using namespace std;  
+
 class SoundEffect {
 public:
 	friend class AudioEngine;
@@ -18,16 +17,12 @@ private:
 class Music {
 public:
 	friend class AudioEngine;
-	Music() ;
-	Music(string soundTag); 
 	void play(int loop = 0);
 	void pause();
 	void stop();
 	void resume();
-	bool isSameTag(string comparedTag); 
 private:
 	Mix_Music* m_music = nullptr;
-	string soundTag ; 
 };
 
 class AudioEngine {

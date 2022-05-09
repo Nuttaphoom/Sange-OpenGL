@@ -9,7 +9,6 @@ static int SCREEN_HEIGHT;
 
 void Level3::LevelLoad()
 {
-
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -60,14 +59,15 @@ void Level3::LevelLoad()
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
-		cout << MapWidth << "::" << MapHeight << endl;
 		sBackGroundMapData = new int* [MapHeight];
 		for (int y = 0; y < MapHeight; y++) {
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
- 			}
- 		}
+				//cout << sBackGroundMapData[y][x] << "     "; 
+			}
+			//cout << endl; 
+		}
 		BackGroundMapFile.close();
 	}
 
@@ -76,7 +76,11 @@ void Level3::LevelLoad()
 
 void Level3::LevelInit()
 {
- 
+	AudioEngine audio;
+	audio.init();
+
+	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
+	//sound1.play();
 
 #pragma region tilemapss
 
@@ -303,7 +307,7 @@ void Level3::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							playerObj->OnDamaged(999);
+							cout << "ENTITY COL" << endl;
 						}
 					}
 				}

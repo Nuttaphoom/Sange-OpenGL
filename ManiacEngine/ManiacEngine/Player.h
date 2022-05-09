@@ -42,7 +42,7 @@ class Player : public Entity, public Subject
 		void AddDetectingEntity(Entity* entity); 
 		void RemoveDetectingEntity(Entity* entity);
 		bool isSeen(); 
-		bool isBat() { return bat; }
+		
 		virtual void Attack(Entity* target);
 		virtual void RespawnThisObject();  
 
@@ -51,7 +51,6 @@ class Player : public Entity, public Subject
 		static Player* GetInstance(string fileName, int row, int column, float HP, glm::vec3 Pos, glm::vec3 Size, bool _res1, bool _res2);
 
 		void OnDamaged(int damage);
-
  };
 
 

@@ -1,12 +1,12 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Raycast.h"
-Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 CollisionSize) : Entity(fileName, row, column, HP, MoveSpeed, Pos, Size, CollisionSize)
+Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size ): Entity(fileName, row, column, HP, MoveSpeed, Pos, Size)
 {
 	stateMachine = StateMachine::RUNNING;
 }
 
-Enemy::Enemy(unsigned int text, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 CollisionSize) : Entity(text, row, column, HP, MoveSpeed, Pos, Size, CollisionSize)
+Enemy::Enemy(unsigned int text, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : Entity(text, row, column, HP, MoveSpeed, Pos, Size)
 {
 	stateMachine = StateMachine::RUNNING;
 }
@@ -46,7 +46,7 @@ void Enemy::ChangeState(StateMachine nextState)
 bool Enemy::PlayerDetect(Entity* p )
 {
 	Player::GetInstance()->RemoveDetectingEntity(this);
-	if (p->GetState() == StateMachine::HIDING || p->isInv() == true || p->IsPause())
+	if (p->GetState() == StateMachine::HIDING || p->_inv == true)
 		return false; 
 
 	glm::vec3 Distance = glm::vec3(abs(GetPos().x - p->GetPos().x), abs(GetPos().y - p->GetPos()).y, 0);
@@ -57,15 +57,9 @@ bool Enemy::PlayerDetect(Entity* p )
 	//cout << "Distance between Player and this enemy : " << Distance.x << "," << Distance.y << endl; 
 
 	if (Distance.x < 64*6 && Distance.y < 100) {
-		RayCast* ray = new RayCast(this->GetPos(), p->GetPos());
-		glm::vec3 resultPoint = ray->GetOutPutPoint();
-		cout << "here 1" << endl; 
-		if (resultPoint.x == p->GetPos().x && resultPoint.y == p->GetPos().y)  {
-			cout << "here 2" << endl;
-
+		glm::vec3 resultVec = RayCast(this->GetPos(), p->GetPos()).GetOutPutRayCast() ;
+		if (abs(resultVec.x - abs(Distance.x)) < 0.1f && abs(resultVec.y - abs(Distance.y)) < 0.1f) {
 			Player::GetInstance()->AddDetectingEntity(this); 
-			cout << "here 3" << endl;
-
 			return true;
 		}
 	}
