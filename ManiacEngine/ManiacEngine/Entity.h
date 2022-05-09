@@ -44,8 +44,8 @@ class Entity : public SpriteObject
 		//Will be changed when StateMachine is changed 
 		glm::vec3 collisionSize;
 
-		Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos,glm::vec3 Size, glm::vec3 collisionSize);
-		Entity(unsigned int texture, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 collisionSize);
+		Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos,glm::vec3 Size);
+		Entity(unsigned int texture, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size);
 		Entity(){}
 		
 		virtual bool Death();
@@ -79,7 +79,4 @@ class Entity : public SpriteObject
 		virtual float GetHP();
 		virtual float GetMoveSpeed();
 		virtual int GetDirection();
-
-		bool isInv() { return _inv; }
-
 };

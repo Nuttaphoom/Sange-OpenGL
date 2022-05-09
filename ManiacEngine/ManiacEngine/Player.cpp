@@ -33,8 +33,10 @@ void Player::HandleKey(char Key)
 	k.KeyDetect(Key);
 }
 
-Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size, bool _res1, bool _res2) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size,glm::vec3(64, -128, 0))
+Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Size, bool _res1, bool _res2) : Entity(fileName, row, column, _hp, _moveSpeed, Pos,Size)
 {	
+	this->collisionSize = glm::vec3(64, -128, 0);
+
 	stateMachine = StateMachine::FALLING;
 	EntityData ED;
 	ED.Read();
@@ -284,7 +286,9 @@ void Player::ChangeState(StateMachine NextState)
 		SetAnimationLoop(3, 1, 1, 100);
 	}
 	else if (this->GetState() == StateMachine::Die) {
-		SetPause(true);
+		cout << "before die" << endl;
+		SetAnimationLoop(9, 0, 14, 100);
+		cout << "after die" << endl;
 	}
 }
 
@@ -310,7 +314,7 @@ Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::
  
 void Player::OnDamaged(int damage) {
 	if (IsPause() || GetState() == StateMachine::ATTACKING)
-		true; 
+		true;
 
 	this->HP -= damage;
 	notify(0); //Notify HP Observer 
@@ -331,7 +335,7 @@ void Player::Attack(Entity* target) {
 	if (target->DirectionSet == this->DirectionSet) {
 		for (int i = 0; i < 2; i++) {
 			if (invWALLs[i].Collide_W_Entity(*target)) {
-				ChangeState(StateMachine::ATTACKING);
+				cout << "player attack!!  " << endl; 
   				target->OnDamaged(999999);
 				Heal(1);
 			}
@@ -445,7 +449,7 @@ void Player::InvChange(bool x) {
 }
 
 void Player::SetInv() {
-	if (bat == false && OnGround != false && _inv == false && _skill2 != false || detectingEntity.size() > 0)
+	if (bat == false && OnGround != false && _inv == false && _skill2 != false)
 	{
 		if (GetState() == StateMachine::IDLE ||
 			GetState() == StateMachine::RUNNING ||

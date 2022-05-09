@@ -1,7 +1,7 @@
 #include "LevelCutscenesOne.h"
 #include "Audio.h"
 #include "Director.h"
-#include "SoundPlayer.h"
+
 void LevelCutscenesOne::LevelLoad()
 {
 	SquareMeshVbo* square = new SquareMeshVbo();
@@ -71,8 +71,6 @@ void LevelCutscenesOne::LevelLoad()
 
 void LevelCutscenesOne::LevelInit()
 {
-	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/BGM/Cutscene1OST.mp3");
-
 	vector<DrawableObject*> storageScenes;
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 5, 10, 3, glm::vec3(7000, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
@@ -147,11 +145,7 @@ void LevelCutscenesOne::LevelFree()
 	//delete cameraController;
 	//delete tilemaps;
 	//delete checkPoint;
-
-	SoundPlayer::GetInstance()->ClearSound();
-	cout << "Free Level" << endl; 
-
-
+	//cout << "Free Level" << endl;*/
 }
 
 void LevelCutscenesOne::LevelUnload()

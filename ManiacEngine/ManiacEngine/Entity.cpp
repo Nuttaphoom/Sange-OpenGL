@@ -2,7 +2,7 @@
 #include "GameEngine.h"
 #include "SquareMeshVbo.h" 
 #include "InvisibleObject.h"
-#include "GameStateController.h"
+
 void Entity::ResetVelocity() {
 	this->applyingVelocity.x = 0 ;
 	this->applyingVelocity.y = 0;
@@ -51,17 +51,17 @@ void Entity::VelocityControl() {
 		}
 	}
 }
- Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 collisionSize) : SpriteObject(fileName, row, column,Pos,Size), HP(HP), MoveSpeed(MoveSpeed) {
+ Entity::Entity(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(fileName, row, column,Pos,Size), HP(HP), MoveSpeed(MoveSpeed) {
 	this->velocity = glm::vec3(0, 0, 0);
-	this->collisionSize = collisionSize;
+	this->collisionSize = Size; 
 	Default_pos = Pos ;
 	Default_HP = HP ;
 	Default_MoveSpeed = MoveSpeed ;
 }
 
- Entity::Entity(unsigned int texture, int row, int column, float HP, float MoveSpeed,  glm::vec3 Pos, glm::vec3 Size,glm::vec3 collisionSize) : SpriteObject(texture, row, column, Pos, Size), HP(HP), MoveSpeed(MoveSpeed) {
+ Entity::Entity(unsigned int texture, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size) : SpriteObject(texture, row, column, Pos, Size), HP(HP), MoveSpeed(MoveSpeed) {
 	 this->velocity = glm::vec3(0, 0, 0);
-	 this->collisionSize = collisionSize;
+	 this->collisionSize = Size;
 	 Default_pos = Pos;
 	 Default_HP = HP;
 	 Default_MoveSpeed = MoveSpeed;
@@ -70,17 +70,60 @@ void Entity::VelocityControl() {
 
 int Entity::Collides(Entity e)
 {
-	if (e.IsPause() || IsPause() || e.isDead() || isDead() || e.GetState() == StateMachine::HIDING || GetState() == StateMachine::HIDING || e.isInv() || isInv())
-		return 0; 
+	int CollideDetection = 0; //Check where it collide with Entity (In Other Entity POV) 
+						  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
+	
+	float LeftX_Inv_Obj = (float)this->GetPos().x - this->collisionSize.x / 2;
+	float RightX_Inv_Obj = (float)this->GetPos().x + this->collisionSize.x / 2;
 
-	InvisibleObject* invWall = new InvisibleObject() ;
-	invWall->SetPosition(GetPos());
-	invWall->SetSize(GetSize().x, abs(GetSize().y));
-	invWall->SetRender(true);
-	int result = invWall->Collide_W_Entity(e);
- 
-	delete invWall;
-	return result;	 
+	float TOPY_Inv_Obj = (float)this->GetPos().y + this->collisionSize.y * -1 / 2;
+	float BOTTOMY_Inv_Obj = (float)this->GetPos().y - this->collisionSize.y * -1 / 2;
+
+	float TOP_BOTTOM_X = (float)e.GetPos().x - e.GetSize().x / 4;
+	float TOP_Y = (float)e.GetPos().y + e.GetSize().y / 2 * -1;
+
+	float Middle_1_2_X = (float)e.GetPos().x - e.GetSize().x / 2;
+	float Middle_1_Y = (float)e.GetPos().y + e.GetSize().y * -1 / 4;
+
+	float Middle_2_Y = (float)e.GetPos().y - e.GetSize().y * -1 / 4;
+
+	float BOTTOM_Y = (float)e.GetPos().y - e.GetSize().y * -1 / 2;
+
+	//TOP 
+	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X > LeftX_Inv_Obj) ||
+		(TOP_BOTTOM_X + e.GetSize().x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e.GetSize().x / 2 > LeftX_Inv_Obj)) {
+		if (TOP_Y > TOPY_Inv_Obj && TOP_Y < BOTTOMY_Inv_Obj) {
+			CollideDetection += 1;
+		}
+	}
+
+	//MIDDLE_LEFT
+	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
+		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
+			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)) {
+			CollideDetection += 4;
+		}
+	}
+
+	//MIDDLE_RIGHT
+	Middle_1_2_X += e.GetSize().x;
+	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
+		if ((Middle_1_Y > TOPY_Inv_Obj && Middle_1_Y < BOTTOMY_Inv_Obj) ||
+			(Middle_2_Y > TOPY_Inv_Obj && Middle_2_Y < BOTTOMY_Inv_Obj)) {
+			CollideDetection += 8;
+		}
+	}
+
+	//TOP 
+	if ((TOP_BOTTOM_X < RightX_Inv_Obj && TOP_BOTTOM_X > LeftX_Inv_Obj) ||
+		(TOP_BOTTOM_X + e.GetSize().x / 2 < RightX_Inv_Obj && TOP_BOTTOM_X + e.GetSize().x / 2 > LeftX_Inv_Obj)) {
+		if (BOTTOM_Y > TOPY_Inv_Obj && BOTTOM_Y < BOTTOMY_Inv_Obj) {
+			CollideDetection += 2;
+		}
+	}
+
+	//cout << CollideDetection << endl;
+	return  CollideDetection;
 }
 
 bool Entity::Death()
@@ -105,7 +148,7 @@ void Entity::Render(glm::mat4 globalModelTransform)
 		}
 
 		glm::mat4 currentMatrix = this->getTransform();
-		/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
+		//Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value
 		currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1));
 
 		if (squareMesh != nullptr) {

@@ -3,7 +3,7 @@
 #include "DrawableObject.h"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
-#include "SoundPlayer.h"
+
 class SpriteObject :public DrawableObject
 {
 private:

@@ -126,13 +126,13 @@ void LevelTest::HandleKey(char key)
 
 	switch (key)
 	{
-		case 'w': player->Translate(glm::vec3(0.0, 10, 0)); break;
-		case 's': player->Translate(glm::vec3(0.0, -10, 0)); break;
-		case 'a': player->Translate(glm::vec3(-10, 0, 0)); break;
-		case 'd': player->Translate(glm::vec3(10, 0, 0)); break;
-		case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
-		case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
-		case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3;    ; break;
+	case 'w': player->Translate(glm::vec3(0.0, 10, 0)); break;
+	case 's': player->Translate(glm::vec3(0.0, -10, 0)); break;
+	case 'a': player->Translate(glm::vec3(-10, 0, 0)); break;
+	case 'd': player->Translate(glm::vec3(10, 0, 0)); break;
+	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
+	case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
+	case 'e': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3;    ; break;
 	}
 }
 
