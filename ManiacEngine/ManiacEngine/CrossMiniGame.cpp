@@ -43,7 +43,9 @@ void CrossMiniGame::HandleKey(char key) {
 }
 
 void CrossMiniGame::RandomPlaceKeyBar() {
-	this->_keyBar->SetPosition(glm::vec3((rand() % (int)_maxValue) - (rand() % (int) _minValue) , 0, 0));
+	do {
+		this->_keyBar->SetPosition(glm::vec3((rand() % (int)_maxValue) - (rand() % (int)_minValue), 0, 0));
+	} while (abs(_keyBar->GetPos().x - _movingBar->GetPos().x) < _movingBar->GetSize().x / 2);
 }
 
 void CrossMiniGame::Update(int deltaTime) {
