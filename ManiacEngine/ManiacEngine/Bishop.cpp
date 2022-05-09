@@ -5,7 +5,7 @@
 void CastingThunder(glm::vec3 posToCast);
 
 
-Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 25, Pos, Size) {
+Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 25, Pos, Size, Size) {
 	_bishopState = StateMachine::IDLE;
 	SetAnimationLoop(1, 8, 8, 100.0f);
 } 

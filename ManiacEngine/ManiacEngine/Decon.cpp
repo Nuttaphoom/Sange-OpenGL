@@ -41,7 +41,7 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 
 }
 
-Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size)
+Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(10,Size.y,0))
 {
  	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f; 
@@ -96,6 +96,7 @@ void Decon::EnterAttackZone(Entity* target) {
 
 void Decon::StartAttack() {
 	ChangeState(StateMachine::ATTACKING) ; 
+
 }
 
 void Decon::UpdateStateMachine(float deltatime)
@@ -108,6 +109,7 @@ void Decon::UpdateStateMachine(float deltatime)
 		if (PlayerDetect(Player::GetInstance()) == true)
 		{
 			ChangeState(StateMachine::CHASING);
+			cout << "START CHASING" << endl;
 		}
 		else
 		{
@@ -141,8 +143,10 @@ void Decon::UpdateStateMachine(float deltatime)
 	if (GetState() == StateMachine::ATTACKING) {
  		attack_delay += deltatime ;  
 		if (attack_delay > 75*8-(14/100)) {
- 			Attack(Player::GetInstance()); 
- 			attack_delay = 0;
+			if (PlayerDetect(Player::GetInstance())) {
+				Attack(Player::GetInstance());
+				attack_delay = 0;
+			}
 		}
 	}
 	else {
@@ -152,13 +156,6 @@ void Decon::UpdateStateMachine(float deltatime)
 
 void Decon::ChangeState(StateMachine nextState)
 {
-	if (GetState() == nextState)
-		return; 
-
-	if (DeconState == StateMachine::Die ) {
-		cout << "come back from dead" << endl;
-	 }
-
 	DeconState = nextState;
 	this->velocity = glm::vec3(0, 0, 0);
 
@@ -169,12 +166,15 @@ void Decon::ChangeState(StateMachine nextState)
 	else if (GetState() == StateMachine::RUNNING)
 	{
 		SetAnimationLoop(0, 0, 12, 100);
+		MoveSpeed = 80;
 	}
 	else if (GetState() == StateMachine::CHASING)
 	{
 		SetAnimationLoop(0, 0, 12, 100);
+		MoveSpeed = 160;
 	}
 	else if (GetState() == StateMachine::ATTACKING) {
+		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/Deacon_Attack.mp3");
  		SetAnimationLoop(1, 0, 9, 60);
 	}
 	else if (GetState() == StateMachine::Die) {

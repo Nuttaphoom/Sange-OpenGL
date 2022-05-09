@@ -1,7 +1,7 @@
 #include "Button.h"
 #include "GameStateList.h"
 #include "GameStateController.h" 
-#include "Audio.h"
+#include "SoundPlayer.h"
 
 void NextLevelButton_Func();
 void ContinueButton_Func();
@@ -88,6 +88,7 @@ void Button::OnClick(glm::vec3 CamSpace_MousePosition) {
 	if (!isClick(CamSpace_MousePosition))
 		return; 
 
+	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/GUI/ButtonClick.mp3");
 	buttonTypesFunc[(int) this->buttonName](); 
 
 }

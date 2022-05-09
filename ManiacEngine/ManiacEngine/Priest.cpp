@@ -40,13 +40,13 @@ void CreatePriestDeadAnim(Entity* en, string fileName, int row, int col, int how
 
 }
 
-Priest::Priest(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size):Enemy(fileName, row, column, 100, 80.0f, Pos, Size) {
+Priest::Priest(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 80.0f, Pos, Size, glm::vec3(Size.x / 2,Size.y,0)) {
 	attack_delay = 1.5f;
 	ChangeState(StateMachine::IDLE);
 	lightBallTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/LightBall.png");
 }
 
-Priest::Priest(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80.0f, Pos, Size) {
+Priest::Priest(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80.0f, Pos, Size, glm::vec3(Size.x / 2, Size.y, 0)) {
 	attack_delay = 1.5f;
 	ChangeState(StateMachine::IDLE);
 	lightBallTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/LightBall.png");
@@ -220,7 +220,7 @@ void Priest::Render(glm::mat4 globalModelTransform)
 
 }
 
-PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size,glm::vec3 Destination ) :Entity(texture, row, column,100000,250 ,Pos, Size) {
+PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size,glm::vec3 Destination ) :Entity(texture, row, column,100000,250 ,Pos, Size,Size) {
 	RayCast* ray = new RayCast(Pos, Destination);
  	_destination = ray->GetOutPutPoint();
 	

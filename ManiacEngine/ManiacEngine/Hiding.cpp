@@ -9,7 +9,8 @@ void Hiding::Called() {
 	Player* p = Player::GetInstance();
 	
 	if (! p->GetInstance()->isSeen()) {
-		p->SetPosition(this->GetPos());
+		glm::vec3 newPos = glm::vec3(this->GetPos().x,p->GetPos().y, 0);
+		p->SetPosition(newPos);
 		p->TranslateVelocity(-p->GetVelocity());
 		p->ChangeState(StateMachine::HIDING);
 	}

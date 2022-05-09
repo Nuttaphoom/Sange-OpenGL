@@ -89,6 +89,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="EntityData.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SquareMeshVbo.cpp" />
     <ClCompile Include="Subject.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="PlayerClimbHandleKey.h" />
     <ClInclude Include="PlayerHandleKey.h" />
     <ClInclude Include="Priest.h" />
+    <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="TileMap.h" />
     <ClCompile Include="ToxicGas.cpp" />

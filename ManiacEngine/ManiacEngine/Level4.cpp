@@ -197,7 +197,7 @@ void Level4::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							cout << "ENTITY COL" << endl;
+							playerObj->OnDamaged(999);
 						}
 					}
 				}

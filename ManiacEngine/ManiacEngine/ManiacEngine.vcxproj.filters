@@ -255,6 +255,9 @@
     <ClCompile Include="ToxicGas.cpp">
       <Filter>Source Files\Objects\Interactable Objects</Filter>
     </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -433,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="ToxicGas.h">
       <Filter>Header Files\Objects\InteractableObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

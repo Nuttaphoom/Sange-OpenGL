@@ -265,14 +265,14 @@ void Level2::LevelInit()
 	_menuHolderList.push_back(pauseMenuHolder);
 	//_menuHolderList.push_back(gameoverHolder);
 	//_menuHolderList.push_back(mainMenuHolder);
-#pragma endregion
+	#pragma endregion
 
-#pragma  Manager
+	#pragma  Manager
 	AnimatorManager* animatorManager = AnimatorManager::GetInstance();
 	managersList.push_back(animatorManager);
 	objectsList.push_back(animatorManager);
 
-#pragma endregion  
+	#pragma endregion  
 
 	//cout << "Init Level" << endl;
 
@@ -334,7 +334,7 @@ void Level2::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							cout << "ENTITY COL" << endl;
+							playerObj->OnDamaged(999);
 						}
 					}
 				}
