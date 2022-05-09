@@ -130,6 +130,43 @@ void Level3::LevelInit()
 	ToxicGas* toxicGas6 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(1470 + 32 + 256 + 256 + 128 + 128 + 64 + 32, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
 	interactableObjectManager->addInteractableObjects(toxicGas6);
 	objectsList.push_back(toxicGas6);
+
+	ToxicGas* toxicGas7 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(3897.82, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas7);
+	objectsList.push_back(toxicGas7);
+
+	ToxicGas* toxicGas8 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(4033.34, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas8);
+	objectsList.push_back(toxicGas8);
+
+	ToxicGas* toxicGas9 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(4152.86, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas9);
+	objectsList.push_back(toxicGas9);
+
+	ToxicGas* toxicGas10 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(4273.13, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas10);
+	objectsList.push_back(toxicGas10);
+
+	ToxicGas* toxicGas11 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(5943.58, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas11);
+	objectsList.push_back(toxicGas11);
+
+	ToxicGas* toxicGas12 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(7937.57, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas12);
+	objectsList.push_back(toxicGas12);
+
+	ToxicGas* toxicGas13 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(8068.66, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas13);
+	objectsList.push_back(toxicGas13);
+
+	ToxicGas* toxicGas14 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(7742.1, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas14);
+	objectsList.push_back(toxicGas14);
+
+	ToxicGas* toxicGas15 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(7599.15, -1152, 0.0f), glm::vec3(64, -128, 1), glm::vec3(64, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas15);
+	objectsList.push_back(toxicGas15);
+
 #pragma endregion 
 
 
