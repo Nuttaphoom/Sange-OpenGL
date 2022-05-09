@@ -11,7 +11,7 @@ class Player : public Entity, public Subject
 	private :
 		static Player* instance;
 		vector<Entity*> detectingEntity ;  
-		int delay = 0;
+		float delay = 0;
 		int delay1 = 0;
 		float _climbSpeed = 500.0f;
 		float _jump;

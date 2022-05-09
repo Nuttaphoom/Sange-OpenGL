@@ -156,9 +156,11 @@ void Player::UpdateStateMachine(float deltatime)
 		//cout << "CLIFFEDGE" << endl;
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		cout << GetVelocity().y << endl;
-		delay += deltatime;
-		if (delay > 100)
+		delay += 1.0f / 1000.0f * deltatime;
+		cout << delay << endl;
+		if (delay > 0.1)
 		{
+			cout << delay << endl;
 			delay = 0;
 			ChangeState(StateMachine::CLIFFEDGEDOWN);
 		}
@@ -170,11 +172,11 @@ void Player::UpdateStateMachine(float deltatime)
 		//cout << "CLIFFEDGEDOWN" << endl;
 		ResetVelocity();
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
-		delay += deltatime;
+		delay += 1.0f / 1000.0f * deltatime;
 		if (OnGround == false) {
 			TranslateVelocity(glm::vec3(0, -50, 0));
 		}
-		if (OnGround != false && delay > 100)
+		if (OnGround != false && delay > 0.1)
 		{
 			delay = 0;
 			TranslateVelocity(glm::vec3(0, 50, 0));
@@ -284,7 +286,7 @@ void Player::ChangeState(StateMachine NextState)
 		SetAnimationLoop(3, 1, 1, 100);
 	}
 	else if (this->GetState() == StateMachine::Die) {
-		SetPause(true);
+		SetAnimationLoop(9, 0, 14, 100);
 	}
 }
 
@@ -400,6 +402,12 @@ void Player::UpdateClimbing()
 				abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 106.0f &&
 				GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y > GetPos().y) {
 				//cout << "Climb" << endl;
+				break;
+			}
+			else if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 30.0f &&
+				abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 150.0f &&
+					GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y > GetPos().y) {
+				cout << "blocked" << endl;
 				break;
 			}
 			else if (k == l - 1) {
