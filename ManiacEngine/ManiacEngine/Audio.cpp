@@ -22,7 +22,7 @@ void SoundEffect::play(int loop)
 
 void AudioEngine::setMusicVolume(float setmusicVol) {
 	musicVolume = setmusicVol;
-	Mix_VolumeMusic(musicVolume * MIX_MAX_VOLUME);
+	Mix_VolumeMusic((musicVolume * masterVolume) * MIX_MAX_VOLUME);
 }
 
 void AudioEngine::setsfxVolume(float sfxVol) {
@@ -31,8 +31,10 @@ void AudioEngine::setsfxVolume(float sfxVol) {
 }
 
 void AudioEngine::setMastervolume(float masterVol) {
+	
 	masterVolume = masterVol;
-	Mix_VolumeMusic(masterVolume * MIX_MAX_VOLUME);
+	
+	Mix_VolumeMusic((masterVolume * musicVolume)  * MIX_MAX_VOLUME);
 	Mix_Volume(-1, masterVolume * MIX_MAX_VOLUME);
 }
 
