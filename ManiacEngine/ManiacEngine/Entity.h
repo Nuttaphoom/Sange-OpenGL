@@ -19,6 +19,7 @@ enum class StateMachine {
 	Die,
 	BAT,
 	TRANSFORM,
+	AMULET,
 };
 
 class Entity : public SpriteObject

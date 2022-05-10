@@ -31,7 +31,7 @@ void Entity::VelocityControl() {
 	applyingVelocity = glm::vec3(0, 0, 0);
 
 
-	if (GetState() == StateMachine::CLIMBING)
+	if (GetState() == StateMachine::CLIMBING || GetState() == StateMachine::BAT)
 	{
 		if (velocity.y != 0)
 		{

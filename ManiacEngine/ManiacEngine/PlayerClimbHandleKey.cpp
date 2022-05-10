@@ -6,7 +6,9 @@ void PlayerClimbHandleKey::PlayerClimbControl(char key) {
 	switch (key)
 	{
 		case 'w':
-			Player::GetInstance()->TranslateVelocity(glm::vec3(0, Player::GetInstance()->GetClimbSpeed(), 0));
+			if (Player::GetInstance()->GetBlock() != true) {
+				Player::GetInstance()->TranslateVelocity(glm::vec3(0, Player::GetInstance()->GetClimbSpeed(), 0));
+			}
 			break;
 		case 's':
 			if (Player::GetInstance()->OnGround != true){

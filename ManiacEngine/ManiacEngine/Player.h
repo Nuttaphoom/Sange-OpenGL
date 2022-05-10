@@ -20,6 +20,7 @@ class Player : public Entity, public Subject
 		bool bat = false;
 		bool _skill1 = false;
 		bool _skill2 = false;
+		bool _block = false;
 	public :
 		Player(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, bool _res1, bool _res2);
  		void Update(int deltatime);
@@ -38,6 +39,8 @@ class Player : public Entity, public Subject
 		float GetMoveSpeed();
 		void BatChange(bool);
 		void InvChange(bool);
+		bool GetBlock();
+		void ClimbCheck();
 
 		void AddDetectingEntity(Entity* entity); 
 		void RemoveDetectingEntity(Entity* entity);

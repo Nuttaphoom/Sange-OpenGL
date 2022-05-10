@@ -7,11 +7,11 @@ void BatHandleKey::BatControl(char key)
 	switch (key)
 	{
 		case 'w':
-			player->TranslateVelocity(glm::vec3(0, 10, 0));
+			player->TranslateVelocity(glm::vec3(0, 250, 0));
 			break;
 		case 's':
 			if (player->OnGround == false) 
-				player->TranslateVelocity(glm::vec3(0, -10, 0));
+				player->TranslateVelocity(glm::vec3(0, -250, 0));
 			break;
 		case 'a':
 			player->TranslateVelocity(glm::vec3(-250, 0, 0));

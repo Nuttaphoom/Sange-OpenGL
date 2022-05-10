@@ -49,8 +49,9 @@ void PlayerHandleKey::PlayerStateCheck(char key) {
 		Player::GetInstance()->GetState() != StateMachine::CLIFFEDGE && 
 		Player::GetInstance()->GetState() != StateMachine::CLIFFEDGEDOWN && 
 		Player::GetInstance()->GetState() != StateMachine::BAT &&
-		Player::GetInstance()->GetState() != StateMachine::TRANSFORM&&
-		Player::GetInstance()->GetState() != StateMachine::CLIMBINGIDLE)
+		Player::GetInstance()->GetState() != StateMachine::TRANSFORM &&
+		Player::GetInstance()->GetState() != StateMachine::CLIMBINGIDLE &&
+		Player::GetInstance()->GetState() != StateMachine::AMULET)
 	{
 		PlayerControl(key);
 	}
