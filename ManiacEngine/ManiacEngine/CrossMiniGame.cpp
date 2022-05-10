@@ -1,13 +1,13 @@
 #include "CrossMiniGame.h"
 #include <math.h>
 #include <time.h>
-
+#include "SoundPlayer.h"
 void CrossMiniGame::StartTheBar() {
 
 }
 void CrossMiniGame::StopTheBar() {
 	if (abs(_keyBar->GetPos().x - _movingBar->GetPos().x) < _movingBar->GetSize().x / 2) {
-		cout << "PASS" << endl;
+		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/TrapActivate.mp3");
 		_done = true;
 
 	}

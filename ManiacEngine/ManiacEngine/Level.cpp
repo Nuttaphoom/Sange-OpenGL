@@ -80,6 +80,7 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
+
 	#pragma region tilemapss
  
 	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.1 SpriteSheet.png", 21, 40);
@@ -194,6 +195,11 @@ void Level::LevelInit()
 	objectsList.push_back(animatorManager);
 
 	#pragma endregion  
+
+#pragma PlaySound
+	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level1OST.mp3",100);
+
+#pragma endregion 
 }
  
 void Level::LevelUpdate()

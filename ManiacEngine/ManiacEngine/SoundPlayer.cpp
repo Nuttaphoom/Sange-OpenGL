@@ -24,9 +24,10 @@ void SoundPlayer::ClearSound() {
 	}
 }
 
-void SoundPlayer::PlayMusic(string musicPath) {
+void SoundPlayer::PlayMusic(string musicPath,int loop) {
 	Music newSound = _audioEngine->loadMusic(musicPath);
-	newSound.play();
+	newSound.play(loop);
+	
 
 	_activeSounds.push_back(newSound);
 }

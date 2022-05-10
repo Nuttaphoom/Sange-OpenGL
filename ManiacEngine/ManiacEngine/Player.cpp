@@ -8,7 +8,7 @@
 #include "AnimatorManager.h"
 #include "HandleKey.h"
 #include <ostream>
-
+#include "SoundPlayer.h"
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
  
 Player* Player::instance = nullptr; 
@@ -54,9 +54,10 @@ Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Siz
 
 void Player::Update(int deltatime)
 {
-	if (IsPause())
-		return;
-
+ 
+	if (IsPause()) 
+ 		return;
+	
 	Entity::Update(deltatime);
  
 	//cout << "hi from update in Player" << endl;
@@ -234,6 +235,14 @@ void Player::UpdateStateMachine(float deltatime)
 			ChangeState(StateMachine::IDLE);
 		}
 	}
+
+	if (GetState() == StateMachine::Dying) {
+		delay += 1.0f / 1000.0f * GameEngine::GetInstance()->GetDeltaTime();
+		if (delay > 1.4f) {
+			delay = 0;
+			ChangeState(StateMachine::Die); 
+		}
+	}
 }
  
 void Player::UpdateCollision() {
@@ -246,7 +255,7 @@ void Player::ChangeState(StateMachine NextState)
 		return; 
 
 	stateMachine = NextState;
-
+	delay = 0;
 	if (this->GetState() == StateMachine::IDLE)
 	{
 		SetAnimationLoop(0, 0, 1, 100);
@@ -296,11 +305,16 @@ void Player::ChangeState(StateMachine NextState)
 	{
 		SetAnimationLoop(3, 1, 1, 100);
 	}
-	else if (this->GetState() == StateMachine::Die) {
+	else if (this->GetState() == StateMachine::Dying) {
+		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/SangeDying.mp3");
 		SetAnimationLoop(9, 0, 14, 100);
 	}
 	else if (this->GetState() == StateMachine::AMULET) {
 		SetAnimationLoop(8, 0, 7, 200);
+	}
+	else if (this->GetState() == StateMachine::Die) {
+		notify(1);  //Notify Dead Observer , In Respawner.h
+		SetAnimationLoop(9, 12, 1, 100,false);
 	}
 }
 
@@ -332,8 +346,7 @@ void Player::OnDamaged(int damage) {
 	notify(0); //Notify HP Observer 
 		
 	if (this->HP <= 0) {
-		notify(1);  //Notify Dead Observer , In Respawner.h
-		ChangeState(StateMachine::Die); 
+		ChangeState(StateMachine::Dying); 
 	}
 }
 
@@ -350,6 +363,8 @@ void Player::Attack(Entity* target) {
 				ChangeState(StateMachine::ATTACKING);
   				target->OnDamaged(999999);
 				Heal(1);
+				SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/TakeDownStartTrigger.mp3");
+
 			}
 		}
 	}
@@ -439,6 +454,7 @@ void Player::SetBat() {
 				OnDamaged(1);
 				ResetVelocity();
 				ChangeState(StateMachine::TRANSFORM);
+				SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/Skill_Metamorphosys.mp3");
 			}
 		}
 	}
@@ -470,6 +486,9 @@ void Player::SetInv() {
 				ChangeState(StateMachine::AMULET);
 				OnDamaged(1);
 				InvChange(true);
+				SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/Skill_Invisibility.mp3");
+
+
 			}
 		}
 	}

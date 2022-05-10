@@ -20,6 +20,7 @@ enum class StateMachine {
 	BAT,
 	TRANSFORM,
 	AMULET,
+	Dying,
 };
 
 class Entity : public SpriteObject
@@ -71,7 +72,7 @@ class Entity : public SpriteObject
 		virtual void Stop();
 
 		virtual void SetHP(float data);
-		virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame);
+		virtual void SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame, bool loop = true);
 		virtual void SetVelocity(glm::vec3 velocity);
 		virtual void SetDirection(int x);
 		virtual void SetRenderType(int x);

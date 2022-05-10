@@ -162,9 +162,9 @@ void Entity::SetVelocity(glm::vec3 velocity) {
 	this->velocity = velocity;
 }
 
-void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame)
+void Entity::SetAnimationLoop(int startRow, int startColumn, int howManyFrame, int delayBetaweenFrame, bool loop)
 {
-	SpriteObject::SetAnimationLoop(startRow, startColumn, howManyFrame, delayBetaweenFrame,true);
+	SpriteObject::SetAnimationLoop(startRow, startColumn, howManyFrame, delayBetaweenFrame,loop);
 }
 
  
