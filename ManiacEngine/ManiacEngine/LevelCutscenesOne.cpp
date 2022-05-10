@@ -71,7 +71,7 @@ void LevelCutscenesOne::LevelLoad()
 
 void LevelCutscenesOne::LevelInit()
 {
-	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/BGM/Cutscene1OST.mp3");
+	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutScene.mp3");
 
 	vector<DrawableObject*> storageScenes;
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 5, 10, 3, glm::vec3(7000, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
@@ -92,7 +92,12 @@ void LevelCutscenesOne::LevelInit()
 	objectsList.push_back(background3);
 	storageScenes.push_back(background3);
 
-	Director* director = new Director(storageScenes, GameEngine::GetInstance()->GetWindowWidth(), GameState::GS_LEVEL1,34,2);
+	GUI* background4 = new GUI("../Resource/Cutscenes/4.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth(), -GameEngine::GetInstance()->GetWindowHeight(), 1));
+	objectsList.push_back(background4);
+	storageScenes.push_back(background4);
+ 
+
+	Director* director = new Director(storageScenes, GameEngine::GetInstance()->GetWindowWidth(), GameState::GS_LEVEL1,31*4 + 3,29-12);
 	objectsList.push_back(director);
 	
 #pragma endregion

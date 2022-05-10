@@ -12,6 +12,7 @@ public:
 	static SoundPlayer* GetInstance();
 
 	void PlaySound(string soundPath);  
+	void PlayMusic(string musicPath);
 	void StopSound(string soundTag);
 	void ClearSound();
 

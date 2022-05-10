@@ -24,13 +24,17 @@ void SoundPlayer::ClearSound() {
 	}
 }
 
-void  SoundPlayer::PlaySound(string soundPath) {
- 
-	Music newSound = _audioEngine->loadMusic(soundPath);
+void SoundPlayer::PlayMusic(string musicPath) {
+	Music newSound = _audioEngine->loadMusic(musicPath);
 	newSound.play();
 
 	_activeSounds.push_back(newSound);
-	
+}
+
+void  SoundPlayer::PlaySound(string soundPath) {
+ 
+	SoundEffect newSound = _audioEngine->loadSoundEffect(soundPath);
+	newSound.play();	
 }
 void  SoundPlayer::StopSound(string soundTag) {
 	for (int i = 0; i < _activeSounds.size(); i++) {
