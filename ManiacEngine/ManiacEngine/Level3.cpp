@@ -9,7 +9,7 @@ static int SCREEN_HEIGHT;
 
 void Level3::LevelLoad()
 {
-
+	/*
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -71,13 +71,75 @@ void Level3::LevelLoad()
 		BackGroundMapFile.close();
 	}
 
-	//cout << "Load Level" << endl;
+	//cout << "Load Level" << endl;*/
+
+
+	SquareMeshVbo* square = new SquareMeshVbo();
+	square->LoadData();
+	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
+	ifstream mapFile("../Resource/Map/Level_2.1/Middle_Mapdata.txt");
+	if (mapFile.is_open()) {
+		mapFile >> MapHeight;
+		mapFile >> MapWidth;
+		sMiddleMapdata = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sMiddleMapdata[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				mapFile >> sMiddleMapdata[y][x];
+			}
+		}
+		mapFile.close();
+	}
+
+
+	ifstream FrontMapFile("../Resource/Map/Level_2.1/Front_Mapdata.txt");
+	if (FrontMapFile.is_open()) {
+		FrontMapFile >> MapHeight;
+		FrontMapFile >> MapWidth;
+		sFrontMapData = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sFrontMapData[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				FrontMapFile >> sFrontMapData[y][x];
+			}
+		}
+		FrontMapFile.close();
+	}
+
+	ifstream cMapFile("../Resource/Map/Level_2.1/Col_Mapdata.txt");
+	if (cMapFile.is_open()) {
+		cMapFile >> MapHeight;
+		cMapFile >> MapWidth;
+		sColMapdata = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sColMapdata[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				cMapFile >> sColMapdata[y][x];
+			}
+		}
+		cMapFile.close();
+	}
+
+	ifstream BackGroundMapFile("../Resource/Map/Level_2.1/Background_Mapdata.txt");
+	if (BackGroundMapFile.is_open()) {
+		BackGroundMapFile >> MapHeight;
+		BackGroundMapFile >> MapWidth;
+		cout << MapWidth << "::" << MapHeight << endl;
+		sBackGroundMapData = new int* [MapHeight];
+		for (int y = 0; y < MapHeight; y++) {
+			sBackGroundMapData[y] = new int[MapWidth];
+			for (int x = 0; x < MapWidth; x++) {
+				BackGroundMapFile >> sBackGroundMapData[y][x];
+				//cout << sBackGroundMapData[y][x] << "     "; 
+			}
+			//cout << endl; 
+		}
+		BackGroundMapFile.close();
+	}
 }
 
 void Level3::LevelInit()
 {
- 
-
 #pragma region tilemapss
 
 	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level2.1 SpriteSheet.png", 21, 40);

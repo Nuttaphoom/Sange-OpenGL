@@ -18,8 +18,6 @@ SoundPlayer* SoundPlayer::GetInstance(){
 }
  
 void SoundPlayer::ClearSound() {
-	std::cout << "Clear sounds" << std::endl;
-
 	for (int i = _activeSounds.size() - 1; i >= 0 ; i--) {
  		_activeSounds[i].stop();
 		_activeSounds.erase(_activeSounds.begin() + i);
@@ -35,7 +33,6 @@ void  SoundPlayer::PlaySound(string soundPath) {
 	
 }
 void  SoundPlayer::StopSound(string soundTag) {
-	std::cout << "Sound is stoped" << std::endl ;
 	for (int i = 0; i < _activeSounds.size(); i++) {
 		if (_activeSounds[i].isSameTag(soundTag)) {
 			_activeSounds[i].stop();
