@@ -11,6 +11,16 @@
 #include "SoundPlayer.h"
 #define ENTITYLIST GameStateController::GetInstance()->currentLevel->GetEntityList()
  
+
+void CreateDeadAnimation() {
+	vector<SpriteObject*> playerOnly; 
+	Player* p = Player::GetInstance();
+	playerOnly.push_back(dynamic_cast<SpriteObject*>(p));
+	AnimatorManager::GetInstance()->CreateAnimationFactory(playerOnly, p->GetPos(), p->GetSize(), 3,"../Resource/Texture/Sange/SangeDeadSprite.png", 1, 14, 13, 100);
+
+}
+
+
 Player* Player::instance = nullptr; 
 
 void Player::HandleMouse(glm::vec3 mouseRealPos) {
@@ -307,8 +317,9 @@ void Player::ChangeState(StateMachine NextState)
 	}
 	else if (this->GetState() == StateMachine::Dying) {
 		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/SangeDying.mp3");
-		SetAnimationLoop(9, 0, 14, 100);
-	}
+		SetPause(true);
+		CreateDeadAnimation();
+	} 
 	else if (this->GetState() == StateMachine::AMULET) {
 		SetAnimationLoop(8, 0, 7, 200);
 	}
@@ -347,6 +358,7 @@ void Player::OnDamaged(int damage) {
 		
 	if (this->HP <= 0) {
 		ChangeState(StateMachine::Dying); 
+		notify(1); // Notify respawner
 	}
 }
 

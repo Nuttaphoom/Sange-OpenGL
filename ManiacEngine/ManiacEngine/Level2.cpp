@@ -77,12 +77,6 @@ void Level2::LevelLoad()
 
 void Level2::LevelInit()
 {
-	AudioEngine audio;
-	audio.init();
-
-	SoundEffect sound1 = audio.loadSoundEffect("../Resource/Sound/Sword_Draw.mp3");
-	//sound1.play();
-
 #pragma region tilemapss
 	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.2 SpriteSheet.png", 33, 40);
 	for (int i = 0; i < tilemaps->GetTiles().size(); i++) {
@@ -243,6 +237,10 @@ void Level2::LevelInit()
 	objectsList.push_back(SangeImage);
 	GUIObjectsList.push_back(SangeImage);
 
+	GUI* TakeDownIcon = new GUI("../Resource/Texture/GUI/AttackIcon.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, -GameEngine::GetInstance()->GetWindowHeight() / 2 + 64 + 16, 0), glm::vec3(128, -128, 1));
+	objectsList.push_back(TakeDownIcon);
+	GUIObjectsList.push_back(TakeDownIcon);
+
 	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
 
 	objectsList.push_back(hpbar);
@@ -275,6 +273,9 @@ void Level2::LevelInit()
 	#pragma endregion  
 
 	//cout << "Init Level" << endl;
+
+	SoundPlayer::GetInstance()->ClearSound();
+	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level2OST.mp3", 100);
 
 }
 
@@ -403,7 +404,7 @@ void Level2::HandleKey(char key)
 		//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1;   break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3;   break;
 	case 'g':  player->OnDamaged(1); break;
 	case 'f':
 	case 't':

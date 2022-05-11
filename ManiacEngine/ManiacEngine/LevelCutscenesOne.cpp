@@ -109,6 +109,10 @@ void LevelCutscenesOne::LevelInit()
 
 #pragma endregion  
 
+#pragma Sound
+	SoundPlayer::GetInstance()->ClearSound();
+
+#pragma endregion 
 	//cout << "Init Level" << endl;
 
 }

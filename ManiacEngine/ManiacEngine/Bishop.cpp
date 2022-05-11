@@ -24,8 +24,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 
 	if (_bishopState == StateMachine::IDLE) {
  		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
-
-		if (_countDownTime >= 3.0f) {
+		if (_countDownTime >= 5.0f) {
 			_countDownTime = 0;
 			ChangeState(StateMachine::RUNNING);
 		}
@@ -51,7 +50,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
 		
 
-		if (_countDownTime >= 5) {
+		if (_countDownTime >= 3.0f) {
 			ChangeState(StateMachine::RUNNING);
 			_countDownTime = 0; 
 		}
@@ -125,13 +124,16 @@ void Bishop::Attack(Entity* target) {
 void Bishop::ChangeState(StateMachine NextState) {
 	_countDownTime = 0;
 
-	if (NextState == StateMachine::IDLE) 
+	if (NextState == StateMachine::IDLE) {
+		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/EnemySounds/Bishop/Speaking.mp3");
 		SetAnimationLoop(0, 0, 1, 100.0f);
+	}
 	else if (NextState == StateMachine::ATTACKING) {
 		SetAnimationLoop(1, 0, 6, 150.0f);
 	}
 	else if (NextState == StateMachine::CASTING)
 	{
+		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/EnemySounds/Bishop/Casting.mp3");
 		SetAnimationLoop(0, 3, 6, 150.0f);
 	}
 
@@ -150,7 +152,7 @@ void Bishop::ChangeState(StateMachine NextState) {
 	else if (_bishopState == StateMachine::CASTING) {
 		int randomXPos;
 		do {
-			randomXPos = rand() % 4 - rand() % 4;
+			randomXPos = rand() % 6 - rand() % 6;
 		} while (randomXPos == 0);
 		CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x + 64 * randomXPos, GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
 		_bishopState = NextState;
@@ -161,6 +163,8 @@ StateMachine  Bishop::GetState() {
 	return _bishopState; 
 }
 void CastingThunder(glm::vec3 posToCast) {
-	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128, 256 * -2, 1), 0.5f, "../Resource/Texture/VisualEffect/Thunder.png"
-		, 1, 8, 8, 50, ETextureName::BishopThunder);
+	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/EnemySounds/Bishop/ThunderSound.mp3");
+
+	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128+32, 256 * -2, 1), 36.0f * 25.0f / 1000.0f, "../Resource/Texture/VisualEffect/Thunder.png"
+		, 1, 26, 26, 25, ETextureName::BishopThunder);
 }

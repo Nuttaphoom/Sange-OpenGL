@@ -75,7 +75,7 @@ int Entity::Collides(Entity e)
 
 	InvisibleObject* invWall = new InvisibleObject() ;
 	invWall->SetPosition(GetPos());
-	invWall->SetSize(GetSize().x, abs(GetSize().y));
+	invWall->SetSize(collisionSize.x, abs(collisionSize.y));
 	invWall->SetRender(true);
 	int result = invWall->Collide_W_Entity(e);
  
@@ -92,7 +92,7 @@ bool Entity::Death()
 
 void Entity::Render(glm::mat4 globalModelTransform)
 {
-	if (GetState() != StateMachine::HIDING && IsPause() == false) {
+	if (GetState() != StateMachine::HIDING && IsPause() == false && isDead() == false) {
 		SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 		GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();

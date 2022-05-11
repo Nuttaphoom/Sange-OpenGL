@@ -18,6 +18,7 @@ ReSpawner::ReSpawner() {
 } 
 
 void ReSpawner::ReSpawn() {
+ 
 	_menuHolder->disableButton();
 
 	for (int i = 0; i < GameStateController::GetInstance()->currentLevel->GetEntityList().size(); i++) {

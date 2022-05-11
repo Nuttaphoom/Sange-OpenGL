@@ -125,6 +125,19 @@ void Level4::LevelInit()
 	objectsList.push_back(SangeImage);
 	GUIObjectsList.push_back(SangeImage);
 
+
+	GUI* TakeDownIcon = new GUI("../Resource/Texture/GUI/AttackIcon.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, -GameEngine::GetInstance()->GetWindowHeight() / 2 + 64 + 16, 0), glm::vec3(128, -128, 1));
+	objectsList.push_back(TakeDownIcon);
+	GUIObjectsList.push_back(TakeDownIcon);
+
+	GUI* BatIcon = new GUI("../Resource/Texture/GUI/BatIcon.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90 + 128, -GameEngine::GetInstance()->GetWindowHeight() / 2 + 64 + 16, 0), glm::vec3(128, -128, 1));
+	objectsList.push_back(BatIcon);
+	GUIObjectsList.push_back(BatIcon);
+
+	GUI* InviSkillIcon = new GUI("../Resource/Texture/GUI/InviSkillIcon.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90 + 128 + 128, -GameEngine::GetInstance()->GetWindowHeight() / 2 + 64 + 16, 0), glm::vec3(128, -128, 1));
+	objectsList.push_back(InviSkillIcon);
+	GUIObjectsList.push_back(InviSkillIcon);
+
 	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
 
 	objectsList.push_back(hpbar);
@@ -133,6 +146,10 @@ void Level4::LevelInit()
 
 #pragma endregion
 
+#pragma Sound
+	SoundPlayer::GetInstance()->ClearSound();
+
+#pragma endregion 
 
 
 
@@ -261,7 +278,7 @@ void Level4::HandleKey(char key)
 		//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1;   break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_MAINMENU;   break;
 	case 'g':  player->OnDamaged(1); break;
 	case 'f':
 	case 't':

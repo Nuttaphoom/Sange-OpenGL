@@ -80,7 +80,6 @@ void Level::LevelLoad()
 
 void Level::LevelInit()
 {
-
 	#pragma region tilemapss
  
 	TileMap* tilemaps = new TileMap(MapHeight, MapWidth, sFrontMapData, sMiddleMapdata, sBackGroundMapData, sColMapdata, "../Resource/Texture/SpriteSheet/Map Asset/Level1.1 SpriteSheet.png", 21, 40);
@@ -173,6 +172,12 @@ void Level::LevelInit()
 	
 	GUIObjectsList.push_back(hpbar);
 
+	
+	GUI * TakeDownIcon = new GUI("../Resource/Texture/GUI/AttackIcon.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90    , -GameEngine::GetInstance()->GetWindowHeight() / 2 + 64+16, 0), glm::vec3(128 , -128, 1));
+	objectsList.push_back(TakeDownIcon);
+	GUIObjectsList.push_back(TakeDownIcon);
+ 
+
 	MenuHolder* pauseMenuHolder = new MenuHolder("PauseMenu");
 	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
 	pauseMenuHolder->addButton(b1);
@@ -197,6 +202,8 @@ void Level::LevelInit()
 	#pragma endregion  
 
 #pragma PlaySound
+	SoundPlayer::GetInstance()->ClearSound();
+
 	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level1OST.mp3",100);
 
 #pragma endregion 
@@ -317,7 +324,7 @@ void Level::HandleKey(char key)
 	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3 ; break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2 ; break;
 	case 'g':  player->OnDamaged(1); break;
 	case 'f': break;
 	case 't': break;

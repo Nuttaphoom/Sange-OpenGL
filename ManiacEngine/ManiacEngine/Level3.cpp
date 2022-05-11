@@ -162,7 +162,7 @@ void Level3::LevelInit()
 	interactableObjectManager->addInteractableObjects(flower_1);
 	objectsList.push_back(flower_1);
 
-	Gate* gate_1 = new Gate(GameState::GS_LEVEL3, "../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(9680, -1176 + 65 - 60 + 64, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1));
+	Gate* gate_1 = new Gate(GameState::GS_LEVEL4, "../Resource/Texture/Interactable/Gate.png", 1, 1, glm::vec3(9680, -1176 + 65 - 60 + 64, 0.0f), glm::vec3(64 * 3.5f, -64 * 3.5f, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(gate_1);
 	objectsList.push_back(gate_1);
@@ -328,6 +328,14 @@ void Level3::LevelInit()
 	objectsList.push_back(SangeImage);
 	GUIObjectsList.push_back(SangeImage);
 
+	GUI* TakeDownIcon = new GUI("../Resource/Texture/GUI/AttackIcon.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90, -GameEngine::GetInstance()->GetWindowHeight() / 2 + 64 + 16, 0), glm::vec3(128, -128, 1));
+	objectsList.push_back(TakeDownIcon);
+	GUIObjectsList.push_back(TakeDownIcon);
+
+	GUI* BatIcon = new GUI("../Resource/Texture/GUI/BatIcon.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 90 + 128, -GameEngine::GetInstance()->GetWindowHeight() / 2 + 64 + 16, 0), glm::vec3(128, -128, 1));
+	objectsList.push_back(BatIcon);
+	GUIObjectsList.push_back(BatIcon);
+
 	HPBar* hpbar = new HPBar("../Resource/Texture/GUI/HPPoint.png", 1, 1, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 * -1 + 180, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
 
 	objectsList.push_back(hpbar);
@@ -343,6 +351,10 @@ void Level3::LevelInit()
 
 #pragma endregion  
 
+#pragma Sound
+	SoundPlayer::GetInstance()->ClearSound();
+
+#pragma endregion 
 }
 
 void Level3::LevelUpdate()
@@ -460,7 +472,7 @@ void Level3::HandleKey(char key)
 		//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': interactableObjectManager->notify(player); player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1;   break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL4;   break;
 	case 'g':  player->OnDamaged(1); break;
 	case 'f':
 	case 't':

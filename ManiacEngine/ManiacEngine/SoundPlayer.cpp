@@ -22,6 +22,8 @@ void SoundPlayer::ClearSound() {
  		_activeSounds[i].stop();
 		_activeSounds.erase(_activeSounds.begin() + i);
 	}
+
+	 
 }
 
 void SoundPlayer::PlayMusic(string musicPath,int loop) {
@@ -36,6 +38,8 @@ void  SoundPlayer::PlaySound(string soundPath) {
  
 	SoundEffect newSound = _audioEngine->loadSoundEffect(soundPath);
 	newSound.play();	
+	cout << "Play Soud" << endl;
+
 }
 void  SoundPlayer::StopSound(string soundTag) {
 	for (int i = 0; i < _activeSounds.size(); i++) {

@@ -41,7 +41,7 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 
 }
 
-Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(10,Size.y,0))
+Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(Size.x / 2,Size.y,0))
 {
  	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f; 
@@ -55,8 +55,8 @@ void Decon::Attack(Entity* target) {
 	}
 	for (int i = 0; i < 2; i++) {
 		if (invWALLs[i].Collide_W_Entity(*target)) {
- 			target->OnDamaged(1);
-			return; 
+ 			target->OnDamaged(0);
+			break;
 		}
 	}	
 
