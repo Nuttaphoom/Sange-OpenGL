@@ -25,6 +25,7 @@ void TileMap::SetUV(float widthEachCell , float heightEachCell, int columnMax, i
  
 
 TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdata_Middle_Layer,int** Mapdata_Back_Layer, int **ColMapdata, string texture_path, int rowMax, int columnMax) {
+	bool turnOnCollisionVisual = false;
 	this->Map_Height = height; 
 	this->Map_Width = width; 
 	width -= 1;
@@ -130,7 +131,7 @@ TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdat
 				newInv->SetPosition(glm::vec3(-GameEngine::GetInstance()->GetWindowWidth() / 2 + j * 63 + 33, GameEngine::GetInstance()->GetWindowHeight() / 2 - (i) * 63 - 33, 1));
 				//newInv->SetPosition(glm::vec3(0, -256, 0));
 				newInv->SetSize(64, 64);
-				newInv->SetRender(true);
+				newInv->SetRender(turnOnCollisionVisual);
 				tiles_collision.push_back(newInv);
 
 			}

@@ -39,6 +39,13 @@ void Player::HandleKey(char Key)
 	if (IsPause() || GetState() == StateMachine::Die)
 		return;
 
+	if (Key == 'g') {
+		for (int i = 0; i < ENTITYLIST.size(); i++) {
+			if (Enemy* eptr = dynamic_cast<Enemy*>(ENTITYLIST[i])) {
+				if (eptr->GetState() != StateMachine::Die && !eptr->Death()) { Attack(eptr); }
+			}
+		};
+	}
 	class HandleKey k;
 	k.KeyDetect(Key);
 }

@@ -1,6 +1,7 @@
 #include "LevelTest.h"
 #include <fstream>
 
+#include "GameStateController.h"
 
 
 void LevelTest::LevelLoad()

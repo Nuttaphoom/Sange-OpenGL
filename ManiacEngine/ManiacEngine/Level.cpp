@@ -1,8 +1,8 @@
 #include "Level.h"
 #include "TileMap.h"
 #include "Audio.h"
-#include "GameStateController.h"
 #include "TextObject.h" 
+#include "GameStateController.h"
 
 static int SCREEN_WIDTH;
 static int SCREEN_HEIGHT;	
@@ -314,18 +314,14 @@ void Level::LevelUnload()
 
 void Level::HandleKey(char key)
 {
+	player->HandleKey(key);
+
 	switch (key)
 	{
-	case 'w': player->HandleKey(key); break;
-	case 's': player->HandleKey(key); break;
-	case 'a': player->HandleKey(key); break;
-	case 'd': player->HandleKey(key); break;
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
-	//case 'r': GameData::GetInstance()->gGameStateNext = GameState::GS_RESTART; ; break;
 	case 'e': player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
 	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2 ; break;
-	case 'g':  player->OnDamaged(1); break;
 	case 'f': break;
 	case 't': break;
 	case 'h': break;
@@ -335,9 +331,7 @@ void Level::HandleKey(char key)
 	case '1': player->HandleKey(key); break;
 	case '2': player->HandleKey(key); break;
 
-	//Just release
-	case 'A': player->HandleKey(key); break; 
-	case 'D': player->HandleKey(key); break; 
+ 
 	}
 
 	interactableObjectManager->HandleKey(key);
@@ -350,8 +344,6 @@ void Level::HandleMouse(int type, int x, int y)
 	// Calculate Real X Y 
 	Level::WorldToCam(realX, realY);
 	mouseVec3 = glm::vec3(realX, realY, 1);
-
-	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
 	//Player HandleMouse 
 	this->player->HandleMouse(mouseVec3); 

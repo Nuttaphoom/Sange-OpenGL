@@ -2,6 +2,8 @@
 #include "Audio.h"
 #include "Director.h"
 #include "SoundPlayer.h"
+#include "GameStateController.h"
+
 void LevelCutscenesOne::LevelLoad()
 {
 	SquareMeshVbo* square = new SquareMeshVbo();
