@@ -7,11 +7,11 @@
 
 class MenuHolder : DrawableObject {
 	private :
-		vector<Button*> buttonHolder =  vector<Button*>();
+		vector<GUI*> buttonHolder =  vector<GUI*>();
 		string _menuName; 
 	public :
 		MenuHolder(string menuName);
-		void addButton(Button* add);
+		void addButton(GUI* add);
 		void deleteButton(Button* del);
 		void disableButton();
 		void enableButton();

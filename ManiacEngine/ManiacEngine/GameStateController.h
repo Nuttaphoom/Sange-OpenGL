@@ -9,6 +9,7 @@
 #include "Level3.h"
 #include "Level4.h" 
 #include "LevelCutscenesOne.h"
+#include "LevelCutscenesTwo.h"
 
 using namespace std;
 class GameStateController

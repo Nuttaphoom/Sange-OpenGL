@@ -8,7 +8,7 @@ bool MenuHolder::isMenu(string name) {
 	return name == _menuName; 
 }
 
-void MenuHolder::addButton(Button* add) {
+void MenuHolder::addButton(GUI* add) {
 	cout << "Before Push" << endl;
 	buttonHolder.push_back(add);
 	cout << "After Push" << endl;

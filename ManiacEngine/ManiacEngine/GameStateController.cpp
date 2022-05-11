@@ -1,5 +1,6 @@
 #include "GameStateController.h"
 #include "Level_Menu.h"
+
 GameStateController* GameStateController::instance = nullptr; 
 
 GameStateController* GameStateController::GetInstance() {
@@ -58,6 +59,9 @@ void GameStateController::Update()
 			break;
 		case GameState::GS_CUTSCENES1:
 			currentLevel = new LevelCutscenesOne();
+			break;
+		case GameState::GS_CUTSCENES2:
+			currentLevel = new LevelCutscenesTwo();
 			break;
 		default:
 			cout << "gGameStateCurr : invalid state!!" << endl;

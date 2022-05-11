@@ -50,6 +50,7 @@
     <ClInclude Include="HandleKey.h" />
     <ClInclude Include="Level4.h" />
     <ClInclude Include="LevelCutscenesOne.h" />
+    <ClInclude Include="LevelCutscenesTwo.h" />
     <ClInclude Include="Level_Menu.h" />
     <ClInclude Include="MenuHolder.h" />
     <ClInclude Include="AnimatorManager.h" />
@@ -65,6 +66,7 @@
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="Level4.cpp" />
     <ClCompile Include="LevelCutscenesOne.cpp" />
+    <ClCompile Include="LevelCutscenesTwo.cpp" />
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Level_Menu.cpp" />
     <ClCompile Include="Main.cpp" />

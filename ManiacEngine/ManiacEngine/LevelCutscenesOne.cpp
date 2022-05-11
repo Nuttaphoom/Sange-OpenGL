@@ -73,7 +73,6 @@ void LevelCutscenesOne::LevelLoad()
 
 void LevelCutscenesOne::LevelInit()
 {
-	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutScene.mp3");
 
 	vector<DrawableObject*> storageScenes;
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 5, 10, 3, glm::vec3(7000, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
@@ -113,6 +112,7 @@ void LevelCutscenesOne::LevelInit()
 
 #pragma Sound
 	SoundPlayer::GetInstance()->ClearSound();
+	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutScene.mp3");
 
 #pragma endregion 
 	//cout << "Init Level" << endl;

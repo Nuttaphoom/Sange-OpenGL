@@ -11,7 +11,6 @@ void PlayerHandleKey::PlayerControl(char key) {
 	{
 		case 'w':
 			if (player->OnGround == true && player->GetState() != StateMachine::JUMPPING) {
-				cout << "apply jump force : " << GameEngine::GetInstance()->GetDeltaTime() << endl ;
 				player->OnGround = false;
 				player->TranslateVelocity(glm::vec3(0, player->GetJump(), 0));
 				player->ChangeState(StateMachine::JUMPPING);

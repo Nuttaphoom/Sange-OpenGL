@@ -258,6 +258,9 @@
     <ClCompile Include="SoundPlayer.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="LevelCutscenesTwo.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -439,6 +442,9 @@
     </ClInclude>
     <ClInclude Include="SoundPlayer.h">
       <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelCutscenesTwo.h">
+      <Filter>Header Files\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
