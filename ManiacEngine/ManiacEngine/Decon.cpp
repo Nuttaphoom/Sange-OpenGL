@@ -5,6 +5,17 @@
 #include "GameData.h"
 #include "AnimatorManager.h"
 
+bool CanWalkToNextTile(Entity* en) {
+	glm::vec3 posTarget =  glm::vec3(en->GetPos().x + 64 * en->DirectionSet ,en->GetPos().y - 64 , en->GetPos().z) ;
+	RayCast ray = RayCast(en->GetPos(), posTarget) ;
+	glm::vec3 output = ray.GetOutPutPoint();
+	if (output.y == posTarget.y) {
+		return false ;
+	}
+
+	return true;
+
+}
 void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFrame, int delayBetweenFrame,float lifespan) {
 	vector<SpriteObject*> entities;
 	entities.push_back(en);
@@ -17,7 +28,7 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 
 	glm::vec3 animationPos ;
 	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
-	animationPos.y = Player::GetInstance()->GetPos().y - 10 ;
+	animationPos.y = en->GetPos().y - 10 ;
 	 
 	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame,ETextureName::DeconDeadAnimationTexture);
  	glm::vec3 movePos; 
@@ -37,6 +48,12 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 	Player::GetInstance()->ChangeState(StateMachine::IDLE);
 
 
+}
+
+Decon::Decon(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80, Pos, Size, glm::vec3(Size.x / 2, Size.y, 0))
+{
+	DeconState = StateMachine::RUNNING;
+	attack_delay = 2.0f;
 }
 
 Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(Size.x / 2,Size.y,0))
@@ -103,7 +120,7 @@ void Decon::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::RUNNING)
 	{
-		if (PlayerDetect(Player::GetInstance()) == true)
+		if (PlayerDetect(Player::GetInstance()) == true && CanWalkToNextTile(this))
 		{
 			ChangeState(StateMachine::CHASING);
 		}
@@ -111,8 +128,6 @@ void Decon::UpdateStateMachine(float deltatime)
 		{
  			Patrol();
 		}
-
-
 	}
 	
 	if (GetState() == StateMachine::IDLE)
@@ -124,13 +139,24 @@ void Decon::UpdateStateMachine(float deltatime)
 		if (PlayerDetect(Player::GetInstance()) == false)
 		{
 			chasing_delay += deltatime;
+
+			if (! CanWalkToNextTile(this)) {
+				ChangeState(StateMachine::RUNNING);
+			}
+			else {
+				PlayerChase(Player::GetInstance());
+			}
+
 			if (chasing_delay > 2000) {
 				chasing_delay = 0; 
 				ChangeState(StateMachine::RUNNING);
+
 			}
-			PlayerChase(Player::GetInstance());
 		}
 		else {
+			if (!CanWalkToNextTile(this)) {
+				ChangeState(StateMachine::RUNNING);
+			}
 			chasing_delay = 0; 
 			PlayerChase(Player::GetInstance());
 		}

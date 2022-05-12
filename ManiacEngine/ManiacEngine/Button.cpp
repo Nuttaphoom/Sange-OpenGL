@@ -2,7 +2,8 @@
 #include "GameStateList.h"
 #include "GameStateController.h" 
 #include "SoundPlayer.h"
-
+#include "Level_Menu.h"
+#include <string>
 void NextLevelButton_Func();
 void ContinueButton_Func();
 void ExitButton_Func();
@@ -139,15 +140,29 @@ void MasterVolumeDown() {
 		master->masterVolume = master->masterVolume - 0.1f;
 	}
 	master->setMastervolume(master->masterVolume);
+
+	if (Level_Menu* s = dynamic_cast<Level_Menu*>(GameStateController::GetInstance()->currentLevel)) {
+		SDL_Color white = SDL_Color();
+		white.r = 255; white.g = 255; white.b = 255;
+		int showText = master->masterVolume * 10  ; 
+		s->soundScalerText[0]->LoadText(to_string(showText).c_str(), white, 30);
+	}
 }
 
 void MasterVolumeUp() {
 	AudioEngine* master;
 	master = AudioEngine::GetInstance();
-	if (master->masterVolume < 0.5f) {
+	if (master->masterVolume < 1.0f) {
 		master->masterVolume = master->masterVolume + 0.1f;
 	}
 	master->setMastervolume(master->masterVolume);
+
+	if (Level_Menu* s = dynamic_cast<Level_Menu*>(GameStateController::GetInstance()->currentLevel)) {
+		SDL_Color white = SDL_Color();
+		white.r = 255; white.g = 255; white.b = 255;
+		int showText = master->masterVolume * 10  ;
+		s->soundScalerText[0]->LoadText(to_string(showText).c_str(), white, 30);
+	}
 }
 
 void MusicVolumeUp() {
@@ -157,6 +172,13 @@ void MusicVolumeUp() {
 		music->musicVolume = music->musicVolume + 0.1f;
 	}
 	music->setMusicVolume(music->musicVolume);
+
+	if (Level_Menu* s = dynamic_cast<Level_Menu*>(GameStateController::GetInstance()->currentLevel)) {
+		SDL_Color white = SDL_Color();
+		white.r = 255; white.g = 255; white.b = 255;
+		int showText = music->musicVolume * 10;
+		s->soundScalerText[1]->LoadText(to_string(showText).c_str(), white, 30);
+	}
 }
 
 void MusicVolumeDown() {
@@ -166,6 +188,13 @@ void MusicVolumeDown() {
 		music->musicVolume = music->musicVolume - 0.1f;
 	}
 	music->setMusicVolume(music->musicVolume);
+
+	if (Level_Menu* s = dynamic_cast<Level_Menu*>(GameStateController::GetInstance()->currentLevel)) {
+		SDL_Color white = SDL_Color();
+		white.r = 255; white.g = 255; white.b = 255;
+		int showText = music->musicVolume * 10;
+		s->soundScalerText[1]->LoadText(to_string(showText).c_str(), white, 30);
+	}
 }
 
 void SFXVolumeUp() {
@@ -175,6 +204,8 @@ void SFXVolumeUp() {
 		sfx->sfxVolume = sfx->sfxVolume + 0.1f;
 	}
 	sfx->setsfxVolume(sfx->sfxVolume);
+
+
 }
 void SFXVolumeDown() {
 	AudioEngine* sfx;

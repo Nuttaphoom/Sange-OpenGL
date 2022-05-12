@@ -12,6 +12,7 @@ static int SCREEN_HEIGHT;
 
 void Level_Menu::LevelLoad()
 {
+ 
 	SquareMeshVbo* square = new SquareMeshVbo();
 	square->LoadData();
 	GameEngine::GetInstance()->AddMesh(SquareMeshVbo::MESH_NAME, square);
@@ -75,6 +76,7 @@ void Level_Menu::LevelLoad()
 
 void Level_Menu::LevelInit()
 {
+	
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 5, 10, 3, glm::vec3(7000, -1176.0f, 0.0f), glm::vec3(1, -1, 0), false, false);
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
@@ -149,6 +151,19 @@ void Level_Menu::LevelInit()
 	GUIObjectsList.push_back(music);
 	optionHolder->disableButton();
 
+	TextObject* masterSoundVal = new TextObject(); 
+	masterSoundVal->LoadText("5", SDL_WhiteColor, 30);
+	masterSoundVal->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 -200, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
+	objectsList.push_back(masterSoundVal);
+	optionHolder->addButton(masterSoundVal);
+	soundScalerText[0] = masterSoundVal;
+
+	TextObject* musicSoundVal = new TextObject();
+	musicSoundVal->LoadText("10", SDL_WhiteColor, 30);
+	musicSoundVal->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 200, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0));
+	objectsList.push_back(musicSoundVal);
+	optionHolder->addButton(musicSoundVal);
+	soundScalerText[1] = musicSoundVal;
 
 	_menuHolderList.push_back(mainMenuHolder);
 	_menuHolderList.push_back(optionHolder);

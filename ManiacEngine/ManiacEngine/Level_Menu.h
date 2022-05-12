@@ -4,8 +4,9 @@
 
 class Level_Menu : public Level {
 private:
-
 public:
+	TextObject* soundScalerText[2];
+
 	virtual void LevelLoad();
 	virtual void LevelInit();
 	virtual void LevelUpdate();

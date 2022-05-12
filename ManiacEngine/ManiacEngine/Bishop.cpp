@@ -23,7 +23,7 @@ void CreateBishopDeadAnim(Entity* en   ) {
 
 	glm::vec3 animationPos;
 	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
-	animationPos.y = Player::GetInstance()->GetPos().y - 5;
+	animationPos.y = en->GetPos().y - 5;
 
 	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame, ETextureName::BishopDeadAnimationTexture);
 	glm::vec3 movePos;

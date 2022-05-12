@@ -72,7 +72,7 @@ void Trap::Called() {
 		return;
 	//Creating trap mini game
 	if (_crossMiniGamePtr == nullptr)
-		_crossMiniGamePtr = new CrossMiniGame("../Resource/Texture/Interactable/MiniGameBoarder.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(256, 128, 1), 100, 0);
+		_crossMiniGamePtr = new CrossMiniGame("../Resource/Texture/Interactable/MiniGameBoarder.png", 1, 1, glm::vec3(0, -200, 0), glm::vec3(256, 128, 1), 100, 0);
  
  
 }
@@ -98,6 +98,7 @@ void Trap::Update(int deltaTime) {
 	InteractableObject* testObj = new InteractableObject(InteractableObject::InteractableObject("../Resource/Texture/Interactable/Cross.png", 0, 0, glm::vec3(GetPos().x + offsetX, GetPos().y, GetPos().z), GetSize() , glm::vec3(128 / 4 - 30,-128, 1)));
 	
 	if (testObj->InCollideRadius(testObj, player) > 0    ) {
+ 
 		coolDown = 3; 
 		refused = true; 
 		player->OnDamaged(10);

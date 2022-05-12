@@ -2,10 +2,10 @@
 #include "GameEngine.h"
 #include "SquareMeshVbo.h"
 
-TextObject::TextObject()
+TextObject::TextObject(bool b)
 {
 	SetPause(false); 
-
+	worldSpace = b; 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -33,11 +33,17 @@ void TextObject::Render(glm::mat4 globalModelTransform) {
 		cout << "Error: Can't perform transformation " << endl;
 		return;
 	}
-
 	glm::mat4 currentMatrix = glm::mat4(1);
-	currentMatrix = glm::translate(currentMatrix, Camera::GetInstance()->GetCamOffset());
-	currentMatrix = glm::scale(currentMatrix, GetSize() / Camera::GetInstance()->GetZoomOffset());
-	currentMatrix = glm::translate(currentMatrix, glm::vec3(GetPos().x / GetSize().x, GetPos().y / GetSize().y, 0));
+
+	if (worldSpace) {
+		currentMatrix = this->getTransform();
+	}
+	else {
+		currentMatrix = glm::mat4(1);
+		currentMatrix = glm::translate(currentMatrix, Camera::GetInstance()->GetCamOffset());
+		currentMatrix = glm::scale(currentMatrix, GetSize() / Camera::GetInstance()->GetZoomOffset());
+		currentMatrix = glm::translate(currentMatrix, glm::vec3(GetPos().x / GetSize().x, GetPos().y / GetSize().y, 0));
+	}
 	if (squareMesh != nullptr) {
 
 		currentMatrix = globalModelTransform * currentMatrix;

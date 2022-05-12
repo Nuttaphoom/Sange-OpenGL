@@ -7,9 +7,10 @@ class TextObject :public GUI
 {
 private:
 	unsigned int texture;
+	bool worldSpace = false;
 
 public:
-	TextObject();
+	TextObject(bool b = false);
 	~TextObject();
 	void Render(glm::mat4 globalModelTransform);
 	void Update(float deltaTime);

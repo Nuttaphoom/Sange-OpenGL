@@ -416,7 +416,7 @@ void Level4::LevelInit()
 
 #pragma Sound
 	SoundPlayer::GetInstance()->ClearSound();
-
+	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level4OST.mp3");
 #pragma endregion 
 
 
@@ -480,7 +480,7 @@ void Level4::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							//playerObj->OnDamaged(999);
+							playerObj->OnDamaged(999);
 						}
 					}
 				}

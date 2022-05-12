@@ -18,7 +18,7 @@ void CreatePriestDeadAnim(Entity* en, string fileName, int row, int col, int how
 
 	glm::vec3 animationPos;
 	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
-	animationPos.y = Player::GetInstance()->GetPos().y  ;
+	animationPos.y = en->GetPos().y   ;
 
 	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame, ETextureName::PriestDeadAnimationTexture);
 	glm::vec3 movePos;

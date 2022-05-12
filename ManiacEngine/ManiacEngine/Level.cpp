@@ -117,17 +117,59 @@ void Level::LevelInit()
 	objectsList.push_back(hiding2);
 
 	#pragma endregion 
+#pragma region GUITEXT
+	SDL_Color whilteColor;
+	whilteColor.r = 255; whilteColor.g = 255; whilteColor.b = 255;
 
-	#pragma region Entities 
+	TextObject* Controller_Text = new TextObject(true);
+	Controller_Text->LoadText("Press A,D,W to Move", whilteColor, 20);
+	Controller_Text->SetPosition(glm::vec3(164, -1152.0f + 64 * 2, 0.0f));
+	objectsList.push_back(Controller_Text);
+
+	TextObject* TakeDown_Text1 = new TextObject(true);
+	TakeDown_Text1->LoadText("Mouse 1 to Take Down", whilteColor, 20);
+	TakeDown_Text1->SetPosition(glm::vec3(164 + 64 * 8 + 32, -1152.0f + 64 * 1, 0.0f));
+	objectsList.push_back(TakeDown_Text1);
+	TextObject* TakeDown_Text2 = new TextObject(true);
+	TakeDown_Text2->LoadText("Enemy From Behind", whilteColor, 20);
+	TakeDown_Text2->SetPosition(glm::vec3(164 + 64 * 8 + 32, -1152.0f + 32, 0.0f));
+	objectsList.push_back(TakeDown_Text2);
+
+	TextObject* WallClimb_Text = new TextObject(true);
+	WallClimb_Text->LoadText("Press E to Climb The Wall", whilteColor, 20);
+	WallClimb_Text->SetPosition(glm::vec3(164 + 64 * 19, -1152.0f + 64 * 2, 0.0f));
+	objectsList.push_back(WallClimb_Text);
+
+	TextObject* flower_Text = new TextObject(true);
+	flower_Text->LoadText("Press E to Save", whilteColor, 20);
+	flower_Text->SetPosition(glm::vec3(glm::vec3(1800, -850 - 64 - 16 + 32 + 16, 0.0f)));
+	objectsList.push_back(flower_Text);
+
+	TextObject* cross_Text = new TextObject(true);
+	cross_Text->LoadText("Press E to Defuse The Cross", whilteColor, 20);
+	cross_Text->SetPosition(glm::vec3(glm::vec3(2216, -850 - 32 + 64 + 32, 0.0f)));
+	objectsList.push_back(cross_Text);
+
+	TextObject* hiding_Text = new TextObject(true);
+	hiding_Text->LoadText("Press E to Hide in an Object", whilteColor, 20);
+	hiding_Text->SetPosition(glm::vec3(glm::vec3(125 + 64 * 58, -1135.0f - 32 + 64 + 32, 0.0f)));
+	objectsList.push_back(hiding_Text);
+#pragma endregion 
+
+#pragma region Entities 
 
 
 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(164, -1152.0f+5, 0.0f),glm::vec3(128,-128,0), false, false);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(164, -1152.0f + 5, 0.0f), glm::vec3(128, -128, 0), false, false);
 	obj->SetAnimationLoop(0, 0, 4, 100);
- 	EntityObjectsList.push_back(obj);
+	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
- 
+
+	Decon* tuitorialDecon = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(164 + 64 * 7, -1152.0f + 5, 0.0f), glm::vec3(128, -128, 1));
+	tuitorialDecon->SetDirection(1);
+	tuitorialDecon->ChangeState(StateMachine::IDLE);
+	objectsList.push_back(tuitorialDecon);
 
 	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920, 0.0f), glm::vec3(128, -128,1) );
 	test->AddPatrolPos(glm::vec3(4886, -920, 0.0f)); 

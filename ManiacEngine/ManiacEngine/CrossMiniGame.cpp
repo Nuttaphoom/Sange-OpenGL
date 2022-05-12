@@ -20,7 +20,7 @@ void CrossMiniGame::StopTheBar() {
 CrossMiniGame::CrossMiniGame(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size,float MaxValue,float MinValue):MiniGame(fileName,row,column,Pos,Size) {
 	srand(time(NULL));
 
-	this->_movingBar = new GUI("../Resource/Texture/Plain/Red Rectangle.png", row, column, glm::vec3(0,0,0), glm::vec3(12,50,1));
+	this->_movingBar = new GUI("../Resource/Texture/Plain/Red Rectangle.png", row, column, glm::vec3(0,-200,0), glm::vec3(12,50,1));
 	this->_boarder = new GUI(fileName, row, column, Pos, Size);
 	this->_keyBar = new GUI("../Resource/Texture/Plain/Green Rectangle.png", row, column, Pos, glm::vec3(5, 50, 1));
 
@@ -44,7 +44,7 @@ void CrossMiniGame::HandleKey(char key) {
 
 void CrossMiniGame::RandomPlaceKeyBar() {
 	do {
-		this->_keyBar->SetPosition(glm::vec3((rand() % (int)_maxValue) - (rand() % (int)_minValue), 0, 0));
+		this->_keyBar->SetPosition(glm::vec3((rand() % (int)_maxValue) - (rand() % (int)_minValue), -200, 0));
 	} while (abs(_keyBar->GetPos().x - _movingBar->GetPos().x) < _movingBar->GetSize().x / 2);
 }
 
