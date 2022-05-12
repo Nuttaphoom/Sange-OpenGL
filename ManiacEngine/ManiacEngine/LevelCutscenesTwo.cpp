@@ -166,7 +166,10 @@ void LevelCutscenesTwo::LevelUnload()
 
 void LevelCutscenesTwo::HandleKey(char key)
 {
-
+	switch (key)
+	{
+		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_MAINMENU; break;
+	}
 }
 
 void LevelCutscenesTwo::HandleMouse(int type, int x, int y)

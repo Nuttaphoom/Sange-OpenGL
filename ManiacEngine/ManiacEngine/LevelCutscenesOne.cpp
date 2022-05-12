@@ -163,12 +163,15 @@ void LevelCutscenesOne::LevelUnload()
 
 void LevelCutscenesOne::HandleKey(char key)
 {
-	
+	switch (key)
+	{
+		case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL1 ; break;
+	}
 }
 
 void LevelCutscenesOne::HandleMouse(int type, int x, int y)
 {
-	
+
 }
 
 void LevelCutscenesOne::WorldToCam(float& realX, float& realY) {

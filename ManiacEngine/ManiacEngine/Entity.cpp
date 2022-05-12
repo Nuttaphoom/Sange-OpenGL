@@ -283,7 +283,7 @@ void Entity::Stop()
 }
 
 void Entity::Heal(int heal) {
-	if (HP < 3) {
+	if (HP < 4) {
 		HP += heal;
 	}
 }
