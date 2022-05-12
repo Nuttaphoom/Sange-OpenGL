@@ -13,7 +13,7 @@ class Player : public Entity, public Subject
 		vector<Entity*> detectingEntity ;  
 		float delay = 0;
 		int delay1 = 0;
-		float _climbSpeed = 500.0f;
+		float _climbSpeed = 250.0f;
 		float _jump;
 		float _moveSpeed;
 		float _hp;
@@ -21,6 +21,7 @@ class Player : public Entity, public Subject
 		bool _skill1 = false;
 		bool _skill2 = false;
 		bool _block = false;
+		int loop = 0;
 	public :
 		Player(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, bool _res1, bool _res2);
  		void Update(int deltatime);

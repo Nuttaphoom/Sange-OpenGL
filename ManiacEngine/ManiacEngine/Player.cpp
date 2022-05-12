@@ -168,17 +168,22 @@ void Player::UpdateStateMachine(float deltatime)
 	{
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += 1.0f / 1000.0f * deltatime;
+		//cout << delay << endl;
+		cout << loop << endl;
 		if (delay > 0.1)
 		{
 			delay = 0;
 			ChangeState(StateMachine::CLIFFEDGEDOWN);
 		}
-		TranslateVelocity(glm::vec3 (0, 140, 0));
+		if (loop < 1) {
+			TranslateVelocity(glm::vec3(0, 600, 0));
+			loop++;
+		}
 	}
 
 	if (GetState() == StateMachine::CLIFFEDGEDOWN)
 	{
-		ResetVelocity();
+		loop = 0;
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += 1.0f / 1000.0f * deltatime;
 		if (OnGround == false) {
