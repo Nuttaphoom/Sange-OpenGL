@@ -261,6 +261,9 @@
     <ClCompile Include="LevelCutscenesTwo.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Pope.cpp">
+      <Filter>Source Files\Objects\Enemy Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameData.h">
@@ -445,6 +448,9 @@
     </ClInclude>
     <ClInclude Include="LevelCutscenesTwo.h">
       <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Pope.h">
+      <Filter>Header Files\Objects\Enemy Types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
