@@ -20,7 +20,7 @@ void CreatePriestDeadAnim(Entity* en, string fileName, int row, int col, int how
 	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
 	animationPos.y = Player::GetInstance()->GetPos().y  ;
 
-	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame, ETextureName::BishopDeadAnimationTexture);
+	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame, ETextureName::PriestDeadAnimationTexture);
 	glm::vec3 movePos;
 	movePos.x = animationPos.x + 15 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1);
 	movePos.y = Player::GetInstance()->GetPos().y;

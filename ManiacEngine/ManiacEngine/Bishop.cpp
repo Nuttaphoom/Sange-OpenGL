@@ -4,10 +4,51 @@
 #include "Raycast.h"
 void CastingThunder(glm::vec3 posToCast);
 
+void CreateBishopDeadAnim(Entity* en   ) {
+	float lifespan = 2.0f; 
+	string fileName = "../Resource/Texture/Enemy/Bishop/Bishop_Dead_SpriteSheet.png";
+	int row = 2;
+	int col = 10;
+	int howManyFrame = 19;
+	float delayBetweenFrame = 100;
+ 
+	vector<SpriteObject*> entities;
+	entities.push_back(en);
+	entities.push_back(Player::GetInstance());
+
+
+	glm::vec3 size = Player::GetInstance()->GetSize();
+	size.x *= 1.15 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1);
+	size.y *= 1;
+
+	glm::vec3 animationPos;
+	animationPos.x = (en->GetPos().x + Player::GetInstance()->GetPos().x) / 2;
+	animationPos.y = Player::GetInstance()->GetPos().y - 5;
+
+	AnimatorManager::GetInstance()->CreateAnimationFactory(entities, animationPos, size, lifespan, fileName, row, col, howManyFrame, delayBetweenFrame, ETextureName::BishopDeadAnimationTexture);
+	glm::vec3 movePos;
+	movePos.x = animationPos.x + 15 * (Player::GetInstance()->GetPos().x > en->GetPos().x ? -1 : 1);
+	movePos.y = Player::GetInstance()->GetPos().y;
+	movePos.z = Player::GetInstance()->GetPos().z;
+
+	if (en->GetPos().x < Player::GetInstance()->GetPos().x) {
+		Player::GetInstance()->SetDirection(1);
+	}
+	else if (en->GetPos().x > Player::GetInstance()->GetPos().x) {
+		Player::GetInstance()->SetDirection(-1);
+	}
+
+	Player::GetInstance()->ResetVelocity();
+	Player::GetInstance()->SetPosition(movePos);
+	Player::GetInstance()->ChangeState(StateMachine::IDLE);
+
+
+}
 
 Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column, 100, 25, Pos, Size, Size) {
 	_bishopState = StateMachine::IDLE;
 	SetAnimationLoop(1, 8, 8, 100.0f);
+	CurrentPatrolPos = 1;
 } 
 
 void Bishop::Update(int deltatime) {
@@ -33,7 +74,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 		//cout << "Bishop is in Attacking" << endl;
 
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
-		if (_countDownTime >= 1.0f) {
+		if (_countDownTime >= 0.8f) {
 			ChangeState(StateMachine::RUNNING);
 			_countDownTime = 0;
 		}
@@ -45,13 +86,11 @@ void Bishop::UpdateStateMachine(float deltatime) {
  
 	}
 	else if (_bishopState == StateMachine::CASTING) {
-		//cout << "Bishop is in Casting" << endl;
-
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
 		
 
 		if (_countDownTime >= 3.0f) {
-			ChangeState(StateMachine::RUNNING);
+			ChangeState(StateMachine::ATTACKING);
 			_countDownTime = 0; 
 		}
 	}
@@ -124,6 +163,7 @@ void Bishop::Attack(Entity* target) {
 void Bishop::ChangeState(StateMachine NextState) {
 	_countDownTime = 0;
 
+
 	if (NextState == StateMachine::IDLE) {
 		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/EnemySounds/Bishop/Speaking.mp3");
 		SetAnimationLoop(0, 0, 1, 100.0f);
@@ -136,27 +176,22 @@ void Bishop::ChangeState(StateMachine NextState) {
 		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/EnemySounds/Bishop/Casting.mp3");
 		SetAnimationLoop(0, 3, 6, 150.0f);
 	}
-
-	if (_bishopState == StateMachine::IDLE) {
-		_bishopState = NextState;
-
+	else if (NextState == StateMachine::Die) {
+		CreateBishopDeadAnim(this);
 	}
-	else if (_bishopState == StateMachine::ATTACKING) {
-		_bishopState = NextState;
 
-	}
-	else if (_bishopState == StateMachine::RUNNING) {
-		_bishopState = NextState;
-
-	}
-	else if (_bishopState == StateMachine::CASTING) {
+	if (_bishopState == StateMachine::CASTING) {
 		int randomXPos;
 		do {
 			randomXPos = rand() % 6 - rand() % 6;
 		} while (randomXPos == 0);
 		CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x + 64 * randomXPos, GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
-		_bishopState = NextState;
+
 	}
+
+	_bishopState = NextState;
+
+ 
 }
 
 StateMachine  Bishop::GetState() {

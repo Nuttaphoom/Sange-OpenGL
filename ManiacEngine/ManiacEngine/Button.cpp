@@ -146,7 +146,7 @@ void MasterVolumeDown() {
 void MasterVolumeUp() {
 	AudioEngine* master;
 	master = AudioEngine::GetInstance();
-	if (master->masterVolume < 1) {
+	if (master->masterVolume < 0.5f) {
 		master->masterVolume = master->masterVolume + 0.1f;
 	}
 	master->setMastervolume(master->masterVolume);

@@ -201,12 +201,11 @@ void Level::LevelInit()
 
 	#pragma endregion  
 
-#pragma PlaySound
+	#pragma PlaySound
 	SoundPlayer::GetInstance()->ClearSound();
-
 	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level1OST.mp3",100);
 
-#pragma endregion 
+	#pragma endregion 
 }
  
 void Level::LevelUpdate()
@@ -218,7 +217,7 @@ void Level::LevelUpdate()
 	/// Collision Check 
  	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
-			if (eptr->isDead())
+			if (eptr->IsPause())
 				continue;
 
 			int CollideDetection = 0;

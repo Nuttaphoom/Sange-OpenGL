@@ -14,7 +14,6 @@
 using namespace std;
 class GameStateController
 {
-
 private :
 	static GameStateController* instance;
 protected :

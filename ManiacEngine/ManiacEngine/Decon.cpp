@@ -147,6 +147,9 @@ void Decon::UpdateStateMachine(float deltatime)
 				Attack(Player::GetInstance());
 				attack_delay = 0;
 			}
+			else {
+				ChangeState(StateMachine::CHASING);
+			}
 		}
 	}
 	else {

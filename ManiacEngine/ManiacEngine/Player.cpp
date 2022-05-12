@@ -17,8 +17,7 @@ void CreateDeadAnimation() {
 	Player* p = Player::GetInstance();
 	playerOnly.push_back(dynamic_cast<SpriteObject*>(p));
 	AnimatorManager::GetInstance()->CreateAnimationFactory(playerOnly, p->GetPos(), p->GetSize(), 3,"../Resource/Texture/Sange/SangeDeadSprite.png", 1, 14, 13, 100);
-
-}
+ }
 
 
 Player* Player::instance = nullptr; 
@@ -189,7 +188,6 @@ void Player::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::CLIFFEDGEDOWN)
 	{
-		//cout << "CLIFFEDGEDOWN" << endl;
 		ResetVelocity();
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += 1.0f / 1000.0f * deltatime;
@@ -324,7 +322,6 @@ void Player::ChangeState(StateMachine NextState)
 	}
 	else if (this->GetState() == StateMachine::Dying) {
 		SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/SangeDying.mp3");
-		SetPause(true);
 		CreateDeadAnimation();
 	} 
 	else if (this->GetState() == StateMachine::AMULET) {
@@ -360,7 +357,7 @@ void Player::OnDamaged(int damage) {
 	if (IsPause() || GetState() == StateMachine::ATTACKING)
 		true; 
 
-	this->HP -= damage;
+	//this->HP -= damage;
 	notify(0); //Notify HP Observer 
 		
 	if (this->HP <= 0) {

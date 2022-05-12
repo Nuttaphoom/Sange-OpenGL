@@ -97,7 +97,6 @@ void LevelCutscenesTwo::LevelInit()
 	objectsList.push_back(background4);
 	storageScenes.push_back(background4);
 
-
 	Director* director = new Director(storageScenes, GameEngine::GetInstance()->GetWindowWidth(), GameState::GS_LEVEL1, 31 * 4 + 3, 29 - 12);
 	objectsList.push_back(director);
 
@@ -112,7 +111,7 @@ void LevelCutscenesTwo::LevelInit()
 
 #pragma Sound
 	SoundPlayer::GetInstance()->ClearSound();
-	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutScene2.mp3");
+	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutSceneTwo.mp3");
 
 #pragma endregion 
 	//cout << "Init Level" << endl;

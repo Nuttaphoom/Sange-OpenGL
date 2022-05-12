@@ -32,7 +32,7 @@ void AudioEngine::setsfxVolume(float sfxVol) {
 
 void AudioEngine::setMastervolume(float masterVol) {
 	
-	masterVolume = masterVol;
+	masterVolume = masterVol ;
 	
 	Mix_VolumeMusic((masterVolume * musicVolume)  * MIX_MAX_VOLUME);
 	Mix_Volume(-1, masterVolume * MIX_MAX_VOLUME);

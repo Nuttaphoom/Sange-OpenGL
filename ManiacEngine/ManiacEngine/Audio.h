@@ -32,7 +32,7 @@ private:
 
 class AudioEngine {
 	public:
-		float masterVolume = 1.0f;
+		float masterVolume = 0.5f;
 		float sfxVolume = 1.0f;
 		float musicVolume = 1.0f;
 
