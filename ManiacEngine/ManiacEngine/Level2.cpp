@@ -91,43 +91,43 @@ void Level2::LevelInit()
 #pragma endregion 
 
 #pragma region interactableObject 
-	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(591.0f, -1152.0f - 32 + 128 / 4, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(591.0f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding);
 	objectsList.push_back(hiding);
 
-	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(2618.21, -1152.0f - 32 + 128 / 4, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(2618.21, -1152.0f - 32 , 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding2);
 	objectsList.push_back(hiding2);
 
 
-	Hiding* hiding4 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7209.93f, -1152.0f - 32 + 128 / 4, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding4 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7209.93f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding4);
 	objectsList.push_back(hiding4);
 
-	Hiding* hiding5 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7518.9f, -1152.0f - 32 + 128 / 4, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding5 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7518.9f, -1152.0f - 32 , 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding5);
 	objectsList.push_back(hiding5);
 
-	Hiding* hiding6 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7841.48f, -1152.0f - 32 + 128 / 4 , 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding6 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(7841.48f, -1152.0f - 32  , 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding6);
 	objectsList.push_back(hiding6);
 
-	Hiding* hiding7 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8165.86f, -1152.0f - 32 + 128 / 4, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding7 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8165.86f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding7);
 	objectsList.push_back(hiding7);
 
-	Hiding* hiding8 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8472.94f, -1152.0f - 32 + 128 / 4, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding8 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8472.94f, -1152.0f - 32 , 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding8);
 	objectsList.push_back(hiding8);
 
-	Hiding* hiding9 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8783.97f, -1152.0f - 32 + 128 / 4, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding9 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8783.97f, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding9);
 	objectsList.push_back(hiding9);
@@ -146,7 +146,7 @@ void Level2::LevelInit()
 	interactableObjectManager->addInteractableObjects(gate_1);
 	objectsList.push_back(gate_1);
 
-	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(8296.67, -1152 - 32, 0.0f), glm::vec3(128, -168, 1), glm::vec3(128, -128, 1));
+	Trap* trap_1 = new Trap("../Resource/Texture/Interactable/Cross.png", 1, 1, glm::vec3(8296.67, -1152, 0.0f), glm::vec3(128, -168, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(trap_1);
 	objectsList.push_back(trap_1);
