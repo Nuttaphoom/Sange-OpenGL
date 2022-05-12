@@ -260,19 +260,13 @@ void Level3::LevelInit()
 	EntityObjectsList.push_back(d3);
 	objectsList.push_back(d3);
 
-	Decon* d4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2793.97, -1152, 0.0f), glm::vec3(128, -128, 1));
-	d4->AddPatrolPos(glm::vec3(2793.97, -1152, 0.0f));
-	d4->AddPatrolPos(glm::vec3(2793.97, -1152, 0.0f));
+	Decon* d4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2537.93, -1152, 0.0f), glm::vec3(128, -128, 1));
+	d4->AddPatrolPos(glm::vec3(2537.93, -1152, 0.0f));
+	d4->AddPatrolPos(glm::vec3(3182.43, -1152, 0.0f));
 	d4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d4);
 	objectsList.push_back(d4);
 
-	Decon* d5 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3103.51, -1152, 0.0f), glm::vec3(128, -128, 1));
-	d5->AddPatrolPos(glm::vec3(3103.51, -1152, 0.0f));
-	d5->AddPatrolPos(glm::vec3(3103.51, -1152, 0.0f));
-	d5->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(d5);
-	objectsList.push_back(d5);
 
 	Decon* d6 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6069.72, -522, 0.0f), glm::vec3(128, -128, 1));
 	d6->AddPatrolPos(glm::vec3(6330, -522, 0.0f));
@@ -280,13 +274,6 @@ void Level3::LevelInit()
 	d6->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d6);
 	objectsList.push_back(d6);
-
-	Decon* d7 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6350.96, -837, 0.0f), glm::vec3(128, -128, 1));
-	d7->AddPatrolPos(glm::vec3(6350.96, -837, 0.0f));
-	d7->AddPatrolPos(glm::vec3(6350.96, -837, 0.0f));
-	d7->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(d7);
-	objectsList.push_back(d7);
 
 	Decon* d8 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6119.69, -837, 0.0f), glm::vec3(128, -128, 1));
 	d8->AddPatrolPos(glm::vec3(6119.69, -837, 0.0f));

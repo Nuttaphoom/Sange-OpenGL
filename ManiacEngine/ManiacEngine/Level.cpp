@@ -111,6 +111,11 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(gate_1); 
 	objectsList.push_back(gate_1);
 
+	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8131.87, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+
+	interactableObjectManager->addInteractableObjects(hiding2);
+	objectsList.push_back(hiding2);
+
 	#pragma endregion 
 
 	#pragma region Entities 
@@ -152,7 +157,12 @@ void Level::LevelInit()
 	EntityObjectsList.push_back(test4);
 	objectsList.push_back(test4); 
 
-
+	Decon* test5 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7292.79, -648.7, 0.0f), glm::vec3(128, -128, 1));
+	test5->AddPatrolPos(glm::vec3(7292.79, -648.7, 0.0f));
+	test5->AddPatrolPos(glm::vec3(7460.29, -648.7, 0.0f));
+	test5->SetAnimationLoop(0, 0, 12, 100);
+	EntityObjectsList.push_back(test5);
+	objectsList.push_back(test5);
  
 	#pragma endregion
 	respawner = new ReSpawner();
