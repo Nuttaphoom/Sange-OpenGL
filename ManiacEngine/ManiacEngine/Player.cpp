@@ -542,7 +542,7 @@ void Player::ClimbCheck() {
 			if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 30.0f &&
 				abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 80.0f &&
 				GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y > GetPos().y) {
-				cout << "Blocked" << endl;
+				//cout << "Blocked" << endl;
 				TranslateVelocity(glm::vec3(0, -1 * GetClimbSpeed(), 0));
 			}
 		}
