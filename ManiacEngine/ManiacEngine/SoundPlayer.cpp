@@ -38,8 +38,6 @@ void  SoundPlayer::PlaySound(string soundPath) {
  
 	SoundEffect newSound = _audioEngine->loadSoundEffect(soundPath);
 	newSound.play();	
-	cout << "Play Soud" << endl;
-
 }
 void  SoundPlayer::StopSound(string soundTag) {
 	for (int i = 0; i < _activeSounds.size(); i++) {

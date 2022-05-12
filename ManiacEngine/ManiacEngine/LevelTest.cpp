@@ -51,8 +51,6 @@ void LevelTest::LevelLoad()
 		}
 		cMapFile.close();
  	}
-
-	//cout << "Load Level" << endl;
 }
 
 void LevelTest::LevelInit()
@@ -89,20 +87,17 @@ void LevelTest::LevelInit()
 	*/
 
 
-	//cout << "Init Level" << endl;
 }
 
 void LevelTest::LevelUpdate()
 {
  
-	//cout << "Update Level" << endl;
 }
 
 void LevelTest::LevelDraw()
 {
 	
 	GameEngine::GetInstance()->Render(objectsList);
- 	//cout << "Draw Level" << endl;
 }
 
 void LevelTest::LevelFree()
@@ -119,7 +114,6 @@ void LevelTest::LevelFree()
 void LevelTest::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void LevelTest::HandleKey(char key)

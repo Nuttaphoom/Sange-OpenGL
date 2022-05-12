@@ -71,8 +71,6 @@ void Bishop::UpdateStateMachine(float deltatime) {
 		}
 	}
 	else if (_bishopState == StateMachine::ATTACKING) {
-		//cout << "Bishop is in Attacking" << endl;
-
 		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
 		if (_countDownTime >= 0.8f) {
 			ChangeState(StateMachine::RUNNING);
@@ -126,9 +124,6 @@ bool Bishop::PlayerDetect(Entity* p)
 			return true;
 		}
 	}
-
-
-	//cout << "DON'T SEE PLAYER" << endl;
 	return false;
 
 }

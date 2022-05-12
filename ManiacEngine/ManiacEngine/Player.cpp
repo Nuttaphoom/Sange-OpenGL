@@ -76,7 +76,6 @@ void Player::Update(int deltatime)
 	
 	Entity::Update(deltatime);
  
-	//cout << "hi from update in Player" << endl;
 
 	UpdateStateMachine(deltatime);
 	UpdateInv();
@@ -91,7 +90,6 @@ void Player::UpdateStateMachine(float deltatime)
 {
  	if (GetState() == StateMachine::RUNNING)
 	{
-		//cout << "RUNNING" << endl; 
 		if (GetVelocity().x < 1 && GetVelocity().x > -1 && OnGround == true)
 		{
 			ChangeState(StateMachine::IDLE);
@@ -100,7 +98,6 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::LANDING)
 	{
-		//cout << "LANDING" << endl;
 
 		if (GetVelocity().x < 2 && GetVelocity().x > -2)
 		{
@@ -119,7 +116,6 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::FALLING)
 	{
-		//cout << "FALLING" << endl;
 
 		if (GetVelocity().y == 0 && OnGround == true)
 		{
@@ -154,7 +150,6 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 	if (GetState() == StateMachine::MIDJUMP  )
 	{
-		//cout << "MIDJUMPING" << endl; 
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
 		if (delay > 1)
@@ -166,20 +161,15 @@ void Player::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::IDLE)
 	{
-		//cout << "IDLE" << endl;
 
 	}
 
 	if (GetState() == StateMachine::CLIFFEDGE)
 	{
-		//cout << "CLIFFEDGE" << endl;
 		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
-		cout << GetVelocity().y << endl;
 		delay += 1.0f / 1000.0f * deltatime;
-		cout << delay << endl;
 		if (delay > 0.1)
 		{
-			cout << delay << endl;
 			delay = 0;
 			ChangeState(StateMachine::CLIFFEDGEDOWN);
 		}
@@ -430,7 +420,6 @@ void Player::SetClimbing()
 		{
 			InvisibleObject* o = dynamic_cast<InvisibleObject*>(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k));
 			if (o != nullptr && o->IsClimbable()) {
-				//cout << "climb" << endl;
 				ChangeState(StateMachine::CLIMBING);
 			}
 		}
@@ -446,7 +435,6 @@ void Player::UpdateClimbing()
 			if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 75.0f &&
 				abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 106.0f &&
 				GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y > GetPos().y) {
-				//cout << "Climb" << endl;
 				break;
 			}
 			else if (k == l - 1) {
@@ -542,7 +530,6 @@ void Player::ClimbCheck() {
 			if (abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().x - GetPos().x) < 30.0f &&
 				abs(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y - GetPos().y) < 80.0f &&
 				GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().at(k)->GetPos().y > GetPos().y) {
-				//cout << "Blocked" << endl;
 				TranslateVelocity(glm::vec3(0, -1 * GetClimbSpeed(), 0));
 			}
 		}

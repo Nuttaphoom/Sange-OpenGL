@@ -28,7 +28,6 @@ bool Shader::LoadSource()
 		shaderFile.close();
 
 		// Print everything in that file
-		//cout << "shader are " << source << endl;
 
 		this->shaderId = glCreateShader(shaderType);
 		const GLchar* shaderSource[] = { source.c_str() };

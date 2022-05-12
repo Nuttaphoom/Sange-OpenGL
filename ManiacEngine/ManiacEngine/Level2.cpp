@@ -67,14 +67,10 @@ void Level2::LevelLoad()
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
-			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}
-
-	//cout << "Load Level" << endl;
 }
 
 void Level2::LevelInit()
@@ -263,8 +259,6 @@ void Level2::LevelInit()
 
 	#pragma endregion  
 
-	//cout << "Init Level" << endl;
-
 	SoundPlayer::GetInstance()->ClearSound();
 	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level2OST.mp3", 100);
 
@@ -272,6 +266,7 @@ void Level2::LevelInit()
 
 void Level2::LevelUpdate()
 {
+
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();
@@ -279,7 +274,7 @@ void Level2::LevelUpdate()
 	/// Collision Check 
 	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
-			if (eptr->isDead())
+			if (eptr->IsPause())
 				continue;
 
 			int CollideDetection = 0;
@@ -336,23 +331,12 @@ void Level2::LevelUpdate()
 
 
 
+	if (isPause)
+		return;
 
-
-	//Update InteractableObject 
-	interactableObjectManager->Update(deltaTime);
-
-	// Update Game Objs
-	for (DrawableObject* obj : EntityObjectsList) {
-		//Play Update In every game object 
-		if (Entity* eptr = dynamic_cast<Entity*>(obj))
-			if (eptr->isDead())
-				continue;
+	//Update every objects 
+	for (DrawableObject* obj : objectsList) {
 		obj->Update(deltaTime);
-	}
-
-	//Update Manager 
-	for (Manager* m : managersList) {
-		m->Update(deltaTime);
 	}
 
 }
@@ -361,7 +345,6 @@ void Level2::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
 }
 
 void Level2::LevelFree()
@@ -374,13 +357,11 @@ void Level2::LevelFree()
 	//delete cameraController;
 	//delete tilemaps;
 	//delete checkPoint;
-	//cout << "Free Level" << endl;*/
 }
 
 void Level2::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void Level2::HandleKey(char key)
@@ -415,8 +396,6 @@ void Level2::HandleMouse(int type, int x, int y)
 	// Calculate Real X Y 
 	Level2::WorldToCam(realX, realY);
 	mouseVec3 = glm::vec3(realX, realY, 1);
-
-	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
 	//Player HandleMouse 
 	this->player->HandleMouse(mouseVec3);

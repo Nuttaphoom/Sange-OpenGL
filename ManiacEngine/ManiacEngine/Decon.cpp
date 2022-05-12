@@ -6,8 +6,6 @@
 #include "AnimatorManager.h"
 
 void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFrame, int delayBetweenFrame,float lifespan) {
-
-	cout << "creating dead anim" << endl; 
 	vector<SpriteObject*> entities;
 	entities.push_back(en);
 	entities.push_back(Player::GetInstance());
@@ -69,7 +67,6 @@ void Decon::Update(int deltatime) {
 
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
-	//cout << "Decon is " << GetPos().x << "," << GetPos().y << endl; 
 }
 
 void Decon::EnterAttackZone(Entity* target) {
@@ -109,7 +106,6 @@ void Decon::UpdateStateMachine(float deltatime)
 		if (PlayerDetect(Player::GetInstance()) == true)
 		{
 			ChangeState(StateMachine::CHASING);
-			cout << "START CHASING" << endl;
 		}
 		else
 		{

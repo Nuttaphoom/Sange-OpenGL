@@ -181,8 +181,6 @@ bool Priest::PlayerDetect(Entity* p) {
 		}
 	}
 
-
-	//cout << "DON'T SEE PLAYER" << endl;
 	return false;
 }
 

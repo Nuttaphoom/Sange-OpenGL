@@ -18,7 +18,6 @@ void ToxicGas::Update(int deltaTime) {
 
 	Player* player = Player::GetInstance();
 	if (InCollideRadius(this, player)) {
-		cout << "Collider size.x : " << ColliderSize.x << endl; 
 		player->OnDamaged(10);
 	}
 

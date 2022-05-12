@@ -61,21 +61,15 @@ void Level::LevelLoad()
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
-		cout << MapWidth << "::" << MapHeight << endl; 
 		sBackGroundMapData = new int* [MapHeight];
 		for (int y = 0; y < MapHeight; y++) {
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
-			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}
-
-	//cout << "Load Level" << endl;
-
 }
 
 void Level::LevelInit()
@@ -120,6 +114,9 @@ void Level::LevelInit()
 	#pragma endregion 
 
 	#pragma region Entities 
+
+
+
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(164, -1152.0f+5, 0.0f),glm::vec3(128,-128,0), false, false);
 	obj->SetAnimationLoop(0, 0, 4, 100);
  	EntityObjectsList.push_back(obj);
@@ -156,6 +153,7 @@ void Level::LevelInit()
 	objectsList.push_back(test4); 
 
 
+ 
 	#pragma endregion
 	respawner = new ReSpawner();
 
@@ -206,6 +204,7 @@ void Level::LevelInit()
 	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level1OST.mp3",100);
 
 	#pragma endregion 
+
 }
  
 void Level::LevelUpdate()
@@ -288,7 +287,6 @@ void Level::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
 }
 
 void Level::LevelFree()
@@ -301,14 +299,11 @@ void Level::LevelFree()
 	//delete cameraController;
 	//delete tilemaps;
 	//delete checkPoint;
-	//cout << "Free Level" << endl;*/
-
  }
 
 void Level::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void Level::HandleKey(char key)

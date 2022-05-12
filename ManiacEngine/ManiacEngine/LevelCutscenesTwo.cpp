@@ -61,14 +61,10 @@ void LevelCutscenesTwo::LevelLoad()
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
-			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}
-
-	//cout << "Load Level" << endl;
 }
 
 void LevelCutscenesTwo::LevelInit()
@@ -81,23 +77,27 @@ void LevelCutscenesTwo::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
-	GUI* background = new GUI("../Resource/Cutscenes/Cut_2/1.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth(), -GameEngine::GetInstance()->GetWindowHeight(), 1));
+	GUI* background = new GUI("../Resource/Cutscenes/Cut_2/1.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() + 2, -GameEngine::GetInstance()->GetWindowHeight(), 1));
 	objectsList.push_back(background);
 	storageScenes.push_back(background);
 
-	GUI* background2 = new GUI("../Resource/Cutscenes/Cut_2/2.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth(), -GameEngine::GetInstance()->GetWindowHeight(), 1));
+	GUI* background2 = new GUI("../Resource/Cutscenes/Cut_2/2.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() + 2, -GameEngine::GetInstance()->GetWindowHeight(), 1));
 	objectsList.push_back(background2);
 	storageScenes.push_back(background2);
 
-	GUI* background3 = new GUI("../Resource/Cutscenes/Cut_2/3.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth(), -GameEngine::GetInstance()->GetWindowHeight(), 1));
+	GUI* background3 = new GUI("../Resource/Cutscenes/Cut_2/3.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() + 2, -GameEngine::GetInstance()->GetWindowHeight(), 1));
 	objectsList.push_back(background3);
 	storageScenes.push_back(background3);
 
-	GUI* background4 = new GUI("../Resource/Cutscenes/Cut_2/Credit.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth(), -GameEngine::GetInstance()->GetWindowHeight(), 1));
+	GUI* background4 = new GUI("../Resource/Cutscenes/Cut_2/Credits.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() + 2, -GameEngine::GetInstance()->GetWindowHeight(), 1));
 	objectsList.push_back(background4);
 	storageScenes.push_back(background4);
 
-	Director* director = new Director(storageScenes, GameEngine::GetInstance()->GetWindowWidth(), GameState::GS_LEVEL1, 31 * 4 + 3, 29 - 12);
+	GUI* background5 = new GUI("../Resource/Cutscenes/Cut_2/Credit.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth() + 2, -GameEngine::GetInstance()->GetWindowHeight(), 1));
+	objectsList.push_back(background5);
+	storageScenes.push_back(background5);
+
+	Director* director = new Director(storageScenes, GameEngine::GetInstance()->GetWindowWidth(), GameState::GS_MAINMENU, 31 * 5 - 46  , 29 - 15);
 	objectsList.push_back(director);
 
 #pragma endregion
@@ -114,8 +114,6 @@ void LevelCutscenesTwo::LevelInit()
 	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutSceneTwo.mp3");
 
 #pragma endregion 
-	//cout << "Init Level" << endl;
-
 }
 
 void LevelCutscenesTwo::LevelUpdate()
@@ -142,9 +140,7 @@ void LevelCutscenesTwo::LevelUpdate()
 
 void LevelCutscenesTwo::LevelDraw()
 {
-
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
 }
 
 void LevelCutscenesTwo::LevelFree()
@@ -159,7 +155,6 @@ void LevelCutscenesTwo::LevelFree()
 	//delete checkPoint;
 
 	SoundPlayer::GetInstance()->ClearSound();
-	cout << "Free Level" << endl;
 
 
 }
@@ -167,7 +162,6 @@ void LevelCutscenesTwo::LevelFree()
 void LevelCutscenesTwo::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void LevelCutscenesTwo::HandleKey(char key)

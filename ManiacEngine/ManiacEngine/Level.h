@@ -18,6 +18,7 @@
 #include "ReSpawner.h"
 #include "Bishop.h"
 #include "Priest.h"
+#include "Pope.h" 
 #include "AnimatorManager.h"
 #include "MenuHolder.h"
 #include "Gate.h"

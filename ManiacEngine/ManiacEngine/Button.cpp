@@ -28,11 +28,9 @@ Button::Button(ButtonName buttonName, string fileName, int row, int column, glm:
 	buttonTypesFunc.push_back(StartgameButton_Func);
 
 	buttonTypesFunc.push_back(ContinueButton_Func);
-	cout << "BB1" << endl;
 
 
 	buttonTypesFunc.push_back(ExitButton_Func);
-	cout << "BB2" << endl;
 	buttonTypesFunc.push_back(SettingButton_Func);
 }
 

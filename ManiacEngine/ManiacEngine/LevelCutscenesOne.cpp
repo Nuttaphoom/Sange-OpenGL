@@ -61,14 +61,10 @@ void LevelCutscenesOne::LevelLoad()
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
-			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}
-
-	//cout << "Load Level" << endl;
 }
 
 void LevelCutscenesOne::LevelInit()
@@ -115,7 +111,6 @@ void LevelCutscenesOne::LevelInit()
 	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutScene.mp3");
 
 #pragma endregion 
-	//cout << "Init Level" << endl;
 
 }
 
@@ -145,7 +140,6 @@ void LevelCutscenesOne::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
 }
 
 void LevelCutscenesOne::LevelFree()
@@ -160,15 +154,11 @@ void LevelCutscenesOne::LevelFree()
 	//delete checkPoint;
 
 	SoundPlayer::GetInstance()->ClearSound();
-	cout << "Free Level" << endl; 
-
-
 }
 
 void LevelCutscenesOne::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void LevelCutscenesOne::HandleKey(char key)

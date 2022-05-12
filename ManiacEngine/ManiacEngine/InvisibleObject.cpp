@@ -102,7 +102,6 @@ int InvisibleObject::Collide_W_Entity(Entity e) {
 
 	//MIDDLE_RIGHT
 	Middle_1_2_X = (float)e.GetPos().x + e.collisionSize.x / 2    ;
-	//cout << "MIDDLE RIGHT : " << Middle_1_2_X << " GetPos().x : " << e.GetPos().x << endl;
 	if ((Middle_1_2_X < RightX_Inv_Obj && Middle_1_2_X > LeftX_Inv_Obj)) {
 		if ((Middle_1_Y < TOPY_Inv_Obj && Middle_1_Y > BOTTOMY_Inv_Obj) ||
 			(Middle_2_Y < TOPY_Inv_Obj && Middle_2_Y > BOTTOMY_Inv_Obj)) {

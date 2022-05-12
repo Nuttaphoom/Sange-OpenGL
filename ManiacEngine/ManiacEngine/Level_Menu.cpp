@@ -67,14 +67,10 @@ void Level_Menu::LevelLoad()
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
-			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}
-
-	//cout << "Load Level" << endl;
 }
 
 void Level_Menu::LevelInit()
@@ -171,9 +167,6 @@ void Level_Menu::LevelInit()
 
 
 #pragma endregion 
-
-	//cout << "Init Level" << endl;
-
 }
 
 void Level_Menu::LevelUpdate()
@@ -210,7 +203,6 @@ void Level_Menu::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
 }
 
 void Level_Menu::LevelFree()
@@ -223,13 +215,11 @@ void Level_Menu::LevelFree()
 	//delete cameraController;
 	//delete tilemaps;
 	//delete checkPoint;
-	//cout << "Free Level" << endl;*/
 }
 
 void Level_Menu::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void Level_Menu::HandleKey(char key)
@@ -263,8 +253,6 @@ void Level_Menu::HandleMouse(int type, int x, int y)
 	// Calculate Real X Y 
 	Level_Menu::WorldToCam(realX, realY);
 	mouseVec3 = glm::vec3(realX, realY, 1);
-
-	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
 	//Player HandleMouse 
 	this->player->HandleMouse(mouseVec3);

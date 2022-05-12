@@ -62,7 +62,6 @@ void Level3::LevelLoad()
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
-		cout << MapWidth << "::" << MapHeight << endl;
 		sBackGroundMapData = new int* [MapHeight];
 		for (int y = 0; y < MapHeight; y++) {
 			sBackGroundMapData[y] = new int[MapWidth];
@@ -126,15 +125,12 @@ void Level3::LevelLoad()
 	if (BackGroundMapFile.is_open()) {
 		BackGroundMapFile >> MapHeight;
 		BackGroundMapFile >> MapWidth;
-		cout << MapWidth << "::" << MapHeight << endl;
 		sBackGroundMapData = new int* [MapHeight];
 		for (int y = 0; y < MapHeight; y++) {
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
-			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}
@@ -236,8 +232,7 @@ void Level3::LevelInit()
 
 #pragma region Entities 
 	unsigned int priestTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png");
-	cout << "priestTexture" << " " << priestTexture << endl;
-
+ 
 	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, false);
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
@@ -362,7 +357,6 @@ void Level3::LevelInit()
 
 void Level3::LevelUpdate()
 {
-	//cout << Player::GetInstance()->GetPos().x << "X" << Player::GetInstance()->GetPos().y << "Y" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();
@@ -370,7 +364,7 @@ void Level3::LevelUpdate()
 	/// Collision Check 
 	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
-			if (eptr->isDead())
+			if (eptr->IsPause())
 				continue;
 
 			int CollideDetection = 0;
@@ -434,14 +428,12 @@ void Level3::LevelUpdate()
 	for (DrawableObject* obj : objectsList) {
 		obj->Update(deltaTime);
 	}
-
 }
 
 void Level3::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
 }
 
 void Level3::LevelFree()
@@ -454,13 +446,11 @@ void Level3::LevelFree()
 	//delete cameraController;
 	//delete tilemaps;
 	//delete checkPoint;
-	//cout << "Free Level" << endl;*/
 }
 
 void Level3::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void Level3::HandleKey(char key)
@@ -495,8 +485,6 @@ void Level3::HandleMouse(int type, int x, int y)
 	// Calculate Real X Y 
 	Level3::WorldToCam(realX, realY);
 	mouseVec3 = glm::vec3(realX, realY, 1);
-
-	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
 	//Player HandleMouse 
 	this->player->HandleMouse(mouseVec3);

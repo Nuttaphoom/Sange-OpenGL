@@ -24,11 +24,16 @@ void Director::Update(int deltatime) {
 		return;
 	}
 
+	lifespan -= 1.0f / 1000.0f * (float)deltatime;
+	if (lifespan <= 0) {
+		SetPause(true);
+		GameData::GetInstance()->gGameStateNext = this->_levelToLoad;
+	}
+
 	for (int i = 0;i < storagePic.size();i++) {
 		if (ScPausetime) {
 			scPausetimeCount += 1.0f/1000.0f*(float)deltatime;
-			cout << "scPausetimeCount : " << scPausetimeCount << endl;
-
+ 
 			if (scPausetimeCount >= scPausetimeMax) {
 				ScPausetime = false;
 				scPausetimeCount = 0;
@@ -51,17 +56,12 @@ void Director::Update(int deltatime) {
 	}
 
 	if (!ScPausetime) {
-		cout << "time use for translation : " << timeUsed << endl;
-
+ 
 		timeUsed += 1.0f / 1000.0f * (float)deltatime;
 
 	}
 	
-	lifespan -= 1.0f / 1000.0f * (float)deltatime;
-	if (lifespan <= 0) {
-		SetPause(true);
-		GameData::GetInstance()->gGameStateNext = this->_levelToLoad ;
-	}
+
 
 }
 

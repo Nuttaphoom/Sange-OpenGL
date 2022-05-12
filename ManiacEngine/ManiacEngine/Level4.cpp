@@ -67,14 +67,11 @@ void Level4::LevelLoad()
 			sBackGroundMapData[y] = new int[MapWidth];
 			for (int x = 0; x < MapWidth; x++) {
 				BackGroundMapFile >> sBackGroundMapData[y][x];
-				//cout << sBackGroundMapData[y][x] << "     "; 
 			}
-			//cout << endl; 
 		}
 		BackGroundMapFile.close();
 	}
 
-	//cout << "Load Level" << endl;
 }
 
 void Level4::LevelInit()
@@ -213,6 +210,10 @@ void Level4::LevelInit()
 	ToxicGas* toxicGas21 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(6741.42, -1152, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, 128, 1));
 	interactableObjectManager->addInteractableObjects(toxicGas21);
 	objectsList.push_back(toxicGas21);
+
+	Gate* gate = new Gate(GameState::GS_CUTSCENES2,"../Resource/Texture/Interactable/BabyBed.png", 1, 1, glm::vec3(9918.51     * 5, -778.524f + 5, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, -128, 1));
+	interactableObjectManager->addInteractableObjects(gate);
+	objectsList.push_back(gate);
 
 #pragma endregion 
 
@@ -371,7 +372,9 @@ void Level4::LevelInit()
 	EntityObjectsList.push_back(d12);
 	objectsList.push_back(d12);
 
-
+	Pope* popeTest = new Pope("../Resource/Texture/Enemy/Pope/Pope_SpriteSheet.png", 1, 4, glm::vec3(9918.51, -778.524f + 5, 0.0f), glm::vec3(128, -128, 1));
+	EntityObjectsList.push_back(popeTest);
+	objectsList.push_back(popeTest);
 
 #pragma endregion
 	respawner = new ReSpawner();
@@ -404,6 +407,13 @@ void Level4::LevelInit()
 
 #pragma endregion
 
+#pragma  Manager
+	AnimatorManager* animatorManager = AnimatorManager::GetInstance();
+	managersList.push_back(animatorManager);
+	objectsList.push_back(animatorManager);
+
+#pragma endregion  
+
 #pragma Sound
 	SoundPlayer::GetInstance()->ClearSound();
 
@@ -411,13 +421,11 @@ void Level4::LevelInit()
 
 
 
-	//cout << "Init Level" << endl;
 
 }
 
 void Level4::LevelUpdate()
 {
-	cout << Player::GetInstance()->GetPos().x << "X" << Player::GetInstance()->GetPos().y << "Y" << endl;
 	int deltaTime = GameEngine::GetInstance()->GetDeltaTime();
 	//Camera Controller Behavior
 	cameraController->Update();
@@ -425,7 +433,7 @@ void Level4::LevelUpdate()
 	/// Collision Check 
 	for (DrawableObject* en : EntityObjectsList) {
 		if (Entity* eptr = dynamic_cast<Entity*>(en)) {
-			if (eptr->isDead())
+			if (eptr->IsPause())
 				continue;
 
 			int CollideDetection = 0;
@@ -472,7 +480,7 @@ void Level4::LevelUpdate()
 				if (Entity* eptr2 = dynamic_cast<Entity*>(nObj)) {
 					if (playerObj != eptr2) {
 						if (playerObj->Collides(*eptr2)) {
-							playerObj->OnDamaged(999);
+							//playerObj->OnDamaged(999);
 						}
 					}
 				}
@@ -482,17 +490,11 @@ void Level4::LevelUpdate()
 
 
 
+	if (isPause)
+		return;
 
-
-	//Update InteractableObject 
-	interactableObjectManager->Update(deltaTime);
-
-	// Update Game Objs
-	for (DrawableObject* obj : EntityObjectsList) {
-		//Play Update In every game object 
-		if (Entity* eptr = dynamic_cast<Entity*>(obj))
-			if (eptr->isDead())
-				continue;
+	//Update every objects 
+	for (DrawableObject* obj : objectsList) {
 		obj->Update(deltaTime);
 	}
 
@@ -502,7 +504,6 @@ void Level4::LevelDraw()
 {
 
 	GameEngine::GetInstance()->Render(objectsList);
-	//cout << "Draw Level" << endl;
 }
 
 void Level4::LevelFree()
@@ -515,13 +516,11 @@ void Level4::LevelFree()
 	//delete cameraController;
 	//delete tilemaps;
 	//delete checkPoint;
-	//cout << "Free Level" << endl;*/
 }
 
 void Level4::LevelUnload()
 {
 	GameEngine::GetInstance()->ClearMesh();
-	//cout << "Unload Level" << endl;
 }
 
 void Level4::HandleKey(char key)
@@ -556,8 +555,6 @@ void Level4::HandleMouse(int type, int x, int y)
 	// Calculate Real X Y 
 	Level4::WorldToCam(realX, realY);
 	mouseVec3 = glm::vec3(realX, realY, 1);
-
-	//cout << "Mouse Pos : (" << realX  << "," << realY <<")" << endl;
 
 	//Player HandleMouse 
 	this->player->HandleMouse(mouseVec3);
