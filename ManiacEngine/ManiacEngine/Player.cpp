@@ -513,11 +513,29 @@ void Player::UpdateInv() {
 			SetRenderType(1);
 			InvChange(false);
 		}
-		if (delay > 4000)
+		if (delay > 3500)
 		{
+			delay1 += deltatime;
+			if (delay1 >= 100) {
+				if (loop == 0)
+				{
+					//cout << "here" << endl;
+					SetRenderType(1);
+					loop = 1;
+					delay1 = 0;
+				}
+				else if (loop == 1)
+				{
+					//cout << "there" << endl;
+					SetRenderType(2);
+					loop = 0;
+					delay1 = 0;
+				}
+			}
 			if (delay > 5000)
 			{
 				delay = 0;
+				loop = 0;
 				SetRenderType(1);
 				InvChange(false);
 			}
