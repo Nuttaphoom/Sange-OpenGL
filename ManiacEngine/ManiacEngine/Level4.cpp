@@ -219,160 +219,160 @@ void Level4::LevelInit()
 
 
 #pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(125, -1176.0f, 0.0f), glm::vec3(128, -128, 0), true, true);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(125, -1176.0f + 64, 0.0f), glm::vec3(128, -128, 0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
 
-	Decon* d1 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(574.999, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d1 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(574.999, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d1->AddPatrolPos(glm::vec3(574.999, -1152, 0.0f));
 	d1->AddPatrolPos(glm::vec3(315.448, -1152, 0.0f));
 	d1->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d1);
 	objectsList.push_back(d1);
 
-	Priest* p1 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(802.578, -837.6, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p1 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(802.578, -837.6 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p1->AddPatrolPos(glm::vec3(712.545, -837.6, 0.0f));
 	p1->AddPatrolPos(glm::vec3(924.84, -837.6, 0.0f));
 	p1->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p1);
 	objectsList.push_back(p1);
 
-	Decon* d2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1639.7, -837.55, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1639.7, -837.55 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d2->AddPatrolPos(glm::vec3(1639.7, -837.55, 0.0f));
 	d2->AddPatrolPos(glm::vec3(1780.97, -837.55, 0.0f));
 	d2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d2);
 	objectsList.push_back(d2);
 
-	Priest* p2 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(2312.47, -459, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p2 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(2312.47, -459 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p2->AddPatrolPos(glm::vec3(2296.7, -459, 0.0f));
 	p2->AddPatrolPos(glm::vec3(2353.99, -459, 0.0f));
 	p2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p2);
 	objectsList.push_back(p2);
 
-	Decon* d3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2108.99, -900, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2108.99, -900 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d3->AddPatrolPos(glm::vec3(2108.99, -900, 0.0f));
 	d3->AddPatrolPos(glm::vec3(2268.51, -900, 0.0f));
 	d3->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d3);
 	objectsList.push_back(d3);
 
-	Decon* d4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2547.88, -900, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2547.88, -900 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d4->AddPatrolPos(glm::vec3(2547.88, -900, 0.0f));
 	d4->AddPatrolPos(glm::vec3(2304.51, -900, 0.0f));
 	d4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d4);
 	objectsList.push_back(d4);
 
-	Decon* d5 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2910.83, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d5 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2910.83, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d5->AddPatrolPos(glm::vec3(2910.83, -1152, 0.0f));
 	d5->AddPatrolPos(glm::vec3(3068.15, -1152, 0.0f));
 	d5->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d5);
 	objectsList.push_back(d5);
 
-	Decon* d6 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3386.86, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d6 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3386.86, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d6->AddPatrolPos(glm::vec3(3262.06, -1152, 0.0f));
 	d6->AddPatrolPos(glm::vec3(3548.34, -1152, 0.0f));
 	d6->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d6);
 	objectsList.push_back(d6);
 
-	Decon* d7 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3722.84, -774.55, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d7 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3722.84, -774.55 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d7->AddPatrolPos(glm::vec3(3722.84, -774.55, 0.0f));
 	d7->AddPatrolPos(glm::vec3(3853.13, -774.55, 0.0f));
 	d7->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d7);
 	objectsList.push_back(d7);
 
-	Priest* p3 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(4892.77, -585.55, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p3 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(4892.77, -585.55 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p3->AddPatrolPos(glm::vec3(4892.77, -585.55, 0.0f));
 	p3->AddPatrolPos(glm::vec3(4892.77, -585.55, 0.0f));
 	p3->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p3);
 	objectsList.push_back(p3);
 
-	Priest* p4 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(5431.14, -585.6, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p4 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(5431.14, -585.6 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p4->AddPatrolPos(glm::vec3(5431.14, -585.6, 0.0f));
 	p4->AddPatrolPos(glm::vec3(5431.14, -585.6, 0.0f));
 	p4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p4);
 	objectsList.push_back(p4);
 
-	Decon* d8 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5254.39, -837, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d8 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5254.39, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d8->AddPatrolPos(glm::vec3(5254.39, -837, 0.0f));
 	d8->AddPatrolPos(glm::vec3(5254.39, -837, 0.0f));
 	d8->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d8);
 	objectsList.push_back(d8);
 
-	Decon* d9 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5606.49, -837, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d9 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5606.49, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d9->AddPatrolPos(glm::vec3(5606.49, -837, 0.0f));
 	d9->AddPatrolPos(glm::vec3(5606.49, -837, 0.0f));
 	d9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d9);
 	objectsList.push_back(d9);
 
-	Priest* p5 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6163.74, -837, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p5 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6163.74, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p5->AddPatrolPos(glm::vec3(6163.74, -837, 0.0f));
 	p5->AddPatrolPos(glm::vec3(6163.74, -837, 0.0f));
 	p5->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p5);
 	objectsList.push_back(p5);
 
-	Priest* p6 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6857.56, -774, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p6 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6857.56, -774 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p6->AddPatrolPos(glm::vec3(6857.56, -774, 0.0f));
 	p6->AddPatrolPos(glm::vec3(6857.56, -774, 0.0f));
 	p6->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p6);
 	objectsList.push_back(p6);
 
-	Decon* d10 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6522.81, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d10 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6522.81, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d10->AddPatrolPos(glm::vec3(6522.81, -1152, 0.0f));
 	d10->AddPatrolPos(glm::vec3(6522.81, -1152, 0.0f));
 	d10->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d10);
 	objectsList.push_back(d10);
 
-	Decon* d11 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7518.79, -774.6, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d11 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7518.79, -774.6 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d11->AddPatrolPos(glm::vec3(7518.79, -774.6, 0.0f));
 	d11->AddPatrolPos(glm::vec3(7518.79, -774.6, 0.0f));
 	d11->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d11);
 	objectsList.push_back(d11);
 
-	Priest* p7 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(7735.59, -585.6, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p7 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(7735.59, -585.6 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p7->AddPatrolPos(glm::vec3(7735.59, -585.6, 0.0f));
 	p7->AddPatrolPos(glm::vec3(7735.59, -585.6, 0.0f));
 	p7->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p7);
 	objectsList.push_back(p7);
 
-	Priest* p8 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(8430.65, -837, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p8 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(8430.65, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p8->AddPatrolPos(glm::vec3(8430.65, -837, 0.0f));
 	p8->AddPatrolPos(glm::vec3(8430.65, -837, 0.0f));
 	p8->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p8);
 	objectsList.push_back(p8);
 
-	Priest* p9 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(9187.31, -774, 0.0f), glm::vec3(128, -128, 1));
+	Priest* p9 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(9187.31, -774 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p9->AddPatrolPos(glm::vec3(9187.31, -774, 0.0f));
 	p9->AddPatrolPos(glm::vec3(9187.31, -774, 0.0f));
 	p9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p9);
 	objectsList.push_back(p9);
 
-	Decon* d12 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(9701.04, -1152, 0.0f), glm::vec3(128, -128, 1));
+	Decon* d12 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(9701.04, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d12->AddPatrolPos(glm::vec3(9701.04, -1152, 0.0f));
 	d12->AddPatrolPos(glm::vec3(9284.45, -1152, 0.0f));
 	d12->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d12);
 	objectsList.push_back(d12);
 
-	Pope* popeTest = new Pope("../Resource/Texture/Enemy/Pope/Pope_SpriteSheet.png", 1, 4, glm::vec3(9918.51, -778.524f + 5, 0.0f), glm::vec3(128, -128, 1));
+	Pope* popeTest = new Pope("../Resource/Texture/Enemy/Pope/Pope_SpriteSheet.png", 1, 4, glm::vec3(9918.51, -778.524f + 64, 0.0f), glm::vec3(128, -128, 1));
 	EntityObjectsList.push_back(popeTest);
 	objectsList.push_back(popeTest);
 
