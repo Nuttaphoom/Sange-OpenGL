@@ -153,14 +153,14 @@ void Level_Menu::LevelInit()
 
 	TextObject* masterSoundVal = new TextObject(); 
 	masterSoundVal->LoadText("5", SDL_WhiteColor, 30);
-	masterSoundVal->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 -200, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
+	masterSoundVal->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 625, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
 	objectsList.push_back(masterSoundVal);
 	optionHolder->addButton(masterSoundVal);
 	soundScalerText[0] = masterSoundVal;
 
 	TextObject* musicSoundVal = new TextObject();
 	musicSoundVal->LoadText("10", SDL_WhiteColor, 30);
-	musicSoundVal->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 200, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0));
+	musicSoundVal->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 625, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0));
 	objectsList.push_back(musicSoundVal);
 	optionHolder->addButton(musicSoundVal);
 	soundScalerText[1] = musicSoundVal;
