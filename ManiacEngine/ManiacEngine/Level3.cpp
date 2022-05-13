@@ -283,8 +283,7 @@ void Level3::LevelInit()
 	objectsList.push_back(d8);
 
 	Decon* d9 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7441.46, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d9->AddPatrolPos(glm::vec3(7441.46, -1152, 0.0f));
-	d9->AddPatrolPos(glm::vec3(7441.46, -1152, 0.0f));
+ 
 	d9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d9);
 	objectsList.push_back(d9);

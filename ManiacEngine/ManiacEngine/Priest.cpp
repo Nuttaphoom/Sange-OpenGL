@@ -247,11 +247,11 @@ void PriestLightBall::Update(int deltaTime) {
 	int a = invisibleObject->Collide_W_Entity(*player); 
  	if (a > 0) {
 		SetPause(true);
-		player->OnDamaged(0);
+		player->OnDamaged(99);
 	}
 	else if (abs(player->GetPos().x - GetPos().x) < 5 && abs(player->GetPos().y - GetPos().y < 5 )) {
 		SetPause(true);
-		player->OnDamaged(0);
+		player->OnDamaged(99);
 	}
 	else if (abs(GetPos() - _destination).x <= 30 && abs(GetPos() - _destination).y <= 30) {
 		SetPause(true);

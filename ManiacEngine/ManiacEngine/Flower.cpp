@@ -7,6 +7,6 @@ Flower::Flower(string fileName, int row, int column,glm::vec3 Pos,glm::vec3 Size
 
 void Flower::Called() {
 	glm::vec3 savedPos = GetPos(); 
-	savedPos.y += 32;
+	savedPos.y += 64;
 	CheckPoint::GetInstance()->SetCheckPoint(savedPos);
 }
