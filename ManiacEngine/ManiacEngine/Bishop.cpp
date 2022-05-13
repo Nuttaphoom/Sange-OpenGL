@@ -65,6 +65,7 @@ void Bishop::UpdateStateMachine(float deltatime) {
 
 	if (_bishopState == StateMachine::IDLE) {
  		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
+		SetDirection(1);
 		if (_countDownTime >= 5.0f) {
 			_countDownTime = 0;
 			ChangeState(StateMachine::RUNNING);
@@ -151,6 +152,9 @@ void Bishop::Patrol() {
 }
 
 void Bishop::Attack(Entity* target) {
+	if (target->isDead()) {
+		return;
+	}
 	ChangeState(StateMachine::ATTACKING);
 	CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x, GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
  	target->OnDamaged(100);  

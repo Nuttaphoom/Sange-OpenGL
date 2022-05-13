@@ -265,6 +265,7 @@ void Entity::SetHP(float data)
 
 void Entity::RespawnThisObject() {
 	SetPause(false);
+	SetDirection(1);
 	ChangeState(StateMachine::IDLE); 
 	SetPosition(Default_pos); 
 	this->HP = Default_HP;  

@@ -13,6 +13,7 @@ void CameraController::Update() {
 	float offsetX = 0;
 	float offsetY = GameEngine::GetInstance()->GetWindowHeight() /6 - 128; 
 
+
 	n += glm::vec3(offsetX, offsetY, 1);
 
   	Camera::GetInstance()->SetPosition(n);

@@ -54,7 +54,7 @@ bool Enemy::PlayerDetect(Entity* p )
 	if (p->GetPos().x > GetPos().x && DirectionSet != 1) return false;
 	if (p->GetPos().x < GetPos().x && DirectionSet != -1) return false; 
 
-	if (Distance.x < 64*6 && Distance.y < 100) {
+	if (Distance.x < 64*6 && Distance.y < 64) {
 		RayCast* ray = new RayCast(this->GetPos(), p->GetPos());
 		glm::vec3 resultPoint = ray->GetOutPutPoint();
 		if (resultPoint.x == p->GetPos().x && resultPoint.y == p->GetPos().y)  {

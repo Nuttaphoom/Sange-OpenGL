@@ -50,7 +50,7 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 
 }
 
-Decon::Decon(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80, Pos, Size, glm::vec3(Size.x / 2, Size.y, 0))
+Decon::Decon(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80, Pos, Size, glm::vec3(Size.x / 2, Size.y / 2, 0))
 {
 	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f;
@@ -96,7 +96,7 @@ void Decon::EnterAttackZone(Entity* target) {
 	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
 		invWALLs[i].SetPosition(glm::vec3(this->GetPos().x + (8 * this->DirectionSet * i), this->GetPos().y + this->GetSize().y * -1 / 2, 1));
-		invWALLs[i].SetSize(80, 80);
+		invWALLs[i].SetSize(80, 32);
 	}
 
  

@@ -166,9 +166,10 @@ void Level::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
-	Decon* tuitorialDecon = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(164 + 64 * 7, -1152.0f + 5 + 64, 0.0f), glm::vec3(128, -128, 1));
+	Decon* tuitorialDecon = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(164 + 64 * 8, -1152.0f + 5 + 64, 0.0f), glm::vec3(128, -128, 1));
 	tuitorialDecon->SetDirection(1);
 	tuitorialDecon->ChangeState(StateMachine::IDLE);
+	EntityObjectsList.push_back(tuitorialDecon);
 	objectsList.push_back(tuitorialDecon);
 
 	Decon* test = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(4886, -920 + 64, 0.0f), glm::vec3(128, -128,1) );

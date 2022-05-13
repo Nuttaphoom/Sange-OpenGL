@@ -28,7 +28,6 @@ void HPBar::Render(glm::mat4 globalModelTransform)
 void HPBar::Update(int deltaTime) {
 	for (int i = 0; i < HPPoints.size(); i++) {
 		HPPoints[i]->SetPause(true);
-		cout << "Player::GetInstance()->GetHP() : " << Player::GetInstance()->GetHP() << endl;
 		if (Player::GetInstance()->GetHP() > i)
 			HPPoints[i]->SetPause(false);
 	}

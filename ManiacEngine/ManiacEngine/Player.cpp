@@ -323,7 +323,6 @@ void Player::ChangeState(StateMachine NextState)
 		SetAnimationLoop(8, 0, 7, 200);
 	}
 	else if (this->GetState() == StateMachine::Die) {
-		notify(1);  //Notify Dead Observer , In Respawner.h
 		SetAnimationLoop(9, 12, 1, 100,false);
 	}
 }
@@ -357,7 +356,8 @@ void Player::OnDamaged(int damage) {
 		
 	if (this->HP <= 0) {
 		ChangeState(StateMachine::Dying); 
-		notify(1); // Notify respawner
+		notify(1);  //Notify Dead Observer , In Respawner.h
+		SetPause(true);
 	}
 }
 
