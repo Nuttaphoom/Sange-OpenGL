@@ -238,7 +238,7 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 
 	if (GetState() == StateMachine::AMULET) {
-		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		float deltatime = GameEngine::GetInstance()->GetDeltaTime();
 		delay += deltatime;
 		if (delay > 1300) {
 			delay = 0;
@@ -251,6 +251,14 @@ void Player::UpdateStateMachine(float deltatime)
 		if (delay > 1.4f) {
 			delay = 0;
 			ChangeState(StateMachine::Die); 
+		}
+	}
+
+	if (GetState() == StateMachine::JUMPPING) {
+		int deltatime = GameEngine::GetInstance()->GetDeltaTime();
+		delay += deltatime;
+		if (OnGround == true && delay > 100) {
+			ChangeState(StateMachine::IDLE);
 		}
 	}
 }
