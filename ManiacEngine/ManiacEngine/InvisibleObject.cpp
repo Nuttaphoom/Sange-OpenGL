@@ -49,9 +49,9 @@ void InvisibleObject::SetRender(bool b) {
 int InvisibleObject::Collide_W_Entity(Entity e) {
 	int CollideDetection = 0; //Check where it collide with Entity (In Entity POV) 
 							  // 1 FOR TOP, 2 FOR BOTTOM, 4 FOR LEFT, AND 8 FOR RIGHT 
-	if (e.IsPause() || e.Death()) {
-		return 0;
-	}
+	if (e.IsPause() || e.isDead() ) {
+ 		return 0;
+	} 
 	 
 	if (abs(e.GetPos().x - this->GetPos().x) > 128 || abs(e.GetPos().y - this->GetPos().y) > 128)
 		return 0; 

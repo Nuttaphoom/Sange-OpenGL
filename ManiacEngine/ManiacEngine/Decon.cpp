@@ -6,9 +6,12 @@
 #include "AnimatorManager.h"
 
 bool CanWalkToNextTile(Entity* en) {
-	glm::vec3 posTarget =  glm::vec3(en->GetPos().x + 64 * en->DirectionSet ,en->GetPos().y - 64 , en->GetPos().z) ;
+	glm::vec3 posTarget =  glm::vec3(en->GetPos().x + 64 * en->DirectionSet ,en->GetPos().y -  256, en->GetPos().z) ;
 	RayCast ray = RayCast(en->GetPos(), posTarget) ;
 	glm::vec3 output = ray.GetOutPutPoint();
+	cout << "output.y : " << output.y << endl;
+	cout << "posTarget.y : " << posTarget.y << endl;
+	cout << "en.y : " << en->GetPos().y << endl; 
 	if (output.y == posTarget.y) {
 		return false ;
 	}
@@ -120,9 +123,13 @@ void Decon::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::RUNNING)
 	{
-		if (PlayerDetect(Player::GetInstance()) == true && CanWalkToNextTile(this))
+		if (PlayerDetect(Player::GetInstance()) == true)
 		{
-			ChangeState(StateMachine::CHASING);
+			cout << "should change ?" << endl;
+			if (CanWalkToNextTile(this)) {
+				cout << "change to chasing" << endl;
+					ChangeState(StateMachine::CHASING);
+			}
 		}
 		else
 		{

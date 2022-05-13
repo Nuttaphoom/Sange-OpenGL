@@ -17,9 +17,11 @@ glm::vec3 RayCast::GetOutPutPoint() {
 		curPoint.y += IncreasedYValue;
 									  
  		Entity* inv = new Entity() ; 
+		inv->SetPause(false);
+		inv->SetHP(99);
  		inv->SetPosition(curPoint); 
 		inv->SetSize(32, 32);
-
+ 
  		for (int c = GameStateController::GetInstance()->currentLevel->GetInvisibleWallList().size() - 1; c >= 0; c--) {
 			if (dynamic_cast<InvisibleObject*>(GameStateController::GetInstance()->currentLevel->GetInvisibleWallList()[c])->Collide_W_Entity(*inv)) {
  				return curPoint;

@@ -54,8 +54,6 @@ Bishop::Bishop(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Si
 void Bishop::Update(int deltatime) {
 	if (IsPause())
 		return;
-
-	cout << "bishop update " << endl;
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	 
@@ -97,7 +95,6 @@ void Bishop::UpdateStateMachine(float deltatime) {
 	}
 
 	if (PlayerDetect(p) && _bishopState != StateMachine::ATTACKING && ! isDead() ){
-		cout << "Bishop attack" << endl;
 		Attack(p);
 	}
 }
