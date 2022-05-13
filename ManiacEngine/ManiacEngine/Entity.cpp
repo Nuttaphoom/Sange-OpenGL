@@ -131,7 +131,7 @@ void Entity::Update(int deltatime)
 
 	SpriteObject::Update(deltatime);
 
-	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM && GetState() != StateMachine::CLIMBINGIDLE && GetState() != StateMachine::CLIFFEDGE && GetState() != StateMachine::CLIFFEDGEDOWN) { //Apply velocity 
+	if (!OnGround && GetState() != StateMachine::CLIMBING && GetState() != StateMachine::BAT && GetState() != StateMachine::TRANSFORM && GetState() != StateMachine::CLIMBINGIDLE && GetState() != StateMachine::CLIFFEDGE && GetState() != StateMachine::CLIFFEDGEDOWN && GetState() != StateMachine::Die) { //Apply velocity 
 		TranslateVelocity(glm::vec3(0, -600.0f / 1000.0f * deltatime, 0));
  	}	
  
@@ -264,6 +264,7 @@ void Entity::RespawnThisObject() {
 	SetPause(false);
 	SetDirection(1);
 	ChangeState(StateMachine::IDLE); 
+	ResetVelocity();
 	SetPosition(Default_pos); 
 	this->HP = Default_HP;  
 	this->MoveSpeed = Default_MoveSpeed; 

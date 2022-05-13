@@ -2,20 +2,12 @@
 #include "Enemy.h"
 #include "InvisibleObject.h"
 
-class PopeCutscenePlayer : public InvisibleObject {
-private:
-
-public:
-	PopeCutscenePlayer();
-	virtual void Update(float deltaTime);
-
-};
+ 
  
 class Pope : public Enemy {
 private:
 	StateMachine _popeState ;
-	PopeCutscenePlayer* _popeCutscenePlayer; 
-
+ 
  public:
 	 Pope(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
 	 Pope(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size);

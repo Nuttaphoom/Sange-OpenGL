@@ -165,9 +165,13 @@ void Level3::LevelInit()
 	interactableObjectManager->addInteractableObjects(gate_1);
 	objectsList.push_back(gate_1);
 
-	ToxicGas* toxicGas = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(1470 + 32, -1152, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, 128, 1));
+	ToxicGas* toxicGas = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(1470 - 64*5 - 32, -1152, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, 128, 1));
 	interactableObjectManager->addInteractableObjects(toxicGas);
 	objectsList.push_back(toxicGas);
+
+	ToxicGas* toxicGas1 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(1470 + 32, -1152, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, 128, 1));
+	interactableObjectManager->addInteractableObjects(toxicGas1);
+	objectsList.push_back(toxicGas1);
 
 
 	ToxicGas* toxicGas2 = new ToxicGas("../Resource/Texture/Interactable/ToxicGas.png", 1, 4, glm::vec3(1470 + 32 + 128, -1152, 0.0f), glm::vec3(128, -128, 1), glm::vec3(128, 128, 1));
@@ -325,6 +329,21 @@ void Level3::LevelInit()
 	objectsList.push_back(hpbar);
 
 	GUIObjectsList.push_back(hpbar);
+	SDL_Color whilteColor;
+	whilteColor.r = 255; whilteColor.g = 255; whilteColor.b = 255;
+	MenuHolder* pauseMenuHolder = new MenuHolder("PauseMenu");
+	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Continue", whilteColor, 25);
+	pauseMenuHolder->addButton(b1);
+	objectsList.push_back(b1);
+	GUIObjectsList.push_back(b1);
+
+	Button* b2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 500, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Exit", whilteColor, 25);
+	pauseMenuHolder->addButton(b2);
+	objectsList.push_back(b2);
+	GUIObjectsList.push_back(b2);
+	pauseMenuHolder->disableButton();
+
+	_menuHolderList.push_back(pauseMenuHolder);
 
 #pragma endregion
 
@@ -337,7 +356,7 @@ void Level3::LevelInit()
 
 #pragma Sound
 	SoundPlayer::GetInstance()->ClearSound();
-
+	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/Level3OST.mp3", 100);
 #pragma endregion 
 }
 
@@ -448,7 +467,7 @@ void Level3::HandleKey(char key)
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	case 'e': player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL4; break;
 	case 'f': break;
 	case 't': break;
 	case 'h': break;

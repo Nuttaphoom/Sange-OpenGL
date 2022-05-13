@@ -82,6 +82,7 @@ void Level_Menu::LevelInit()
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
+	obj->SetPause(true);
 
 	GUI* background = new GUI("../Resource/Texture/Button/Background.png", 1, 1, glm::vec3(0, 0, 0), glm::vec3(GameEngine::GetInstance()->GetWindowWidth(), -GameEngine::GetInstance()->GetWindowHeight(), 1));
 	objectsList.push_back(background);
@@ -140,16 +141,21 @@ void Level_Menu::LevelInit()
 	GUIObjectsList.push_back(closeOption);
 	
 	
-	Button* master = new Button(ButtonName::NONE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4,4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 1100, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Master", SDL_WhiteColor, 20);
-	optionHolder->addButton(master);
-	objectsList.push_back(master);
-	GUIObjectsList.push_back(master);
+	TextObject* masterText = new TextObject() ;
+	masterText->LoadText("Master Audio : ", SDL_WhiteColor, 30);
+	masterText->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 1100, GameEngine::GetInstance()->GetWindowHeight() / 2 - 85, 0));
+ 	objectsList.push_back(masterText);
+	GUIObjectsList.push_back(masterText);
+	optionHolder->addButton(masterText);
 
-	Button* music = new Button(ButtonName::NONE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 1100, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Music", SDL_WhiteColor, 20);
-	optionHolder->addButton(music);
-	objectsList.push_back(music);
-	GUIObjectsList.push_back(music);
-	optionHolder->disableButton();
+	TextObject* musicText = new TextObject();
+	musicText->LoadText("Music Audio : ", SDL_WhiteColor, 30);
+	musicText->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 1100, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0));
+	objectsList.push_back(musicText);
+	GUIObjectsList.push_back(musicText);
+	optionHolder->addButton(musicText);
+
+ 
 
 	TextObject* masterSoundVal = new TextObject(); 
 	masterSoundVal->LoadText("5", SDL_WhiteColor, 30);
@@ -159,11 +165,13 @@ void Level_Menu::LevelInit()
 	soundScalerText[0] = masterSoundVal;
 
 	TextObject* musicSoundVal = new TextObject();
-	musicSoundVal->LoadText("10", SDL_WhiteColor, 30);
+	musicSoundVal->LoadText("5", SDL_WhiteColor, 30);
 	musicSoundVal->SetPosition(glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 625, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0));
 	objectsList.push_back(musicSoundVal);
 	optionHolder->addButton(musicSoundVal);
 	soundScalerText[1] = musicSoundVal;
+
+	optionHolder->disableButton();
 
 	_menuHolderList.push_back(mainMenuHolder);
 	_menuHolderList.push_back(optionHolder);

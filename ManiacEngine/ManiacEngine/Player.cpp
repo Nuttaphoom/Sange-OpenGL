@@ -13,11 +13,11 @@
  
 
 void CreateDeadAnimation() {
-	vector<SpriteObject*> playerOnly; 
+	vector<SpriteObject*> playerOnly;
 	Player* p = Player::GetInstance();
 	playerOnly.push_back(dynamic_cast<SpriteObject*>(p));
-	AnimatorManager::GetInstance()->CreateAnimationFactory(playerOnly, p->GetPos(), p->GetSize(), 3,"../Resource/Texture/Sange/SangeDeadSprite.png", 1, 14, 13, 100);
- }
+	AnimatorManager::GetInstance()->CreateAnimationFactory(playerOnly, p->GetPos(), p->GetSize(), 1800.0f / 1000.0f, "../Resource/Texture/Sange/SangeDeadSprite.png", 1, 18, 18, 100);
+}
 
 
 Player* Player::instance = nullptr; 
@@ -45,7 +45,7 @@ void Player::HandleKey(char Key)
 			}
 		};
 	}
-	class HandleKey k;
+ 	class HandleKey k;
 	k.KeyDetect(Key);
 }
 
@@ -247,11 +247,9 @@ void Player::UpdateStateMachine(float deltatime)
 	}
 
 	if (GetState() == StateMachine::Dying) {
-		delay += 1.0f / 1000.0f * GameEngine::GetInstance()->GetDeltaTime();
-		if (delay > 1.4f) {
-			delay = 0;
-			ChangeState(StateMachine::Die); 
-		}
+		ResetVelocity();
+		ChangeState(StateMachine::Die);
+
 	}
 
 	if (GetState() == StateMachine::JUMPPING) {
@@ -331,7 +329,10 @@ void Player::ChangeState(StateMachine NextState)
 		SetAnimationLoop(8, 0, 7, 200);
 	}
 	else if (this->GetState() == StateMachine::Die) {
+		SetPause(true);
 		SetAnimationLoop(9, 12, 1, 100,false);
+				notify(1);  //Notify Dead Observer , In Respawner.h
+
 	}
 }
 
@@ -364,9 +365,7 @@ void Player::OnDamaged(int damage) {
 		
 	if (this->HP <= 0) {
 		ChangeState(StateMachine::Dying); 
-		notify(1);  //Notify Dead Observer , In Respawner.h
-		SetPause(true);
-	}
+ 	}
 }
 
 void Player::Attack(Entity* target) {
@@ -392,6 +391,7 @@ void Player::Attack(Entity* target) {
 void Player::RespawnThisObject() {
 	HP = Default_HP;
 	MoveSpeed = Default_MoveSpeed;
+	bat = false;
 	CheckPoint::GetInstance()->LoadCheckPoint();
 }
 
@@ -494,7 +494,7 @@ void Player::InvChange(bool x) {
 }
 
 void Player::SetInv() {
-	if (bat == false && OnGround != false && _inv == false && _skill2 != false || detectingEntity.size() > 0)
+	if (bat == false && OnGround && _inv == false && _skill2 && ! isSeen() )
 	{
 		if (GetState() == StateMachine::IDLE ||
 			GetState() == StateMachine::RUNNING ||

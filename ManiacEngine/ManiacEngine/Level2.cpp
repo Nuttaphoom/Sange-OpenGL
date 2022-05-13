@@ -162,6 +162,14 @@ void Level2::LevelInit()
 	objectsList.push_back(obj);
 	player = obj;
 
+	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Bishop Sprite Sheet.png", 2, 9, glm::vec3(9005, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
+	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
+	_bishopTest->AddPatrolPos(glm::vec3(9005, -1152.0f, 0.0f));
+	_bishopTest->AddPatrolPos(glm::vec3(9000, -1152.0f, 0.0f));
+
+	EntityObjectsList.push_back(_bishopTest);
+	objectsList.push_back(_bishopTest);
+
 	Decon* d1 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1094.37, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d1->AddPatrolPos(glm::vec3(501.42, -1152, 0.0f));
 	d1->AddPatrolPos(glm::vec3(1094.37, -1152, 0.0f));
@@ -207,13 +215,7 @@ void Level2::LevelInit()
 	EntityObjectsList.push_back(d8);
 	objectsList.push_back(d8);
 
-	Bishop* _bishopTest = new Bishop("../Resource/Texture/Enemy/Bishop/Bishop Sprite Sheet.png", 2, 9, glm::vec3(9005, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
-	_bishopTest->SetAnimationLoop(0, 0, 12, 100);
-	_bishopTest->AddPatrolPos(glm::vec3(9005, -1152.0f, 0.0f));
-	_bishopTest->AddPatrolPos(glm::vec3(9000, -1152.0f, 0.0f));
 
-	EntityObjectsList.push_back(_bishopTest);
-	objectsList.push_back(_bishopTest);
 	
 	 
 #pragma endregion
@@ -234,23 +236,21 @@ void Level2::LevelInit()
 	objectsList.push_back(hpbar);
 
 	GUIObjectsList.push_back(hpbar);
-
+	SDL_Color whilteColor;
+	whilteColor.r = 255; whilteColor.g = 255; whilteColor.b = 255;
 	MenuHolder* pauseMenuHolder = new MenuHolder("PauseMenu");
-	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Continue", whilteColor, 25);
 	pauseMenuHolder->addButton(b1);
 	objectsList.push_back(b1);
 	GUIObjectsList.push_back(b1);
 
-	Button* b2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/TestNumber.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 500, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	Button* b2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 500, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Exit", whilteColor, 25);
 	pauseMenuHolder->addButton(b2);
 	objectsList.push_back(b2);
 	GUIObjectsList.push_back(b2);
 	pauseMenuHolder->disableButton();
- 
 
 	_menuHolderList.push_back(pauseMenuHolder);
-	//_menuHolderList.push_back(gameoverHolder);
-	//_menuHolderList.push_back(mainMenuHolder);
 	#pragma endregion
 
 	#pragma  Manager
@@ -374,7 +374,7 @@ void Level2::HandleKey(char key)
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	case 'e': player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL3; break;
 	case 'f': break;
 	case 't': break;
 	case 'h': break;

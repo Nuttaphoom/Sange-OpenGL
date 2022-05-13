@@ -111,7 +111,7 @@ void LevelCutscenesTwo::LevelInit()
 
 #pragma Sound
 	SoundPlayer::GetInstance()->ClearSound();
-	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutSceneTwo.mp3");
+	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/BGM/CompleteIntroCutSceneTwo.mp3");
 
 #pragma endregion 
 }

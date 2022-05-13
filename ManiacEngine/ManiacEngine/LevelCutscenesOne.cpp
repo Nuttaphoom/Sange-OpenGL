@@ -108,7 +108,7 @@ void LevelCutscenesOne::LevelInit()
 
 #pragma Sound
 	SoundPlayer::GetInstance()->ClearSound();
-	SoundPlayer::GetInstance()->PlayMusic("../Resource/Sound/BGM/CompleteIntroCutScene.mp3");
+	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/BGM/CompleteIntroCutScene.mp3");
 
 #pragma endregion 
 

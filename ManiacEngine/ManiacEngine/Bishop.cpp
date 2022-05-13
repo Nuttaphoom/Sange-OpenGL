@@ -61,7 +61,7 @@ void Bishop::Update(int deltatime) {
 }
 void Bishop::UpdateStateMachine(float deltatime) {
 	Player* p = Player::GetInstance();
-	if (IsPause())
+	if (IsPause() || p->isDead())
 		return;
 
 	if (_bishopState == StateMachine::IDLE) {
@@ -163,7 +163,7 @@ void Bishop::Attack(Entity* target) {
 	ChangeState(StateMachine::ATTACKING);
 	CastingThunder(glm::vec3(Player::GetInstance()->GetPos().x, GetPos().y + 256 * 1 - -1 * Player::GetInstance()->GetSize().y / 2, 1));
  	target->OnDamaged(100);  
-}
+ }
 void Bishop::ChangeState(StateMachine NextState) {
 	_countDownTime = 0;
 
@@ -193,6 +193,6 @@ StateMachine  Bishop::GetState() {
 
 void CastingThunder(glm::vec3 posToCast) {
 	SoundPlayer::GetInstance()->PlaySound("../Resource/Sound/SF/EnemySounds/Bishop/ThunderSound.mp3");
-	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128+32, 256 * -2, 1), 36.0f /2.0f * 25.0f / 1000.0f, "../Resource/Texture/VisualEffect/Thunder.png"
-		, 1, 26, 26, 12, ETextureName::BishopThunder);
+	AnimatorManager::GetInstance()->CreateAnimationFactory(vector<SpriteObject*>(), posToCast , glm::vec3(128+32, 256 * -2, 1), 2.50f/3.0f , "../Resource/Texture/VisualEffect/Thunder.png"
+		, 1, 26, 26, 24, ETextureName::BishopThunder);
 }

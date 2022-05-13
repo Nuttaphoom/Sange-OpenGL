@@ -34,7 +34,7 @@ class AudioEngine {
 	public:
 		float masterVolume = 0.5f;
 		float sfxVolume = 1.0f;
-		float musicVolume = 1.0f;
+		float musicVolume = 0.5f;
 
 		static AudioEngine* instance;
 		AudioEngine();

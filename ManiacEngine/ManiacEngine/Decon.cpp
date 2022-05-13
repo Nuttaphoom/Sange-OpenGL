@@ -9,9 +9,6 @@ bool CanWalkToNextTile(Entity* en) {
 	glm::vec3 posTarget =  glm::vec3(en->GetPos().x + 64 * en->DirectionSet ,en->GetPos().y -  256, en->GetPos().z) ;
 	RayCast ray = RayCast(en->GetPos(), posTarget) ;
 	glm::vec3 output = ray.GetOutPutPoint();
-	cout << "output.y : " << output.y << endl;
-	cout << "posTarget.y : " << posTarget.y << endl;
-	cout << "en.y : " << en->GetPos().y << endl; 
 	if (output.y == posTarget.y) {
 		return false ;
 	}
@@ -73,7 +70,7 @@ void Decon::Attack(Entity* target) {
 	}
 	for (int i = 0; i < 2; i++) {
 		if (invWALLs[i].Collide_W_Entity(*target)) {
- 			target->OnDamaged(0);
+ 			target->OnDamaged(999);
 			break;
 		}
 	}	
@@ -123,13 +120,10 @@ void Decon::UpdateStateMachine(float deltatime)
 
 	if (GetState() == StateMachine::RUNNING)
 	{
-		if (PlayerDetect(Player::GetInstance()) == true)
+		if (PlayerDetect(Player::GetInstance()) == true && CanWalkToNextTile(this))
 		{
-			cout << "should change ?" << endl;
-			if (CanWalkToNextTile(this)) {
-				cout << "change to chasing" << endl;
-					ChangeState(StateMachine::CHASING);
-			}
+			ChangeState(StateMachine::CHASING);
+			
 		}
 		else
 		{
@@ -139,7 +133,8 @@ void Decon::UpdateStateMachine(float deltatime)
 	
 	if (GetState() == StateMachine::IDLE)
 	{
-		ChangeState(StateMachine::RUNNING);
+		if (PatrolPos.size() > 0)
+			ChangeState(StateMachine::RUNNING);
 	}
 	
 	if (GetState() == StateMachine::CHASING) {

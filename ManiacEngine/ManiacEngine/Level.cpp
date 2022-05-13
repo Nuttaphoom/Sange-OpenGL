@@ -111,7 +111,7 @@ void Level::LevelInit()
 	interactableObjectManager->addInteractableObjects(gate_1); 
 	objectsList.push_back(gate_1);
 
-	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8131.87, -1152.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Barrel.png", 1, 1, glm::vec3(8131.87, -1135.0f - 32, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
 
 	interactableObjectManager->addInteractableObjects(hiding2);
 	objectsList.push_back(hiding2);
@@ -230,12 +230,12 @@ void Level::LevelInit()
  
 
 	MenuHolder* pauseMenuHolder = new MenuHolder("PauseMenu");
-	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1),"Continue",whilteColor,25);
 	pauseMenuHolder->addButton(b1);
 	objectsList.push_back(b1);
 	GUIObjectsList.push_back(b1);
 
-	Button* b2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight()/ 2 - 500, 0), glm::vec3(1668 / 11, 2224 / 11 * -1, 1));
+	Button* b2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight()/ 2 - 500, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Exit", whilteColor, 25);
 	pauseMenuHolder->addButton(b2);
 	objectsList.push_back(b2);
 	GUIObjectsList.push_back(b2);

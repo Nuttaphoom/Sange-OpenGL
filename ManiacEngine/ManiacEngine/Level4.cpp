@@ -103,27 +103,27 @@ void Level4::LevelInit()
 	interactableObjectManager->addInteractableObjects(flower_1);
 	objectsList.push_back(flower_1);
 
-	Hiding* hiding1 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(2320.64, -900.7 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding1 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(2320.64, -900.7  + 64, 0.0f), glm::vec3(128, -256, 1), glm::vec3(128, -256, 1));
 	interactableObjectManager->addInteractableObjects(hiding1);
 	objectsList.push_back(hiding1);
 
-	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(4494.55, -1152 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(4494.55, -1152  + 64, 0.0f), glm::vec3(128, -256, 1), glm::vec3(128, -256, 1));
 	interactableObjectManager->addInteractableObjects(hiding2);
 	objectsList.push_back(hiding2);
 
-	Hiding* hiding3 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(6447.64, -774 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding3 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(6447.64, -774 + 64, 0.0f), glm::vec3(128, -256, 1), glm::vec3(128, -256, 1));
 	interactableObjectManager->addInteractableObjects(hiding3);
 	objectsList.push_back(hiding3);
 
-	Hiding* hiding4 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(7378.39, -774 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding4 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(7378.39, -774  + 64, 0.0f), glm::vec3(128, -256, 1), glm::vec3(128, -256, 1));
 	interactableObjectManager->addInteractableObjects(hiding4);
 	objectsList.push_back(hiding4);
 
-	Hiding* hiding5 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(8162.69, -1152 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding5 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(8162.69, -1152  + 64, 0.0f), glm::vec3(128, -256, 1), glm::vec3(128, -256, 1));
 	interactableObjectManager->addInteractableObjects(hiding5);
 	objectsList.push_back(hiding5);
 
-	Hiding* hiding6 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(9185.27, -1152 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding6 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(9185.27, -1152  + 64, 0.0f), glm::vec3(128, -256, 1), glm::vec3(128, -256, 1));
 	interactableObjectManager->addInteractableObjects(hiding6);
 	objectsList.push_back(hiding6);
 
@@ -219,107 +219,81 @@ void Level4::LevelInit()
 
 
 #pragma region Entities 
-	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(125, -1176.0f + 64, 0.0f), glm::vec3(128, -128, 0), true, true);
+	Player* obj = Player::GetInstance("../Resource/Texture/Sange_Sprite.png", 10, 16, 3, glm::vec3(574.999 - 64 * 4, -1176.0f + 64, 0.0f), glm::vec3(128, -128, 0), true, true);
 	obj->SetAnimationLoop(0, 0, 4, 100);
 	EntityObjectsList.push_back(obj);
 	objectsList.push_back(obj);
 	player = obj;
-
+	/*
 	Decon* d1 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(574.999, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d1->AddPatrolPos(glm::vec3(574.999, -1152, 0.0f));
-	d1->AddPatrolPos(glm::vec3(315.448, -1152, 0.0f));
-	d1->SetAnimationLoop(0, 0, 12, 100);
+	d1->SetDirection(1);
 	EntityObjectsList.push_back(d1);
-	objectsList.push_back(d1);
+	objectsList.push_back(d1);*/
 
 	Priest* p1 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(802.578, -837.6 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p1->AddPatrolPos(glm::vec3(712.545, -837.6, 0.0f));
 	p1->AddPatrolPos(glm::vec3(924.84, -837.6, 0.0f));
-	p1->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p1);
 	objectsList.push_back(p1);
 
 	Decon* d2 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(1639.7, -837.55 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d2->AddPatrolPos(glm::vec3(1639.7, -837.55, 0.0f));
 	d2->AddPatrolPos(glm::vec3(1780.97, -837.55, 0.0f));
-	d2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d2);
 	objectsList.push_back(d2);
 
 	Priest* p2 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(2312.47, -459 + 64, 0.0f), glm::vec3(128, -128, 1));
 	p2->AddPatrolPos(glm::vec3(2296.7, -459, 0.0f));
 	p2->AddPatrolPos(glm::vec3(2353.99, -459, 0.0f));
-	p2->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p2);
 	objectsList.push_back(p2);
 
 	Decon* d3 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2108.99, -900 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d3->AddPatrolPos(glm::vec3(2108.99, -900, 0.0f));
 	d3->AddPatrolPos(glm::vec3(2268.51, -900, 0.0f));
-	d3->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d3);
 	objectsList.push_back(d3);
 
 	Decon* d4 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2547.88, -900 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d4->AddPatrolPos(glm::vec3(2547.88, -900, 0.0f));
 	d4->AddPatrolPos(glm::vec3(2304.51, -900, 0.0f));
-	d4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d4);
 	objectsList.push_back(d4);
 
 	Decon* d5 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(2910.83, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d5->AddPatrolPos(glm::vec3(2910.83, -1152, 0.0f));
 	d5->AddPatrolPos(glm::vec3(3068.15, -1152, 0.0f));
-	d5->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d5);
 	objectsList.push_back(d5);
 
 	Decon* d6 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3386.86, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d6->AddPatrolPos(glm::vec3(3262.06, -1152, 0.0f));
 	d6->AddPatrolPos(glm::vec3(3548.34, -1152, 0.0f));
-	d6->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d6);
 	objectsList.push_back(d6);
 
 	Decon* d7 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(3722.84, -774.55 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d7->AddPatrolPos(glm::vec3(3722.84, -774.55, 0.0f));
 	d7->AddPatrolPos(glm::vec3(3853.13, -774.55, 0.0f));
-	d7->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d7);
 	objectsList.push_back(d7);
 
-	Priest* p3 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(4892.77, -585.55 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p3->SetAnimationLoop(0, 0, 12, 100);
-	p3->SetDirection(1);
-	EntityObjectsList.push_back(p3);
-	objectsList.push_back(p3);
-
-	Priest* p4 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(5431.14, -585.6 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p4->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(p4);
-	objectsList.push_back(p4);
-
-	Decon* d8 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5254.39, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d8->SetAnimationLoop(0, 0, 12, 100);
-	EntityObjectsList.push_back(d8);
-	objectsList.push_back(d8);
-
 	Decon* d9 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5606.49, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d9);
 	objectsList.push_back(d9);
 
-	Priest* p5 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6163.74, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p5->SetAnimationLoop(0, 0, 12, 100);
+	/*Priest* p5 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6163.74, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
+	p5->SetDirection(-1);
 	EntityObjectsList.push_back(p5);
-	objectsList.push_back(p5);
+	objectsList.push_back(p5);*/
 
 	Priest* p6 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6857.56, -774 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p6->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p6);
 	objectsList.push_back(p6);
+	p6->SetDirection(-1);
 
-	Decon* d10 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6522.81, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
+
+	/*Decon* d10 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6522.81, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d10->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d10);
 	objectsList.push_back(d10);
@@ -327,31 +301,27 @@ void Level4::LevelInit()
 	Decon* d11 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7518.79, -774.6 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d11->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d11);
-	objectsList.push_back(d11);
+	objectsList.push_back(d11);*/
 
 	Priest* p7 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(7735.59, -585.6 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p7->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p7);
 	objectsList.push_back(p7);
 
 	Priest* p8 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(8430.65, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p8->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p8);
 	objectsList.push_back(p8);
 
 	Priest* p9 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(9187.31, -774 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p9);
 	objectsList.push_back(p9);
 
 	Decon* d12 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(9701.04, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
 	d12->AddPatrolPos(glm::vec3(9701.04, -1152, 0.0f));
 	d12->AddPatrolPos(glm::vec3(9284.45, -1152, 0.0f));
-	d12->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d12);
 	objectsList.push_back(d12);
 
-	Pope* popeTest = new Pope("../Resource/Texture/Enemy/Pope/Pope_SpriteSheet.png", 1, 4, glm::vec3(9918.51, -778.524f + 64, 0.0f), glm::vec3(128, -128, 1));
+	Pope* popeTest = new Pope("../Resource/Texture/Enemy/Pope/Pope_SpriteSheet.png", 1, 4, glm::vec3(9918.51+128, -778.524f + 64, 0.0f), glm::vec3(128, -128, 1));
 	EntityObjectsList.push_back(popeTest);
 	objectsList.push_back(popeTest);
 
@@ -383,6 +353,21 @@ void Level4::LevelInit()
 	objectsList.push_back(hpbar);
 
 	GUIObjectsList.push_back(hpbar);
+	SDL_Color whilteColor;
+	whilteColor.r = 255; whilteColor.g = 255; whilteColor.b = 255;
+	MenuHolder* pauseMenuHolder = new MenuHolder("PauseMenu");
+	Button* b1 = new Button(ButtonName::CONTINUE_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 250, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Continue", whilteColor, 25);
+	pauseMenuHolder->addButton(b1);
+	objectsList.push_back(b1);
+	GUIObjectsList.push_back(b1);
+
+	Button* b2 = new Button(ButtonName::EXIT_GAME_BUTTON, "../Resource/Texture/Button/button_frame.png", 4, 4, glm::vec3(GameEngine::GetInstance()->GetWindowWidth() / 2 - 650, GameEngine::GetInstance()->GetWindowHeight() / 2 - 500, 0), glm::vec3(1920 / 10, 528 / 5 * -1, 1), "Exit", whilteColor, 25);
+	pauseMenuHolder->addButton(b2);
+	objectsList.push_back(b2);
+	GUIObjectsList.push_back(b2);
+	pauseMenuHolder->disableButton();
+
+	_menuHolderList.push_back(pauseMenuHolder);
 
 #pragma endregion
 
@@ -511,7 +496,7 @@ void Level4::HandleKey(char key)
 	case 'q': GameData::GetInstance()->gGameStateNext = GameState::GS_QUIT; ; break;
 	case 'e': player->HandleKey(key); break;
 	case 'p': CheckPoint::GetInstance()->LoadCheckPoint(); break;
-	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_LEVEL2; break;
+	case 'n': GameData::GetInstance()->gGameStateNext = GameState::GS_CUTSCENES2; break;
 	case 'f': break;
 	case 't': break;
 	case 'h': break;

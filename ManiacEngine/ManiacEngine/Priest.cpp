@@ -56,9 +56,10 @@ void Priest::Attack(Entity* target) {
 	glm::vec3 lightBallSpawnPos; 
 	lightBallSpawnPos.x = GetPos().x - (GetSize().x / 4 );
 	lightBallSpawnPos.y = GetPos().y + (-1 * GetSize().y / 4); 
-	PriestLightBall* newBall = new PriestLightBall(lightBallTexture, 1, 4, lightBallSpawnPos, glm::vec3(96, -96, 1), target->GetPos());
+	PriestLightBall* newBall = new PriestLightBall(lightBallTexture, 1, 4, lightBallSpawnPos, glm::vec3(64, -64, 1), target->GetPos());
 	_activePriestLightBalls.push_back(newBall);
-	ChangeState(StateMachine::ATTACKING);
+	GameStateController::GetInstance()->currentLevel->AddObjectList(newBall); 
+ 	ChangeState(StateMachine::ATTACKING);
 }
 
 void Priest::EnterAttackZone(Entity* target) {
@@ -70,12 +71,8 @@ void Priest::Update(int deltatime) {
 		return;
 
 	Entity::Update(deltatime);
-	UpdateStateMachine(deltatime);
-
-	for (int i = 0; i < _activePriestLightBalls.size(); i++) {
-		_activePriestLightBalls[i]->Update(deltatime); 
-	}
-	 
+	UpdateStateMachine(deltatime);	 
+ 
 }
 
 void Priest::StartAttack() {
@@ -189,6 +186,14 @@ void Priest::AddPatrolPos(glm::vec3 pos)
 	PatrolPos.push_back(pos);
 }
 
+void Priest::RespawnThisObject() {
+	Entity::RespawnThisObject();
+	for (int i = _activePriestLightBalls.size() - 1; i >= 0; i--) {
+		PriestLightBall* p = _activePriestLightBalls[i]; 
+		_activePriestLightBalls.erase(_activePriestLightBalls.begin() + i);
+		p->SetPause(true);
+	}
+}
 void Priest::Patrol() {
 	if (PatrolPos.size() == 0) return;
 
@@ -212,10 +217,6 @@ StateMachine Priest::GetState() { return _priestState; }
 void Priest::Render(glm::mat4 globalModelTransform)
 {
 	Entity::Render(globalModelTransform);
-	for (int i = 0; i < _activePriestLightBalls.size(); i++) {
-		_activePriestLightBalls[i]->Render(globalModelTransform);
-	}
-
 }
 
 PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size,glm::vec3 Destination ) :Entity(texture, row, column,100000,250 ,Pos, Size,Size) {
@@ -228,6 +229,7 @@ PriestLightBall::PriestLightBall(unsigned int texture, int row, int column, glm:
 	stateMachine = StateMachine::TRANSFORM;  
 	SetAnimationLoop(1, 1, 4, 500);
 	TranslateVelocity(glm::normalize(movingVelocity) * GetMoveSpeed()  );
+
 
 }
 
@@ -246,10 +248,10 @@ void PriestLightBall::Update(int deltaTime) {
 
 	int a = invisibleObject->Collide_W_Entity(*player); 
  	if (a > 0) {
-		SetPause(true);
-		player->OnDamaged(99);
+		SetPause(true) ;
+		player->OnDamaged(99) ;
 	}
-	else if (abs(player->GetPos().x - GetPos().x) < 5 && abs(player->GetPos().y - GetPos().y < 5 )) {
+	else if (abs(player->GetPos().x - GetPos().x) < 5 && abs(player->GetPos().y - GetPos().y) < 5 ) {
 		SetPause(true);
 		player->OnDamaged(99);
 	}

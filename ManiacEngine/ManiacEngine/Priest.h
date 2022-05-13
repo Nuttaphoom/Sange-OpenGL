@@ -33,6 +33,8 @@ public:
 	virtual bool PlayerDetect(Entity* p);
 	virtual void  PlayerChase(Entity* p);
 	virtual void  Render(glm::mat4 globalModelTransform);
+	virtual void RespawnThisObject();
+
 };
 
 class PriestLightBall : public Entity {

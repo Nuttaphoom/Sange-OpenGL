@@ -19,7 +19,7 @@ AnimatorManager::AnimatorManager() :Manager("TEST", 0, 0, glm::vec3(0, 0, 0), gl
 	textures[ETextureName::BishopThunder] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/VisualEffect/Thunder.png");
 	textures[ETextureName:: PriestDeadAnimationTexture] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Priest/Priest_Dead_SpriteSheet.png");
 	textures[ETextureName::BishopDeadAnimationTexture] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Bishop/Bishop_Dead_SpriteSheet.png");
-
+	textures[ETextureName::PopeDeadAnimationTexture] = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/Pope/Pope_Dead_SpriteSheet.png");
 }
 
 //Responsible to "hide" (not replace) object(s) and spawn animationObj in their position with some given adjustment 
@@ -64,15 +64,16 @@ void AnimatorManager::CreateAnimationFactory(vector<SpriteObject*> objToHide, gl
 	return;
 }
 
-
+float dataText = 0;
 void AnimatorManager::Update(int deltaTime) {
+	dataText += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime(); ;
 	for (int i = 0; i < spriteObjectDict.size(); i++) {
 		//Update for aniation object 
 		AnimatorObj* spriteObject = spriteObjectDict[i];
 		spriteObject->AnimationObject->Update(deltaTime);
 
 		spriteObject->lifespan -= 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime();
- 		if (spriteObject->lifespan <= 0) {
+  		if (spriteObject->lifespan <= 0) {
 			delete spriteObject->AnimationObject;
 
 			for (int k = 0; k < spriteObject->PausedObj.size(); k++) {
@@ -80,8 +81,10 @@ void AnimatorManager::Update(int deltaTime) {
 			}
 
 			spriteObjectDict.erase(spriteObjectDict.begin() + i);
+			break;
 		}
 	}
+	cout << endl;
 }
 
 void AnimatorManager::Render(glm::mat4 globalModelTransform) {

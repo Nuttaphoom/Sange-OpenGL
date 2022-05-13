@@ -6,6 +6,7 @@
 
 void PlayerHandleKey::PlayerControl(char key) {
 
+	
 	Player* player = Player::GetInstance(); 
 	switch (key)
 	{
