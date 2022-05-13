@@ -53,13 +53,13 @@ void CreateDeadAnim(Entity* en, string fileName, int row, int col, int howManyFr
 
 }
 
-Decon::Decon(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80, Pos, Size, glm::vec3(Size.x / 2, Size.y / 2, 0))
+Decon::Decon(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(texture, row, column, 100, 80, Pos, Size, glm::vec3(Size.x / 3, Size.y / 2, 0))
 {
 	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f;
 }
 
-Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(Size.x / 2,Size.y,0))
+Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(Size.x / 3,Size.y,0))
 {
  	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f; 

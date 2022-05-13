@@ -351,7 +351,7 @@ void Player::OnDamaged(int damage) {
 	if (IsPause() || GetState() == StateMachine::ATTACKING)
 		true; 
 
-	//this->HP -= damage;
+	this->HP -= damage;
 	notify(0); //Notify HP Observer 
 		
 	if (this->HP <= 0) {
