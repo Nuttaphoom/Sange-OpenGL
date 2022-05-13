@@ -103,27 +103,27 @@ void Level4::LevelInit()
 	interactableObjectManager->addInteractableObjects(flower_1);
 	objectsList.push_back(flower_1);
 
-	Hiding* hiding1 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(2320.64, -900.7, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding1 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(2320.64, -900.7 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(hiding1);
 	objectsList.push_back(hiding1);
 
-	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(4494.55, -1152, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding2 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(4494.55, -1152 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(hiding2);
 	objectsList.push_back(hiding2);
 
-	Hiding* hiding3 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(6447.64, -774, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding3 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(6447.64, -774 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(hiding3);
 	objectsList.push_back(hiding3);
 
-	Hiding* hiding4 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(7378.39, -774, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding4 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(7378.39, -774 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(hiding4);
 	objectsList.push_back(hiding4);
 
-	Hiding* hiding5 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(8162.69, -1152, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding5 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(8162.69, -1152 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(hiding5);
 	objectsList.push_back(hiding5);
 
-	Hiding* hiding6 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(9185.27, -1152, 0.0f), glm::vec3(90, -100, 1), glm::vec3(128, -128, 1));
+	Hiding* hiding6 = new Hiding("../Resource/Texture/Interactable/Closet.png", 1, 1, glm::vec3(9185.27, -1152 - 15, 0.0f), glm::vec3(50, -100, 1), glm::vec3(128, -128, 1));
 	interactableObjectManager->addInteractableObjects(hiding6);
 	objectsList.push_back(hiding6);
 
@@ -289,78 +289,57 @@ void Level4::LevelInit()
 	objectsList.push_back(d7);
 
 	Priest* p3 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(4892.77, -585.55 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p3->AddPatrolPos(glm::vec3(4892.77, -585.55, 0.0f));
-	p3->AddPatrolPos(glm::vec3(4892.77, -585.55, 0.0f));
 	p3->SetAnimationLoop(0, 0, 12, 100);
+	p3->SetDirection(1);
 	EntityObjectsList.push_back(p3);
 	objectsList.push_back(p3);
 
 	Priest* p4 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(5431.14, -585.6 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p4->AddPatrolPos(glm::vec3(5431.14, -585.6, 0.0f));
-	p4->AddPatrolPos(glm::vec3(5431.14, -585.6, 0.0f));
 	p4->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p4);
 	objectsList.push_back(p4);
 
 	Decon* d8 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5254.39, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d8->AddPatrolPos(glm::vec3(5254.39, -837, 0.0f));
-	d8->AddPatrolPos(glm::vec3(5254.39, -837, 0.0f));
 	d8->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d8);
 	objectsList.push_back(d8);
 
 	Decon* d9 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(5606.49, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d9->AddPatrolPos(glm::vec3(5606.49, -837, 0.0f));
-	d9->AddPatrolPos(glm::vec3(5606.49, -837, 0.0f));
 	d9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d9);
 	objectsList.push_back(d9);
 
 	Priest* p5 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6163.74, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p5->AddPatrolPos(glm::vec3(6163.74, -837, 0.0f));
-	p5->AddPatrolPos(glm::vec3(6163.74, -837, 0.0f));
 	p5->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p5);
 	objectsList.push_back(p5);
 
 	Priest* p6 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(6857.56, -774 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p6->AddPatrolPos(glm::vec3(6857.56, -774, 0.0f));
-	p6->AddPatrolPos(glm::vec3(6857.56, -774, 0.0f));
 	p6->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p6);
 	objectsList.push_back(p6);
 
 	Decon* d10 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(6522.81, -1152 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d10->AddPatrolPos(glm::vec3(6522.81, -1152, 0.0f));
-	d10->AddPatrolPos(glm::vec3(6522.81, -1152, 0.0f));
 	d10->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d10);
 	objectsList.push_back(d10);
 
 	Decon* d11 = new Decon("../Resource/Texture/Enemy/Decon/Decon_SpriteSheet.png", 2, 12, glm::vec3(7518.79, -774.6 + 64, 0.0f), glm::vec3(128, -128, 1));
-	d11->AddPatrolPos(glm::vec3(7518.79, -774.6, 0.0f));
-	d11->AddPatrolPos(glm::vec3(7518.79, -774.6, 0.0f));
 	d11->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(d11);
 	objectsList.push_back(d11);
 
 	Priest* p7 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(7735.59, -585.6 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p7->AddPatrolPos(glm::vec3(7735.59, -585.6, 0.0f));
-	p7->AddPatrolPos(glm::vec3(7735.59, -585.6, 0.0f));
 	p7->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p7);
 	objectsList.push_back(p7);
 
 	Priest* p8 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(8430.65, -837 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p8->AddPatrolPos(glm::vec3(8430.65, -837, 0.0f));
-	p8->AddPatrolPos(glm::vec3(8430.65, -837, 0.0f));
 	p8->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p8);
 	objectsList.push_back(p8);
 
 	Priest* p9 = new Priest("../Resource/Texture/Enemy/Priest/PriestSpriteSheet.png", 3, 30, glm::vec3(9187.31, -774 + 64, 0.0f), glm::vec3(128, -128, 1));
-	p9->AddPatrolPos(glm::vec3(9187.31, -774, 0.0f));
-	p9->AddPatrolPos(glm::vec3(9187.31, -774, 0.0f));
 	p9->SetAnimationLoop(0, 0, 12, 100);
 	EntityObjectsList.push_back(p9);
 	objectsList.push_back(p9);
