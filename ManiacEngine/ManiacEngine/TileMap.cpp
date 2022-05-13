@@ -25,7 +25,7 @@ void TileMap::SetUV(float widthEachCell , float heightEachCell, int columnMax, i
  
 
 TileMap::TileMap(int width, int height, int** Mapdata_Front_Layer , int** Mapdata_Middle_Layer,int** Mapdata_Back_Layer, int **ColMapdata, string texture_path, int rowMax, int columnMax) {
-	bool turnOnCollisionVisual = false;
+	bool turnOnCollisionVisual = true ;
 	this->Map_Height = height; 
 	this->Map_Width = width; 
 	width -= 1;

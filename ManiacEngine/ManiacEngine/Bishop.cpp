@@ -55,6 +55,7 @@ void Bishop::Update(int deltatime) {
 	if (IsPause())
 		return;
 
+	cout << "bishop update " << endl;
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
 	 
@@ -62,7 +63,8 @@ void Bishop::Update(int deltatime) {
 }
 void Bishop::UpdateStateMachine(float deltatime) {
 	Player* p = Player::GetInstance();
-
+	if (IsPause())
+		return;
 	if (_bishopState == StateMachine::IDLE) {
  		_countDownTime += 1.0f / 1000 * GameEngine::GetInstance()->GetDeltaTime() ; 
 		SetDirection(1);
@@ -94,7 +96,8 @@ void Bishop::UpdateStateMachine(float deltatime) {
 		}
 	}
 
-	if (PlayerDetect(p) && _bishopState != StateMachine::ATTACKING) {
+	if (PlayerDetect(p) && _bishopState != StateMachine::ATTACKING && ! isDead() ){
+		cout << "Bishop attack" << endl;
 		Attack(p);
 	}
 }
@@ -176,6 +179,7 @@ void Bishop::ChangeState(StateMachine NextState) {
 		SetAnimationLoop(0, 3, 6, 150.0f);
 	}
 	else if (NextState == StateMachine::Die) {
+		SetPause(true);
 		CreateBishopDeadAnim(this);
 	}
 

@@ -121,10 +121,7 @@ void Entity::Render(glm::mat4 globalModelTransform)
 
 void Entity::InvincibleFrame(int deltatime)
 {
-	if (IFrame >= 0)
-	{
-		IFrame--;
-	}
+	
 }
 
 void Entity::Update(int deltatime)

@@ -30,7 +30,6 @@ class Entity : public SpriteObject
 		float MoveSpeed;
 		glm::vec3 velocity; 
 		glm::vec3 applyingVelocity; 
-		float IFrame;
 		enum StateMachine stateMachine ;
 		int collisionNumber; //1 = TOP, 2 = BOTTOM , 3 = LEFT , 4 = RIGHT  
 
