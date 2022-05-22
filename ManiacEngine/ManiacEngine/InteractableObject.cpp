@@ -1,7 +1,11 @@
 #include "InteractableObject.h"
-
+#include "GameStateController.h"
  
-InteractableObject::InteractableObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 ColliderSize) : SpriteObject(fileName,row,column,Pos,Size) , ColliderSize(ColliderSize){}
+InteractableObject::InteractableObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, glm::vec3 ColliderSize) : SpriteObject(fileName,row,column,Pos,Size) , ColliderSize(ColliderSize){
+	feedbackImage = new SpriteObject("../Resource/Texture/GUI/InteractFeedback.png", 1, 1, glm::vec3(Pos.x,Pos.y + 100,Pos.z), glm::vec3(64,-64,1));
+	feedbackImage->SetPause(true); 
+	GameStateController::GetInstance()->currentLevel->AddObjectList(feedbackImage); 
+}
 
 void InteractableObject::RespawnThisObject() {
 
@@ -13,6 +17,14 @@ void InteractableObject::HandleKey(char k) {
 
 void InteractableObject::Update(int deltaTime) {
 	SpriteObject::Update(deltaTime); 
+
+	if (InCollideRadius(this, Player::GetInstance())> 0) {
+		feedbackImage->SetPause(false);
+	}
+	else {
+		feedbackImage->SetPause(true);
+
+	}
 }
 
  
@@ -97,6 +109,8 @@ int InteractableObject::InCollideRadius(InteractableObject* in,Entity *en) {
 			CollideDetection += 2;
 		}
 	}
+
+
 
 	return  CollideDetection;
 }

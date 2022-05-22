@@ -60,7 +60,9 @@ SpriteObject::~SpriteObject()
 
 void SpriteObject::Render(glm::mat4 globalModelTransform)
 {
-	
+	if (IsPause())
+		return;
+
 	SquareMeshVbo* squareMesh = dynamic_cast<SquareMeshVbo*> (GameEngine::GetInstance()->GetRenderer()->GetMesh(SquareMeshVbo::MESH_NAME));
 
 	GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();

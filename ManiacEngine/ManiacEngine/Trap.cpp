@@ -78,6 +78,8 @@ void Trap::Called() {
 }
 
 void Trap::Update(int deltaTime) {
+	InteractableObject::Update(deltaTime); 
+
 	if (refused)
 		return; 
 
