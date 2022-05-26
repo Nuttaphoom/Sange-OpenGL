@@ -21,6 +21,7 @@ private:
 	int timeCount;
 	bool playAnim; 
 	bool Pause  ;
+	int renderMode = 1; 
 
 
 public:
@@ -32,6 +33,8 @@ public:
  	~SpriteObject();
 
 	bool IsPause();
+	void ChangeRenderMode(int i); // 1 = normal 2 = half transparent 
+
 	virtual void SetPause(bool b);
 
 	virtual void Render(glm::mat4 globalModelTransform);
@@ -42,7 +45,8 @@ public:
 	virtual void SetTexture(string path);
 	virtual unsigned int GetTexture();
 	virtual void SetUV(float uvs[8]); 
-	virtual float* GetUV(); 
+	virtual float* GetUV();
+	
 
 
 };

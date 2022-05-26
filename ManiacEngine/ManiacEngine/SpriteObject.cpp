@@ -81,7 +81,7 @@ void SpriteObject::Render(glm::mat4 globalModelTransform)
 
 		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
-		glUniform1i(modeId, 1);
+		glUniform1i(modeId, renderMode);
 		squareMesh->AdjustTexcoord(uv);
 		squareMesh->Render();
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -181,4 +181,8 @@ bool SpriteObject::IsPause() {
 
 void SpriteObject::SetPause(bool b) {
 	this->Pause = b ;
+}
+
+void SpriteObject::ChangeRenderMode(int i) {
+	this->renderMode = i; 
 }

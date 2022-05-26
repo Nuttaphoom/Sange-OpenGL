@@ -54,12 +54,18 @@ Decon::Decon(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3
 {
 	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f;
+	fovImage = new SpriteObject("../Resource/Texture/Enemy/FOVTest.png", 1, 1, Pos, glm::vec3(64 * 6, Size.y - 64, 1));
+	fovImage->ChangeRenderMode(2);
 }
 
 Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(Size.x / 3,Size.y,0))
 {
  	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f; 
+	fovImage = new SpriteObject("../Resource/Texture/Enemy/FOVTest.png", 1, 1, Pos, glm::vec3(64 * 6, Size.y - 64, 1));
+	fovImage->ChangeRenderMode(2);
+
+
 } 
 
 void Decon::Attack(Entity* target) {
@@ -84,6 +90,10 @@ void Decon::Update(int deltatime) {
 
 	Entity::Update(deltatime);
 	UpdateStateMachine(deltatime);
+
+	
+	fovImage->SetPosition(glm::vec3(GetPos().x +(DirectionSet * (32 + 16 + 128 + 16)),GetPos().y+32,GetPos().z));
+	fovImage->SetSize(abs(fovImage->GetSize().x) * DirectionSet, fovImage->GetSize().y);
 }
 
 void Decon::EnterAttackZone(Entity* target) {
@@ -247,4 +257,12 @@ void Decon::PlayerChase(Entity* p) {
 		SetDirection(1);
 		TranslateVelocity(glm::vec3(this->GetMoveSpeed(), 0, 0));
 	}
+}
+
+void Decon::Render(glm::mat4 globalModelTransform) {
+	if (IsPause())
+		return; 
+
+	Entity::Render(globalModelTransform); 
+	fovImage->Render(globalModelTransform); 
 }

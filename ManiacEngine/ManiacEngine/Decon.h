@@ -10,6 +10,7 @@ class Decon : public Enemy {
 		float attack_delay = 0;
 		float chasing_delay = 0;
 		float attack_cooldown_counter = 0;
+		SpriteObject* fovImage;
 
 	public :
 	Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size);
@@ -25,4 +26,6 @@ class Decon : public Enemy {
 	virtual void AddPatrolPos(glm::vec3 pos);
 	virtual void Patrol();
 	virtual void  PlayerChase(Entity* p)  ;
+	virtual void Render(glm::mat4 globalModelTransform);
+
  };
