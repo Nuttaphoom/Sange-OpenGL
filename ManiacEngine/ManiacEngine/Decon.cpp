@@ -4,6 +4,7 @@
 #include "Raycast.h"
 #include "GameData.h"
 #include "AnimatorManager.h"
+#include "GameStateController.h"
 
 bool CanWalkToNextTile(Entity* en) {
 	glm::vec3 posTarget =  glm::vec3(en->GetPos().x + 64 * en->DirectionSet ,en->GetPos().y -  256, en->GetPos().z) ;
@@ -55,7 +56,8 @@ Decon::Decon(unsigned int texture, int row, int column, glm::vec3 Pos, glm::vec3
 	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f;
 	fovImage = new SpriteObject("../Resource/Texture/Enemy/FOVTest.png", 1, 1, Pos, glm::vec3(64 * 6, Size.y - 64, 1));
-	fovImage->ChangeRenderMode(2);
+	fovImage->ChangeRenderMode(3);
+	GameStateController::GetInstance()->currentLevel->AddObjectList(fovImage);
 }
 
 Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) :Enemy(fileName, row, column,100, 80,Pos,Size,glm::vec3(Size.x / 3,Size.y,0))
@@ -63,7 +65,10 @@ Decon::Decon(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size
  	DeconState = StateMachine::RUNNING;
 	attack_delay = 2.0f; 
 	fovImage = new SpriteObject("../Resource/Texture/Enemy/FOVTest.png", 1, 1, Pos, glm::vec3(64 * 6, Size.y - 64, 1));
-	fovImage->ChangeRenderMode(2);
+	fovImage->ChangeRenderMode(3);
+	GameStateController::GetInstance()->currentLevel->AddObjectList(fovImage);
+
+	
 
 
 } 
@@ -93,15 +98,15 @@ void Decon::Update(int deltatime) {
 
 	
 	fovImage->SetPosition(glm::vec3(GetPos().x +(DirectionSet * (32 + 16 + 128 + 16)),GetPos().y+32,GetPos().z));
-	fovImage->SetSize(abs(fovImage->GetSize().x) * DirectionSet, fovImage->GetSize().y);
+fovImage->DirectionSet = DirectionSet;
 }
 
 void Decon::EnterAttackZone(Entity* target) {
 	////////////
- 
-	if (GetState() == StateMachine::ATTACKING || GetState() == StateMachine::Die|| target->GetState() == StateMachine::HIDING) 
-		return; 
-	
+
+	if (GetState() == StateMachine::ATTACKING || GetState() == StateMachine::Die || target->GetState() == StateMachine::HIDING)
+		return;
+
 
 	InvisibleObject invWALLs[2];
 	for (int i = 0; i < 2; i++) {
@@ -109,17 +114,17 @@ void Decon::EnterAttackZone(Entity* target) {
 		invWALLs[i].SetSize(80, 32);
 	}
 
- 
- 	for (int i = 0; i < 2; i++) {
+
+	for (int i = 0; i < 2; i++) {
 		if (invWALLs[i].Collide_W_Entity(*target)) {
- 			StartAttack();
+			StartAttack();
 		}
-		
+
 	}
 }
 
 void Decon::StartAttack() {
-	ChangeState(StateMachine::ATTACKING) ; 
+	ChangeState(StateMachine::ATTACKING);
 
 }
 
@@ -133,26 +138,26 @@ void Decon::UpdateStateMachine(float deltatime)
 		if (PlayerDetect(Player::GetInstance()) == true && CanWalkToNextTile(this))
 		{
 			ChangeState(StateMachine::CHASING);
-			
+
 		}
 		else
 		{
- 			Patrol();
+			Patrol();
 		}
 	}
-	
+
 	if (GetState() == StateMachine::IDLE)
 	{
 		if (PatrolPos.size() > 0)
 			ChangeState(StateMachine::RUNNING);
 	}
-	
+
 	if (GetState() == StateMachine::CHASING) {
 		if (PlayerDetect(Player::GetInstance()) == false)
 		{
 			chasing_delay += deltatime;
 
-			if (! CanWalkToNextTile(this)) {
+			if (!CanWalkToNextTile(this)) {
 				ChangeState(StateMachine::RUNNING);
 			}
 			else {
@@ -160,7 +165,7 @@ void Decon::UpdateStateMachine(float deltatime)
 			}
 
 			if (chasing_delay > 2000) {
-				chasing_delay = 0; 
+				chasing_delay = 0;
 				ChangeState(StateMachine::RUNNING);
 
 			}
@@ -169,14 +174,14 @@ void Decon::UpdateStateMachine(float deltatime)
 			if (!CanWalkToNextTile(this)) {
 				ChangeState(StateMachine::RUNNING);
 			}
-			chasing_delay = 0; 
+			chasing_delay = 0;
 			PlayerChase(Player::GetInstance());
 		}
 	}
 
 	if (GetState() == StateMachine::ATTACKING) {
- 		attack_delay += deltatime ;  
-		if (attack_delay > 75*8-(14/100)) {
+		attack_delay += deltatime;
+		if (attack_delay > 75 * 8 - (14 / 100)) {
 			if (PlayerDetect(Player::GetInstance())) {
 				Attack(Player::GetInstance());
 				attack_delay = 0;
@@ -187,12 +192,13 @@ void Decon::UpdateStateMachine(float deltatime)
 		}
 	}
 	else {
-		EnterAttackZone(Player::GetInstance()); 
+		EnterAttackZone(Player::GetInstance());
 	}
 }
 
 void Decon::ChangeState(StateMachine nextState)
 {
+ 
 	DeconState = nextState;
 	this->velocity = glm::vec3(0, 0, 0);
 
@@ -216,6 +222,7 @@ void Decon::ChangeState(StateMachine nextState)
 	}
 	else if (GetState() == StateMachine::Die) {
 		SetPause(true) ; 
+		fovImage->SetPause(true); 
   		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.0f);
 	}
 }
@@ -225,6 +232,10 @@ StateMachine Decon::GetState() {
 	return this->DeconState ; 
 }
  
+void Decon::RespawnThisObject() {
+	Entity::RespawnThisObject();
+	fovImage->SetPause(false);
+}
 
 void Decon::AddPatrolPos(glm::vec3 pos)
 {
@@ -264,5 +275,4 @@ void Decon::Render(glm::mat4 globalModelTransform) {
 		return; 
 
 	Entity::Render(globalModelTransform); 
-	fovImage->Render(globalModelTransform); 
 }

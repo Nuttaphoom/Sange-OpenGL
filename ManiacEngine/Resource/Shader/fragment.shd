@@ -21,5 +21,8 @@ void main()
     }else if (renderMode == 2) {
         finalColor = texture(ourTexture,TexCoord) ; 
         finalColor.a *= 0.45f;
+    }else if (renderMode == 3) {
+        finalColor = texture(ourTexture,TexCoord) ; 
+        finalColor.a *= 0.35f;    
     }
 }

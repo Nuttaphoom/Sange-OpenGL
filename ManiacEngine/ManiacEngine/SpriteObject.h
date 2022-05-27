@@ -25,6 +25,8 @@ private:
 
 
 public:
+	int DirectionSet = 1;
+
 	SpriteObject(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size) ;
 	SpriteObject(unsigned int texture , int row, int column,glm::vec3 Pos, glm::vec3 Size);
 	SpriteObject() {

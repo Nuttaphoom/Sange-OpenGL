@@ -27,5 +27,7 @@ class Decon : public Enemy {
 	virtual void Patrol();
 	virtual void  PlayerChase(Entity* p)  ;
 	virtual void Render(glm::mat4 globalModelTransform);
+	virtual void RespawnThisObject();
+
 
  };

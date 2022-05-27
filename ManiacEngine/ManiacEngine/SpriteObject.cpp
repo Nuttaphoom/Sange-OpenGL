@@ -68,21 +68,21 @@ void SpriteObject::Render(glm::mat4 globalModelTransform)
 	GLuint modelMatixId = GameEngine::GetInstance()->GetRenderer()->GetModelMatrixAttrId();
 	GLuint modeId = GameEngine::GetInstance()->GetRenderer()->GetModeUniformId();
 
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, GetTexture());
 	if (modelMatixId == -1) {
 		cout << "Error: Can't perform transformation " << endl;
 		return;
 	}
 
 	glm::mat4 currentMatrix = this->getTransform();
- 
+	/*Instead of rendering it directly, we apply a scale matrix according to the DirectionSet value*/
+	currentMatrix = glm::scale(currentMatrix, glm::vec3(DirectionSet, 1, 1));
 
 	if (squareMesh != nullptr) {
-
 		currentMatrix = globalModelTransform * currentMatrix;
 		glUniformMatrix4fv(modelMatixId, 1, GL_FALSE, glm::value_ptr(currentMatrix));
 		glUniform1i(modeId, renderMode);
-		squareMesh->AdjustTexcoord(uv);
+		squareMesh->AdjustTexcoord(GetUV());
 		squareMesh->Render();
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

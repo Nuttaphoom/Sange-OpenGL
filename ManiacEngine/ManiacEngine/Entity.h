@@ -39,7 +39,6 @@ class Entity : public SpriteObject
 		float Default_MoveSpeed;
 	public:
 		bool OnGround = false;
-		int DirectionSet = 1;
 		bool _inv = false;
 		int _renderType = 1;
 		//Will be changed when StateMachine is changed 
