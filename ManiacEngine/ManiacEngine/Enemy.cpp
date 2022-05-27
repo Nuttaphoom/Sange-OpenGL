@@ -1,14 +1,42 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Raycast.h"
+#include "GameStateController.h"
+unsigned int Enemy::aleartSignTexture = NULL ;
+unsigned int Enemy::foundPlayerSignTexture = NULL; 
 Enemy::Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 CollisionSize) : Entity(fileName, row, column, HP, MoveSpeed, Pos, Size, CollisionSize)
 {
 	stateMachine = StateMachine::RUNNING;
+	if (aleartSignTexture == NULL) 
+		aleartSignTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/AleartIcon.png");
+
+	if (foundPlayerSignTexture == NULL)
+		foundPlayerSignTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/FoundPlayerIcon.png");
+
+	foundPlayerSign = new SpriteObject(foundPlayerSignTexture, 1, 1, glm::vec3(Pos.x, Pos.y, Pos.z), glm::vec3(955 / 28, -1649 / 28, 1));
+	foundPlayerSign->SetPause(true);
+	GameStateController::GetInstance()->currentLevel->AddObjectList(foundPlayerSign);
+
+	aleartSign = new SpriteObject(aleartSignTexture, 1, 1, glm::vec3(Pos.x,Pos.y,Pos.z), glm::vec3(955/28,-1649/28,1));
+	aleartSign->SetPause(true); 
+	GameStateController::GetInstance()->currentLevel->AddObjectList(aleartSign);
+	
 }
 
 Enemy::Enemy(unsigned int text, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 CollisionSize) : Entity(text, row, column, HP, MoveSpeed, Pos, Size, CollisionSize)
 {
 	stateMachine = StateMachine::RUNNING;
+	if (aleartSignTexture == NULL)
+		aleartSignTexture = GameEngine::GetInstance()->GetRenderer()->LoadTexture("../Resource/Texture/Enemy/AleartIcon.png");
+
+	foundPlayerSign = new SpriteObject(foundPlayerSignTexture, 1, 1, glm::vec3(Pos.x, Pos.y, Pos.z), glm::vec3(955 / 28, -1649 / 28, 1));
+	foundPlayerSign->SetPause(true);
+	GameStateController::GetInstance()->currentLevel->AddObjectList(foundPlayerSign);
+
+	aleartSign = new SpriteObject(aleartSignTexture, 1, 1, glm::vec3(Pos.x, Pos.y, Pos.z), glm::vec3(955 / 28, -1649 / 28, 1));
+	aleartSign->SetPause(true);
+	GameStateController::GetInstance()->currentLevel->AddObjectList(aleartSign);
+
 }
 
 

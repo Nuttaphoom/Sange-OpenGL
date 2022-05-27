@@ -10,6 +10,7 @@ class DrawableObject
 protected:
 	glm::vec3 pos = glm::vec3(0, 0, 0);
 	glm::vec3 size = glm::vec3(0, 0, 0);
+	glm::vec3 rotation = glm::vec3(0, 0, 0); 
 
 public:
 	glm::mat4 getTransform();
@@ -23,7 +24,7 @@ public:
 	void SetSize(float sizeX, float sizeY);
 	void SetPosition(glm::vec3 newPosition);
 	void Translate(glm::vec3 moveDistance);
- 
+	void Rotate(float amoutX, float amoutY); 
 	//Rotate, Scale ???
 
 };

@@ -8,8 +8,10 @@
 glm::mat4 DrawableObject::getTransform()
 {
 	glm::mat4 transform = glm::mat4(1.0);
+
 	transform = glm::translate(transform, glm::vec3(pos.x, pos.y, 0));
-	transform = glm::scale(transform, glm::vec3(size.x, size.y, 1));
+ 	transform = glm::scale(transform, glm::vec3(size.x, size.y, 1));
+  
 	return transform;
 }
 
@@ -36,6 +38,11 @@ void DrawableObject::SetPosition(glm::vec3 newPosition)
 void DrawableObject::Translate(glm::vec3 moveDistance)
 {
 	pos = pos + moveDistance;
+}
+
+void DrawableObject::Rotate(float xAmout, float yAmout) {
+	rotation.x = xAmout; 
+	rotation.y = yAmout; 
 }
 
 void DrawableObject::Update(int deltaTime)

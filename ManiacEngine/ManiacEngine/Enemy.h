@@ -9,8 +9,15 @@ class Enemy : public Entity
 	protected:
  	vector <glm::vec3> PatrolPos;
  	int CurrentPatrolPos = 0;
+	
+	SpriteObject* aleartSign; 
+	SpriteObject* foundPlayerSign; 
 
 	public:
+	static unsigned int aleartSignTexture;
+	static unsigned int foundPlayerSignTexture; 
+
+
 	Enemy(string fileName, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 CollisionSize);
 	Enemy(unsigned int text, int row, int column, float HP, float MoveSpeed, glm::vec3 Pos, glm::vec3 Size, glm::vec3 CollisionSize)  ;
 

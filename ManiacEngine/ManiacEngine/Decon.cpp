@@ -98,7 +98,14 @@ void Decon::Update(int deltatime) {
 
 	
 	fovImage->SetPosition(glm::vec3(GetPos().x +(DirectionSet * (32 + 16 + 128 + 16)),GetPos().y+32,GetPos().z));
-fovImage->DirectionSet = DirectionSet;
+	fovImage->DirectionSet = DirectionSet;
+
+	if (!foundPlayerSign->IsPause()) {
+		foundPlayerSign->SetPosition(glm::vec3(GetPos().x, GetPos().y + 96, GetPos().z));
+	}
+	if (! aleartSign->IsPause())
+		aleartSign->SetPosition(glm::vec3(GetPos().x, GetPos().y + 96, GetPos().z));
+
 }
 
 void Decon::EnterAttackZone(Entity* target) {
@@ -138,10 +145,14 @@ void Decon::UpdateStateMachine(float deltatime)
 		if (PlayerDetect(Player::GetInstance()) == true && CanWalkToNextTile(this))
 		{
 			ChangeState(StateMachine::CHASING);
+			foundPlayerSign->SetPause(false);
+
 
 		}
 		else
 		{
+			foundPlayerSign->SetPause(true);
+
 			Patrol();
 		}
 	}
@@ -223,6 +234,7 @@ void Decon::ChangeState(StateMachine nextState)
 	else if (GetState() == StateMachine::Die) {
 		SetPause(true) ; 
 		fovImage->SetPause(true); 
+		aleartSign->SetPause(true); 
   		CreateDeadAnim(this, "../Resource/Texture/Enemy/Decon/Decon_Dead_SpriteSheet.png",2,10,19,100,2.0f);
 	}
 }
@@ -235,6 +247,8 @@ StateMachine Decon::GetState() {
 void Decon::RespawnThisObject() {
 	Entity::RespawnThisObject();
 	fovImage->SetPause(false);
+	aleartSign->SetPause(true); 
+	foundPlayerSign->SetPause(true); 
 }
 
 void Decon::AddPatrolPos(glm::vec3 pos)
@@ -245,12 +259,28 @@ void Decon::AddPatrolPos(glm::vec3 pos)
  
 void Decon::Patrol()
 {
-	if (PatrolPos.size() == 0) return; 
+	if (PatrolPos.size() == 0) return;
 
-	glm::vec3 dest = PatrolPos.at(CurrentPatrolPos); 
+	glm::vec3 dest = PatrolPos.at(CurrentPatrolPos);
 
-	if (abs(dest.x - GetPos().x) < 2) CurrentPatrolPos = (CurrentPatrolPos + 1) % PatrolPos.size(); 
 
+	if (abs(Player::GetInstance()->GetPos().x - GetPos().x) < 3000) {
+		if (Player::GetInstance()->GetPos().x < GetPos().x) {
+			DirectionSet = -1;
+		}
+		else {
+			DirectionSet = 1;
+		}
+	}
+ 
+
+	if (abs(dest.x - GetPos().x) < 2) {
+		CurrentPatrolPos = (CurrentPatrolPos + 1) % PatrolPos.size();
+		aleartSign->SetPause(true); 
+ 	}
+ 	else if (abs(dest.x - GetPos().x) < 96) {
+		aleartSign->SetPause(false);
+ 	}
 	if (dest.x > GetPos().x) SetDirection(1);
 	else SetDirection(-1); 
 

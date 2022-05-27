@@ -31,6 +31,8 @@ void Player::HandleMouse(glm::vec3 mouseRealPos) {
 			if (eptr->GetState() != StateMachine::Die &&  ! eptr->Death() ) {    Attack(eptr); }
 		}
 	};
+
+
 }
 
 void Player::HandleKey(char Key)
@@ -66,6 +68,7 @@ Player::Player(string fileName, int row, int column, glm::vec3 Pos,glm::vec3 Siz
 
 	CheckPoint::GetInstance()->SetCheckPoint(Default_pos);
 	SetHP(_hp);
+	notify(0);
 }
 
 void Player::Update(int deltatime)
