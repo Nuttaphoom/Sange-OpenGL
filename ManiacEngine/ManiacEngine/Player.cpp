@@ -47,6 +47,11 @@ void Player::HandleKey(char Key)
 			}
 		};
 	}
+
+	if (Key == 'i') {
+		cout << "imortal actived" << endl; 
+		immortal = true ; 
+	}
  	class HandleKey k;
 	k.KeyDetect(Key);
 }
@@ -360,8 +365,8 @@ Player* Player::GetInstance(string fileName, int row, int column, float HP,glm::
 }
  
 void Player::OnDamaged(int damage) {
-	if (IsPause() || GetState() == StateMachine::ATTACKING)
-		true; 
+	if (IsPause() || GetState() == StateMachine::ATTACKING || immortal)
+		return ; 
 
 	this->HP -= damage;
 	notify(0); //Notify HP Observer 

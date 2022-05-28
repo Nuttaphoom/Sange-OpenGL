@@ -22,6 +22,7 @@ class Player : public Entity, public Subject
 		bool _skill2 = false;
 		bool _block = false;
 		int loop = 0;
+		bool immortal = false; 
 	public :
 		Player(string fileName, int row, int column, glm::vec3 Pos, glm::vec3 Size, bool _res1, bool _res2);
  		void Update(int deltatime);

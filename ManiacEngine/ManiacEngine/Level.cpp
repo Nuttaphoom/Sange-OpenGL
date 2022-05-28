@@ -378,6 +378,8 @@ void Level::HandleKey(char key)
 	case '1': player->HandleKey(key); break;
 	case '2': player->HandleKey(key); break;
 
+	
+
  
 	}
 
